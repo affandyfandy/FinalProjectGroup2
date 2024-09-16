@@ -1,1 +1,33 @@
-<p>login works!</p>
+<div class="h-screen w-screen flex items-center justify-center bg-cover bg-center"
+    style="background-image: url('assets/images/auth-bg.png')">
+
+    <div
+        class="w-[630px] bg-base-100 px-3 py-14 sm:px-14 sm:rounded-3xl flex flex-col items-center space-y-24 sm:space-y-14">
+        <div>
+            <h1 class="text-3xl font-bold flex flex-col items-center">Theatr.</h1>
+            <p class="text-zinc-500 font-light">FPT Indonesia’s Office Theatre</p>
+        </div>
+
+        <form class="w-full space-y-3">
+            <input *ngIf="isRegister" type="text" [value]="name" placeholder="Your name here..."
+                class="input input-bordered w-full">
+            <input type="email" [value]="email" placeholder="Your email here..." class="input input-bordered w-full">
+            <input type="password" [value]="password" placeholder="Your password here..."
+                class="input input-bordered w-full">
+            <input *ngIf="isRegister" type="password" [value]="confirmPassword"
+                placeholder="Confirm your password here..." class="input input-bordered w-full">
+        </form>
+
+        <button class="btn btn-primary w-full rounded-full">
+            {{ isRegister ? 'Register' : 'Login'}}
+        </button>
+
+        <div class="flex items-center space-x-2">
+            <p class="font-light">
+                {{ isRegister ? "Already have an account?" : "Don't have an account?"}}
+            </p>
+            <button (click)="toggleRegister()" class="font-semibold">
+                {{ isRegister ? 'Login here.' : 'Register here.'}}</button>
+        </div>
+    </div>
+</div>

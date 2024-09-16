@@ -9,4 +9,10 @@ export const routes: Routes = [
         title: RouterConfig.LOGIN.title,
         data: RouterConfig.LOGIN.data,
     },
+    {
+        path: RouterConfig.HOME.path,
+        loadChildren: () =>
+            import('./pages/home/home.routes').then((m) => m.homeRoutes),
+        title: RouterConfig.HOME.title,
+    }
 ];

@@ -1,12 +1,22 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
+  imports: [
+    CommonModule
+  ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  isRegister = false;
+  name = '';
+  email = '';
+  password = '';
+  confirmPassword = '';
 
+  toggleRegister() {
+    this.isRegister = !this.isRegister;
+  }
 }
