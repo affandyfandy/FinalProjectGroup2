@@ -1,0 +1,24 @@
+<header class="flex items-center justify-between h-20 px-10 w-full bg-transparent">
+    <div class="text-2xl font-bold">
+        Theatr.
+    </div>
+
+    <nav class="flex space-x-8">
+        <a routerLink="/" routerLinkActive="font-semibold border-white"
+            class="font-light border-b-2 border-transparent px-3 py-1 hover:border-white hover:font-semibold transition">Home</a>
+        <a routerLink="/bookings" routerLinkActive="font-semibold border-white"
+            class="font-light border-b-2 border-transparent px-3 py-1 hover:border-white hover:font-semibold transition">Bookings</a>
+    </nav>
+
+    <div *ngIf="!isLoggedIn; else profileButton">
+        <button (click)="navigateToLogin()" class="btn btn-primary px-8 py-2 rounded-full">Login</button>
+    </div>
+    <ng-template #profileButton>
+        <button class="btn btn-ghost">
+            <div class="flex space-x-2 items-center">
+                <img src="assets/icons/profile-circle-white.svg" alt="Profile" class="w-8 h-8 rounded-full">
+                <h1>Irham Naufal</h1>
+            </div>
+        </button>
+    </ng-template>
+</header>
