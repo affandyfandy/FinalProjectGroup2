@@ -34,7 +34,8 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<String> login(@Valid @RequestBody LoginDTO authRequest) {
         Optional<String> token = authenticationService.login(authRequest);
-        if (token != null) {
+
+        if (token.isPresent()) {
             return ResponseEntity.ok(token.get());
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
