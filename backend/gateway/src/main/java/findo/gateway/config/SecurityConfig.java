@@ -12,6 +12,7 @@ public class SecurityConfig {
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         http
+            .csrf(csrfCustomizer -> csrfCustomizer.disable()) // Disable CSRF protection
             .authorizeExchange(exchange ->
                 exchange
                     .pathMatchers(
