@@ -1,5 +1,36 @@
 package findo.user.entity;
 
-public class EntityUser {
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.Date;
+import java.util.UUID;
+
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "users")
+public class EntityUser {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(unique = true, nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    private String role;
+    private double balance;
+    private Date createdTime;
+    private Date updatedTime;
+    private String createdBy;
+    private String updatedBy;
 }
