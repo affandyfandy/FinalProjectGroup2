@@ -1,6 +1,7 @@
 package findo.auth.service.impl;
 
 import java.time.Instant;
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,9 +17,11 @@ import org.springframework.stereotype.Service;
 
 import findo.auth.data.entity.User;
 import findo.auth.data.repository.UserRepository;
-import findo.auth.dto.AuthDTO;
+import findo.auth.dto.LoginDTO;
+import findo.auth.dto.RegisterDTO;
 import findo.auth.dto.UserDetailsDTO;
 import findo.auth.service.AuthenticationService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -31,11 +34,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     final private AuthenticationManager authenticationManager;
     
     @Override
-    public User register(AuthDTO user) {
+    public User register(RegisterDTO user) {
         User userData = new User();
+        userData.setName(user.getName());
         userData.setEmail(user.getEmail());
         userData.setRole("ROLE_CUSTOMER");
         userData.setPassword(passwordEncoder.encode(user.getPassword()));
+        userData.setCreatedBy(user.getEmail());
+        userData.setUpdatedBy(user.getEmail());
+        userData.setCreatedTime(new Date());
+        userData.setUpdatedTime(new Date());
 
         return userRepository.save(userData);
     }
@@ -46,7 +54,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public Optional<String> login(AuthDTO authRequest) {
+    public Optional<String> login(@Valid LoginDTO authRequest) {
         try {
             // Get user authentication
             Authentication authentication = authenticationManager.authenticate(
@@ -76,7 +84,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
             return Optional.ofNullable(token);
         } catch (AuthenticationException e) {
-            return null;
+            throw e;
         }
     }    
 }

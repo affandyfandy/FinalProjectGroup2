@@ -3,10 +3,11 @@ package findo.auth.service;
 import java.util.Optional;
 
 import findo.auth.data.entity.User;
-import findo.auth.dto.AuthDTO;
+import findo.auth.dto.LoginDTO;
+import findo.auth.dto.RegisterDTO;
 
 public interface AuthenticationService {
-    User register(AuthDTO user);
+    User register(RegisterDTO user);
     User findByEmail(String email);
-    Optional<String> login(AuthDTO authRequest);
+    Optional<String> login(LoginDTO authRequest);
 }

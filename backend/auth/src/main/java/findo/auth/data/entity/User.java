@@ -3,6 +3,7 @@ package findo.auth.data.entity;
 import java.util.Date;
 import java.util.UUID;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,9 +21,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(nullable=false)
     private String name;
+
+    @Column(unique=true, nullable=false)
     private String email;
+
+    @Column(nullable=false)
     private String password;
+    
     private String role;
     private double balance;
     private Date createdTime;
