@@ -2,7 +2,6 @@ package findo.auth.service.impl;
 
 import java.time.Instant;
 import java.util.Date;
-import java.util.Optional;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,6 +17,7 @@ import org.springframework.stereotype.Service;
 import findo.auth.data.entity.User;
 import findo.auth.data.repository.UserRepository;
 import findo.auth.dto.LoginDTO;
+import findo.auth.dto.LoginResponseDTO;
 import findo.auth.dto.RegisterDTO;
 import findo.auth.dto.UserDetailsDTO;
 import findo.auth.service.AuthenticationService;
@@ -54,7 +54,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public Optional<String> login(@Valid LoginDTO authRequest) {
+    public LoginResponseDTO login(@Valid LoginDTO authRequest) {
         try {
             // Get user authentication
             Authentication authentication = authenticationManager.authenticate(
@@ -82,7 +82,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             // Encode JWT using claim
             String token = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
 
-            return Optional.ofNullable(token);
+            return new LoginResponseDTO(token, user.getRole());
         } catch (AuthenticationException e) {
             throw e;
         }
