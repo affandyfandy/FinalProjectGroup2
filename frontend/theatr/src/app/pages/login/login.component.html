@@ -9,14 +9,36 @@
         </div>
 
         <form #authForm="ngForm" class="w-full space-y-3">
-            <input *ngIf="isRegister" type="text" [(ngModel)]="name" placeholder="Your name here..." name="name"
-                required class="input input-bordered w-full">
-            <input type="email" [(ngModel)]="email" placeholder="Your email here..." name="email" required email
-                class="input input-bordered w-full">
-            <input type="password" [(ngModel)]="password" placeholder="Your password here..." name="password" required
-                minlength="8" class="input input-bordered w-full">
-            <input *ngIf="isRegister" type="password" [(ngModel)]="confirmPassword" name="confirmPassword" required
-                minlength="8" placeholder="Confirm your password here..." class="input input-bordered w-full">
+            <div *ngIf="isRegister">
+                <input type="text" [(ngModel)]="user.name" placeholder="Your name here..." name="username" required
+                    #username="ngModel" class="input input-bordered w-full">
+
+                <p *ngIf="username.invalid && username.touched" class="text-error text-sm font-medium">*this field can't
+                    be empty</p>
+            </div>
+
+            <div>
+                <input type="email" [(ngModel)]="user.email" placeholder="Your email here..." name="email" required
+                    email #email="ngModel" class="input input-bordered w-full">
+                <p *ngIf="email.invalid && email.touched" class="text-error text-sm font-medium">*email should be
+                    valid</p>
+            </div>
+
+            <div>
+                <input type="password" [(ngModel)]="user.password" placeholder="Your password here..." name="password"
+                    required #password="ngModel" minlength="8" class="input input-bordered w-full">
+
+                <p *ngIf="password.invalid && password.touched" class="text-error text-sm font-medium">*minimal 8
+                    characters</p>
+            </div>
+
+            <div *ngIf="isRegister">
+                <input type="password" [(ngModel)]="user.confirmPassword" name="confirmPassword" required
+                    #confirmPassword="ngModel" minlength="8" placeholder="Confirm your password here..."
+                    class="input input-bordered w-full">
+                <p *ngIf="confirmPassword.invalid && confirmPassword.touched" class="text-error text-sm font-medium">
+                    *should match to password field</p>
+            </div>
         </form>
 
         <button (click)="submit()" [disabled]="authForm.invalid" class="btn btn-primary w-full rounded-full">

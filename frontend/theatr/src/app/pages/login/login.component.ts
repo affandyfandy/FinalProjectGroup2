@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { RouterConfig } from '../../config/app.constants';
 import { FormsModule } from '@angular/forms';
+import { User } from '../../model/user.model';
 
 @Component({
   selector: 'app-login',
@@ -19,10 +20,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class LoginComponent {
   isRegister = false;
-  name = '';
-  email = '';
-  password = '';
-  confirmPassword = '';
+  user: User = {} as User;
 
   isShowSuccess = false;
   isShowError = false;
@@ -42,7 +40,7 @@ export class LoginComponent {
   }
 
   private login() {
-    this.authService.login({ email: this.email, password: this.password }).subscribe({
+    this.authService.login({ email: this.user.email!, password: this.user.password! }).subscribe({
       next: (res: any) => {
         this.authService.setToken(res.token);
         this.authService.setRole(res.role);
@@ -55,7 +53,7 @@ export class LoginComponent {
   }
 
   private register() {
-    this.authService.register({ name: this.name, email: this.email, password: this.password }).subscribe({
+    this.authService.register({ name: this.user.name!, email: this.user.email!, password: this.user.password! }).subscribe({
       next: () => {
         this.isShowSuccess = true;
         this.alertMessage = 'Register successfully';
@@ -68,10 +66,7 @@ export class LoginComponent {
   };
 
   private resetField() {
-    this.name = '';
-    this.email = '';
-    this.password = '';
-    this.confirmPassword = '';
+    this.user = {} as User;
     this.isRegister = false;
   }
 

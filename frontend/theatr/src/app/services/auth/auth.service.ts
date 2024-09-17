@@ -46,4 +46,8 @@ export class AuthService {
     localStorage.removeItem(AppConstants.TOKEN_KEY);
     localStorage.removeItem(AppConstants.ROLE_KEY);
   }
+
+  isLoggedIn() {
+    return !!this.getToken();
+  }
 }
