@@ -3,8 +3,6 @@ package findo.user.controller;
 import findo.user.dto.ShowDataDTO;
 import jakarta.validation.Valid;
 import reactor.core.publisher.Mono;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
@@ -20,15 +18,18 @@ import java.util.UUID;
 @RequestMapping("/api/v1/users")
 public class UserController {
 
-    @Autowired
-    private UserServiceImpl userService;
+    private final UserServiceImpl userService;
+
+    public UserController(UserServiceImpl userService) {
+        this.userService = userService;
+    }
 
     @PutMapping("/update-profile")
     public Mono<ResponseEntity<String>> changeName(@AuthenticationPrincipal JwtAuthenticationToken principal,
             @Valid @RequestBody ChangeNameDTO changeNameDTO) {
         String userId = principal.getToken().getClaimAsString("sub"); // Extract user ID from JWT token's "sub" claim
         return userService.updateUserName(UUID.fromString(userId), changeNameDTO)
-                .map(message -> ResponseEntity.ok(message));
+                .map(ResponseEntity::ok);
     }
 
     @PutMapping("/change-password")
@@ -36,7 +37,7 @@ public class UserController {
             @Valid @RequestBody ChangePasswordDTO changePasswordDTO) {
         String userId = principal.getToken().getClaimAsString("sub"); // Extract user ID from JWT token's "sub" claim
         return userService.changePassword(UUID.fromString(userId), changePasswordDTO)
-                .map(message -> ResponseEntity.ok(message));
+                .map(ResponseEntity::ok);
     }
 
     @PutMapping("/top-up")
@@ -44,7 +45,7 @@ public class UserController {
             @Valid @RequestBody AddBalanceDTO addBalanceDTO) {
         String userId = principal.getToken().getClaimAsString("sub"); // Extract user ID from JWT token's "sub" claim
         return userService.addBalance(UUID.fromString(userId), addBalanceDTO)
-                .map(message -> ResponseEntity.ok(message));
+                .map(ResponseEntity::ok);
     }
 
     @GetMapping("/profile")
