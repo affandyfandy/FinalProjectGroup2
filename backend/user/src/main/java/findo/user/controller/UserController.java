@@ -1,16 +1,17 @@
 package findo.user.controller;
 
 import findo.user.dto.ShowDataDTO;
-import findo.user.exception.UserNotFoundException;
 import jakarta.validation.Valid;
+import reactor.core.publisher.Mono;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import findo.user.dto.AddBalanceDTO;
 import findo.user.dto.ChangeNameDTO;
 import findo.user.dto.ChangePasswordDTO;
-import findo.user.entity.EntityUser;
 import findo.user.service.impl.UserServiceImpl;
 
 import java.util.UUID;
@@ -22,30 +23,34 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
 
-    @PutMapping("/profile/{id}/name")
-    public ResponseEntity<EntityUser> updateUserName(@PathVariable UUID id, @Valid @RequestBody ChangeNameDTO changeNameDTO) {
-        return userService.updateUserName(id, changeNameDTO)
-                .map(ResponseEntity::ok)
-                .orElseThrow(() -> new UserNotFoundException("User not found with ID: " + id));
+    @PutMapping("/update-profile")
+    public Mono<ResponseEntity<String>> changeName(@AuthenticationPrincipal JwtAuthenticationToken principal,
+            @Valid @RequestBody ChangeNameDTO changeNameDTO) {
+        String userId = principal.getToken().getClaimAsString("sub"); // Extract user ID from JWT token's "sub" claim
+        return userService.updateUserName(UUID.fromString(userId), changeNameDTO)
+                .map(message -> ResponseEntity.ok(message));
     }
 
-    @PutMapping("/profile/{id}/change-password")
-    public ResponseEntity<EntityUser> changePassword(@PathVariable UUID id, @Valid @RequestBody ChangePasswordDTO changePasswordDTO) {
-        return userService.changePassword(id, changePasswordDTO)
-                .map(ResponseEntity::ok)
-                .orElseThrow(() -> new UserNotFoundException("User not found with ID: " + id));
+    @PutMapping("/change-password")
+    public Mono<ResponseEntity<String>> changePassword(@AuthenticationPrincipal JwtAuthenticationToken principal,
+            @Valid @RequestBody ChangePasswordDTO changePasswordDTO) {
+        String userId = principal.getToken().getClaimAsString("sub"); // Extract user ID from JWT token's "sub" claim
+        return userService.changePassword(UUID.fromString(userId), changePasswordDTO)
+                .map(message -> ResponseEntity.ok(message));
     }
 
-    @PutMapping("/profile/{id}/top-up")
-    public ResponseEntity<EntityUser> addBalance(@PathVariable UUID id, @Valid @RequestBody AddBalanceDTO addBalanceDTO) {
-        return userService.addBalance(id, addBalanceDTO)
-                .map(ResponseEntity::ok)
-                .orElseThrow(() -> new UserNotFoundException("User not found with ID: " + id));
+    @PutMapping("/top-up")
+    public Mono<ResponseEntity<String>> addBalance(@AuthenticationPrincipal JwtAuthenticationToken principal,
+            @Valid @RequestBody AddBalanceDTO addBalanceDTO) {
+        String userId = principal.getToken().getClaimAsString("sub"); // Extract user ID from JWT token's "sub" claim
+        return userService.addBalance(UUID.fromString(userId), addBalanceDTO)
+                .map(message -> ResponseEntity.ok(message));
     }
 
-    @GetMapping("/profile/{id}")
-    public ResponseEntity<ShowDataDTO> getUserData(@PathVariable UUID id) {
-        ShowDataDTO showDataDTO = userService.getUserDataById(id);
-        return ResponseEntity.ok(showDataDTO);
+    @GetMapping("/profile")
+    public Mono<ResponseEntity<ShowDataDTO>> getUserData(@AuthenticationPrincipal JwtAuthenticationToken principal) {
+        String userId = principal.getToken().getClaimAsString("sub"); // Extract user ID from JWT token's "sub" claim
+        return userService.getUserDataById(UUID.fromString(userId))
+                .map(ResponseEntity::ok);
     }
 }
