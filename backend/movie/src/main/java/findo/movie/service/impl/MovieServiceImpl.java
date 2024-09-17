@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 import findo.movie.data.entity.Movie;
 import findo.movie.data.repository.MovieRepository;
 import findo.movie.dto.MovieSaveDTO;
+import findo.movie.exception.DuplicateTitleException;
+import findo.movie.exception.MovieNotFoundException;
 import findo.movie.mapper.MovieMapper;
 import findo.movie.service.MovieService;
 import findo.movie.utils.ImgUtils;
@@ -31,11 +33,16 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie findMovieById(UUID id) {
-        return movieRepository.findById(id).orElse(null);
+        return movieRepository.findById(id)
+            .orElseThrow(() -> new MovieNotFoundException("Movie not found!"));
     }
 
     @Override
-    public Movie createMovie(MovieSaveDTO movieSaveDTO) {
+    public String createMovie(MovieSaveDTO movieSaveDTO) {
+        if(movieRepository.existsByTitle(movieSaveDTO.getTitle())) {
+            throw new DuplicateTitleException("Movie with this title already exists!");
+        }
+
         Movie savedMovie = movieMapper.toMovie(movieSaveDTO);
 
         savedMovie.setDuration(30);
@@ -43,26 +50,30 @@ public class MovieServiceImpl implements MovieService {
         savedMovie.setUpdatedBy("test");
         savedMovie.setCreatedTime(LocalDate.now());
         savedMovie.setUpdatedTime(LocalDate.now());
-    
-        return movieRepository.save(savedMovie);
+
+        movieRepository.save(savedMovie);
+
+        return "Movie Created Successfully";
     }
 
     @Override
-    public Movie updateMovie(UUID id, MovieSaveDTO movieSaveDTO) {
+    public String updateMovie(UUID id, MovieSaveDTO movieSaveDTO) {
         Movie checkMovie = findMovieById(id);
 
-        if(checkMovie != null) {
-            checkMovie.setTitle(movieSaveDTO.getTitle());
-            checkMovie.setSynopsis(movieSaveDTO.getSynopsis());
-            checkMovie.setPosterUrl(movieSaveDTO.getPosterUrl());
-            checkMovie.setYear(movieSaveDTO.getYear());
-            checkMovie.setUpdatedBy("test");
-            checkMovie.setUpdatedTime(LocalDate.now());
-
-            return movieRepository.save(checkMovie);
+        if(!checkMovie.getTitle().equals(movieSaveDTO.getTitle()) && movieRepository.existsByTitle(movieSaveDTO.getTitle())) {
+            throw new DuplicateTitleException("Movie with title already exists!");
         }
 
-        return null;
+        checkMovie.setTitle(movieSaveDTO.getTitle());
+        checkMovie.setSynopsis(movieSaveDTO.getSynopsis());
+        checkMovie.setPosterUrl(movieSaveDTO.getPosterUrl());
+        checkMovie.setYear(movieSaveDTO.getYear());
+        checkMovie.setUpdatedBy("test");
+        checkMovie.setUpdatedTime(LocalDate.now());
+
+        movieRepository.save(checkMovie);
+
+        return "Movie updated successfully!";
     }
 
     @Override

@@ -56,21 +56,17 @@ public class MovieController {
     }
 
     @PostMapping
-    public ResponseEntity<Movie> createMovie(@Valid @RequestBody MovieSaveDTO movieSaveDTO) {
-        Movie movie = movieService.createMovie(movieSaveDTO);
+    public ResponseEntity<String> createMovie(@Valid @RequestBody MovieSaveDTO movieSaveDTO) {
+        String message = movieService.createMovie(movieSaveDTO);
         
-        return ResponseEntity.status(HttpStatus.CREATED).body(movie);
+        return ResponseEntity.status(HttpStatus.CREATED).body(message);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Movie> updateMovie(@PathVariable("id") UUID id, @Valid @RequestBody MovieSaveDTO movieSaveDTO) {
-        Movie movie = movieService.updateMovie(id, movieSaveDTO);
+    public ResponseEntity<String> updateMovie(@PathVariable("id") UUID id, @Valid @RequestBody MovieSaveDTO movieSaveDTO) {
+        String message = movieService.updateMovie(id, movieSaveDTO);
 
-        if(movie == null) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        }
-
-        return ResponseEntity.status(HttpStatus.OK).body(movie);
+        return ResponseEntity.status(HttpStatus.OK).body(message);
     }
 
     @PostMapping(value = "/upload-poster")
