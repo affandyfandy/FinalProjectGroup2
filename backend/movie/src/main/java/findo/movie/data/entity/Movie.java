@@ -1,6 +1,6 @@
 package findo.movie.data.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -36,8 +36,8 @@ public class Movie {
 
     @Column(nullable=false)
     private int year;
-    private Date createdTime;
-    private Date updatedTime;
+    private LocalDate createdTime;
+    private LocalDate updatedTime;
     private String createdBy;
     private String updatedBy;
 }

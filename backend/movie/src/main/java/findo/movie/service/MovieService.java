@@ -1,5 +1,16 @@
 package findo.movie.service;
 
-public interface MovieService {
+import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import findo.movie.data.entity.Movie;
+import findo.movie.dto.MovieSaveDTO;
+
+public interface MovieService {
+    Page<Movie> findAllMovies(Pageable pageable);
+    Movie findMovieById(UUID id);
+    Movie createMovie(MovieSaveDTO movieSaveDTO);
+    Movie updateMovie(UUID id, MovieSaveDTO movieSaveDTO);
 }
