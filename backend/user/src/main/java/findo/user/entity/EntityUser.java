@@ -4,8 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Date;
+import java.time.*;
 import java.util.UUID;
 
 @Entity
@@ -29,8 +28,8 @@ public class EntityUser {
 
     private String role;
     private double balance;
-    private Date createdTime;
-    private Date updatedTime;
+    private LocalDate createdTime;
+    private LocalDate updatedTime;
     private String createdBy;
     private String updatedBy;
 }

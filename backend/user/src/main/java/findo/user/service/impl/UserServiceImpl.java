@@ -1,6 +1,5 @@
 package findo.user.service.impl;
 
-import java.util.Optional;
 import java.util.UUID;
 
 import findo.user.dto.ShowDataDTO;
@@ -12,9 +11,9 @@ import org.springframework.stereotype.Service;
 import findo.user.dto.AddBalanceDTO;
 import findo.user.dto.ChangeNameDTO;
 import findo.user.dto.ChangePasswordDTO;
-import findo.user.entity.EntityUser;
 import findo.user.repository.UserRepository;
 import findo.user.service.UserService;
+import reactor.core.publisher.Mono;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -24,40 +23,47 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public Optional<EntityUser> updateUserName(UUID userId, ChangeNameDTO changeNameDTO) {
-        return userRepository.findById(userId).map(user -> {
-            user.setName(changeNameDTO.getNewName());
-            return userRepository.save(user);
-        });
-    }
-
-    public Optional<EntityUser> changePassword(UUID userId, ChangePasswordDTO changePasswordDTO) {
-        return userRepository.findById(userId).map(user -> {
-            if (passwordEncoder.matches(changePasswordDTO.getOldPassword(), user.getPassword())) {
-                user.setPassword(passwordEncoder.encode(changePasswordDTO.getNewPassword()));
-                return userRepository.save(user);
-            }
-            return null; // or throw an exception
-        });
-    }
-
-    public Optional<EntityUser> addBalance(UUID userId, AddBalanceDTO addBalanceDTO) {
-        return userRepository.findById(userId).map(user -> {
-            user.setBalance(user.getBalance() + addBalanceDTO.getBalance());
-            return userRepository.save(user);
-        });
+    @Override
+    public Mono<String> changePassword(UUID userId, ChangePasswordDTO changePasswordDTO) {
+        return Mono.justOrEmpty(userRepository.findById(userId))
+                .switchIfEmpty(Mono.error(new UserNotFoundException("User not found with ID: " + userId)))
+                .flatMap(user -> {
+                    if (passwordEncoder.matches(changePasswordDTO.getOldPassword(), user.getPassword())) {
+                        user.setPassword(passwordEncoder.encode(changePasswordDTO.getNewPassword()));
+                        userRepository.save(user);
+                        return Mono.just("Password Changed Successfully !");
+                    } else {
+                        return Mono.error(new IllegalArgumentException("Old password is incorrect"));
+                    }
+                });
     }
 
     @Override
-    public ShowDataDTO getUserDataById(UUID userId) {
-        EntityUser user = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException("User not found with ID: " + userId));
+    public Mono<String> updateUserName(UUID userId, ChangeNameDTO changeNameDTO) {
+        return Mono.justOrEmpty(userRepository.findById(userId))
+                .switchIfEmpty(Mono.error(new UserNotFoundException("User not found with ID: " + userId)))
+                .flatMap(user -> {
+                    user.setName(changeNameDTO.getNewName());
+                    userRepository.save(user);
+                    return Mono.just("Name Changed Successfully");
+                });
+    }
 
-        // Map EntityUser to ShowDataDTO
-        ShowDataDTO showDataDTO = new ShowDataDTO();
-        showDataDTO.setName(user.getName());
-        showDataDTO.setEmail(user.getEmail());
-        showDataDTO.setBalance(user.getBalance());
-        return showDataDTO;
+    @Override
+    public Mono<String> addBalance(UUID userId, AddBalanceDTO addBalanceDTO) {
+        return Mono.justOrEmpty(userRepository.findById(userId))
+                .switchIfEmpty(Mono.error(new UserNotFoundException("User not found with ID: " + userId)))
+                .flatMap(user -> {
+                    user.setBalance(user.getBalance() + addBalanceDTO.getBalance());
+                    userRepository.save(user);
+                    return Mono.just("Top-Up Success !");
+                });
+    }
+
+    @Override
+    public Mono<ShowDataDTO> getUserDataById(UUID userId) {
+        return Mono.justOrEmpty(userRepository.findById(userId))
+                .switchIfEmpty(Mono.error(new UserNotFoundException("User not found with ID: " + userId)))
+                .map(user -> new ShowDataDTO(user.getName(), user.getEmail(), user.getBalance()));
     }
 }
