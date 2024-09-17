@@ -33,13 +33,20 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie createMovie(MovieSaveDTO movieSaveDTO) {
-        Movie movie = movieMapper.toMovie(movieSaveDTO);
-        movie.setCreatedBy("test");
-        movie.setUpdatedBy("test");
-        movie.setCreatedTime(LocalDate.now());
-        movie.setUpdatedTime(LocalDate.now());
+        Movie checkMovie = movieRepository.findByTitle(movieSaveDTO.getTitle());
 
-        return movieRepository.save(movie);
+        // Check Duplicate Movie
+        if(checkMovie == null) {
+            Movie movie = movieMapper.toMovie(movieSaveDTO);
+            movie.setCreatedBy("test");
+            movie.setUpdatedBy("test");
+            movie.setCreatedTime(LocalDate.now());
+            movie.setUpdatedTime(LocalDate.now());
+    
+            return movieRepository.save(movie);
+        }
+
+        return null;
     }
 
     @Override
@@ -47,15 +54,21 @@ public class MovieServiceImpl implements MovieService {
         Movie checkMovie = findMovieById(id);
 
         if(checkMovie != null) {
-            checkMovie.setTitle(movieSaveDTO.getTitle());
-            checkMovie.setSynopsis(movieSaveDTO.getSynopsis());
-            checkMovie.setPosterUrl(movieSaveDTO.getPosterUrl());
-            checkMovie.setYear(movieSaveDTO.getYear());
-            checkMovie.setDuration(movieSaveDTO.getDuration());
-            checkMovie.setUpdatedBy("test");
-            checkMovie.setUpdatedTime(LocalDate.now());
+            Movie dupMovie = movieRepository.findByTitle(movieSaveDTO.getTitle());
 
-            return movieRepository.save(checkMovie);
+            if(dupMovie == null) {
+                checkMovie.setTitle(movieSaveDTO.getTitle());
+                checkMovie.setSynopsis(movieSaveDTO.getSynopsis());
+                checkMovie.setPosterUrl(movieSaveDTO.getPosterUrl());
+                checkMovie.setYear(movieSaveDTO.getYear());
+                checkMovie.setDuration(movieSaveDTO.getDuration());
+                checkMovie.setUpdatedBy("test");
+                checkMovie.setUpdatedTime(LocalDate.now());
+
+                return movieRepository.save(checkMovie);
+            }
+
+            return null;
         }
 
         return null;

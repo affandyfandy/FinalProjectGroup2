@@ -9,5 +9,5 @@ import findo.movie.data.entity.Movie;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, UUID> {
-
+    Movie findByTitle(String title);
 }
