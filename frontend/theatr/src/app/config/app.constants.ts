@@ -1,5 +1,7 @@
 export const AppConstants = {
-    BASE_API_URL: 'http://localhost:8080/api/v1'
+    BASE_API_URL: 'http://localhost:8080/api/v1',
+    TOKEN_KEY: 'TOKEN',
+    ROLE_KEY: 'ROLE',
 }
 
 export const RouterConfig = {

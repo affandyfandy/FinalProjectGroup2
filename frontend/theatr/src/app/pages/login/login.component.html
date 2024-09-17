@@ -8,17 +8,18 @@
             <p class="text-zinc-500 font-light">FPT Indonesia’s Office Theatre</p>
         </div>
 
-        <form class="w-full space-y-3">
-            <input *ngIf="isRegister" type="text" [value]="name" placeholder="Your name here..."
+        <form #authForm="ngForm" class="w-full space-y-3">
+            <input *ngIf="isRegister" type="text" [(ngModel)]="name" placeholder="Your name here..." name="name"
+                required class="input input-bordered w-full">
+            <input type="email" [(ngModel)]="email" placeholder="Your email here..." name="email" required email
                 class="input input-bordered w-full">
-            <input type="email" [value]="email" placeholder="Your email here..." class="input input-bordered w-full">
-            <input type="password" [value]="password" placeholder="Your password here..."
-                class="input input-bordered w-full">
-            <input *ngIf="isRegister" type="password" [value]="confirmPassword"
-                placeholder="Confirm your password here..." class="input input-bordered w-full">
+            <input type="password" [(ngModel)]="password" placeholder="Your password here..." name="password" required
+                minlength="8" class="input input-bordered w-full">
+            <input *ngIf="isRegister" type="password" [(ngModel)]="confirmPassword" name="confirmPassword" required
+                minlength="8" placeholder="Confirm your password here..." class="input input-bordered w-full">
         </form>
 
-        <button class="btn btn-primary w-full rounded-full">
+        <button (click)="submit()" [disabled]="authForm.invalid" class="btn btn-primary w-full rounded-full">
             {{ isRegister ? 'Register' : 'Login'}}
         </button>
 
