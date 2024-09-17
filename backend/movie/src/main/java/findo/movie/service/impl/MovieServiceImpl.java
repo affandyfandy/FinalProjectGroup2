@@ -6,12 +6,14 @@ import java.util.UUID;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import findo.movie.data.entity.Movie;
 import findo.movie.data.repository.MovieRepository;
 import findo.movie.dto.MovieSaveDTO;
 import findo.movie.mapper.MovieMapper;
 import findo.movie.service.MovieService;
+import findo.movie.utils.ImgUtils;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -20,6 +22,7 @@ public class MovieServiceImpl implements MovieService {
 
     private final MovieRepository movieRepository;
     private final MovieMapper movieMapper;
+    private final ImgUtils imgUtils;
 
     @Override
     public Page<Movie> findAllMovies(Pageable pageable) {
@@ -33,20 +36,15 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie createMovie(MovieSaveDTO movieSaveDTO) {
-        Movie checkMovie = movieRepository.findByTitle(movieSaveDTO.getTitle());
+        Movie savedMovie = movieMapper.toMovie(movieSaveDTO);
 
-        // Check Duplicate Movie
-        if(checkMovie == null) {
-            Movie movie = movieMapper.toMovie(movieSaveDTO);
-            movie.setCreatedBy("test");
-            movie.setUpdatedBy("test");
-            movie.setCreatedTime(LocalDate.now());
-            movie.setUpdatedTime(LocalDate.now());
+        savedMovie.setDuration(30);
+        savedMovie.setCreatedBy("test");
+        savedMovie.setUpdatedBy("test");
+        savedMovie.setCreatedTime(LocalDate.now());
+        savedMovie.setUpdatedTime(LocalDate.now());
     
-            return movieRepository.save(movie);
-        }
-
-        return null;
+        return movieRepository.save(savedMovie);
     }
 
     @Override
@@ -54,23 +52,21 @@ public class MovieServiceImpl implements MovieService {
         Movie checkMovie = findMovieById(id);
 
         if(checkMovie != null) {
-            Movie dupMovie = movieRepository.findByTitle(movieSaveDTO.getTitle());
+            checkMovie.setTitle(movieSaveDTO.getTitle());
+            checkMovie.setSynopsis(movieSaveDTO.getSynopsis());
+            checkMovie.setPosterUrl(movieSaveDTO.getPosterUrl());
+            checkMovie.setYear(movieSaveDTO.getYear());
+            checkMovie.setUpdatedBy("test");
+            checkMovie.setUpdatedTime(LocalDate.now());
 
-            if(dupMovie == null) {
-                checkMovie.setTitle(movieSaveDTO.getTitle());
-                checkMovie.setSynopsis(movieSaveDTO.getSynopsis());
-                checkMovie.setPosterUrl(movieSaveDTO.getPosterUrl());
-                checkMovie.setYear(movieSaveDTO.getYear());
-                checkMovie.setDuration(movieSaveDTO.getDuration());
-                checkMovie.setUpdatedBy("test");
-                checkMovie.setUpdatedTime(LocalDate.now());
-
-                return movieRepository.save(checkMovie);
-            }
-
-            return null;
+            return movieRepository.save(checkMovie);
         }
 
         return null;
+    }
+
+    @Override
+    public String uploadFile(MultipartFile file) {
+        return imgUtils.uploadFile(file);
     }
 }

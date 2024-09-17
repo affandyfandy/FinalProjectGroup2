@@ -19,9 +19,6 @@ public class MovieSaveDTO {
     @NotBlank(message="Image is Required")
     private String posterUrl;
 
-    @NotNull(message="Duration is Required")
-    private int duration;
-
     @NotNull(message="Year is Required")
     private int year;
 }

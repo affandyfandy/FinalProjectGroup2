@@ -26,6 +26,7 @@ public interface MovieMapper {
     MovieSaveDTO toMovieSaveDTO(Movie movie);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "duration", ignore = true)
     @Mapping(target = "createdTime", ignore = true)
     @Mapping(target = "updatedTime", ignore = true)
     @Mapping(target = "createdBy", ignore = true)
