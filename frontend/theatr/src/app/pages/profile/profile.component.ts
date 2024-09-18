@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
-import { User } from '../../model/user.model';
+import { ChangePasswordDTO, User } from '../../model/user.model';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -29,6 +29,8 @@ export class ProfileComponent {
   alertMessage = '';
   isAlertSuccess = true;
 
+  changePasswordDTO = {} as ChangePasswordDTO;
+
   constructor(
     private userService: UserService,
     private authService: AuthService,
@@ -37,6 +39,7 @@ export class ProfileComponent {
 
   ngOnInit() {
     this.getProfile();
+    this.setUpDTO();
   }
 
   getProfile() {
@@ -49,6 +52,11 @@ export class ProfileComponent {
         console.error(err);
       }
     });
+  }
+
+  setUpDTO() {
+    this.changePasswordDTO.newPassword = '';
+    this.changePasswordDTO.oldPassword = '';
   }
 
   logout() {
@@ -69,6 +77,21 @@ export class ProfileComponent {
     });
   }
 
+  changePassword() {
+    console.log('BODY:', this.changePasswordDTO);
+
+    this.userService.changePassword(this.changePasswordDTO).subscribe({
+      next: () => {
+        this.closeChangePasswordModal();
+        this.showAlert('Password changed successfully', true);
+      },
+      error: (err) => {
+        this.showAlert('Failed to change your password', false);
+      },
+
+    });
+  }
+
   showLogoutModal() {
     const modal = document.getElementById('logout-modal') as HTMLDialogElement;
     modal.showModal();
@@ -79,8 +102,27 @@ export class ProfileComponent {
     modal.close();
   }
 
+  showChangePasswordModal() {
+    const modal = document.getElementById('change-password-modal') as HTMLDialogElement;
+    modal.showModal();
+  }
+
+  closeChangePasswordModal() {
+    const modal = document.getElementById('change-password-modal') as HTMLDialogElement;
+    modal.close();
+    this.setUpDTO();
+    this.user.confirmPassword = '';
+  }
+
   isButtonDisabled(): boolean {
     return this.user.name === this.tempUsername || this.user.name === '' || !this.user.name;
+  }
+
+  isUpdatePasswordButtonDisabled(): boolean {
+    return (this.changePasswordDTO.oldPassword.length < 8) ||
+      (this.changePasswordDTO.newPassword.length < 8) ||
+      ((this.user.confirmPassword?.length ?? 0) < 8) ||
+      (this.changePasswordDTO.newPassword !== this.user.confirmPassword);
   }
 
   showAlert(message: string, success: boolean) {

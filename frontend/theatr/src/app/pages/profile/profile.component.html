@@ -30,17 +30,61 @@
 
         <div class="divider"></div>
 
+        <button (click)="showChangePasswordModal()" class="btn btn-secondary bg-opacity-50 w-full rounded-full">Change
+            Password</button>
+
         <button (click)="showLogoutModal()" class="btn btn-outline btn-error w-full rounded-full">Log Out</button>
     </div>
 </div>
 
-<!-- MODAL -->
+<!-- LOGOUT MODAL -->
 <dialog id="logout-modal" class="modal">
     <div class="modal-box flex flex-col items-center space-y-6 justify-center bg-base-300">
         <h1 class="text-lg font-semibold">Are you sure you want to log out?</h1>
         <div class="flex space-x-2 w-full">
             <button class="btn btn-primary max-w-[230px] w-full rounded-full" (click)="closeLogoutModal()">No</button>
             <button (click)="logout()" class="btn btn-outline max-w-[230px] w-full btn-error rounded-full">Yes</button>
+        </div>
+    </div>
+</dialog>
+
+<!-- CHANGE PASSWORD MODAL -->
+<dialog id="change-password-modal" class="modal">
+    <div class="modal-box flex flex-col max-w-[672px] items-center space-y-6 justify-center bg-base-300">
+        <h1 class="text-2xl font-semibold">Change Password</h1>
+
+        <form #passwordForm="ngForm" class="w-full space-y-3">
+            <div>
+                <input type="password" [(ngModel)]="changePasswordDTO.oldPassword" placeholder="Old password here..."
+                    name="password" required #password="ngModel" minlength="8" class="input input-bordered w-full">
+
+                <p *ngIf="password.invalid && password.touched" class="text-error text-sm font-medium">*minimal 8
+                    characters</p>
+            </div>
+
+            <div>
+                <input type="password" [(ngModel)]="changePasswordDTO.newPassword" placeholder="New password here..."
+                    name="newPassword" required #newPassword="ngModel" minlength="8"
+                    class="input input-bordered w-full">
+
+                <p *ngIf="newPassword.invalid && newPassword.touched" class="text-error text-sm font-medium">*minimal 8
+                    characters</p>
+            </div>
+
+            <div>
+                <input type="password" [(ngModel)]="user.confirmPassword" name="confirmPassword" required
+                    #confirmPassword="ngModel" minlength="8" placeholder="Confirm your password here..."
+                    class="input input-bordered w-full">
+                <p *ngIf="confirmPassword.invalid && confirmPassword.touched" class="text-error text-sm font-medium">
+                    *should match to password field</p>
+            </div>
+        </form>
+
+        <div class="flex space-x-2 w-full">
+            <button class="btn btn-secondary bg-opacity-50 max-w-[310px] w-full rounded-full"
+                (click)="closeChangePasswordModal()">Cancel</button>
+            <button (click)="changePassword()" [disabled]="isUpdatePasswordButtonDisabled()"
+                class="btn btn-primary max-w-[310px] w-full rounded-full">Save</button>
         </div>
     </div>
 </dialog>
