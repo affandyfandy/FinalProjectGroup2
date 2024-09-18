@@ -10,6 +10,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import findo.user.dto.AddBalanceDTO;
 import findo.user.dto.ChangeNameDTO;
 import findo.user.dto.ChangePasswordDTO;
+import findo.user.dto.ChangePasswordResponseDTO;
 import findo.user.service.impl.UserServiceImpl;
 
 import java.util.UUID;
@@ -33,7 +34,7 @@ public class UserController {
     }
 
     @PutMapping("/change-password")
-    public Mono<ResponseEntity<String>> changePassword(@AuthenticationPrincipal JwtAuthenticationToken principal,
+    public Mono<ResponseEntity<ChangePasswordResponseDTO>> changePassword(@AuthenticationPrincipal JwtAuthenticationToken principal,
             @Valid @RequestBody ChangePasswordDTO changePasswordDTO) {
         String userId = principal.getToken().getClaimAsString("sub"); // Extract user ID from JWT token's "sub" claim
         return userService.changePassword(UUID.fromString(userId), changePasswordDTO)

@@ -1,9 +1,6 @@
 package findo.user.service;
 
-import findo.user.dto.AddBalanceDTO;
-import findo.user.dto.ChangeNameDTO;
-import findo.user.dto.ChangePasswordDTO;
-import findo.user.dto.ShowDataDTO;
+import findo.user.dto.*;
 import findo.user.entity.EntityUser;
 import findo.user.exception.UserNotFoundException;
 import findo.user.repository.UserRepository;
@@ -54,9 +51,9 @@ class UserServiceTest {
         when(passwordEncoder.matches("password123", user.getPassword())).thenReturn(true);
         when(passwordEncoder.encode("newPassword123")).thenReturn("encodedNewPassword");
 
-        Mono<String> result = userService.changePassword(user.getId(), changePasswordDTO);
+        Mono<ChangePasswordResponseDTO> result = userService.changePassword(user.getId(), changePasswordDTO);
 
-        assertThat(result.block()).isEqualTo("Password Changed Successfully !");
+        assertThat(result.block()).isEqualTo(new ChangePasswordResponseDTO("Password Changed Successfully!"));
         verify(userRepository).save(user);
         assertThat(user.getPassword()).isEqualTo("encodedNewPassword");
     }

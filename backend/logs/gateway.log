@@ -566,3 +566,678 @@ com.netflix.discovery.shared.transport.TransportException: Cannot execute reques
 	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:114)
 	at java.base/java.lang.Thread.run(Thread.java:833)
 2024-09-18 13:44:19 - Completed shut down of DiscoveryClient
+2024-09-18 19:01:00 - HV000001: Hibernate Validator 8.0.1.Final
+2024-09-18 19:01:00 - Starting GatewayApplication using Java 17.0.4.1 with PID 9388 (D:\FPT\New Data FPT\FPT\Project FinalTerm\FinalProjectGroup\FinalProjectGroup2\backend\gateway\target\classes started by Chandra H in D:\FPT\New Data FPT\FPT\Project FinalTerm\FinalProjectGroup\FinalProjectGroup2\backend)
+2024-09-18 19:01:00 - No active profile set, falling back to 1 default profile: "default"
+2024-09-18 19:01:01 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-18 19:01:01 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-18 19:01:02 - BeanFactory id=6e257b7a-1b26-3e8f-bb71-e41334476613
+2024-09-18 19:01:02 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2024-09-18 19:01:02 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2024-09-18 19:01:02 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2024-09-18 19:01:02 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2024-09-18 19:01:02 - Bean 'reactorDeferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2024-09-18 19:01:04 - Cannot determine local hostname
+2024-09-18 19:01:04 - Routes supplied from Gateway Properties: [RouteDefinition{id='auth-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/auth/**}}], filters=[], uri=lb://auth-service, order=0, metadata={}}, RouteDefinition{id='user-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/users/**}}], filters=[FilterDefinition{name='JwtAuthenticationFilter', args={}}], uri=lb://user-service, order=0, metadata={}}, RouteDefinition{id='booking-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/bookings/**}}], filters=[FilterDefinition{name='JwtAuthenticationFilter', args={}}], uri=lb://booking-service, order=0, metadata={}}, RouteDefinition{id='schedule-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/schedules/**}}], filters=[], uri=lb://schedule, order=0, metadata={}}, RouteDefinition{id='movie-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/movies/**}}], filters=[], uri=lb://movie, order=0, metadata={}}, RouteDefinition{id='studio-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/studios/**}}], filters=[], uri=lb://studio, order=0, metadata={}}]
+2024-09-18 19:01:04 - Loaded RoutePredicateFactory [After]
+2024-09-18 19:01:04 - Loaded RoutePredicateFactory [Before]
+2024-09-18 19:01:04 - Loaded RoutePredicateFactory [Between]
+2024-09-18 19:01:04 - Loaded RoutePredicateFactory [Cookie]
+2024-09-18 19:01:04 - Loaded RoutePredicateFactory [Header]
+2024-09-18 19:01:04 - Loaded RoutePredicateFactory [Host]
+2024-09-18 19:01:04 - Loaded RoutePredicateFactory [Method]
+2024-09-18 19:01:04 - Loaded RoutePredicateFactory [Path]
+2024-09-18 19:01:04 - Loaded RoutePredicateFactory [Query]
+2024-09-18 19:01:04 - Loaded RoutePredicateFactory [ReadBody]
+2024-09-18 19:01:04 - Loaded RoutePredicateFactory [RemoteAddr]
+2024-09-18 19:01:04 - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2024-09-18 19:01:04 - Loaded RoutePredicateFactory [Weight]
+2024-09-18 19:01:04 - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2024-09-18 19:01:04 - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2024-09-18 19:01:05 - Cannot determine local hostname
+2024-09-18 19:01:06 - Cannot determine local hostname
+2024-09-18 19:01:07 - Exposing 18 endpoints beneath base path '/actuator'
+2024-09-18 19:01:07 - ControllerAdvice beans: none
+2024-09-18 19:01:07 - enableLoggingRequestDetails='false': form data and headers will be masked to prevent unsafe logging of potentially sensitive data
+2024-09-18 19:01:07 - LiveReload server is running on port 35729
+2024-09-18 19:01:07 - Eureka HTTP Client uses RestTemplate.
+2024-09-18 19:01:07 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2024-09-18 19:01:07 - Setting initial instance status as: STARTING
+2024-09-18 19:01:07 - Initializing Eureka in region us-east-1
+2024-09-18 19:01:07 - Resolving eureka endpoints via configuration
+2024-09-18 19:01:08 - Disable delta property : false
+2024-09-18 19:01:08 - Single vip registry refresh property : null
+2024-09-18 19:01:08 - Force full registry fetch : false
+2024-09-18 19:01:08 - Application is null : false
+2024-09-18 19:01:08 - Registered Applications size is zero : true
+2024-09-18 19:01:08 - Application version is -1: true
+2024-09-18 19:01:08 - Getting all instance registry info from the eureka server
+2024-09-18 19:01:08 - HTTP GET http://localhost:8761/eureka/apps/
+2024-09-18 19:01:08 - Accept=[application/json, application/*+json]
+2024-09-18 19:01:08 - Response 200 OK
+2024-09-18 19:01:08 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-18 19:01:08 - The response status is 200
+2024-09-18 19:01:08 - Starting heartbeat executor: renew interval is: 30
+2024-09-18 19:01:08 - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2024-09-18 19:01:08 - Discovery Client initialized at timestamp 1726660868755 with initial instances count: 0
+2024-09-18 19:01:08 - Registering application GATEWAY with eureka with status UP
+2024-09-18 19:01:08 - Saw local status change event StatusChangeEvent [timestamp=1726660868762, current=UP, previous=STARTING]
+2024-09-18 19:01:08 - DiscoveryClient_GATEWAY/localhost:gateway:8080: registering service...
+2024-09-18 19:01:08 - HTTP POST http://localhost:8761/eureka/apps/GATEWAY
+2024-09-18 19:01:08 - Accept=[application/json, application/*+json]
+2024-09-18 19:01:08 - Writing [InstanceInfo [instanceId = localhost:gateway:8080, appName = GATEWAY, hostName = localhost, status = UP, ipAddr = 26.86.151.172, port = 8080, securePort = 443, dataCenterInfo = com.netflix.appinfo.MyDataCenterInfo@5016753d] as "application/json"
+2024-09-18 19:01:08 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-18 19:01:08 - RouteDefinition matched: auth-service
+2024-09-18 19:01:08 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-18 19:01:08 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:01:08 - RouteDefinition matched: user-service
+2024-09-18 19:01:08 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-18 19:01:08 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:01:08 - RouteDefinition matched: booking-service
+2024-09-18 19:01:08 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-18 19:01:08 - RouteDefinition matched: schedule-service
+2024-09-18 19:01:08 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-18 19:01:08 - RouteDefinition matched: movie-service
+2024-09-18 19:01:08 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-18 19:01:08 - RouteDefinition matched: studio-service
+2024-09-18 19:01:08 - New routes count: 6
+2024-09-18 19:01:08 - Response 204 NO_CONTENT
+2024-09-18 19:01:08 - DiscoveryClient_GATEWAY/localhost:gateway:8080 - registration status: 204
+2024-09-18 19:01:09 - Netty started on port 8080 (http)
+2024-09-18 19:01:09 - Updating port to 8080
+2024-09-18 19:01:10 - Cannot determine local hostname
+2024-09-18 19:01:11 - Cannot determine local hostname
+2024-09-18 19:01:11 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-18 19:01:11 - RouteDefinition matched: auth-service
+2024-09-18 19:01:11 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-18 19:01:11 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:01:11 - RouteDefinition matched: user-service
+2024-09-18 19:01:11 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-18 19:01:11 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:01:11 - RouteDefinition matched: booking-service
+2024-09-18 19:01:11 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-18 19:01:11 - RouteDefinition matched: schedule-service
+2024-09-18 19:01:11 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-18 19:01:11 - RouteDefinition matched: movie-service
+2024-09-18 19:01:11 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-18 19:01:11 - RouteDefinition matched: studio-service
+2024-09-18 19:01:11 - New routes count: 6
+2024-09-18 19:01:11 - Started GatewayApplication in 12.027 seconds (process running for 12.697)
+2024-09-18 19:01:38 - Disable delta property : false
+2024-09-18 19:01:38 - Single vip registry refresh property : null
+2024-09-18 19:01:38 - Force full registry fetch : false
+2024-09-18 19:01:38 - Application is null : false
+2024-09-18 19:01:38 - Registered Applications size is zero : true
+2024-09-18 19:01:38 - Application version is -1: false
+2024-09-18 19:01:38 - Getting all instance registry info from the eureka server
+2024-09-18 19:01:38 - HTTP GET http://localhost:8761/eureka/apps/
+2024-09-18 19:01:38 - Accept=[application/json, application/*+json]
+2024-09-18 19:01:38 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY/localhost:gateway:8080?status=UP&lastDirtyTimestamp=1726660868761
+2024-09-18 19:01:38 - Response 200 OK
+2024-09-18 19:01:38 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-18 19:01:38 - Accept=[application/json, application/*+json]
+2024-09-18 19:01:38 - The response status is 200
+2024-09-18 19:01:38 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-18 19:01:38 - RouteDefinition matched: auth-service
+2024-09-18 19:01:38 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-18 19:01:38 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:01:38 - RouteDefinition matched: user-service
+2024-09-18 19:01:38 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-18 19:01:38 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:01:38 - RouteDefinition matched: booking-service
+2024-09-18 19:01:38 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-18 19:01:38 - RouteDefinition matched: schedule-service
+2024-09-18 19:01:38 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-18 19:01:38 - RouteDefinition matched: movie-service
+2024-09-18 19:01:38 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-18 19:01:38 - RouteDefinition matched: studio-service
+2024-09-18 19:01:38 - Response 200 OK
+2024-09-18 19:01:38 - New routes count: 6
+2024-09-18 19:02:08 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY/localhost:gateway:8080?status=UP&lastDirtyTimestamp=1726660868761
+2024-09-18 19:02:08 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-18 19:02:08 - Accept=[application/json, application/*+json]
+2024-09-18 19:02:08 - Accept=[application/json, application/*+json]
+2024-09-18 19:02:08 - Response 200 OK
+2024-09-18 19:02:08 - Response 200 OK
+2024-09-18 19:02:08 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-18 19:02:08 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-18 19:02:08 - RouteDefinition matched: auth-service
+2024-09-18 19:02:08 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-18 19:02:08 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:02:08 - RouteDefinition matched: user-service
+2024-09-18 19:02:08 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-18 19:02:08 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:02:08 - RouteDefinition matched: booking-service
+2024-09-18 19:02:08 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-18 19:02:08 - RouteDefinition matched: schedule-service
+2024-09-18 19:02:08 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-18 19:02:08 - RouteDefinition matched: movie-service
+2024-09-18 19:02:08 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-18 19:02:08 - RouteDefinition matched: studio-service
+2024-09-18 19:02:08 - New routes count: 6
+2024-09-18 19:02:38 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY/localhost:gateway:8080?status=UP&lastDirtyTimestamp=1726660868761
+2024-09-18 19:02:38 - Accept=[application/json, application/*+json]
+2024-09-18 19:02:38 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-18 19:02:38 - Accept=[application/json, application/*+json]
+2024-09-18 19:02:38 - Response 200 OK
+2024-09-18 19:02:38 - Response 200 OK
+2024-09-18 19:02:38 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-18 19:02:38 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-18 19:02:38 - RouteDefinition matched: auth-service
+2024-09-18 19:02:38 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-18 19:02:38 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:02:38 - RouteDefinition matched: user-service
+2024-09-18 19:02:38 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-18 19:02:38 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:02:38 - RouteDefinition matched: booking-service
+2024-09-18 19:02:38 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-18 19:02:38 - RouteDefinition matched: schedule-service
+2024-09-18 19:02:38 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-18 19:02:38 - RouteDefinition matched: movie-service
+2024-09-18 19:02:38 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-18 19:02:38 - RouteDefinition matched: studio-service
+2024-09-18 19:02:38 - New routes count: 6
+2024-09-18 19:03:08 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY/localhost:gateway:8080?status=UP&lastDirtyTimestamp=1726660868761
+2024-09-18 19:03:08 - Accept=[application/json, application/*+json]
+2024-09-18 19:03:08 - Response 200 OK
+2024-09-18 19:03:08 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-18 19:03:08 - Accept=[application/json, application/*+json]
+2024-09-18 19:03:08 - Response 200 OK
+2024-09-18 19:03:08 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-18 19:03:08 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-18 19:03:08 - RouteDefinition matched: auth-service
+2024-09-18 19:03:08 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-18 19:03:08 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:03:08 - RouteDefinition matched: user-service
+2024-09-18 19:03:08 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-18 19:03:08 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:03:08 - RouteDefinition matched: booking-service
+2024-09-18 19:03:08 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-18 19:03:08 - RouteDefinition matched: schedule-service
+2024-09-18 19:03:08 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-18 19:03:08 - RouteDefinition matched: movie-service
+2024-09-18 19:03:08 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-18 19:03:08 - RouteDefinition matched: studio-service
+2024-09-18 19:03:08 - New routes count: 6
+2024-09-18 19:03:38 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY/localhost:gateway:8080?status=UP&lastDirtyTimestamp=1726660868761
+2024-09-18 19:03:38 - Accept=[application/json, application/*+json]
+2024-09-18 19:03:38 - Response 200 OK
+2024-09-18 19:03:38 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-18 19:03:38 - Accept=[application/json, application/*+json]
+2024-09-18 19:03:38 - Response 200 OK
+2024-09-18 19:03:38 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-18 19:03:38 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-18 19:03:38 - RouteDefinition matched: auth-service
+2024-09-18 19:03:38 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-18 19:03:38 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:03:38 - RouteDefinition matched: user-service
+2024-09-18 19:03:38 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-18 19:03:38 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:03:38 - RouteDefinition matched: booking-service
+2024-09-18 19:03:38 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-18 19:03:38 - RouteDefinition matched: schedule-service
+2024-09-18 19:03:38 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-18 19:03:38 - RouteDefinition matched: movie-service
+2024-09-18 19:03:38 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-18 19:03:38 - RouteDefinition matched: studio-service
+2024-09-18 19:03:38 - New routes count: 6
+2024-09-18 19:04:08 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY/localhost:gateway:8080?status=UP&lastDirtyTimestamp=1726660868761
+2024-09-18 19:04:08 - Accept=[application/json, application/*+json]
+2024-09-18 19:04:08 - Response 200 OK
+2024-09-18 19:04:08 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-18 19:04:08 - Accept=[application/json, application/*+json]
+2024-09-18 19:04:08 - Response 200 OK
+2024-09-18 19:04:08 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-18 19:04:08 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-18 19:04:08 - RouteDefinition matched: auth-service
+2024-09-18 19:04:08 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-18 19:04:08 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:04:08 - RouteDefinition matched: user-service
+2024-09-18 19:04:08 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-18 19:04:08 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:04:08 - RouteDefinition matched: booking-service
+2024-09-18 19:04:08 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-18 19:04:08 - RouteDefinition matched: schedule-service
+2024-09-18 19:04:08 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-18 19:04:08 - RouteDefinition matched: movie-service
+2024-09-18 19:04:08 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-18 19:04:08 - RouteDefinition matched: studio-service
+2024-09-18 19:04:08 - New routes count: 6
+2024-09-18 19:04:38 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY/localhost:gateway:8080?status=UP&lastDirtyTimestamp=1726660868761
+2024-09-18 19:04:38 - Accept=[application/json, application/*+json]
+2024-09-18 19:04:38 - Response 200 OK
+2024-09-18 19:04:38 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-18 19:04:38 - Accept=[application/json, application/*+json]
+2024-09-18 19:04:38 - Response 200 OK
+2024-09-18 19:04:38 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-18 19:04:38 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-18 19:04:38 - RouteDefinition matched: auth-service
+2024-09-18 19:04:38 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-18 19:04:38 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:04:38 - RouteDefinition matched: user-service
+2024-09-18 19:04:38 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-18 19:04:38 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:04:38 - RouteDefinition matched: booking-service
+2024-09-18 19:04:38 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-18 19:04:38 - RouteDefinition matched: schedule-service
+2024-09-18 19:04:38 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-18 19:04:38 - RouteDefinition matched: movie-service
+2024-09-18 19:04:38 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-18 19:04:38 - RouteDefinition matched: studio-service
+2024-09-18 19:04:38 - New routes count: 6
+2024-09-18 19:05:08 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY/localhost:gateway:8080?status=UP&lastDirtyTimestamp=1726660868761
+2024-09-18 19:05:08 - Accept=[application/json, application/*+json]
+2024-09-18 19:05:08 - Response 200 OK
+2024-09-18 19:05:08 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-18 19:05:08 - Accept=[application/json, application/*+json]
+2024-09-18 19:05:08 - Response 200 OK
+2024-09-18 19:05:08 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-18 19:05:08 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-18 19:05:08 - RouteDefinition matched: auth-service
+2024-09-18 19:05:08 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-18 19:05:08 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:05:08 - RouteDefinition matched: user-service
+2024-09-18 19:05:08 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-18 19:05:08 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:05:08 - RouteDefinition matched: booking-service
+2024-09-18 19:05:08 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-18 19:05:08 - RouteDefinition matched: schedule-service
+2024-09-18 19:05:08 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-18 19:05:08 - RouteDefinition matched: movie-service
+2024-09-18 19:05:08 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-18 19:05:08 - RouteDefinition matched: studio-service
+2024-09-18 19:05:08 - New routes count: 6
+2024-09-18 19:05:11 - [f26f0618-1] HTTP POST "/api/v1/auth/login"
+2024-09-18 19:05:12 - Created new WebSession.
+2024-09-18 19:05:12 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+2024-09-18 19:05:12 - Request 'POST /api/v1/auth/login' doesn't match 'POST /logout'
+2024-09-18 19:05:12 - No matches found
+2024-09-18 19:05:12 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/register', method=null}
+2024-09-18 19:05:12 - Request 'POST /api/v1/auth/login' doesn't match 'null /api/v1/auth/register'
+2024-09-18 19:05:12 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/login', method=null}
+2024-09-18 19:05:12 - Checking match of request : '/api/v1/auth/login'; against '/api/v1/auth/login'
+2024-09-18 19:05:12 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/grouped', method=null}
+2024-09-18 19:05:12 - Request 'POST /api/v1/auth/login' doesn't match 'null /api/v1/schedules/grouped'
+2024-09-18 19:05:12 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/detail/**', method=null}
+2024-09-18 19:05:12 - Request 'POST /api/v1/auth/login' doesn't match 'null /api/v1/schedules/detail/**'
+2024-09-18 19:05:12 - matched
+2024-09-18 19:05:12 - Checking authorization on '/api/v1/auth/login' using org.springframework.security.config.web.server.ServerHttpSecurity$AuthorizeExchangeSpec$Access$$Lambda$833/0x0000000801174cd0@2272ceb3
+2024-09-18 19:05:12 - Authorization successful
+2024-09-18 19:05:12 - Route matched: auth-service
+2024-09-18 19:05:12 - Mapping [Exchange: POST http://localhost:8080/api/v1/auth/login] to Route{id='auth-service', uri=lb://auth-service, order=0, predicate=Paths: [/api/v1/auth/**], match trailing slash: true, gatewayFilters=[], metadata={}}
+2024-09-18 19:05:12 - [f26f0618-1] Mapped to org.springframework.cloud.gateway.handler.FilteringWebHandler@281065e
+2024-09-18 19:05:12 - Sorted gatewayFilterFactories: [[GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RemoveCachedBodyFilter@4f2aa0f4}, order = -2147483648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.AdaptCachedBodyGlobalFilter@4d46e2eb}, order = -2147482648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyWriteResponseFilter@3f42c698}, order = -1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardPathFilter@579e433b}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.GatewayMetricsFilter@5035aae}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RouteToRequestUrlFilter@22cd45f2}, order = 10000], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter@4c9791fd}, order = 10150], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.LoadBalancerServiceInstanceCookieFilter@1ffe4e85}, order = 10151], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.WebsocketRoutingFilter@4da9643c}, order = 2147483646], [GatewayFilterAdapter{delegate=findo.gateway.filter.LoggingGlobalFilter@1291d61a}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyRoutingFilter@23fff5fb}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardRoutingFilter@7ec13c7d}, order = 2147483647]]
+2024-09-18 19:05:12 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-18 19:05:12 - RouteDefinition matched: auth-service
+2024-09-18 19:05:12 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-18 19:05:12 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:05:12 - RouteDefinition matched: user-service
+2024-09-18 19:05:12 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-18 19:05:12 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:05:12 - RouteDefinition matched: booking-service
+2024-09-18 19:05:12 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-18 19:05:12 - RouteDefinition matched: schedule-service
+2024-09-18 19:05:12 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-18 19:05:12 - RouteDefinition matched: movie-service
+2024-09-18 19:05:12 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-18 19:05:12 - RouteDefinition matched: studio-service
+2024-09-18 19:05:12 - New routes count: 6
+2024-09-18 19:05:12 - Request: POST http://localhost:8080/api/v1/auth/login from IP: /[0:0:0:0:0:0:0:1]:50895
+2024-09-18 19:05:12 - Will instrument the HTTP request headers [Content-Type:"application/json", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"ce077d70-a349-4305-ab77-9ad03cc0b366", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Content-Length:"68", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50895"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-18 19:05:12 - Client observation  {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='POST', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='auth-service', spring.cloud.gateway.route.uri='lb://auth-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/auth/login'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=5.44E-4, duration(nanos)=544000.0, startTimeNanos=2961907614400}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@56716b39'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@63014a7b} created for the request. New headers are [Content-Type:"application/json", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"ce077d70-a349-4305-ab77-9ad03cc0b366", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Content-Length:"68", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50895"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-18 19:05:12 - Will instrument the response
+2024-09-18 19:05:12 - The response was handled for observation {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='POST', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='auth-service', spring.cloud.gateway.route.uri='lb://auth-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/auth/login'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=0.6688782, duration(nanos)=6.688782E8, startTimeNanos=2961907614400}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@56716b39'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@63014a7b}
+2024-09-18 19:05:12 - Response: 200 OK for POST http://localhost:8080/api/v1/auth/login
+2024-09-18 19:05:12 - [f26f0618-1] Completed 200 OK
+2024-09-18 19:05:30 - [f26f0618-2] HTTP PUT "/api/v1/users/update-profile"
+2024-09-18 19:05:30 - Created new WebSession.
+2024-09-18 19:05:30 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+2024-09-18 19:05:30 - Request 'PUT /api/v1/users/update-profile' doesn't match 'POST /logout'
+2024-09-18 19:05:30 - No matches found
+2024-09-18 19:05:30 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/register', method=null}
+2024-09-18 19:05:30 - Request 'PUT /api/v1/users/update-profile' doesn't match 'null /api/v1/auth/register'
+2024-09-18 19:05:30 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/login', method=null}
+2024-09-18 19:05:30 - Request 'PUT /api/v1/users/update-profile' doesn't match 'null /api/v1/auth/login'
+2024-09-18 19:05:30 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/grouped', method=null}
+2024-09-18 19:05:30 - Request 'PUT /api/v1/users/update-profile' doesn't match 'null /api/v1/schedules/grouped'
+2024-09-18 19:05:30 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/detail/**', method=null}
+2024-09-18 19:05:30 - Request 'PUT /api/v1/users/update-profile' doesn't match 'null /api/v1/schedules/detail/**'
+2024-09-18 19:05:30 - No matches found
+2024-09-18 19:05:30 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/movies/**', method=null}
+2024-09-18 19:05:30 - Request 'PUT /api/v1/users/update-profile' doesn't match 'null /api/v1/movies/**'
+2024-09-18 19:05:30 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/admin/**', method=null}
+2024-09-18 19:05:30 - Request 'PUT /api/v1/users/update-profile' doesn't match 'null /api/v1/bookings/admin/**'
+2024-09-18 19:05:30 - No matches found
+2024-09-18 19:05:30 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/customer/**', method=null}
+2024-09-18 19:05:30 - Request 'PUT /api/v1/users/update-profile' doesn't match 'null /api/v1/bookings/customer/**'
+2024-09-18 19:05:30 - No matches found
+2024-09-18 19:05:30 - Checking authorization on '/api/v1/users/update-profile' using org.springframework.security.authorization.AuthenticatedReactiveAuthorizationManager@5e4515a4
+2024-09-18 19:05:30 - Authorization successful
+2024-09-18 19:05:30 - Route matched: user-service
+2024-09-18 19:05:30 - Mapping [Exchange: PUT http://localhost:8080/api/v1/users/update-profile] to Route{id='user-service', uri=lb://user-service, order=0, predicate=Paths: [/api/v1/users/**], match trailing slash: true, gatewayFilters=[[findo.gateway.filter.JwtAuthenticationFilter$$Lambda$1345/0x0000000801101b30@3b084dff, order = 1]], metadata={}}
+2024-09-18 19:05:30 - [f26f0618-2] Mapped to org.springframework.cloud.gateway.handler.FilteringWebHandler@281065e
+2024-09-18 19:05:30 - Sorted gatewayFilterFactories: [[GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RemoveCachedBodyFilter@4f2aa0f4}, order = -2147483648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.AdaptCachedBodyGlobalFilter@4d46e2eb}, order = -2147482648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyWriteResponseFilter@3f42c698}, order = -1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardPathFilter@579e433b}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.GatewayMetricsFilter@5035aae}, order = 0], [findo.gateway.filter.JwtAuthenticationFilter$$Lambda$1345/0x0000000801101b30@3b084dff, order = 1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RouteToRequestUrlFilter@22cd45f2}, order = 10000], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter@4c9791fd}, order = 10150], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.LoadBalancerServiceInstanceCookieFilter@1ffe4e85}, order = 10151], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.WebsocketRoutingFilter@4da9643c}, order = 2147483646], [GatewayFilterAdapter{delegate=findo.gateway.filter.LoggingGlobalFilter@1291d61a}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyRoutingFilter@23fff5fb}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardRoutingFilter@7ec13c7d}, order = 2147483647]]
+2024-09-18 19:05:30 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-18 19:05:30 - RouteDefinition matched: auth-service
+2024-09-18 19:05:30 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-18 19:05:30 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:05:30 - RouteDefinition matched: user-service
+2024-09-18 19:05:30 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-18 19:05:30 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:05:30 - RouteDefinition matched: booking-service
+2024-09-18 19:05:30 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-18 19:05:30 - RouteDefinition matched: schedule-service
+2024-09-18 19:05:30 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-18 19:05:30 - RouteDefinition matched: movie-service
+2024-09-18 19:05:30 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-18 19:05:30 - RouteDefinition matched: studio-service
+2024-09-18 19:05:30 - New routes count: 6
+2024-09-18 19:05:30 - Request: PUT http://localhost:8080/api/v1/users/update-profile from IP: /[0:0:0:0:0:0:0:1]:50895
+2024-09-18 19:05:30 - Will instrument the HTTP request headers [Content-Type:"application/json", Authorization:"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4YWUwNTg1Yy1kNjM1LTQwZjQtODI5NC1hOGI4Nzc1ZGUyMjIiLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlzcyI6IkZQVCIsImV4cCI6MTcyNzI2NTkxMiwiaWF0IjoxNzI2NjYxMTEyLCJlbWFpbCI6IlRlc3RlcjZAZ21haWwuY29tIn0.TQ25M8DYVhwviWB7KYb3TX379bVlVlX0DBEei4zcH6octACxa4Sy5iCTrU8rKcEB1d1F25VQEHpEJcdjPa3-wIFIg326ajnwU8Sc5owTk3TR0nqGlT6n4IqZPaJkDg70lgl-UqotgJHpEBMtGyhSulYFqbpFxOyuHNG0QU3OkaXqrAf7D-KEuqkYrXBpnG3GQkVLfy_pRjBhV43ed9zzKDOc2YvmvgIH4RBLKDmcSj42FgwbMQ6toIvEFPG8bPTjA0CFsgdwfpw-6ZQPe7aomXjSP-nmWKSeKsReWkf_umumQAWW0qS7Jn0NGfUZ2hAKErw8Iq9ryBGCuB1Mq2Ghjg", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"9d53968c-e22a-4f74-8e5f-d25f994bed68", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Content-Length:"30", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50895"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-18 19:05:30 - Client observation  {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='PUT', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='user-service', spring.cloud.gateway.route.uri='lb://user-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/users/update-profile'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=7.29E-5, duration(nanos)=72900.0, startTimeNanos=2979941976800}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@73f3ccaa'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@61ed6cec} created for the request. New headers are [Content-Type:"application/json", Authorization:"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4YWUwNTg1Yy1kNjM1LTQwZjQtODI5NC1hOGI4Nzc1ZGUyMjIiLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlzcyI6IkZQVCIsImV4cCI6MTcyNzI2NTkxMiwiaWF0IjoxNzI2NjYxMTEyLCJlbWFpbCI6IlRlc3RlcjZAZ21haWwuY29tIn0.TQ25M8DYVhwviWB7KYb3TX379bVlVlX0DBEei4zcH6octACxa4Sy5iCTrU8rKcEB1d1F25VQEHpEJcdjPa3-wIFIg326ajnwU8Sc5owTk3TR0nqGlT6n4IqZPaJkDg70lgl-UqotgJHpEBMtGyhSulYFqbpFxOyuHNG0QU3OkaXqrAf7D-KEuqkYrXBpnG3GQkVLfy_pRjBhV43ed9zzKDOc2YvmvgIH4RBLKDmcSj42FgwbMQ6toIvEFPG8bPTjA0CFsgdwfpw-6ZQPe7aomXjSP-nmWKSeKsReWkf_umumQAWW0qS7Jn0NGfUZ2hAKErw8Iq9ryBGCuB1Mq2Ghjg", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"9d53968c-e22a-4f74-8e5f-d25f994bed68", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Content-Length:"30", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50895"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-18 19:05:30 - Will instrument the response
+2024-09-18 19:05:30 - The response was handled for observation {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='PUT', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='user-service', spring.cloud.gateway.route.uri='lb://user-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/users/update-profile'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=0.3233074, duration(nanos)=3.233074E8, startTimeNanos=2979941976800}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@73f3ccaa'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@61ed6cec}
+2024-09-18 19:05:30 - Response: 200 OK for PUT http://localhost:8080/api/v1/users/update-profile
+2024-09-18 19:05:30 - [f26f0618-2] Completed 200 OK
+2024-09-18 19:05:38 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY/localhost:gateway:8080?status=UP&lastDirtyTimestamp=1726660868761
+2024-09-18 19:05:38 - Accept=[application/json, application/*+json]
+2024-09-18 19:05:38 - Response 200 OK
+2024-09-18 19:05:38 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-18 19:05:38 - Accept=[application/json, application/*+json]
+2024-09-18 19:05:38 - Response 200 OK
+2024-09-18 19:05:38 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-18 19:05:38 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-18 19:05:38 - RouteDefinition matched: auth-service
+2024-09-18 19:05:38 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-18 19:05:38 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:05:38 - RouteDefinition matched: user-service
+2024-09-18 19:05:38 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-18 19:05:38 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 19:05:38 - RouteDefinition matched: booking-service
+2024-09-18 19:05:38 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-18 19:05:38 - RouteDefinition matched: schedule-service
+2024-09-18 19:05:38 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-18 19:05:38 - RouteDefinition matched: movie-service
+2024-09-18 19:05:38 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-18 19:05:38 - RouteDefinition matched: studio-service
+2024-09-18 19:05:38 - New routes count: 6
+2024-09-18 19:05:44 - [f26f0618-3] HTTP PUT "/api/v1/users/change-password"
+2024-09-18 19:05:44 - Created new WebSession.
+2024-09-18 19:05:44 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+2024-09-18 19:05:44 - Request 'PUT /api/v1/users/change-password' doesn't match 'POST /logout'
+2024-09-18 19:05:44 - No matches found
+2024-09-18 19:05:44 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/register', method=null}
+2024-09-18 19:05:44 - Request 'PUT /api/v1/users/change-password' doesn't match 'null /api/v1/auth/register'
+2024-09-18 19:05:44 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/login', method=null}
+2024-09-18 19:05:44 - Request 'PUT /api/v1/users/change-password' doesn't match 'null /api/v1/auth/login'
+2024-09-18 19:05:44 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/grouped', method=null}
+2024-09-18 19:05:44 - Request 'PUT /api/v1/users/change-password' doesn't match 'null /api/v1/schedules/grouped'
+2024-09-18 19:05:44 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/detail/**', method=null}
+2024-09-18 19:05:44 - Request 'PUT /api/v1/users/change-password' doesn't match 'null /api/v1/schedules/detail/**'
+2024-09-18 19:05:44 - No matches found
+2024-09-18 19:05:44 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/movies/**', method=null}
+2024-09-18 19:05:44 - Request 'PUT /api/v1/users/change-password' doesn't match 'null /api/v1/movies/**'
+2024-09-18 19:05:44 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/admin/**', method=null}
+2024-09-18 19:05:44 - Request 'PUT /api/v1/users/change-password' doesn't match 'null /api/v1/bookings/admin/**'
+2024-09-18 19:05:44 - No matches found
+2024-09-18 19:05:44 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/customer/**', method=null}
+2024-09-18 19:05:44 - Request 'PUT /api/v1/users/change-password' doesn't match 'null /api/v1/bookings/customer/**'
+2024-09-18 19:05:44 - No matches found
+2024-09-18 19:05:44 - Checking authorization on '/api/v1/users/change-password' using org.springframework.security.authorization.AuthenticatedReactiveAuthorizationManager@5e4515a4
+2024-09-18 19:05:44 - Authorization successful
+2024-09-18 19:05:44 - Route matched: user-service
+2024-09-18 19:05:44 - Mapping [Exchange: PUT http://localhost:8080/api/v1/users/change-password] to Route{id='user-service', uri=lb://user-service, order=0, predicate=Paths: [/api/v1/users/**], match trailing slash: true, gatewayFilters=[[findo.gateway.filter.JwtAuthenticationFilter$$Lambda$1345/0x0000000801101b30@141a0206, order = 1]], metadata={}}
+2024-09-18 19:05:44 - [f26f0618-3] Mapped to org.springframework.cloud.gateway.handler.FilteringWebHandler@281065e
+2024-09-18 19:05:44 - Sorted gatewayFilterFactories: [[GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RemoveCachedBodyFilter@4f2aa0f4}, order = -2147483648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.AdaptCachedBodyGlobalFilter@4d46e2eb}, order = -2147482648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyWriteResponseFilter@3f42c698}, order = -1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardPathFilter@579e433b}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.GatewayMetricsFilter@5035aae}, order = 0], [findo.gateway.filter.JwtAuthenticationFilter$$Lambda$1345/0x0000000801101b30@141a0206, order = 1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RouteToRequestUrlFilter@22cd45f2}, order = 10000], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter@4c9791fd}, order = 10150], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.LoadBalancerServiceInstanceCookieFilter@1ffe4e85}, order = 10151], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.WebsocketRoutingFilter@4da9643c}, order = 2147483646], [GatewayFilterAdapter{delegate=findo.gateway.filter.LoggingGlobalFilter@1291d61a}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyRoutingFilter@23fff5fb}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardRoutingFilter@7ec13c7d}, order = 2147483647]]
+2024-09-18 19:05:44 - Request: PUT http://localhost:8080/api/v1/users/change-password from IP: /[0:0:0:0:0:0:0:1]:50895
+2024-09-18 19:05:44 - Will instrument the HTTP request headers [Content-Type:"application/json", Authorization:"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4YWUwNTg1Yy1kNjM1LTQwZjQtODI5NC1hOGI4Nzc1ZGUyMjIiLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlzcyI6IkZQVCIsImV4cCI6MTcyNzI2NTkxMiwiaWF0IjoxNzI2NjYxMTEyLCJlbWFpbCI6IlRlc3RlcjZAZ21haWwuY29tIn0.TQ25M8DYVhwviWB7KYb3TX379bVlVlX0DBEei4zcH6octACxa4Sy5iCTrU8rKcEB1d1F25VQEHpEJcdjPa3-wIFIg326ajnwU8Sc5owTk3TR0nqGlT6n4IqZPaJkDg70lgl-UqotgJHpEBMtGyhSulYFqbpFxOyuHNG0QU3OkaXqrAf7D-KEuqkYrXBpnG3GQkVLfy_pRjBhV43ed9zzKDOc2YvmvgIH4RBLKDmcSj42FgwbMQ6toIvEFPG8bPTjA0CFsgdwfpw-6ZQPe7aomXjSP-nmWKSeKsReWkf_umumQAWW0qS7Jn0NGfUZ2hAKErw8Iq9ryBGCuB1Mq2Ghjg", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"3be0bf61-5dfb-46f4-8f5d-ab2daeb193ec", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Content-Length:"69", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50895"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-18 19:05:44 - Client observation  {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='PUT', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='user-service', spring.cloud.gateway.route.uri='lb://user-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/users/change-password'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=7.01E-5, duration(nanos)=70100.0, startTimeNanos=2994011795900}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@1addeef5'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@1ee26976} created for the request. New headers are [Content-Type:"application/json", Authorization:"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4YWUwNTg1Yy1kNjM1LTQwZjQtODI5NC1hOGI4Nzc1ZGUyMjIiLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlzcyI6IkZQVCIsImV4cCI6MTcyNzI2NTkxMiwiaWF0IjoxNzI2NjYxMTEyLCJlbWFpbCI6IlRlc3RlcjZAZ21haWwuY29tIn0.TQ25M8DYVhwviWB7KYb3TX379bVlVlX0DBEei4zcH6octACxa4Sy5iCTrU8rKcEB1d1F25VQEHpEJcdjPa3-wIFIg326ajnwU8Sc5owTk3TR0nqGlT6n4IqZPaJkDg70lgl-UqotgJHpEBMtGyhSulYFqbpFxOyuHNG0QU3OkaXqrAf7D-KEuqkYrXBpnG3GQkVLfy_pRjBhV43ed9zzKDOc2YvmvgIH4RBLKDmcSj42FgwbMQ6toIvEFPG8bPTjA0CFsgdwfpw-6ZQPe7aomXjSP-nmWKSeKsReWkf_umumQAWW0qS7Jn0NGfUZ2hAKErw8Iq9ryBGCuB1Mq2Ghjg", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"3be0bf61-5dfb-46f4-8f5d-ab2daeb193ec", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Content-Length:"69", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50895"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-18 19:05:44 - Will instrument the response
+2024-09-18 19:05:44 - The response was handled for observation {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='PUT', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='user-service', spring.cloud.gateway.route.uri='lb://user-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/users/change-password'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=0.1694019, duration(nanos)=1.694019E8, startTimeNanos=2994011795900}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@1addeef5'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@1ee26976}
+2024-09-18 19:05:44 - Response: 200 OK for PUT http://localhost:8080/api/v1/users/change-password
+2024-09-18 19:05:44 - [f26f0618-3] Completed 200 OK
+2024-09-18 19:05:54 - [f26f0618-4] HTTP POST "/api/v1/auth/login"
+2024-09-18 19:05:54 - Created new WebSession.
+2024-09-18 19:05:54 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+2024-09-18 19:05:54 - Request 'POST /api/v1/auth/login' doesn't match 'POST /logout'
+2024-09-18 19:05:54 - No matches found
+2024-09-18 19:05:54 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/register', method=null}
+2024-09-18 19:05:54 - Request 'POST /api/v1/auth/login' doesn't match 'null /api/v1/auth/register'
+2024-09-18 19:05:54 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/login', method=null}
+2024-09-18 19:05:54 - Checking match of request : '/api/v1/auth/login'; against '/api/v1/auth/login'
+2024-09-18 19:05:54 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/grouped', method=null}
+2024-09-18 19:05:54 - Request 'POST /api/v1/auth/login' doesn't match 'null /api/v1/schedules/grouped'
+2024-09-18 19:05:54 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/detail/**', method=null}
+2024-09-18 19:05:54 - Request 'POST /api/v1/auth/login' doesn't match 'null /api/v1/schedules/detail/**'
+2024-09-18 19:05:54 - matched
+2024-09-18 19:05:54 - Checking authorization on '/api/v1/auth/login' using org.springframework.security.config.web.server.ServerHttpSecurity$AuthorizeExchangeSpec$Access$$Lambda$833/0x0000000801174cd0@2272ceb3
+2024-09-18 19:05:54 - Authorization successful
+2024-09-18 19:05:54 - Route matched: auth-service
+2024-09-18 19:05:54 - Mapping [Exchange: POST http://localhost:8080/api/v1/auth/login] to Route{id='auth-service', uri=lb://auth-service, order=0, predicate=Paths: [/api/v1/auth/**], match trailing slash: true, gatewayFilters=[], metadata={}}
+2024-09-18 19:05:54 - [f26f0618-4] Mapped to org.springframework.cloud.gateway.handler.FilteringWebHandler@281065e
+2024-09-18 19:05:54 - Sorted gatewayFilterFactories: [[GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RemoveCachedBodyFilter@4f2aa0f4}, order = -2147483648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.AdaptCachedBodyGlobalFilter@4d46e2eb}, order = -2147482648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyWriteResponseFilter@3f42c698}, order = -1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardPathFilter@579e433b}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.GatewayMetricsFilter@5035aae}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RouteToRequestUrlFilter@22cd45f2}, order = 10000], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter@4c9791fd}, order = 10150], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.LoadBalancerServiceInstanceCookieFilter@1ffe4e85}, order = 10151], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.WebsocketRoutingFilter@4da9643c}, order = 2147483646], [GatewayFilterAdapter{delegate=findo.gateway.filter.LoggingGlobalFilter@1291d61a}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyRoutingFilter@23fff5fb}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardRoutingFilter@7ec13c7d}, order = 2147483647]]
+2024-09-18 19:05:54 - Request: POST http://localhost:8080/api/v1/auth/login from IP: /[0:0:0:0:0:0:0:1]:50895
+2024-09-18 19:05:54 - Will instrument the HTTP request headers [Content-Type:"application/json", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"c96bccc7-3044-4dd5-a5ae-bc02dbbf44be", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Content-Length:"68", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50895"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-18 19:05:54 - Client observation  {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='POST', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='auth-service', spring.cloud.gateway.route.uri='lb://auth-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/auth/login'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=5.66E-5, duration(nanos)=56600.0, startTimeNanos=3004617124700}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@27d440c7'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@23ebd0e5} created for the request. New headers are [Content-Type:"application/json", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"c96bccc7-3044-4dd5-a5ae-bc02dbbf44be", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Content-Length:"68", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50895"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-18 19:05:54 - Will instrument the response
+2024-09-18 19:05:54 - The response was handled for observation {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='POST', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='auth-service', spring.cloud.gateway.route.uri='lb://auth-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/auth/login'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=0.0867928, duration(nanos)=8.67928E7, startTimeNanos=3004617124700}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@27d440c7'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@23ebd0e5}
+2024-09-18 19:05:54 - Response: 400 BAD_REQUEST for POST http://localhost:8080/api/v1/auth/login
+2024-09-18 19:05:54 - [f26f0618-4] Completed 400 BAD_REQUEST
+2024-09-18 19:06:00 - Unregistering application GATEWAY with eureka with status DOWN
+2024-09-18 19:06:00 - Saw local status change event StatusChangeEvent [timestamp=1726661160042, current=DOWN, previous=UP]
+2024-09-18 19:06:00 - DiscoveryClient_GATEWAY/localhost:gateway:8080: registering service...
+2024-09-18 19:06:00 - HTTP POST http://localhost:8761/eureka/apps/GATEWAY
+2024-09-18 19:06:00 - Accept=[application/json, application/*+json]
+2024-09-18 19:06:00 - Writing [InstanceInfo [instanceId = localhost:gateway:8080, appName = GATEWAY, hostName = localhost, status = DOWN, ipAddr = 26.86.151.172, port = 8080, securePort = 443, dataCenterInfo = com.netflix.appinfo.MyDataCenterInfo@5016753d] as "application/json"
+2024-09-18 19:06:00 - Response 204 NO_CONTENT
+2024-09-18 19:06:00 - DiscoveryClient_GATEWAY/localhost:gateway:8080 - registration status: 204
+2024-09-18 19:06:00 - Shutting down DiscoveryClient ...
+2024-09-18 19:06:03 - Unregistering ...
+2024-09-18 19:06:03 - HTTP DELETE http://localhost:8761/eureka/apps/GATEWAY/localhost:gateway:8080
+2024-09-18 19:06:03 - Accept=[application/json, application/*+json]
+2024-09-18 19:06:03 - Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:8761/eureka/} exception=I/O error on DELETE request for "http://localhost:8761/eureka/apps/GATEWAY/localhost:gateway:8080": Connect to http://localhost:8761 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on DELETE request for "http://localhost:8761/eureka/apps/GATEWAY/localhost:gateway:8080": Connect to http://localhost:8761 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:915)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:895)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:672)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.cancel(RestTemplateEurekaHttpClient.java:87)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:91)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:919)
+	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:900)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:415)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:239)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:202)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:195)
+	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:389)
+	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:136)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:211)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1202)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1156)
+	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.doClose(ReactiveWebServerApplicationContext.java:149)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1102)
+	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:145)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:114)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: org.apache.hc.client5.http.HttpHostConnectException: Connect to http://localhost:8761 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:672)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:597)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:633)
+	at org.apache.hc.client5.http.socket.PlainConnectionSocketFactory.lambda$connectSocket$0(PlainConnectionSocketFactory.java:91)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
+	at org.apache.hc.client5.http.socket.PlainConnectionSocketFactory.connectSocket(PlainConnectionSocketFactory.java:90)
+	at org.apache.hc.client5.http.socket.ConnectionSocketFactory.connectSocket(ConnectionSocketFactory.java:123)
+	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:189)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:450)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:162)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:172)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:142)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:192)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:152)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:116)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
+	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
+	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
+	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:70)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:112)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$3(RestTemplateTransportClientFactory.java:170)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
+	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
+	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:889)
+	... 39 more
+
+2024-09-18 19:06:03 - Request execution failed with message: I/O error on DELETE request for "http://localhost:8761/eureka/apps/GATEWAY/localhost:gateway:8080": Connect to http://localhost:8761 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+2024-09-18 19:06:03 - HTTP DELETE http://localhost:8761/eureka/apps/GATEWAY/localhost:gateway:8080
+2024-09-18 19:06:03 - Accept=[application/json, application/*+json]
+2024-09-18 19:06:03 - Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:8761/eureka/}, exception=I/O error on DELETE request for "http://localhost:8761/eureka/apps/GATEWAY/localhost:gateway:8080": Connect to http://localhost:8761 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on DELETE request for "http://localhost:8761/eureka/apps/GATEWAY/localhost:gateway:8080": Connect to http://localhost:8761 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:915)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:895)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:790)
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:672)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.cancel(RestTemplateEurekaHttpClient.java:87)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.executeOnNewServer(RedirectingEurekaHttpClient.java:121)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:80)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:919)
+	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:900)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:415)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:239)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:202)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:195)
+	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:389)
+	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:136)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:211)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1202)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1156)
+	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.doClose(ReactiveWebServerApplicationContext.java:149)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1102)
+	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:145)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:114)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: org.apache.hc.client5.http.HttpHostConnectException: Connect to http://localhost:8761 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:672)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:597)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:633)
+	at org.apache.hc.client5.http.socket.PlainConnectionSocketFactory.lambda$connectSocket$0(PlainConnectionSocketFactory.java:91)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569)
+	at org.apache.hc.client5.http.socket.PlainConnectionSocketFactory.connectSocket(PlainConnectionSocketFactory.java:90)
+	at org.apache.hc.client5.http.socket.ConnectionSocketFactory.connectSocket(ConnectionSocketFactory.java:123)
+	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:189)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:450)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:162)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:172)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:142)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:192)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:152)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:116)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:170)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
+	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
+	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
+	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:70)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:112)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$3(RestTemplateTransportClientFactory.java:170)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
+	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
+	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:66)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:889)
+	... 40 more
+
+2024-09-18 19:06:03 - Request execution failed with message: I/O error on DELETE request for "http://localhost:8761/eureka/apps/GATEWAY/localhost:gateway:8080": Connect to http://localhost:8761 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: no further information
+2024-09-18 19:06:03 - DiscoveryClient_GATEWAY/localhost:gateway:8080 - de-registration failedCannot execute request on any known server
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:919)
+	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:900)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:415)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:239)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:202)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:195)
+	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:389)
+	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:136)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:211)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1202)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1195)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1156)
+	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.doClose(ReactiveWebServerApplicationContext.java:149)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1102)
+	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:145)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:114)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2024-09-18 19:06:03 - Completed shut down of DiscoveryClient
