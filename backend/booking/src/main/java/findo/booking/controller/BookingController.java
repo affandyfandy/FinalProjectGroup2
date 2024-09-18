@@ -1,5 +1,4 @@
-package findo.booking.controller;
 
-public class BookingController {
-
+return bookingService.createBooking(request, UUID.fromString(userId));
+    }
 }
