@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { RouterConfig } from './config/app.constants';
+import { accessGuard } from './main/guards/access.guard';
 
 export const routes: Routes = [
     {
@@ -14,5 +15,14 @@ export const routes: Routes = [
         loadChildren: () =>
             import('./pages/home/home.routes').then((m) => m.homeRoutes),
         title: RouterConfig.HOME.title,
+    },
+    {
+        path: RouterConfig.PROFILE.path,
+        data: { roles: ['ROLE_ADMIN', 'ROLE_CUSTOMER'] },
+        canActivate: [accessGuard],
+        loadChildren: () =>
+            import('./pages/profile/profile.routes').then((m) => m.profileRoutes),
+        title: RouterConfig.PROFILE.title,
+
     }
 ];

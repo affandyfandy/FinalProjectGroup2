@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user/user.service';
+import { RouterConfig } from '../../../config/app.constants';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +17,7 @@ import { UserService } from '../../../services/user/user.service';
   ],
   templateUrl: './header.component.html'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   isLoggedIn = false;
   username = '-';
 
@@ -27,23 +28,42 @@ export class HeaderComponent {
   ) { }
 
   ngOnInit() {
-    this.isLoggedIn = this.authService.isLoggedIn();
-    this.getProfile();
+    console.log('HeaderComponent');
+
+    this.authService.isLoggedIn$.subscribe((status) => {
+      this.isLoggedIn = status;
+      this.getProfile();
+    });
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.checkLoginStatus();
+      }
+    });
   }
 
   navigateToLogin() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate([RouterConfig.LOGIN.link]);
+  }
+
+  navigateToProfile() {
+    this.router.navigate([RouterConfig.PROFILE.link]);
   }
 
   getProfile() {
-    this.userService.getProfile().subscribe({
-      next: (res: any) => {
-        this.username = res.name;
-      },
-      error: (err) => {
-        console.error(err);
-      }
-    });
+    if (this.isLoggedIn) {
+      this.userService.getProfile().subscribe({
+        next: (res: any) => {
+          this.username = res.name;
+        },
+        error: (err) => {
+          console.error(err);
+        }
+      });
+    }
+  }
+
+  checkLoginStatus() {
+    this.isLoggedIn = this.authService.isLoggedIn();
   }
 }

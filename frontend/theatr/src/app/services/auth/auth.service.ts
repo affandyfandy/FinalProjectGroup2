@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AppConstants } from '../../config/app.constants';
 import { HttpClient } from '@angular/common/http';
 import { LoginDTO, RegisterDTO } from '../../model/user.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,9 @@ import { LoginDTO, RegisterDTO } from '../../model/user.model';
 export class AuthService {
 
   private apiUrl: string = `${AppConstants.BASE_API_URL}/auth`;
+
+  private isLoggedInSubject = new BehaviorSubject<boolean>(this.getToken() !== null);
+  isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -45,9 +49,14 @@ export class AuthService {
   logout() {
     localStorage.removeItem(AppConstants.TOKEN_KEY);
     localStorage.removeItem(AppConstants.ROLE_KEY);
+    this.isLoggedInSubject.next(false);
   }
 
   isLoggedIn() {
     return !!this.getToken();
+  }
+
+  isAdmin() {
+    return this.getRole() === 'ROLE_ADMIN';
   }
 }
