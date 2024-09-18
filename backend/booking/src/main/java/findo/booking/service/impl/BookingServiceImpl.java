@@ -55,7 +55,7 @@ public class BookingServiceImpl implements BookingService {
         Booking booking = bookingRepository.findById(bookingId)
                 .orElseThrow(() -> new RuntimeException("Booking not found"));
 
-        List<BookingSeat> bookingSeats = bookingSeatRepository.findByBookingId(bookingId);
+        List<BookingSeat> bookingSeats = bookingSeatRepository.findByBookingIdWithSeatIds(bookingId);
         return bookingMapper.toBookingDetailDTO(booking, bookingSeats);
     }
 

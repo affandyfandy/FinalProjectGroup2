@@ -25,7 +25,7 @@ public class UserController {
     }
 
     @PutMapping("/update-profile")
-    public Mono<ResponseEntity<String>> changeName(@AuthenticationPrincipal JwtAuthenticationToken principal,
+    public Mono<ResponseEntity<ShowDataDTO>> changeName(@AuthenticationPrincipal JwtAuthenticationToken principal,
             @Valid @RequestBody ChangeNameDTO changeNameDTO) {
         String userId = principal.getToken().getClaimAsString("sub"); // Extract user ID from JWT token's "sub" claim
         return userService.updateUserName(UUID.fromString(userId), changeNameDTO)
@@ -41,7 +41,7 @@ public class UserController {
     }
 
     @PutMapping("/top-up")
-    public Mono<ResponseEntity<String>> addBalance(@AuthenticationPrincipal JwtAuthenticationToken principal,
+    public Mono<ResponseEntity<AddBalanceDTO>> addBalance(@AuthenticationPrincipal JwtAuthenticationToken principal,
             @Valid @RequestBody AddBalanceDTO addBalanceDTO) {
         String userId = principal.getToken().getClaimAsString("sub"); // Extract user ID from JWT token's "sub" claim
         return userService.addBalance(UUID.fromString(userId), addBalanceDTO)

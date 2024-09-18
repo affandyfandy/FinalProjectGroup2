@@ -43,24 +43,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Mono<String> updateUserName(UUID userId, ChangeNameDTO changeNameDTO) {
+    public Mono<ShowDataDTO> updateUserName(UUID userId, ChangeNameDTO changeNameDTO) {
         return Mono.justOrEmpty(userRepository.findById(userId))
                 .switchIfEmpty(Mono.error(new UserNotFoundException(USER_NOT_FOUND_MESSAGE + userId)))
                 .flatMap(user -> {
                     user.setName(changeNameDTO.getNewName());
                     userRepository.save(user);
-                    return Mono.just("Name Changed Successfully");
+                    return Mono.just(new ShowDataDTO(user.getName(), user.getEmail(), user.getBalance()));
                 });
     }
 
     @Override
-    public Mono<String> addBalance(UUID userId, AddBalanceDTO addBalanceDTO) {
+    public Mono<AddBalanceDTO> addBalance(UUID userId, AddBalanceDTO addBalanceDTO) {
         return Mono.justOrEmpty(userRepository.findById(userId))
                 .switchIfEmpty(Mono.error(new UserNotFoundException(USER_NOT_FOUND_MESSAGE + userId)))
                 .flatMap(user -> {
                     user.setBalance(user.getBalance() + addBalanceDTO.getBalance());
                     userRepository.save(user);
-                    return Mono.just("Top-Up Success !");
+                    return Mono.just(new AddBalanceDTO(user.getBalance()));
                 });
     }
 
