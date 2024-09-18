@@ -18,8 +18,10 @@ import { RouterConfig } from '../../../config/app.constants';
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
+  currentUrl = '';
   isLoggedIn = false;
   username = '-';
+  isAdmin = this.authService.isAdmin();
 
   constructor(
     private router: Router,
@@ -28,8 +30,6 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('HeaderComponent');
-
     this.authService.isLoggedIn$.subscribe((status) => {
       this.isLoggedIn = status;
       this.getProfile();
@@ -38,8 +38,13 @@ export class HeaderComponent implements OnInit {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.checkLoginStatus();
+        this.currentUrl = event.url;
       }
     });
+  }
+
+  isSectionActive(section: string): boolean {
+    return this.currentUrl.includes(section);
   }
 
   navigateToLogin() {

@@ -23,7 +23,7 @@ export const RouterConfig = {
         data: { header: true },
     },
     ADMIN_BOOKINGS: {
-        path: 'admin-bookings',
+        path: 'admin/bookings',
         link: '/admin/bookings',
         title: 'Bookings',
         data: { header: true },
@@ -35,19 +35,19 @@ export const RouterConfig = {
         data: { header: true },
     },
     ADMIN_SCHEDULES: {
-        path: 'admin-schedules',
+        path: 'admin/schedules',
         link: '/admin/schedules',
         title: 'Schedules',
         data: { header: true },
     },
     MOVIES: {
-        path: 'movies',
+        path: 'admin/movies',
         link: '/admin/movies',
         title: 'Movies',
         data: { header: true },
     },
     STUDIOS: {
-        path: 'studios',
+        path: 'admin/studios',
         link: '/admin/studios',
         title: 'Studios',
         data: { header: true },

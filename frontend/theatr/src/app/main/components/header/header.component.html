@@ -4,10 +4,26 @@
     </div>
 
     <nav class="flex space-x-8">
-        <a (click)="navigateToHome()" routerLinkActive="font-semibold border-white"
-            class="font-light border-b-2 border-transparent px-3 py-1 hover:border-white hover:font-semibold transition">Home</a>
-        <a (click)="navigateToBookings()" routerLinkActive="font-semibold border-white"
-            class="font-light border-b-2 border-transparent px-3 py-1 hover:border-white hover:font-semibold transition">Bookings</a>
+        <a *ngIf="!isAdmin" (click)="navigateToHome()"
+            ngClass="{{ isSectionActive('home') ? 'font-semibold border-white' : '' }}"
+            class="font-light border-b-2 border-transparent px-3 py-1 hover:border-white transition-all">Home</a>
+        <a *ngIf="!isAdmin" (click)="navigateToBookings()"
+            ngClass="{{ isSectionActive('bookings') ? 'font-semibold border-white' : '' }}"
+            class="font-light border-b-2 border-transparent px-3 py-1 hover:border-white transition-all">Bookings</a>
+
+        <a *ngIf="isAdmin" (click)="navigateToAdminSchedule()"
+            ngClass="{{ isSectionActive('admin/schedules') ? 'font-semibold border-white' : '' }}"
+            class="font-light border-b-2 border-transparent px-3 py-1 hover:border-white transition-all">Schedule</a>
+        <a *ngIf="isAdmin" (click)="navigateToAdminMovies()"
+            ngClass="{{ isSectionActive('admin/movies') ? 'font-semibold border-white' : '' }}"
+            class="font-light border-b-2 border-transparent px-3 py-1 hover:border-white transition-all">Movie</a>
+        <a *ngIf="isAdmin" (click)="navigateToAdminStudio()"
+            ngClass="{{ isSectionActive('admin/studios') ? 'font-semibold border-white' : '' }}"
+            class="font-light border-b-2 border-transparent px-3 py-1 hover:border-white transition-all">Studio</a>
+        <a *ngIf="isAdmin" (click)="navigateToAdminBookings()"
+            ngClass="{{ isSectionActive('admin/bookings') ? 'font-semibold border-white' : '' }}"
+            class="font-light border-b-2 border-transparent px-3 py-1 hover:border-white transition-all">Booking
+            History</a>
     </nav>
 
     <div *ngIf="!isLoggedIn; else profileButton">
