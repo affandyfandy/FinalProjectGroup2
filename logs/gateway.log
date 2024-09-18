@@ -17276,3 +17276,91 @@ Caused by: java.net.ConnectException: Connection refused: no further information
 2024-09-18 23:32:22 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
 2024-09-18 23:32:22 - RouteDefinition matched: studio-service
 2024-09-18 23:32:22 - New routes count: 6
+2024-09-18 23:32:52 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY/localhost:gateway:8080?status=UP&lastDirtyTimestamp=1726674950741
+2024-09-18 23:32:52 - Accept=[application/json, application/*+json]
+2024-09-18 23:32:52 - Response 200 OK
+2024-09-18 23:32:52 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-18 23:32:52 - Accept=[application/json, application/*+json]
+2024-09-18 23:32:52 - Response 200 OK
+2024-09-18 23:32:52 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-18 23:32:52 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-18 23:32:52 - RouteDefinition matched: auth-service
+2024-09-18 23:32:52 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-18 23:32:52 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 23:32:52 - RouteDefinition matched: user-service
+2024-09-18 23:32:52 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-18 23:32:52 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 23:32:52 - RouteDefinition matched: booking-service
+2024-09-18 23:32:52 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-18 23:32:52 - RouteDefinition matched: schedule-service
+2024-09-18 23:32:52 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-18 23:32:52 - RouteDefinition matched: movie-service
+2024-09-18 23:32:52 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-18 23:32:52 - RouteDefinition matched: studio-service
+2024-09-18 23:32:52 - New routes count: 6
+2024-09-18 23:33:22 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY/localhost:gateway:8080?status=UP&lastDirtyTimestamp=1726674950741
+2024-09-18 23:33:22 - Accept=[application/json, application/*+json]
+2024-09-18 23:33:22 - Response 200 OK
+2024-09-18 23:33:22 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-18 23:33:22 - Accept=[application/json, application/*+json]
+2024-09-18 23:33:22 - Response 200 OK
+2024-09-18 23:33:22 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-18 23:33:22 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-18 23:33:22 - RouteDefinition matched: auth-service
+2024-09-18 23:33:22 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-18 23:33:22 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 23:33:22 - RouteDefinition matched: user-service
+2024-09-18 23:33:22 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-18 23:33:22 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 23:33:22 - RouteDefinition matched: booking-service
+2024-09-18 23:33:22 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-18 23:33:22 - RouteDefinition matched: schedule-service
+2024-09-18 23:33:22 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-18 23:33:22 - RouteDefinition matched: movie-service
+2024-09-18 23:33:22 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-18 23:33:22 - RouteDefinition matched: studio-service
+2024-09-18 23:33:22 - New routes count: 6
+2024-09-18 23:33:52 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY/localhost:gateway:8080?status=UP&lastDirtyTimestamp=1726674950741
+2024-09-18 23:33:52 - Accept=[application/json, application/*+json]
+2024-09-18 23:33:52 - Response 200 OK
+2024-09-18 23:33:52 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-18 23:33:52 - Accept=[application/json, application/*+json]
+2024-09-18 23:33:52 - Response 200 OK
+2024-09-18 23:33:52 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-18 23:33:52 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-18 23:33:52 - RouteDefinition matched: auth-service
+2024-09-18 23:33:52 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-18 23:33:52 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 23:33:52 - RouteDefinition matched: user-service
+2024-09-18 23:33:52 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-18 23:33:52 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 23:33:52 - RouteDefinition matched: booking-service
+2024-09-18 23:33:52 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-18 23:33:52 - RouteDefinition matched: schedule-service
+2024-09-18 23:33:52 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-18 23:33:52 - RouteDefinition matched: movie-service
+2024-09-18 23:33:52 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-18 23:33:52 - RouteDefinition matched: studio-service
+2024-09-18 23:33:52 - New routes count: 6
+2024-09-18 23:34:22 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY/localhost:gateway:8080?status=UP&lastDirtyTimestamp=1726674950741
+2024-09-18 23:34:22 - Accept=[application/json, application/*+json]
+2024-09-18 23:34:22 - Response 200 OK
+2024-09-18 23:34:22 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-18 23:34:22 - Accept=[application/json, application/*+json]
+2024-09-18 23:34:22 - Response 200 OK
+2024-09-18 23:34:22 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-18 23:34:22 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-18 23:34:22 - RouteDefinition matched: auth-service
+2024-09-18 23:34:22 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-18 23:34:22 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 23:34:22 - RouteDefinition matched: user-service
+2024-09-18 23:34:22 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-18 23:34:22 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-18 23:34:22 - RouteDefinition matched: booking-service
+2024-09-18 23:34:22 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-18 23:34:22 - RouteDefinition matched: schedule-service
+2024-09-18 23:34:22 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-18 23:34:22 - RouteDefinition matched: movie-service
+2024-09-18 23:34:22 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-18 23:34:22 - RouteDefinition matched: studio-service
+2024-09-18 23:34:22 - New routes count: 6
