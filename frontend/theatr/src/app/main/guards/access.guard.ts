@@ -1,6 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
+import { RouterConfig } from '../../config/app.constants';
 
 export const accessGuard: CanActivateFn = (route, state) => {
     const authService = inject(AuthService);
@@ -10,15 +11,22 @@ export const accessGuard: CanActivateFn = (route, state) => {
 
     if (authService.isLoggedIn()) {
         const userRole = authService.getRole();
+        console.log('userRole', userRole);
+        console.log('requiredRoles', requiredRoles);
 
         if (requiredRoles.includes(userRole)) {
             return true;
         } else {
-            router.navigate(['/unauthorized']);
-            return false;
+            if (authService.isAdmin()) {
+                router.navigate([RouterConfig.ADMIN_SCHEDULES.link]);
+                return false;
+            } else {
+                router.navigate([RouterConfig.UNAUTHORIZED.link]);
+                return false;
+            }
         }
     }
 
-    router.navigate(['/login']);
+    router.navigate([RouterConfig.LOGIN.link]);
     return false;
 };

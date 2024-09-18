@@ -50,6 +50,30 @@ export class HeaderComponent implements OnInit {
     this.router.navigate([RouterConfig.PROFILE.link]);
   }
 
+  navigateToBookings() {
+    this.router.navigate([RouterConfig.BOOKINGS.link]);
+  }
+
+  navigateToHome() {
+    this.router.navigate([RouterConfig.HOME.link]);
+  }
+
+  navigateToAdminBookings() {
+    this.router.navigate([RouterConfig.ADMIN_BOOKINGS.link]);
+  }
+
+  navigateToAdminMovies() {
+    this.router.navigate([RouterConfig.MOVIES.link]);
+  }
+
+  navigateToAdminSchedule() {
+    this.router.navigate([RouterConfig.ADMIN_SCHEDULES.link]);
+  }
+
+  navigateToAdminStudio() {
+    this.router.navigate([RouterConfig.STUDIOS.link]);
+  }
+
   getProfile() {
     if (this.isLoggedIn) {
       this.userService.getProfile().subscribe({
