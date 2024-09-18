@@ -13,7 +13,7 @@ public class MovieDTO {
     private UUID id;
     private String title;
     private String synopsis;
-    private String duration;
+    private int duration;
     private String posterUrl;
     private int year;
 }

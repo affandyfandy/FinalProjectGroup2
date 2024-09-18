@@ -33,7 +33,7 @@ public class MovieController {
     private final MovieService movieService;
 
     @GetMapping
-    public ResponseEntity<Page<Movie>> getAllCustomer(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size) {
+    public ResponseEntity<Page<Movie>> getAllMovies(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Movie> moviePage = movieService.findAllMovies(pageable);
 
@@ -45,12 +45,8 @@ public class MovieController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Movie> getCustomerById(@PathVariable("id") UUID id) {
+    public ResponseEntity<Movie> getMovieById(@PathVariable("id") UUID id) {
         Movie movie = movieService.findMovieById(id);
-
-        if(movie == null) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        }
 
         return ResponseEntity.status(HttpStatus.OK).body(movie);
     }
