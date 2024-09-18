@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import findo.user.dto.AddBalanceDTO;
 import findo.user.dto.ChangeNameDTO;
 import findo.user.dto.ChangePasswordDTO;
+import findo.user.dto.ChangePasswordResponseDTO;
 import findo.user.repository.UserRepository;
 import findo.user.service.UserService;
 import reactor.core.publisher.Mono;
@@ -28,14 +29,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Mono<String> changePassword(UUID userId, ChangePasswordDTO changePasswordDTO) {
+    public Mono<ChangePasswordResponseDTO> changePassword(UUID userId, ChangePasswordDTO changePasswordDTO) {
         return Mono.justOrEmpty(userRepository.findById(userId))
                 .switchIfEmpty(Mono.error(new UserNotFoundException(USER_NOT_FOUND_MESSAGE + userId)))
                 .flatMap(user -> {
                     if (passwordEncoder.matches(changePasswordDTO.getOldPassword(), user.getPassword())) {
                         user.setPassword(passwordEncoder.encode(changePasswordDTO.getNewPassword()));
                         userRepository.save(user);
-                        return Mono.just("Password Changed Successfully !");
+                        return Mono.just(new ChangePasswordResponseDTO("Password Changed Successfully!"));
                     } else {
                         return Mono.error(new IllegalArgumentException("Old password is incorrect"));
                     }
