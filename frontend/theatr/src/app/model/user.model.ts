@@ -31,5 +31,5 @@ export interface ChangePasswordDTO {
 }
 
 export interface UpdateProfileDTO {
-    name: string;
+    newName: string;
 }

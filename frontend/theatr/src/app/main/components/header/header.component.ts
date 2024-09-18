@@ -33,18 +33,20 @@ export class HeaderComponent implements OnInit {
     this.authService.isLoggedIn$.subscribe((status) => {
       this.isLoggedIn = status;
       this.getProfile();
+      this.isAdmin = this.authService.isAdmin();
     });
 
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.checkLoginStatus();
         this.currentUrl = event.url;
+        this.isAdmin = this.authService.isAdmin();
       }
     });
   }
 
   isSectionActive(section: string): boolean {
-    return this.currentUrl.includes(section);
+    return this.currentUrl === ('/' + section);
   }
 
   navigateToLogin() {
