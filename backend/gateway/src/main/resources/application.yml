@@ -15,7 +15,6 @@ spring:
 
   cloud:
     gateway:
-
       routes:
         - id: auth-service
           uri: lb://auth-service
@@ -26,11 +25,15 @@ spring:
           uri: lb://user-service
           predicates:
             - Path=/api/v1/users/**
+          filters:
+            - JwtAuthenticationFilter
 
         - id: booking-service
-          uri: lb://booking
+          uri: lb://booking-service
           predicates:
             - Path=/api/v1/bookings/**
+          filters:
+            - JwtAuthenticationFilter
 
         - id: schedule-service
           uri: lb://schedule
@@ -51,6 +54,15 @@ logging:
   level:
     org.springframework.cloud.gateway: DEBUG
     org.springframework.security: DEBUG
+    root: INFO
+    org.springframework.web: DEBUG
+
+  file:
+    name: logs/gateway.log
+    
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
 
 management:
   endpoints:

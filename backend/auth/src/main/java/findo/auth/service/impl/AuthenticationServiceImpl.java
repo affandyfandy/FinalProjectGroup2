@@ -27,12 +27,12 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService {
-    
+
     final private UserRepository userRepository;
     final private PasswordEncoder passwordEncoder;
     final private JwtEncoder jwtEncoder;
     final private AuthenticationManager authenticationManager;
-    
+
     @Override
     public User register(RegisterDTO user) {
         User userData = new User();
@@ -58,8 +58,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         try {
             // Get user authentication
             Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword())
-            );
+                    new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
 
             // Get UserDetailsDTO after success authentication
             UserDetailsDTO userDetails = (UserDetailsDTO) authentication.getPrincipal();
@@ -73,8 +72,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                     .issuer("FPT")
                     .issuedAt(now)
                     .expiresAt(now.plusSeconds(expiry))
-                    .subject(user.getId().toString())  // Store User ID as a subject
-                    .claim("email", user.getEmail())  // Store email as a claim
+                    .subject(user.getId().toString()) // Store User ID as a subject
+                    .claim("email", user.getEmail()) // Store email as a claim
                     .claim("roles", userDetails.getAuthorities().stream()
                             .map(GrantedAuthority::getAuthority).toList())
                     .build();
@@ -86,5 +85,5 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         } catch (AuthenticationException e) {
             throw e;
         }
-    }    
+    }
 }
