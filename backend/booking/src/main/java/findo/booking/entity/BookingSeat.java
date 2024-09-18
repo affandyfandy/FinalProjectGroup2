@@ -1,4 +1,4 @@
-package findo.user.entity;
+package findo.booking.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,39 +10,35 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.*;
-import java.util.UUID;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "users")
+@Table(name = "booking_seats")
 @EntityListeners(AuditingEntityListener.class)
-public class EntityUser {
+public class BookingSeat {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    @Column(nullable = false)
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "booking_id", nullable = false)
+    private Booking booking; // Reference to the Booking entity
 
-    @Column(unique = true, nullable = false)
-    private String email;
-
-    @Column(nullable = false)
-    private String password;
-
-    private String role;
-    private double balance;
+    @ElementCollection
+    @Column(name = "seat_id")
+    private List<Integer> seatIds; // List of seat IDs
 
     @CreatedDate
     @Column(name = "created_time", updatable = false)
-    private LocalDate createdTime;
+    private LocalDateTime createdTime;
 
     @LastModifiedDate
     @Column(name = "updated_time")
-    private LocalDate updatedTime;
+    private LocalDateTime updatedTime;
 
     @CreatedBy
     @Column(name = "created_by", updatable = false)

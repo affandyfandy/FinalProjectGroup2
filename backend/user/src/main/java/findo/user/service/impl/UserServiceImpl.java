@@ -3,7 +3,6 @@ package findo.user.service.impl;
 import java.util.UUID;
 
 import findo.user.dto.ShowDataDTO;
-import findo.user.exception.GlobalExceptionHandler;
 import findo.user.exception.UserNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

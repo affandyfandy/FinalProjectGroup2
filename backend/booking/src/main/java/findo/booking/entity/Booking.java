@@ -1,4 +1,4 @@
-package findo.user.entity;
+package findo.booking.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,30 +11,33 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.*;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "users")
+@Table(name = "bookings")
 @EntityListeners(AuditingEntityListener.class)
-public class EntityUser {
+public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(name = "user_id")
+    private UUID userIds;
+
+    @ElementCollection
+    @CollectionTable(name = "booking_schedule", joinColumns = @JoinColumn(name = "booking_id"))
+    @Column(name = "user_id")
+    private List<UUID> scheduleIds;
+
     @Column(nullable = false)
-    private String name;
-
-    @Column(unique = true, nullable = false)
-    private String email;
+    private double totalAmount;
 
     @Column(nullable = false)
-    private String password;
-
-    private String role;
-    private double balance;
+    private Boolean isPrinted;
 
     @CreatedDate
     @Column(name = "created_time", updatable = false)

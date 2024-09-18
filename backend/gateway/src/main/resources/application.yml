@@ -26,11 +26,15 @@ spring:
           uri: lb://user-service
           predicates:
             - Path=/api/v1/users/**
+          filters:
+            - JwtAuthenticationFilter
 
         - id: booking-service
-          uri: lb://booking
+          uri: lb://booking-service
           predicates:
             - Path=/api/v1/bookings/**
+          filters:
+            - JwtAuthenticationFilter
 
         - id: schedule-service
           uri: lb://schedule
