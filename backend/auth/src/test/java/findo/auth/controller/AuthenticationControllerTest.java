@@ -1,7 +1,5 @@
 package findo.auth.controller;
 
-import java.util.Optional;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
@@ -21,6 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import findo.auth.data.entity.User;
 import findo.auth.dto.LoginDTO;
+import findo.auth.dto.LoginResponseDTO;
 import findo.auth.dto.RegisterDTO;
 import findo.auth.service.AuthenticationService;
 
@@ -67,7 +66,9 @@ public class AuthenticationControllerTest {
         loginDTO.setPassword("password");
 
         String token = "jwtToken";
-        when(authenticationService.login(any(LoginDTO.class))).thenReturn(Optional.of(token));
+        LoginResponseDTO loginResponseDTO = new LoginResponseDTO();
+        loginResponseDTO.setToken(token);
+        when(authenticationService.login(any(LoginDTO.class))).thenReturn(loginResponseDTO);
 
         mockMvc.perform(post("/api/v1/auth/login")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -82,7 +83,9 @@ public class AuthenticationControllerTest {
         loginDTO.setEmail("johndoe@example.com");
         loginDTO.setPassword("wrongPassword");
 
-        when(authenticationService.login(any(LoginDTO.class))).thenReturn(Optional.empty());
+        LoginResponseDTO loginResponseDTO = new LoginResponseDTO();
+
+        when(authenticationService.login(any(LoginDTO.class))).thenReturn(loginResponseDTO);
 
         mockMvc.perform(post("/api/v1/auth/login")
                 .contentType(MediaType.APPLICATION_JSON)

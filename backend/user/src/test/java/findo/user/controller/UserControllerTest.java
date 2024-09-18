@@ -1,9 +1,6 @@
 package findo.user.controller;
 
-import findo.user.dto.AddBalanceDTO;
-import findo.user.dto.ChangeNameDTO;
-import findo.user.dto.ChangePasswordDTO;
-import findo.user.dto.ShowDataDTO;
+import findo.user.dto.*;
 import findo.user.exception.UserNotFoundException;
 import findo.user.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -74,29 +71,36 @@ class UserControllerTest {
         @Test
         void testChangePassword_Success() {
                 ChangePasswordDTO changePasswordDTO = new ChangePasswordDTO("oldPassword", "newPassword");
+                ChangePasswordResponseDTO responseDTO = new ChangePasswordResponseDTO("Password Changed Successfully");
                 when(userService.changePassword(userId, changePasswordDTO))
-                                .thenReturn(Mono.just("Password Changed Successfully"));
+                        .thenReturn(Mono.just(responseDTO));
 
-                Mono<ResponseEntity<String>> response = userController.changePassword(principal, changePasswordDTO);
+                // Simulate JWT token containing the user ID
+                when(principal.getToken().getClaimAsString("sub")).thenReturn(userId.toString());
 
-                ResponseEntity<String> result = response.block();
+                Mono<ResponseEntity<ChangePasswordResponseDTO>> response = userController.changePassword(principal, changePasswordDTO);
+
+                ResponseEntity<ChangePasswordResponseDTO> result = response.block();
                 assertThat(result).isNotNull();
                 assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
-                assertThat(result.getBody()).isEqualTo("Password Changed Successfully");
+                assertThat(result.getBody()).isEqualTo(responseDTO);
         }
 
         @Test
         void testChangePassword_UserNotFound() {
                 ChangePasswordDTO changePasswordDTO = new ChangePasswordDTO("oldPassword", "newPassword");
                 when(userService.changePassword(userId, changePasswordDTO))
-                                .thenReturn(Mono.error(new UserNotFoundException("User not found")));
+                        .thenReturn(Mono.error(new UserNotFoundException("User not found")));
 
-                Mono<ResponseEntity<String>> response = userController.changePassword(principal, changePasswordDTO);
+                // Simulate JWT token containing the user ID
+                when(principal.getToken().getClaimAsString("sub")).thenReturn(userId.toString());
+
+                Mono<ResponseEntity<ChangePasswordResponseDTO>> response = userController.changePassword(principal, changePasswordDTO);
 
                 StepVerifier.create(response)
-                                .expectErrorMatches(throwable -> throwable instanceof UserNotFoundException
-                                                && throwable.getMessage().equals("User not found"))
-                                .verify();
+                        .expectErrorMatches(throwable -> throwable instanceof UserNotFoundException
+                                && throwable.getMessage().equals("User not found"))
+                        .verify();
         }
 
         @Test
