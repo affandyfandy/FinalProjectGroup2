@@ -28,7 +28,7 @@ public class Booking {
     @Column(name = "user_id")
     private UUID userIds;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "booking_schedule", joinColumns = @JoinColumn(name = "booking_id"))
     @Column(name = "user_id")
     private List<UUID> scheduleIds;

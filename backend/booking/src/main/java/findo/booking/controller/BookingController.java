@@ -33,7 +33,7 @@ public class BookingController {
     }
 
     // Show Booking History (Customer)
-    @GetMapping("/booking-history")
+    @GetMapping("/customer/booking-history")
     public Mono<ResponseEntity<List<CustomerBookingHistoryDTO>>> getBookingHistory(
             @AuthenticationPrincipal JwtAuthenticationToken principal) {
 

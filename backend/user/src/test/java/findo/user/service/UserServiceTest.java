@@ -89,9 +89,16 @@ class UserServiceTest {
         ChangeNameDTO changeNameDTO = new ChangeNameDTO("Jane Doe");
         when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
 
-        Mono<String> result = userService.updateUserName(user.getId(), changeNameDTO);
+        // Update the return type to ShowDataDTO
+        ShowDataDTO expectedResponse = new ShowDataDTO("Jane Doe", user.getEmail(), user.getBalance());
+        when(userRepository.save(user)).thenAnswer(invocation -> {
+            user.setName(changeNameDTO.getNewName());
+            return user;
+        });
 
-        assertThat(result.block()).isEqualTo("Name Changed Successfully");
+        Mono<ShowDataDTO> result = userService.updateUserName(user.getId(), changeNameDTO);
+
+        assertThat(result.block()).isEqualTo(expectedResponse);
         verify(userRepository).save(user);
         assertThat(user.getName()).isEqualTo("Jane Doe");
     }
@@ -108,14 +115,28 @@ class UserServiceTest {
 
     @Test
     void testAddBalance_Success() {
+        // Arrange
         AddBalanceDTO addBalanceDTO = new AddBalanceDTO(50.0);
         when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
 
-        Mono<String> result = userService.addBalance(user.getId(), addBalanceDTO);
+        // Calculate the expected new balance
+        double expectedBalance = user.getBalance() + addBalanceDTO.getBalance();
+        AddBalanceDTO expectedResponse = new AddBalanceDTO(expectedBalance);
 
-        assertThat(result.block()).isEqualTo("Top-Up Success !");
+        // Mock the save operation to update the user's balance
+        when(userRepository.save(any(EntityUser.class))).thenAnswer(invocation -> {
+            EntityUser savedUser = invocation.getArgument(0);
+            user.setBalance(savedUser.getBalance()); // Update the user balance
+            return user;
+        });
+
+        // Act
+        Mono<AddBalanceDTO> result = userService.addBalance(user.getId(), addBalanceDTO);
+
+        // Assert
+        assertThat(result.block()).isEqualTo(expectedResponse);
         verify(userRepository).save(user);
-        assertThat(user.getBalance()).isEqualTo(150.0);
+        assertThat(user.getBalance()).isEqualTo(expectedBalance);
     }
 
     @Test
