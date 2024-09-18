@@ -1,8 +1,5 @@
 package findo.auth.controller;
 
-import java.util.Optional;
-
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import findo.auth.data.entity.User;
 import findo.auth.dto.LoginDTO;
+import findo.auth.dto.LoginResponseDTO;
 import findo.auth.dto.RegisterDTO;
 import findo.auth.service.AuthenticationService;
 import jakarta.validation.Valid;
@@ -32,13 +30,8 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@Valid @RequestBody LoginDTO authRequest) {
-        Optional<String> token = authenticationService.login(authRequest);
-
-        if (token.isPresent()) {
-            return ResponseEntity.ok(token.get());
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
-        }
+    public ResponseEntity<LoginResponseDTO> login(@Valid @RequestBody LoginDTO authRequest) {
+        LoginResponseDTO response = authenticationService.login(authRequest);
+        return ResponseEntity.ok(response);
     }
 }
