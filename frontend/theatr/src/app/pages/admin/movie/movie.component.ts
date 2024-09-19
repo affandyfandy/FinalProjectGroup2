@@ -46,6 +46,7 @@ export class MovieComponent implements OnInit {
 
 
   getMovieList() {
+    // TODO: CHANGE TO API CALL LATER
     for (let i = 0; i < 10; i++) {
       const movie: Movie = {
         id: '1',
@@ -97,13 +98,14 @@ export class MovieComponent implements OnInit {
     if (this.isEdit) {
       return this.currentMovie.title === this.tempMovie.title &&
         this.currentMovie.synopsis === this.tempMovie.synopsis &&
-        this.currentMovie.year === this.tempMovie.year;
+        this.currentMovie.year === this.tempMovie.year &&
+        !this.isPosterChanged;
     } else {
       return !this.currentMovie?.title ||
         !this.currentMovie ||
         !this.currentMovie?.synopsis ||
         !this.currentMovie?.year ||
-        !this.previewImage;
+        this.previewImage === '';
     }
   }
 
