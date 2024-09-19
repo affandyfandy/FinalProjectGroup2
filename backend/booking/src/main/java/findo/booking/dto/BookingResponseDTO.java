@@ -1,7 +1,8 @@
 package findo.booking.dto;
 
 import lombok.Data;
-import java.time.LocalDate;
+
+import java.sql.Timestamp;
 import java.util.UUID;
 
 @Data
@@ -9,8 +10,8 @@ public class BookingResponseDTO {
     private UUID id;
     private double totalAmount;
     private Boolean isPrinted;
-    private LocalDate createdTime;
-    private LocalDate updatedTime;
+    private Timestamp createdTime;
+    private Timestamp updatedTime;
     private String createdBy;
     private String updatedBy;
 }

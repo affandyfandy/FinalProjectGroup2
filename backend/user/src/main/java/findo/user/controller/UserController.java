@@ -1,16 +1,12 @@
 package findo.user.controller;
 
-import findo.user.dto.ShowDataDTO;
+import findo.user.dto.*;
 import jakarta.validation.Valid;
 import reactor.core.publisher.Mono;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import findo.user.dto.AddBalanceDTO;
-import findo.user.dto.ChangeNameDTO;
-import findo.user.dto.ChangePasswordDTO;
-import findo.user.dto.ChangePasswordResponseDTO;
 import findo.user.service.impl.UserServiceImpl;
 
 import java.util.UUID;
@@ -53,6 +49,14 @@ public class UserController {
     public Mono<ResponseEntity<ShowDataDTO>> getUserData(@AuthenticationPrincipal JwtAuthenticationToken principal) {
         String userId = principal.getToken().getClaimAsString("sub"); // Extract user ID from JWT token's "sub" claim
         return userService.getUserDataById(UUID.fromString(userId))
+                .map(ResponseEntity::ok);
+    }
+
+    @PutMapping("/update-balance")
+    public Mono<ResponseEntity<UpdateBalanceDTO>> updateBalance(@AuthenticationPrincipal JwtAuthenticationToken principal,
+                                                    @RequestBody UpdateBalanceDTO updateBalanceDTO) {
+        String userId = principal.getToken().getClaimAsString("sub");
+        return userService.updateBalance(UUID.fromString(userId), updateBalanceDTO.getBalance())
                 .map(ResponseEntity::ok);
     }
 }

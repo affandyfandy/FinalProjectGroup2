@@ -2,18 +2,15 @@ package findo.user.service.impl;
 
 import java.util.UUID;
 
-import findo.user.dto.ShowDataDTO;
+import findo.user.dto.*;
 import findo.user.exception.UserNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import findo.user.dto.AddBalanceDTO;
-import findo.user.dto.ChangeNameDTO;
-import findo.user.dto.ChangePasswordDTO;
-import findo.user.dto.ChangePasswordResponseDTO;
 import findo.user.repository.UserRepository;
 import findo.user.service.UserService;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -70,5 +67,17 @@ public class UserServiceImpl implements UserService {
         return Mono.justOrEmpty(userRepository.findById(userId))
                 .switchIfEmpty(Mono.error(new UserNotFoundException(USER_NOT_FOUND_MESSAGE + userId)))
                 .map(user -> new ShowDataDTO(user.getName(), user.getEmail(), user.getBalance()));
+    }
+
+    @Override
+    public Mono<UpdateBalanceDTO> updateBalance(UUID userId, double newBalance) {
+        return Mono.justOrEmpty(userRepository.findById(userId))
+                .switchIfEmpty(Mono.error(new UserNotFoundException(USER_NOT_FOUND_MESSAGE + userId)))
+                .publishOn(Schedulers.boundedElastic())
+                .flatMap(user -> {
+                    user.setBalance(newBalance);
+                    userRepository.save(user);
+                    return Mono.just(new UpdateBalanceDTO(user.getBalance()));
+                });
     }
 }
