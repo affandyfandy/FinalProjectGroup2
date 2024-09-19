@@ -1,1 +1,41 @@
-<p>bookings works!</p>
+<div class="pt-[100px] px-14">
+    <!-- Search Bar & Add Button -->
+    <div class="flex space-x-2">
+        <select class="select select-bordered w-full max-w-44 bg-base-300 border-none">
+            <option>Latest</option>
+            <option>Earliest</option>
+        </select>
+        <input type="date" (change)="onDateChange($event)" [ngModel]="currentDateTime"
+            class="p-2 px-6 h-12 rounded-md text-white bg-base-300" />
+    </div>
+
+    <!-- Table -->
+    <div *ngIf="bookingList !== []" class="overflow-x-auto pt-4">
+        <table class="table">
+            <!-- head -->
+            <thead>
+                <tr class="text-center">
+                    <th>Ordered Time</th>
+                    <th>Studio</th>
+                    <th>Show Time</th>
+                    <th>Title</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- row -->
+                <tr *ngFor="let booking of bookingList" class="text-center">
+                    <td>{{ booking.updatedTime ? (booking.updatedTime | fullTime) : 'N/A' }}</td>
+                    <td>{{ booking.schedule?.studio?.name }}</td>
+                    <td>{{ booking.schedule?.showTime ? (booking.schedule!.showTime! | fullDateTime) : 'N/A' }}</td>
+                    <td>{{ booking.schedule?.movie?.title }} {{"(" + booking.schedule?.movie?.year + ")" }}</td>
+                    <td>
+                        <button (click)="showModal(booking)" class="btn btn-square btn-secondary btn-sm">
+                            <img src="assets/icons/eye-white.svg" alt="Edit Icon" class="w-5 h-5">
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
