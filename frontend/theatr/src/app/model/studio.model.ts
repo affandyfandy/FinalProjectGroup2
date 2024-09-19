@@ -1,7 +1,7 @@
 import { Seat } from "./seat.model";
 
 export interface Studio {
-    id?: string;
+    id?: number;
     name?: string;
     deleted?: boolean;
     seats?: Seat[];
