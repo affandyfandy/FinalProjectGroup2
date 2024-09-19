@@ -1,1 +1,114 @@
-<p>bookings works!</p>
+<div class="pt-[100px] px-14">
+    <!-- Search Bar & Add Button -->
+    <div class="flex space-x-2">
+        <select class="select select-bordered w-full max-w-44 bg-base-300 border-none">
+            <option>Latest</option>
+            <option>Earliest</option>
+        </select>
+        <input type="date" (change)="onDateChange($event)" [ngModel]="currentDateTime"
+            class="p-2 px-6 h-12 rounded-md text-white bg-base-300" />
+    </div>
+
+    <!-- Table -->
+    <div *ngIf="bookingList !== []" class="overflow-x-auto pt-4">
+        <table class="table">
+            <!-- head -->
+            <thead>
+                <tr class="text-center">
+                    <th>Ordered Time</th>
+                    <th>Studio</th>
+                    <th>Show Time</th>
+                    <th>Title</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- row -->
+                <tr *ngFor="let booking of bookingList" class="text-center">
+                    <td>{{ booking.updatedTime ? (booking.updatedTime | fullTime) : 'N/A' }}</td>
+                    <td>{{ booking.schedule?.studio?.name }}</td>
+                    <td>{{ booking.schedule?.showTime ? (booking.schedule!.showTime! | fullDateTime) : 'N/A' }}</td>
+                    <td>{{ booking.schedule?.movie?.title }} {{"(" + booking.schedule?.movie?.year + ")" }}</td>
+                    <td>
+                        <button (click)="showModal(booking)" class="btn btn-square btn-secondary btn-sm">
+                            <img src="assets/icons/eye-white.svg" alt="Edit Icon" class="w-5 h-5">
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- MODAL -->
+<dialog id="booking-modal" class="modal">
+    <div class="modal-box flex flex-col max-w-[672px] space-y-6 bg-base-300">
+        <div class="flex w-full">
+            <div class="w-full"></div>
+            <button (click)="closeModal()" class="btn btn-circle btn-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="flex items-center w-full space-x-4">
+            <img [src]="currentBooking.schedule?.movie?.posterUrl" alt="Poster"
+                class="w-[120px] h-[186px] rounded-xl object-cover">
+
+            <div class="space-y-2">
+                <h1 class="text-2xl font-bold">{{ currentBooking.schedule?.movie?.title }} {{'(' +
+                    currentBooking.schedule?.movie?.year + ')'}}</h1>
+                <div class="text-zinc-400 flex items-center space-x-2">
+                    <img src="assets/icons/location-gray.svg" alt="Edit Icon" class="w-6 h-6">
+                    <p>{{ currentBooking.schedule?.studio?.name }}</p>
+                </div>
+
+                <div class="flex items-center space-x-2">
+                    <img src="assets/icons/ticket-gray.svg" alt="Edit Icon" class="w-6 h-6">
+                    <p class="text-zinc-400">{{ currentBooking.seats?.length }} Tickets</p>
+                    <p *ngFor="let seat of currentBooking.seats" class="font-bold">{{seat.seatCode}}</p>
+                </div>
+                <p>{{ currentBooking.schedule?.showTime ? (currentBooking.schedule!.showTime! | fullDateTime) : 'N/A' }}
+                </p>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="space-y-2">
+            <div class="flex justify-between">
+                <p class="text-zinc-400">ORDER ID</p>
+                <p class="font-semibold">{{ currentBooking.id }}</p>
+            </div>
+            <div class="flex justify-between">
+                <p class="text-zinc-400">ORDERED AT</p>
+                <p class="font-semibold">{{ currentBooking.updatedTime ? (currentBooking.updatedTime | fullDateTime) :
+                    'N/A'
+                    }}</p>
+            </div>
+            <div class="flex justify-between">
+                <p class="text-zinc-400">CUSTOMER ID</p>
+                <p class="font-semibold">{{ currentBooking.user?.id }}</p>
+            </div>
+            <div class="flex justify-between">
+                <p class="text-zinc-400">CUSTOMER NAME</p>
+                <p class="font-semibold">{{ currentBooking.user?.name }}</p>
+            </div>
+            <div class="flex justify-between">
+                <p class="text-zinc-400">PRICE</p>
+                <p class="font-semibold">{{ currentBooking.schedule?.price ? (currentBooking.schedule!.price! |
+                    priceFormat) : '' }} x {{currentBooking.seats?.length}}</p>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="flex justify-between">
+            <p class="text-zinc-400">TOTAL PRICE</p>
+            <p class="text-xl font-semibold">{{ currentBooking.totalAmount ? (currentBooking.totalAmount |
+                priceFormat) : '' }}</p>
+        </div>
+    </div>
+</dialog>
