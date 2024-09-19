@@ -12,6 +12,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,39 +54,51 @@ class ExceptionHandlerTest {
     void globarException_handleDuplicateTitleException_returnResponseEntity() {
         DuplicateTitleException ex = new DuplicateTitleException("Duplicate title");
 
-        ResponseEntity<String> response = exceptionHandler.handleDuplicateTitleException(ex);
+        Map<String, String> expectedBody = new HashMap<>();
+        expectedBody.put("message", "Duplicate title");
+
+        ResponseEntity<Map<String, String>> response = exceptionHandler.handleDuplicateTitleException(ex);
 
         assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
-        assertEquals("Duplicate title", response.getBody());
+        assertEquals(expectedBody, response.getBody());
     }
 
     @Test
     void globarException_handleMovieNotFoundException_returnResponseEntity() {
         MovieNotFoundException ex = new MovieNotFoundException("Movie not found");
 
-        ResponseEntity<String> response = exceptionHandler.handleMovieNotFoundException(ex);
+        Map<String, String> expectedBody = new HashMap<>();
+        expectedBody.put("message", "Movie not found");
+
+        ResponseEntity<Map<String, String>> response = exceptionHandler.handleMovieNotFoundException(ex);
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-        assertEquals("Movie not found", response.getBody());
+        assertEquals(expectedBody, response.getBody());
     }
 
     @Test
     void globarException_handleIllegalArgumentException_returnResponseEntity() {
         IllegalArgumentException ex = new IllegalArgumentException("Invalid argument");
 
-        ResponseEntity<String> response = exceptionHandler.handleIllegalArgumentException(ex);
+        Map<String, String> expectedBody = new HashMap<>();
+        expectedBody.put("message", "Invalid argument");
+
+        ResponseEntity<Map<String, String>> response = exceptionHandler.handleIllegalArgumentException(ex);
 
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-        assertEquals("Invalid argument", response.getBody());
+        assertEquals(expectedBody, response.getBody());
     }
 
     @Test
     void globarException_handleGlobalException_returnResponseEntity() {
         Exception ex = new Exception("Generic error");
 
-        ResponseEntity<String> response = exceptionHandler.handleGlobalException(ex);
+        Map<String, String> expectedBody = new HashMap<>();
+        expectedBody.put("message", "Generic error");
+
+        ResponseEntity<Map<String, String>> response = exceptionHandler.handleGlobalException(ex);
 
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-        assertEquals("An error occurred: Generic error", response.getBody());
+        assertEquals(expectedBody, response.getBody());
     }
 }

@@ -13,6 +13,8 @@ import java.util.Map;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    private static final String MESSAGE_KEY = "message";
+
     // Handle validation errors (e.g., @NotBlank, @NotNull)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
@@ -28,25 +30,37 @@ public class GlobalExceptionHandler {
 
     // Handle duplicate movie title
     @ExceptionHandler(DuplicateTitleException.class)
-    public ResponseEntity<String> handleDuplicateTitleException(DuplicateTitleException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
+    public ResponseEntity<Map<String, String>> handleDuplicateTitleException(DuplicateTitleException ex) {
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put(MESSAGE_KEY, ex.getMessage());
+        
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
 
     // Handle movie not found
     @ExceptionHandler(MovieNotFoundException.class)
-    public ResponseEntity<String> handleMovieNotFoundException(MovieNotFoundException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    public ResponseEntity<Map<String, String>> handleMovieNotFoundException(MovieNotFoundException ex) {
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put(MESSAGE_KEY, ex.getMessage());
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
     // Handle non-image file uploads
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<Map<String, String>> handleIllegalArgumentException(IllegalArgumentException ex) {
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put(MESSAGE_KEY, ex.getMessage());
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
     // Handle any other exceptions
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleGlobalException(Exception ex) {
-        return new ResponseEntity<>("An error occurred: " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<Map<String, String>> handleGlobalException(Exception ex) {
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put(MESSAGE_KEY, ex.getMessage());
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

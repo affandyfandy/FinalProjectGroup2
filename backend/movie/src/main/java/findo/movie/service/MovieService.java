@@ -12,7 +12,7 @@ import findo.movie.dto.MovieSaveDTO;
 public interface MovieService {
     Page<Movie> findAllMovies(Pageable pageable);
     Movie findMovieById(UUID id);
-    String createMovie(MovieSaveDTO movieSaveDTO);
-    String updateMovie(UUID id, MovieSaveDTO movieSaveDTO);
+    Movie createMovie(MovieSaveDTO movieSaveDTO);
+    Movie updateMovie(UUID id, MovieSaveDTO movieSaveDTO);
     String uploadFile(MultipartFile file);
 }

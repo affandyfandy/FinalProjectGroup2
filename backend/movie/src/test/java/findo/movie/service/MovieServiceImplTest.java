@@ -91,7 +91,7 @@ class MovieServiceImplTest {
     }
 
     @Test
-    void movieService_createMovie_returnSuccessMessage() {
+    void movieService_createMovie_returnCreatedMovie() {
         MovieSaveDTO movSaveDTO = new MovieSaveDTO("Marvel", "This is all about Super Heroes", "http://list", 2024);
 
         Movie mov = new Movie();
@@ -104,9 +104,9 @@ class MovieServiceImplTest {
         when(movieMapper.toMovie(movSaveDTO)).thenReturn(mov);
         when(movieRepository.save(any(Movie.class))).thenReturn(mov1);
 
-        String result = movieService.createMovie(movSaveDTO);
+        Movie result = movieService.createMovie(movSaveDTO);
 
-        Assertions.assertEquals("Movie Created Successfully", result);
+        Assertions.assertEquals(mov1, result);
     }
 
     @Test
@@ -120,7 +120,7 @@ class MovieServiceImplTest {
     }
 
     @Test
-    void movieService_updateMovie_returnSuccessMessage() {
+    void movieService_updateMovie_returnUpdatedMovie() {
         UUID movId = mov1.getId();
 
         MovieSaveDTO movSaveDTO = new MovieSaveDTO("Marvel", "This is all about Super Heroes", "http://list", 2024);
@@ -129,9 +129,9 @@ class MovieServiceImplTest {
         when(movieRepository.existsByTitle(movSaveDTO.getTitle())).thenReturn(false);
         when(movieRepository.save(any(Movie.class))).thenReturn(mov1);
 
-        String result = movieService.updateMovie(movId, movSaveDTO);
+        Movie result = movieService.updateMovie(movId, movSaveDTO);
 
-        Assertions.assertEquals("Movie updated successfully!", result);
+        Assertions.assertEquals(mov1, result);
     }
 
     @Test

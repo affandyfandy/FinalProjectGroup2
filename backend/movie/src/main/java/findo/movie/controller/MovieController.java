@@ -1,5 +1,7 @@
 package findo.movie.controller;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
@@ -52,22 +54,26 @@ public class MovieController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createMovie(@Valid @RequestBody MovieSaveDTO movieSaveDTO) {
-        String message = movieService.createMovie(movieSaveDTO);
+    public ResponseEntity<Movie> createMovie(@Valid @RequestBody MovieSaveDTO movieSaveDTO) {
+        Movie movie = movieService.createMovie(movieSaveDTO);
         
-        return ResponseEntity.status(HttpStatus.CREATED).body(message);
+        return ResponseEntity.status(HttpStatus.CREATED).body(movie);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<String> updateMovie(@PathVariable("id") UUID id, @Valid @RequestBody MovieSaveDTO movieSaveDTO) {
-        String message = movieService.updateMovie(id, movieSaveDTO);
+    public ResponseEntity<Movie> updateMovie(@PathVariable("id") UUID id, @Valid @RequestBody MovieSaveDTO movieSaveDTO) {
+        Movie movie = movieService.updateMovie(id, movieSaveDTO);
 
-        return ResponseEntity.status(HttpStatus.OK).body(message);
+        return ResponseEntity.status(HttpStatus.OK).body(movie);
     }
 
     @PostMapping(value = "/upload-poster")
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<Map<String, String>> uploadFile(@RequestParam("file") MultipartFile file) {
         String url = movieService.uploadFile(file);
-        return ResponseEntity.status(HttpStatus.OK).body(url);
+
+        Map<String, String> urlResponse = new HashMap<>();
+        urlResponse.put("posterUrl", url);
+
+        return ResponseEntity.status(HttpStatus.OK).body(urlResponse);
     }
 }

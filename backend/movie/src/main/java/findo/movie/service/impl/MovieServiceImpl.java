@@ -38,7 +38,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public String createMovie(MovieSaveDTO movieSaveDTO) {
+    public Movie createMovie(MovieSaveDTO movieSaveDTO) {
         if(movieRepository.existsByTitle(movieSaveDTO.getTitle())) {
             throw new DuplicateTitleException("Movie with this title already exists!");
         }
@@ -51,13 +51,11 @@ public class MovieServiceImpl implements MovieService {
         savedMovie.setCreatedTime(LocalDate.now());
         savedMovie.setUpdatedTime(LocalDate.now());
 
-        movieRepository.save(savedMovie);
-
-        return "Movie Created Successfully";
+        return movieRepository.save(savedMovie);
     }
 
     @Override
-    public String updateMovie(UUID id, MovieSaveDTO movieSaveDTO) {
+    public Movie updateMovie(UUID id, MovieSaveDTO movieSaveDTO) {
         Movie checkMovie = findMovieById(id);
 
         if(!checkMovie.getTitle().equals(movieSaveDTO.getTitle()) && movieRepository.existsByTitle(movieSaveDTO.getTitle())) {
@@ -71,9 +69,7 @@ public class MovieServiceImpl implements MovieService {
         checkMovie.setUpdatedBy("test");
         checkMovie.setUpdatedTime(LocalDate.now());
 
-        movieRepository.save(checkMovie);
-
-        return "Movie updated successfully!";
+        return movieRepository.save(checkMovie);
     }
 
     @Override
