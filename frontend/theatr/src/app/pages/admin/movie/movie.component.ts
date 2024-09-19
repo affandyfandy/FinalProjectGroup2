@@ -71,13 +71,15 @@ export class MovieComponent implements OnInit {
       posterUrl: movie?.posterUrl || ''
     };
 
-    this.tempMovie = {
-      title: movie?.title || '',
-      synopsis: movie?.synopsis || '',
-      year: movie?.year || 2024,
-      duration: movie?.duration || 0,
-      posterUrl: movie?.posterUrl || ''
-    };
+    if (isEdit) {
+      this.tempMovie = {
+        title: movie?.title || '',
+        synopsis: movie?.synopsis || '',
+        year: movie?.year || 2024,
+        duration: movie?.duration || 0,
+        posterUrl: movie?.posterUrl || ''
+      };
+    }
 
     this.charCount = isEdit ? this.currentMovie.synopsis.length : 0;
 
@@ -91,6 +93,7 @@ export class MovieComponent implements OnInit {
     this.charCount = 0;
     this.isPosterChanged = false;
     this.previewImage = '';
+    this.tempMovie = {} as AddMovieDTO;
     modal.close();
   }
 
