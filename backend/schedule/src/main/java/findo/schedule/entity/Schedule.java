@@ -1,33 +1,49 @@
 package findo.schedule.entity;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
+import java.util.List;
 import java.util.UUID;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "schedules")
 public class Schedule {
 
     @Id
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
-    @Column(nullable = false)
-    private UUID movieId;
-    private UUID studioId;
-    private Double price;
-    private LocalDate showTime;
-    private LocalDate createdTime;
-    private LocalDate updatedTime;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "schedule_movie", joinColumns = @JoinColumn(name = "schedule_id"))
+    @Column(name = "movie_id", nullable = false)
+    private List<UUID> movieId;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "schedule_studio", joinColumns = @JoinColumn(name = "schedule_id"))
+    @Column(name = "studio_id", nullable = false)
+    private List<Integer> studioId;
+
+    @Column(name = "show_date", nullable = false)
+    private Timestamp showDate;
+
+    @Column(name = "price", nullable = false)
+    private double price;
+
+    @Column(name = "created_time", updatable = false)
+    private Timestamp createdTime;
+
+    @Column(name = "updated_time")
+    private Timestamp updatedTime;
+
+    @Column(name = "created_by", updatable = false)
     private String createdBy;
+
+    @Column(name = "updated_by")
     private String updatedBy;
 }
