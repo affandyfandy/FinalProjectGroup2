@@ -1,5 +1,10 @@
 package findo.studio.service;
 
-public interface SeatService {
+import java.util.List;
 
+import findo.studio.data.entity.Seat;
+import findo.studio.data.entity.Studio;
+
+public interface SeatService {
+    void generateSeats(Studio studio);
 }

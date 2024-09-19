@@ -7,5 +7,5 @@ import findo.studio.data.entity.Studio;
 
 @Repository
 public interface StudioRepository extends JpaRepository<Studio, Integer> {
-
+    boolean existsByName(String name);
 }
