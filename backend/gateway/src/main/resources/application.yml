@@ -36,9 +36,11 @@ spring:
             - JwtAuthenticationFilter
 
         - id: schedule-service
-          uri: lb://schedule
+          uri: lb://schedule-service
           predicates:
             - Path=/api/v1/schedules/**
+          filters:
+            - JwtAuthenticationFilter
 
         - id: movie-service
           uri: lb://movie
