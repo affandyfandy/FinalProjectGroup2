@@ -89,7 +89,7 @@
                 <img src="assets/icons/clock-white.svg" alt="Clock Icon" class="w-[28px] h-[28px]">
                 <div class="w-full">
                     <div class="w-full">
-                        <select (change)="getAvailableShowTime()"
+                        <select (change)="getAvailableShowTime()" [disabled]="availableShowTime.length == 0"
                             class="select select-bordered w-full bg-base-100 border-none">
                             <option disabled>Select a Show Time</option>
                             <option *ngFor="let time of availableShowTime">{{time | timeFormat}}</option>
