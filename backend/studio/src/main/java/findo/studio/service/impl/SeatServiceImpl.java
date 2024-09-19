@@ -45,4 +45,14 @@ public class SeatServiceImpl implements SeatService {
         
         seatRepository.saveAll(listSeats);
     }
+
+    @Override
+    public Seat findSeatById(Integer id) {
+        return seatRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Seat> findAllSeatByStudioId(Integer studioId) {
+        return seatRepository.findByStudioId(studioId);
+    }
 }

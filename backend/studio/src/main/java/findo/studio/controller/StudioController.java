@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import findo.studio.data.entity.Seat;
 import findo.studio.data.entity.Studio;
 import findo.studio.dto.StudioSaveDTO;
+import findo.studio.service.SeatService;
 import findo.studio.service.StudioService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -31,6 +33,7 @@ import lombok.AllArgsConstructor;
 public class StudioController {
 
     private final StudioService studioService;
+    private final SeatService seatService;
 
     @GetMapping
     public ResponseEntity<Page<Studio>> getAllStudios(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size) {
@@ -64,6 +67,28 @@ public class StudioController {
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(studio);
+    }
+
+    @GetMapping(value = "/{id}/seats")
+    public ResponseEntity<List<Seat>> getSeatsByStudioId(@PathVariable("id") Integer studioId) {
+        List<Seat> seats = seatService.findAllSeatByStudioId(studioId);
+
+        if(seats.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(seats);
+    }
+
+    @GetMapping(value = "/seats/{id}")
+    public ResponseEntity<Seat> getSeatById(@PathVariable("id") Integer id) {
+        Seat seat = seatService.findSeatById(id);
+
+        if(seat == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(seat);
     }
 
     @PostMapping
