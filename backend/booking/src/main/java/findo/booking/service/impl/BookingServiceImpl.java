@@ -100,10 +100,13 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public Mono<PrintTicketResponseDTO> printTicket(UUID bookingId) {
+    public Mono<PrintTicketResponseDTO> printTicket(UUID bookingId, String email) {
         return Mono.justOrEmpty(bookingRepository.findById(bookingId))
                 .switchIfEmpty(Mono.error(new RuntimeException("Booking not found")))
                 .flatMap(booking -> {
+                    Timestamp now = Timestamp.from(Instant.now());
+                    booking.setUpdatedTime(now);
+                    booking.setUpdatedBy(email);
                     if (Boolean.TRUE.equals(booking.getIsPrinted())) {
                         throw new TicketAlreadyPrintedException("Ticket has already been printed");
                     }

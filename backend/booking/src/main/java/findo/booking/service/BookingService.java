@@ -17,6 +17,6 @@ public interface BookingService {
 
     Mono<Booking> createBooking(CreateBookingDTO request, UUID userId, String token, String email);
 
-    Mono<PrintTicketResponseDTO> printTicket(UUID bookingId);
+    Mono<PrintTicketResponseDTO> printTicket(UUID bookingId, String email);
 
 }

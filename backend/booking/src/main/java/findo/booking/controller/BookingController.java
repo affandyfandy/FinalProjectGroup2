@@ -81,8 +81,9 @@ public class BookingController {
 
     @PatchMapping("/customer/print-ticket/{bookingId}")
     public Mono<ResponseEntity<InputStreamResource>> printTicket(
-            @PathVariable UUID bookingId) {
-        return bookingService.printTicket(bookingId)
+            @PathVariable UUID bookingId, @AuthenticationPrincipal JwtAuthenticationToken principal) {
+        String email = principal.getToken().getClaimAsString("email");
+        return bookingService.printTicket(bookingId, email)
                 .map(responseDTO -> {
                     HttpHeaders headers = new HttpHeaders();
                     headers.add("Content-Disposition", "inline; filename=booking.pdf");

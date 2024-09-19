@@ -7916,3 +7916,763 @@ Caused by: java.net.ConnectException: Connection refused: no further information
 2024-09-19 16:35:03 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
 2024-09-19 16:35:03 - RouteDefinition matched: studio-service
 2024-09-19 16:35:03 - New routes count: 10
+2024-09-19 17:03:42 - HV000001: Hibernate Validator 8.0.1.Final
+2024-09-19 17:03:42 - Starting GatewayApplication using Java 17.0.3 with PID 17960 (D:\FPT\New Data FPT\FPT\Project FinalTerm\FinalProjectGroup\FinalProjectGroup2\backend\gateway\target\classes started by Chandra H in D:\FPT\New Data FPT\FPT\Project FinalTerm\FinalProjectGroup\FinalProjectGroup2)
+2024-09-19 17:03:42 - No active profile set, falling back to 1 default profile: "default"
+2024-09-19 17:03:42 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-19 17:03:42 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-19 17:03:43 - BeanFactory id=74d6d9e2-27e6-30d8-b3c5-fa81781b0eb4
+2024-09-19 17:03:43 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2024-09-19 17:03:43 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2024-09-19 17:03:43 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2024-09-19 17:03:43 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2024-09-19 17:03:43 - Bean 'reactorDeferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2024-09-19 17:03:44 - Routes supplied from Gateway Properties: [RouteDefinition{id='auth-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/auth/**}}], filters=[], uri=lb://auth-service, order=0, metadata={}}, RouteDefinition{id='user-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/users/**}}], filters=[FilterDefinition{name='JwtAuthenticationFilter', args={}}], uri=lb://user-service, order=0, metadata={}}, RouteDefinition{id='booking-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/bookings/**}}], filters=[FilterDefinition{name='JwtAuthenticationFilter', args={}}], uri=lb://booking-service, order=0, metadata={}}, RouteDefinition{id='schedule-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/schedules/**}}], filters=[], uri=lb://schedule, order=0, metadata={}}, RouteDefinition{id='movie-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/movies/**}}], filters=[], uri=lb://movie, order=0, metadata={}}, RouteDefinition{id='studio-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/studios/**}}], filters=[], uri=lb://studio, order=0, metadata={}}]
+2024-09-19 17:03:45 - Loaded RoutePredicateFactory [After]
+2024-09-19 17:03:45 - Loaded RoutePredicateFactory [Before]
+2024-09-19 17:03:45 - Loaded RoutePredicateFactory [Between]
+2024-09-19 17:03:45 - Loaded RoutePredicateFactory [Cookie]
+2024-09-19 17:03:45 - Loaded RoutePredicateFactory [Header]
+2024-09-19 17:03:45 - Loaded RoutePredicateFactory [Host]
+2024-09-19 17:03:45 - Loaded RoutePredicateFactory [Method]
+2024-09-19 17:03:45 - Loaded RoutePredicateFactory [Path]
+2024-09-19 17:03:45 - Loaded RoutePredicateFactory [Query]
+2024-09-19 17:03:45 - Loaded RoutePredicateFactory [ReadBody]
+2024-09-19 17:03:45 - Loaded RoutePredicateFactory [RemoteAddr]
+2024-09-19 17:03:45 - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2024-09-19 17:03:45 - Loaded RoutePredicateFactory [Weight]
+2024-09-19 17:03:45 - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2024-09-19 17:03:45 - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2024-09-19 17:03:45 - Exposing 18 endpoints beneath base path '/actuator'
+2024-09-19 17:03:45 - ControllerAdvice beans: none
+2024-09-19 17:03:45 - enableLoggingRequestDetails='false': form data and headers will be masked to prevent unsafe logging of potentially sensitive data
+2024-09-19 17:03:45 - LiveReload server is running on port 35729
+2024-09-19 17:03:45 - Eureka HTTP Client uses RestTemplate.
+2024-09-19 17:03:45 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2024-09-19 17:03:45 - Setting initial instance status as: STARTING
+2024-09-19 17:03:45 - Initializing Eureka in region us-east-1
+2024-09-19 17:03:46 - Resolving eureka endpoints via configuration
+2024-09-19 17:03:46 - Disable delta property : false
+2024-09-19 17:03:46 - Single vip registry refresh property : null
+2024-09-19 17:03:46 - Force full registry fetch : false
+2024-09-19 17:03:46 - Application is null : false
+2024-09-19 17:03:46 - Registered Applications size is zero : true
+2024-09-19 17:03:46 - Application version is -1: true
+2024-09-19 17:03:46 - Getting all instance registry info from the eureka server
+2024-09-19 17:03:46 - HTTP GET http://localhost:8761/eureka/apps/
+2024-09-19 17:03:46 - Accept=[application/json, application/*+json]
+2024-09-19 17:03:46 - Response 200 OK
+2024-09-19 17:03:46 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-19 17:03:46 - The response status is 200
+2024-09-19 17:03:46 - Starting heartbeat executor: renew interval is: 30
+2024-09-19 17:03:46 - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2024-09-19 17:03:46 - Discovery Client initialized at timestamp 1726740226569 with initial instances count: 0
+2024-09-19 17:03:46 - Registering application GATEWAY-SERVICE with eureka with status UP
+2024-09-19 17:03:46 - Saw local status change event StatusChangeEvent [timestamp=1726740226575, current=UP, previous=STARTING]
+2024-09-19 17:03:46 - DiscoveryClient_GATEWAY-SERVICE/gateway-service: registering service...
+2024-09-19 17:03:46 - HTTP POST http://localhost:8761/eureka/apps/GATEWAY-SERVICE
+2024-09-19 17:03:46 - Accept=[application/json, application/*+json]
+2024-09-19 17:03:46 - Writing [InstanceInfo [instanceId = gateway-service, appName = GATEWAY-SERVICE, hostName = localhost, status = UP, ipAddr = 26.86.151.172, port = 8080, securePort = 443, dataCenterInfo = com.netflix.appinfo.MyDataCenterInfo@46d2f9ec] as "application/json"
+2024-09-19 17:03:46 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-19 17:03:46 - RouteDefinition matched: auth-service
+2024-09-19 17:03:46 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-19 17:03:46 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:03:46 - RouteDefinition matched: user-service
+2024-09-19 17:03:46 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-19 17:03:46 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:03:46 - RouteDefinition matched: booking-service
+2024-09-19 17:03:46 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-19 17:03:46 - RouteDefinition matched: schedule-service
+2024-09-19 17:03:46 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-19 17:03:46 - RouteDefinition matched: movie-service
+2024-09-19 17:03:46 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-19 17:03:46 - RouteDefinition matched: studio-service
+2024-09-19 17:03:46 - New routes count: 6
+2024-09-19 17:03:46 - Response 204 NO_CONTENT
+2024-09-19 17:03:46 - DiscoveryClient_GATEWAY-SERVICE/gateway-service - registration status: 204
+2024-09-19 17:03:46 - Netty started on port 8080 (http)
+2024-09-19 17:03:46 - Updating port to 8080
+2024-09-19 17:03:47 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-19 17:03:47 - RouteDefinition matched: auth-service
+2024-09-19 17:03:47 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-19 17:03:47 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:03:47 - RouteDefinition matched: user-service
+2024-09-19 17:03:47 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-19 17:03:47 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:03:47 - RouteDefinition matched: booking-service
+2024-09-19 17:03:47 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-19 17:03:47 - RouteDefinition matched: schedule-service
+2024-09-19 17:03:47 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-19 17:03:47 - RouteDefinition matched: movie-service
+2024-09-19 17:03:47 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-19 17:03:47 - RouteDefinition matched: studio-service
+2024-09-19 17:03:47 - New routes count: 6
+2024-09-19 17:03:47 - Started GatewayApplication in 5.742 seconds (process running for 6.405)
+2024-09-19 17:04:16 - Disable delta property : false
+2024-09-19 17:04:16 - Single vip registry refresh property : null
+2024-09-19 17:04:16 - Force full registry fetch : false
+2024-09-19 17:04:16 - Application is null : false
+2024-09-19 17:04:16 - Registered Applications size is zero : true
+2024-09-19 17:04:16 - Application version is -1: false
+2024-09-19 17:04:16 - Getting all instance registry info from the eureka server
+2024-09-19 17:04:16 - HTTP GET http://localhost:8761/eureka/apps/
+2024-09-19 17:04:16 - Accept=[application/json, application/*+json]
+2024-09-19 17:04:16 - Response 200 OK
+2024-09-19 17:04:16 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-19 17:04:16 - The response status is 200
+2024-09-19 17:04:16 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service?status=UP&lastDirtyTimestamp=1726740226575
+2024-09-19 17:04:16 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-19 17:04:16 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:04:16 - Accept=[application/json, application/*+json]
+2024-09-19 17:04:16 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-19 17:04:16 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-19 17:04:16 - RouteDefinition matched: auth-service
+2024-09-19 17:04:16 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-19 17:04:16 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:04:16 - RouteDefinition matched: user-service
+2024-09-19 17:04:16 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-19 17:04:16 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:04:16 - RouteDefinition matched: booking-service
+2024-09-19 17:04:16 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-19 17:04:16 - RouteDefinition matched: schedule-service
+2024-09-19 17:04:16 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-19 17:04:16 - RouteDefinition matched: movie-service
+2024-09-19 17:04:16 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-19 17:04:16 - RouteDefinition matched: studio-service
+2024-09-19 17:04:16 - New routes count: 7
+2024-09-19 17:04:16 - Response 200 OK
+2024-09-19 17:04:46 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service?status=UP&lastDirtyTimestamp=1726740226575
+2024-09-19 17:04:46 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-19 17:04:46 - Accept=[application/json, application/*+json]
+2024-09-19 17:04:46 - Accept=[application/json, application/*+json]
+2024-09-19 17:04:46 - Response 200 OK
+2024-09-19 17:04:46 - Response 200 OK
+2024-09-19 17:04:46 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-19 17:04:46 - RouteDefinition ReactiveCompositeDiscoveryClient_BOOKING-SERVICE applying {pattern=/booking-service/**} to Path
+2024-09-19 17:04:46 - RouteDefinition ReactiveCompositeDiscoveryClient_BOOKING-SERVICE applying filter {regexp=/booking-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:04:46 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_BOOKING-SERVICE
+2024-09-19 17:04:46 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-19 17:04:46 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:04:46 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-19 17:04:46 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-19 17:04:46 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:04:46 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-19 17:04:46 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-19 17:04:46 - RouteDefinition matched: auth-service
+2024-09-19 17:04:46 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-19 17:04:46 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:04:46 - RouteDefinition matched: user-service
+2024-09-19 17:04:46 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-19 17:04:46 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:04:46 - RouteDefinition matched: booking-service
+2024-09-19 17:04:46 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-19 17:04:46 - RouteDefinition matched: schedule-service
+2024-09-19 17:04:46 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-19 17:04:46 - RouteDefinition matched: movie-service
+2024-09-19 17:04:46 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-19 17:04:46 - RouteDefinition matched: studio-service
+2024-09-19 17:04:46 - New routes count: 9
+2024-09-19 17:04:47 - [7e335510-1] HTTP PATCH "/api/v1/bookings/customer/print-ticket/bc44f029-5804-4f28-82b9-43e90e45ffc4"
+2024-09-19 17:04:48 - Created new WebSession.
+2024-09-19 17:04:48 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+2024-09-19 17:04:48 - Request 'PATCH /api/v1/bookings/customer/print-ticket/bc44f029-5804-4f28-82b9-43e90e45ffc4' doesn't match 'POST /logout'
+2024-09-19 17:04:48 - No matches found
+2024-09-19 17:04:48 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/register', method=null}
+2024-09-19 17:04:48 - Request 'PATCH /api/v1/bookings/customer/print-ticket/bc44f029-5804-4f28-82b9-43e90e45ffc4' doesn't match 'null /api/v1/auth/register'
+2024-09-19 17:04:48 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/login', method=null}
+2024-09-19 17:04:48 - Request 'PATCH /api/v1/bookings/customer/print-ticket/bc44f029-5804-4f28-82b9-43e90e45ffc4' doesn't match 'null /api/v1/auth/login'
+2024-09-19 17:04:48 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/grouped', method=null}
+2024-09-19 17:04:48 - Request 'PATCH /api/v1/bookings/customer/print-ticket/bc44f029-5804-4f28-82b9-43e90e45ffc4' doesn't match 'null /api/v1/schedules/grouped'
+2024-09-19 17:04:48 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/detail/**', method=null}
+2024-09-19 17:04:48 - Request 'PATCH /api/v1/bookings/customer/print-ticket/bc44f029-5804-4f28-82b9-43e90e45ffc4' doesn't match 'null /api/v1/schedules/detail/**'
+2024-09-19 17:04:48 - No matches found
+2024-09-19 17:04:48 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/movies/**', method=null}
+2024-09-19 17:04:48 - Request 'PATCH /api/v1/bookings/customer/print-ticket/bc44f029-5804-4f28-82b9-43e90e45ffc4' doesn't match 'null /api/v1/movies/**'
+2024-09-19 17:04:48 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/admin/**', method=null}
+2024-09-19 17:04:48 - Request 'PATCH /api/v1/bookings/customer/print-ticket/bc44f029-5804-4f28-82b9-43e90e45ffc4' doesn't match 'null /api/v1/bookings/admin/**'
+2024-09-19 17:04:48 - No matches found
+2024-09-19 17:04:48 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/customer/**', method=null}
+2024-09-19 17:04:48 - Checking match of request : '/api/v1/bookings/customer/print-ticket/bc44f029-5804-4f28-82b9-43e90e45ffc4'; against '/api/v1/bookings/customer/**'
+2024-09-19 17:04:48 - matched
+2024-09-19 17:04:48 - Checking authorization on '/api/v1/bookings/customer/print-ticket/bc44f029-5804-4f28-82b9-43e90e45ffc4' using org.springframework.security.authorization.AuthorityReactiveAuthorizationManager@385c31fa
+2024-09-19 17:04:48 - Authorization successful
+2024-09-19 17:04:48 - Route matched: booking-service
+2024-09-19 17:04:48 - Mapping [Exchange: PATCH http://localhost:8080/api/v1/bookings/customer/print-ticket/bc44f029-5804-4f28-82b9-43e90e45ffc4] to Route{id='booking-service', uri=lb://booking-service, order=0, predicate=Paths: [/api/v1/bookings/**], match trailing slash: true, gatewayFilters=[[findo.gateway.filter.JwtAuthenticationFilter$$Lambda$1337/0x000000080112d670@77ef6c78, order = 1]], metadata={}}
+2024-09-19 17:04:48 - [7e335510-1] Mapped to org.springframework.cloud.gateway.handler.FilteringWebHandler@28aac4af
+2024-09-19 17:04:48 - Sorted gatewayFilterFactories: [[GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RemoveCachedBodyFilter@5e2deb44}, order = -2147483648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.AdaptCachedBodyGlobalFilter@6ce89884}, order = -2147482648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyWriteResponseFilter@5e33140a}, order = -1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardPathFilter@1d208889}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.GatewayMetricsFilter@2376f96e}, order = 0], [findo.gateway.filter.JwtAuthenticationFilter$$Lambda$1337/0x000000080112d670@77ef6c78, order = 1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RouteToRequestUrlFilter@703ff414}, order = 10000], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter@4fc9eaf2}, order = 10150], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.LoadBalancerServiceInstanceCookieFilter@6039c0bd}, order = 10151], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.WebsocketRoutingFilter@2c6627a2}, order = 2147483646], [GatewayFilterAdapter{delegate=findo.gateway.filter.LoggingGlobalFilter@e951b47}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyRoutingFilter@78da7775}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardRoutingFilter@5bf544b9}, order = 2147483647]]
+2024-09-19 17:04:48 - RouteDefinition ReactiveCompositeDiscoveryClient_BOOKING-SERVICE applying {pattern=/booking-service/**} to Path
+2024-09-19 17:04:48 - RouteDefinition ReactiveCompositeDiscoveryClient_BOOKING-SERVICE applying filter {regexp=/booking-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:04:48 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_BOOKING-SERVICE
+2024-09-19 17:04:48 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-19 17:04:48 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:04:48 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-19 17:04:48 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-19 17:04:48 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:04:48 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-19 17:04:48 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-19 17:04:48 - RouteDefinition matched: auth-service
+2024-09-19 17:04:48 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-19 17:04:48 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:04:48 - RouteDefinition matched: user-service
+2024-09-19 17:04:48 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-19 17:04:48 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:04:48 - RouteDefinition matched: booking-service
+2024-09-19 17:04:48 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-19 17:04:48 - RouteDefinition matched: schedule-service
+2024-09-19 17:04:48 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-19 17:04:48 - RouteDefinition matched: movie-service
+2024-09-19 17:04:48 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-19 17:04:48 - RouteDefinition matched: studio-service
+2024-09-19 17:04:48 - New routes count: 9
+2024-09-19 17:04:48 - Request: PATCH http://localhost:8080/api/v1/bookings/customer/print-ticket/bc44f029-5804-4f28-82b9-43e90e45ffc4 from IP: /[0:0:0:0:0:0:0:1]:50493
+2024-09-19 17:04:48 - Will instrument the HTTP request headers [Authorization:"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4ZmY4Yzc1My02NzM0LTQ4NDYtOTFkMi1mOTkyYjRjZWRkMmQiLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlzcyI6IkZQVCIsImV4cCI6MTcyNzMzNzcxOSwiaWF0IjoxNzI2NzMyOTE5LCJlbWFpbCI6IlRlc3RlcjEwQGdtYWlsLmNvbSJ9.ZrkmtFSxYdqGu0SPGfW0dm_eR_mtcY6DYY-LYBmpM9a8BFjU9Q47BGJPUgQiMTleHlK2FNAIChH9dYYUXrcqeJyh4nksjX1eCNPps5OJNd0wngBEOJlvQu0rwb-mg-nRxIl38BtwaMJOltYu-UC5U7IQcaojewcP0kSGES9gJ36egEwSxVjIpd3b0wq1qI-jy-Dl4mI4mgaYoiu_YJLc5D-SsQWjo5fgu0f2ZC-P4uH582tCAwoNtBM4dr08RkJIRTgAMqQLrryhnomLljKnZQsls3nrEdf3732cQmSnb_GyJz22b6Fp8bMnl92QyyMEGH-zTXZhgXjf362kFp7qMA", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"7c4e2a54-4a04-40b9-9386-6a2561e19ea3", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Content-Length:"0", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50493"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-19 17:04:48 - Client observation  {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='PATCH', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='booking-service', spring.cloud.gateway.route.uri='lb://booking-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/bookings/customer/print-ticket/bc44f029-5804-4f28-82b9-43e90e45ffc4'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=0.0014631, duration(nanos)=1463100.0, startTimeNanos=32313121472200}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@6527eac0'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@33faea25} created for the request. New headers are [Authorization:"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4ZmY4Yzc1My02NzM0LTQ4NDYtOTFkMi1mOTkyYjRjZWRkMmQiLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlzcyI6IkZQVCIsImV4cCI6MTcyNzMzNzcxOSwiaWF0IjoxNzI2NzMyOTE5LCJlbWFpbCI6IlRlc3RlcjEwQGdtYWlsLmNvbSJ9.ZrkmtFSxYdqGu0SPGfW0dm_eR_mtcY6DYY-LYBmpM9a8BFjU9Q47BGJPUgQiMTleHlK2FNAIChH9dYYUXrcqeJyh4nksjX1eCNPps5OJNd0wngBEOJlvQu0rwb-mg-nRxIl38BtwaMJOltYu-UC5U7IQcaojewcP0kSGES9gJ36egEwSxVjIpd3b0wq1qI-jy-Dl4mI4mgaYoiu_YJLc5D-SsQWjo5fgu0f2ZC-P4uH582tCAwoNtBM4dr08RkJIRTgAMqQLrryhnomLljKnZQsls3nrEdf3732cQmSnb_GyJz22b6Fp8bMnl92QyyMEGH-zTXZhgXjf362kFp7qMA", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"7c4e2a54-4a04-40b9-9386-6a2561e19ea3", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Content-Length:"0", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50493"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-19 17:04:48 - Will instrument the response
+2024-09-19 17:04:49 - The response was handled for observation {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='PATCH', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='booking-service', spring.cloud.gateway.route.uri='lb://booking-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/bookings/customer/print-ticket/bc44f029-5804-4f28-82b9-43e90e45ffc4'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=0.7530692, duration(nanos)=7.530692E8, startTimeNanos=32313121472200}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@6527eac0'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@33faea25}
+2024-09-19 17:04:49 - Response: 500 INTERNAL_SERVER_ERROR for PATCH http://localhost:8080/api/v1/bookings/customer/print-ticket/bc44f029-5804-4f28-82b9-43e90e45ffc4
+2024-09-19 17:04:49 - [7e335510-1] Completed 500 INTERNAL_SERVER_ERROR
+2024-09-19 17:05:05 - [7e335510-2] HTTP GET "/api/v1/bookings/customer/booking-history?page=0"
+2024-09-19 17:05:05 - Created new WebSession.
+2024-09-19 17:05:05 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+2024-09-19 17:05:05 - Request 'GET /api/v1/bookings/customer/booking-history' doesn't match 'POST /logout'
+2024-09-19 17:05:05 - No matches found
+2024-09-19 17:05:05 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/register', method=null}
+2024-09-19 17:05:05 - Request 'GET /api/v1/bookings/customer/booking-history' doesn't match 'null /api/v1/auth/register'
+2024-09-19 17:05:05 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/login', method=null}
+2024-09-19 17:05:05 - Request 'GET /api/v1/bookings/customer/booking-history' doesn't match 'null /api/v1/auth/login'
+2024-09-19 17:05:05 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/grouped', method=null}
+2024-09-19 17:05:05 - Request 'GET /api/v1/bookings/customer/booking-history' doesn't match 'null /api/v1/schedules/grouped'
+2024-09-19 17:05:05 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/detail/**', method=null}
+2024-09-19 17:05:05 - Request 'GET /api/v1/bookings/customer/booking-history' doesn't match 'null /api/v1/schedules/detail/**'
+2024-09-19 17:05:05 - No matches found
+2024-09-19 17:05:05 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/movies/**', method=null}
+2024-09-19 17:05:05 - Request 'GET /api/v1/bookings/customer/booking-history' doesn't match 'null /api/v1/movies/**'
+2024-09-19 17:05:05 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/admin/**', method=null}
+2024-09-19 17:05:05 - Request 'GET /api/v1/bookings/customer/booking-history' doesn't match 'null /api/v1/bookings/admin/**'
+2024-09-19 17:05:05 - No matches found
+2024-09-19 17:05:05 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/customer/**', method=null}
+2024-09-19 17:05:05 - Checking match of request : '/api/v1/bookings/customer/booking-history'; against '/api/v1/bookings/customer/**'
+2024-09-19 17:05:05 - matched
+2024-09-19 17:05:05 - Checking authorization on '/api/v1/bookings/customer/booking-history' using org.springframework.security.authorization.AuthorityReactiveAuthorizationManager@385c31fa
+2024-09-19 17:05:05 - Authorization successful
+2024-09-19 17:05:05 - Route matched: booking-service
+2024-09-19 17:05:05 - Mapping [Exchange: GET http://localhost:8080/api/v1/bookings/customer/booking-history?page=0] to Route{id='booking-service', uri=lb://booking-service, order=0, predicate=Paths: [/api/v1/bookings/**], match trailing slash: true, gatewayFilters=[[findo.gateway.filter.JwtAuthenticationFilter$$Lambda$1337/0x000000080112d670@2ec9c8dd, order = 1]], metadata={}}
+2024-09-19 17:05:05 - [7e335510-2] Mapped to org.springframework.cloud.gateway.handler.FilteringWebHandler@28aac4af
+2024-09-19 17:05:05 - Sorted gatewayFilterFactories: [[GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RemoveCachedBodyFilter@5e2deb44}, order = -2147483648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.AdaptCachedBodyGlobalFilter@6ce89884}, order = -2147482648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyWriteResponseFilter@5e33140a}, order = -1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardPathFilter@1d208889}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.GatewayMetricsFilter@2376f96e}, order = 0], [findo.gateway.filter.JwtAuthenticationFilter$$Lambda$1337/0x000000080112d670@2ec9c8dd, order = 1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RouteToRequestUrlFilter@703ff414}, order = 10000], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter@4fc9eaf2}, order = 10150], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.LoadBalancerServiceInstanceCookieFilter@6039c0bd}, order = 10151], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.WebsocketRoutingFilter@2c6627a2}, order = 2147483646], [GatewayFilterAdapter{delegate=findo.gateway.filter.LoggingGlobalFilter@e951b47}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyRoutingFilter@78da7775}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardRoutingFilter@5bf544b9}, order = 2147483647]]
+2024-09-19 17:05:05 - Request: GET http://localhost:8080/api/v1/bookings/customer/booking-history?page=0 from IP: /[0:0:0:0:0:0:0:1]:50493
+2024-09-19 17:05:05 - Will instrument the HTTP request headers [Authorization:"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4ZmY4Yzc1My02NzM0LTQ4NDYtOTFkMi1mOTkyYjRjZWRkMmQiLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlzcyI6IkZQVCIsImV4cCI6MTcyNzM0MjAxOCwiaWF0IjoxNzI2NzM3MjE4LCJlbWFpbCI6IlRlc3RlcjEwQGdtYWlsLmNvbSJ9.RFhjWYd2WMz41CZ_Tll2aoqNtUJaXHDPqfgOfLuAa51_OvyXW2JhK1z-Q315RcKZOayVH18PGai95JlE076_TTy4hSgVrCAGoLyAdrCO_c37lzvonh203qrmTvYcqTFjfkVsFTaWyCO6uXEI0sc5KAfP8XDuYC9kpYv4qiRrHLqDbZGz58QcHzAPs3aZRoMiKjKQl2k8GFQrJKUc12CJ9Mkj1uAUke0fUq9ibto58-b5tncp48cVwK3fkec5oBykmH2hOnpjFlxytAQD5Kz5GmJb4tYdCIIQ4Nlw_74HmWzJ3ZPj-TrXYTBlch1HbkjUbtxO_vJtg8Nm414Cd24x3w", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"18890c85-39d5-4c91-ade9-6f5a43173ce2", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50493"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-19 17:05:05 - Client observation  {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='GET', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='booking-service', spring.cloud.gateway.route.uri='lb://booking-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/bookings/customer/booking-history?page=0'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=9.45E-5, duration(nanos)=94500.0, startTimeNanos=32330807999100}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@200e3374'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@2431a3ad} created for the request. New headers are [Authorization:"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4ZmY4Yzc1My02NzM0LTQ4NDYtOTFkMi1mOTkyYjRjZWRkMmQiLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlzcyI6IkZQVCIsImV4cCI6MTcyNzM0MjAxOCwiaWF0IjoxNzI2NzM3MjE4LCJlbWFpbCI6IlRlc3RlcjEwQGdtYWlsLmNvbSJ9.RFhjWYd2WMz41CZ_Tll2aoqNtUJaXHDPqfgOfLuAa51_OvyXW2JhK1z-Q315RcKZOayVH18PGai95JlE076_TTy4hSgVrCAGoLyAdrCO_c37lzvonh203qrmTvYcqTFjfkVsFTaWyCO6uXEI0sc5KAfP8XDuYC9kpYv4qiRrHLqDbZGz58QcHzAPs3aZRoMiKjKQl2k8GFQrJKUc12CJ9Mkj1uAUke0fUq9ibto58-b5tncp48cVwK3fkec5oBykmH2hOnpjFlxytAQD5Kz5GmJb4tYdCIIQ4Nlw_74HmWzJ3ZPj-TrXYTBlch1HbkjUbtxO_vJtg8Nm414Cd24x3w", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"18890c85-39d5-4c91-ade9-6f5a43173ce2", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50493"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-19 17:05:06 - Will instrument the response
+2024-09-19 17:05:06 - The response was handled for observation {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='GET', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='booking-service', spring.cloud.gateway.route.uri='lb://booking-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/bookings/customer/booking-history?page=0'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=0.1790398, duration(nanos)=1.790398E8, startTimeNanos=32330807999100}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@200e3374'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@2431a3ad}
+2024-09-19 17:05:06 - Response: 200 OK for GET http://localhost:8080/api/v1/bookings/customer/booking-history?page=0
+2024-09-19 17:05:06 - [7e335510-2] Completed 200 OK
+2024-09-19 17:05:16 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service?status=UP&lastDirtyTimestamp=1726740226575
+2024-09-19 17:05:16 - Accept=[application/json, application/*+json]
+2024-09-19 17:05:16 - Response 200 OK
+2024-09-19 17:05:16 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-19 17:05:16 - Accept=[application/json, application/*+json]
+2024-09-19 17:05:16 - Response 200 OK
+2024-09-19 17:05:16 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-19 17:05:16 - RouteDefinition ReactiveCompositeDiscoveryClient_BOOKING-SERVICE applying {pattern=/booking-service/**} to Path
+2024-09-19 17:05:16 - RouteDefinition ReactiveCompositeDiscoveryClient_BOOKING-SERVICE applying filter {regexp=/booking-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:05:16 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_BOOKING-SERVICE
+2024-09-19 17:05:16 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-19 17:05:16 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:05:16 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-19 17:05:16 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-19 17:05:16 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:05:16 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-19 17:05:16 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-19 17:05:16 - RouteDefinition matched: auth-service
+2024-09-19 17:05:16 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-19 17:05:16 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:05:16 - RouteDefinition matched: user-service
+2024-09-19 17:05:16 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-19 17:05:16 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:05:16 - RouteDefinition matched: booking-service
+2024-09-19 17:05:16 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-19 17:05:16 - RouteDefinition matched: schedule-service
+2024-09-19 17:05:16 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-19 17:05:16 - RouteDefinition matched: movie-service
+2024-09-19 17:05:16 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-19 17:05:16 - RouteDefinition matched: studio-service
+2024-09-19 17:05:16 - New routes count: 9
+2024-09-19 17:05:46 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service?status=UP&lastDirtyTimestamp=1726740226575
+2024-09-19 17:05:46 - Accept=[application/json, application/*+json]
+2024-09-19 17:05:46 - Response 200 OK
+2024-09-19 17:05:46 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-19 17:05:46 - Accept=[application/json, application/*+json]
+2024-09-19 17:05:46 - Response 200 OK
+2024-09-19 17:05:46 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-19 17:05:46 - RouteDefinition ReactiveCompositeDiscoveryClient_BOOKING-SERVICE applying {pattern=/booking-service/**} to Path
+2024-09-19 17:05:46 - RouteDefinition ReactiveCompositeDiscoveryClient_BOOKING-SERVICE applying filter {regexp=/booking-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:05:46 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_BOOKING-SERVICE
+2024-09-19 17:05:46 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-19 17:05:46 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:05:46 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-19 17:05:46 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-19 17:05:46 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:05:46 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-19 17:05:46 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-19 17:05:46 - RouteDefinition matched: auth-service
+2024-09-19 17:05:46 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-19 17:05:46 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:05:46 - RouteDefinition matched: user-service
+2024-09-19 17:05:46 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-19 17:05:46 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:05:46 - RouteDefinition matched: booking-service
+2024-09-19 17:05:46 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-19 17:05:46 - RouteDefinition matched: schedule-service
+2024-09-19 17:05:46 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-19 17:05:46 - RouteDefinition matched: movie-service
+2024-09-19 17:05:46 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-19 17:05:46 - RouteDefinition matched: studio-service
+2024-09-19 17:05:46 - New routes count: 9
+2024-09-19 17:06:16 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service?status=UP&lastDirtyTimestamp=1726740226575
+2024-09-19 17:06:16 - Accept=[application/json, application/*+json]
+2024-09-19 17:06:16 - Response 200 OK
+2024-09-19 17:06:16 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-19 17:06:16 - Accept=[application/json, application/*+json]
+2024-09-19 17:06:16 - Response 200 OK
+2024-09-19 17:06:16 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-19 17:06:16 - RouteDefinition ReactiveCompositeDiscoveryClient_BOOKING-SERVICE applying {pattern=/booking-service/**} to Path
+2024-09-19 17:06:16 - RouteDefinition ReactiveCompositeDiscoveryClient_BOOKING-SERVICE applying filter {regexp=/booking-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:06:16 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_BOOKING-SERVICE
+2024-09-19 17:06:16 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-19 17:06:16 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:06:16 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-19 17:06:16 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-19 17:06:16 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:06:16 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-19 17:06:16 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-19 17:06:16 - RouteDefinition matched: auth-service
+2024-09-19 17:06:16 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-19 17:06:16 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:06:16 - RouteDefinition matched: user-service
+2024-09-19 17:06:16 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-19 17:06:16 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:06:16 - RouteDefinition matched: booking-service
+2024-09-19 17:06:16 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-19 17:06:16 - RouteDefinition matched: schedule-service
+2024-09-19 17:06:16 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-19 17:06:16 - RouteDefinition matched: movie-service
+2024-09-19 17:06:16 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-19 17:06:16 - RouteDefinition matched: studio-service
+2024-09-19 17:06:16 - New routes count: 9
+2024-09-19 17:06:43 - [1d78d418-3] HTTP POST "/api/v1/auth/login"
+2024-09-19 17:06:43 - Created new WebSession.
+2024-09-19 17:06:43 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+2024-09-19 17:06:43 - Request 'POST /api/v1/auth/login' doesn't match 'POST /logout'
+2024-09-19 17:06:43 - No matches found
+2024-09-19 17:06:43 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/register', method=null}
+2024-09-19 17:06:43 - Request 'POST /api/v1/auth/login' doesn't match 'null /api/v1/auth/register'
+2024-09-19 17:06:43 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/login', method=null}
+2024-09-19 17:06:43 - Checking match of request : '/api/v1/auth/login'; against '/api/v1/auth/login'
+2024-09-19 17:06:43 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/grouped', method=null}
+2024-09-19 17:06:43 - Request 'POST /api/v1/auth/login' doesn't match 'null /api/v1/schedules/grouped'
+2024-09-19 17:06:43 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/detail/**', method=null}
+2024-09-19 17:06:43 - Request 'POST /api/v1/auth/login' doesn't match 'null /api/v1/schedules/detail/**'
+2024-09-19 17:06:43 - matched
+2024-09-19 17:06:43 - Checking authorization on '/api/v1/auth/login' using org.springframework.security.config.web.server.ServerHttpSecurity$AuthorizeExchangeSpec$Access$$Lambda$825/0x000000080112e000@46fb3e0a
+2024-09-19 17:06:43 - Authorization successful
+2024-09-19 17:06:43 - Route matched: auth-service
+2024-09-19 17:06:43 - Mapping [Exchange: POST http://localhost:8080/api/v1/auth/login] to Route{id='auth-service', uri=lb://auth-service, order=0, predicate=Paths: [/api/v1/auth/**], match trailing slash: true, gatewayFilters=[], metadata={}}
+2024-09-19 17:06:43 - [1d78d418-3] Mapped to org.springframework.cloud.gateway.handler.FilteringWebHandler@28aac4af
+2024-09-19 17:06:43 - Sorted gatewayFilterFactories: [[GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RemoveCachedBodyFilter@5e2deb44}, order = -2147483648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.AdaptCachedBodyGlobalFilter@6ce89884}, order = -2147482648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyWriteResponseFilter@5e33140a}, order = -1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardPathFilter@1d208889}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.GatewayMetricsFilter@2376f96e}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RouteToRequestUrlFilter@703ff414}, order = 10000], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter@4fc9eaf2}, order = 10150], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.LoadBalancerServiceInstanceCookieFilter@6039c0bd}, order = 10151], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.WebsocketRoutingFilter@2c6627a2}, order = 2147483646], [GatewayFilterAdapter{delegate=findo.gateway.filter.LoggingGlobalFilter@e951b47}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyRoutingFilter@78da7775}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardRoutingFilter@5bf544b9}, order = 2147483647]]
+2024-09-19 17:06:43 - RouteDefinition ReactiveCompositeDiscoveryClient_BOOKING-SERVICE applying {pattern=/booking-service/**} to Path
+2024-09-19 17:06:43 - RouteDefinition ReactiveCompositeDiscoveryClient_BOOKING-SERVICE applying filter {regexp=/booking-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:06:43 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_BOOKING-SERVICE
+2024-09-19 17:06:43 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-19 17:06:43 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:06:43 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-19 17:06:43 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-19 17:06:43 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:06:43 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-19 17:06:43 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-19 17:06:43 - RouteDefinition matched: auth-service
+2024-09-19 17:06:43 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-19 17:06:43 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:06:43 - RouteDefinition matched: user-service
+2024-09-19 17:06:43 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-19 17:06:43 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:06:43 - RouteDefinition matched: booking-service
+2024-09-19 17:06:43 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-19 17:06:43 - RouteDefinition matched: schedule-service
+2024-09-19 17:06:43 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-19 17:06:43 - RouteDefinition matched: movie-service
+2024-09-19 17:06:43 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-19 17:06:43 - RouteDefinition matched: studio-service
+2024-09-19 17:06:43 - New routes count: 9
+2024-09-19 17:06:43 - Request: POST http://localhost:8080/api/v1/auth/login from IP: /[0:0:0:0:0:0:0:1]:50525
+2024-09-19 17:06:43 - Will instrument the HTTP request headers [Content-Type:"application/json", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"4d98cc96-46c4-4ab8-bc76-48850085c7f4", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Content-Length:"69", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50525"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-19 17:06:43 - Client observation  {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='POST', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='auth-service', spring.cloud.gateway.route.uri='lb://auth-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/auth/login'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=2.251E-4, duration(nanos)=225100.0, startTimeNanos=32428430332200}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@11f333d3'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@68ffb786} created for the request. New headers are [Content-Type:"application/json", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"4d98cc96-46c4-4ab8-bc76-48850085c7f4", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Content-Length:"69", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50525"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-19 17:06:44 - Will instrument the response
+2024-09-19 17:06:44 - The response was handled for observation {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='POST', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='auth-service', spring.cloud.gateway.route.uri='lb://auth-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/auth/login'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=0.8952874, duration(nanos)=8.952874E8, startTimeNanos=32428430332200}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@11f333d3'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@68ffb786}
+2024-09-19 17:06:44 - Response: 200 OK for POST http://localhost:8080/api/v1/auth/login
+2024-09-19 17:06:44 - [1d78d418-3] Completed 200 OK
+2024-09-19 17:06:46 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service?status=UP&lastDirtyTimestamp=1726740226575
+2024-09-19 17:06:46 - Accept=[application/json, application/*+json]
+2024-09-19 17:06:46 - Response 200 OK
+2024-09-19 17:06:46 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-19 17:06:46 - Accept=[application/json, application/*+json]
+2024-09-19 17:06:46 - Response 200 OK
+2024-09-19 17:06:46 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-19 17:06:46 - RouteDefinition ReactiveCompositeDiscoveryClient_BOOKING-SERVICE applying {pattern=/booking-service/**} to Path
+2024-09-19 17:06:46 - RouteDefinition ReactiveCompositeDiscoveryClient_BOOKING-SERVICE applying filter {regexp=/booking-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:06:46 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_BOOKING-SERVICE
+2024-09-19 17:06:46 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-19 17:06:46 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:06:46 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-19 17:06:46 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-19 17:06:46 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:06:46 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-19 17:06:46 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-19 17:06:46 - RouteDefinition matched: auth-service
+2024-09-19 17:06:46 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-19 17:06:46 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:06:46 - RouteDefinition matched: user-service
+2024-09-19 17:06:46 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-19 17:06:46 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:06:46 - RouteDefinition matched: booking-service
+2024-09-19 17:06:46 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-19 17:06:46 - RouteDefinition matched: schedule-service
+2024-09-19 17:06:46 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-19 17:06:46 - RouteDefinition matched: movie-service
+2024-09-19 17:06:46 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-19 17:06:46 - RouteDefinition matched: studio-service
+2024-09-19 17:06:46 - New routes count: 9
+2024-09-19 17:07:08 - [1d78d418-4] HTTP POST "/api/v1/bookings/customer/book"
+2024-09-19 17:07:08 - Created new WebSession.
+2024-09-19 17:07:08 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+2024-09-19 17:07:08 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'POST /logout'
+2024-09-19 17:07:08 - No matches found
+2024-09-19 17:07:08 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/register', method=null}
+2024-09-19 17:07:08 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'null /api/v1/auth/register'
+2024-09-19 17:07:08 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/login', method=null}
+2024-09-19 17:07:08 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'null /api/v1/auth/login'
+2024-09-19 17:07:08 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/grouped', method=null}
+2024-09-19 17:07:08 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'null /api/v1/schedules/grouped'
+2024-09-19 17:07:08 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/detail/**', method=null}
+2024-09-19 17:07:08 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'null /api/v1/schedules/detail/**'
+2024-09-19 17:07:08 - No matches found
+2024-09-19 17:07:08 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/movies/**', method=null}
+2024-09-19 17:07:08 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'null /api/v1/movies/**'
+2024-09-19 17:07:08 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/admin/**', method=null}
+2024-09-19 17:07:08 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'null /api/v1/bookings/admin/**'
+2024-09-19 17:07:08 - No matches found
+2024-09-19 17:07:08 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/customer/**', method=null}
+2024-09-19 17:07:08 - Checking match of request : '/api/v1/bookings/customer/book'; against '/api/v1/bookings/customer/**'
+2024-09-19 17:07:08 - matched
+2024-09-19 17:07:08 - Checking authorization on '/api/v1/bookings/customer/book' using org.springframework.security.authorization.AuthorityReactiveAuthorizationManager@385c31fa
+2024-09-19 17:07:08 - Authorization successful
+2024-09-19 17:07:08 - Route matched: booking-service
+2024-09-19 17:07:08 - Mapping [Exchange: POST http://localhost:8080/api/v1/bookings/customer/book] to Route{id='booking-service', uri=lb://booking-service, order=0, predicate=Paths: [/api/v1/bookings/**], match trailing slash: true, gatewayFilters=[[findo.gateway.filter.JwtAuthenticationFilter$$Lambda$1337/0x000000080112d670@79fcc14f, order = 1]], metadata={}}
+2024-09-19 17:07:08 - [1d78d418-4] Mapped to org.springframework.cloud.gateway.handler.FilteringWebHandler@28aac4af
+2024-09-19 17:07:08 - Sorted gatewayFilterFactories: [[GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RemoveCachedBodyFilter@5e2deb44}, order = -2147483648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.AdaptCachedBodyGlobalFilter@6ce89884}, order = -2147482648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyWriteResponseFilter@5e33140a}, order = -1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardPathFilter@1d208889}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.GatewayMetricsFilter@2376f96e}, order = 0], [findo.gateway.filter.JwtAuthenticationFilter$$Lambda$1337/0x000000080112d670@79fcc14f, order = 1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RouteToRequestUrlFilter@703ff414}, order = 10000], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter@4fc9eaf2}, order = 10150], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.LoadBalancerServiceInstanceCookieFilter@6039c0bd}, order = 10151], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.WebsocketRoutingFilter@2c6627a2}, order = 2147483646], [GatewayFilterAdapter{delegate=findo.gateway.filter.LoggingGlobalFilter@e951b47}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyRoutingFilter@78da7775}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardRoutingFilter@5bf544b9}, order = 2147483647]]
+2024-09-19 17:07:08 - Request: POST http://localhost:8080/api/v1/bookings/customer/book from IP: /[0:0:0:0:0:0:0:1]:50525
+2024-09-19 17:07:08 - Will instrument the HTTP request headers [Content-Type:"application/json", Authorization:"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4ZmY4Yzc1My02NzM0LTQ4NDYtOTFkMi1mOTkyYjRjZWRkMmQiLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlzcyI6IkZQVCIsImV4cCI6MTcyNzM0NTIwNCwiaWF0IjoxNzI2NzQwNDA0LCJlbWFpbCI6IlRlc3RlcjEwQGdtYWlsLmNvbSJ9.tAz2zQeI4YFtI2q3-6Gmu6IhDnpk3PZmNuSALHt7iknFGEOSTJEPv2vSyxhkBZ9KbJCs96BgiqywwfPaDqzTXFv-oeqz4gFeiM6pDyl0vAb9inp30Y5GBroD_qJ7Rkh_hYPRh6ZXZDlPqvKW9XlqvItxfSeo10BVVWx8J3T8NVjfbgE6JMmbR0KL6gRwstVLupeen6r7NYwezFqJBFMbDWXZIxsKQinWyukoHIZsH8OoGjWfD1LQNpVHzQGwJiPkJiioN0P3pQiD-kO0xuywv9XH-mUd8PA9vOMVlQnfp86YaQRoczx6lq7dt41oXv5m5tjmKTJ_CC1XX1coH-l1rA", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"1030f4d3-1d98-4196-81c8-320fb737ae43", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Content-Length:"120", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50525"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-19 17:07:08 - Client observation  {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='POST', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='booking-service', spring.cloud.gateway.route.uri='lb://booking-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/bookings/customer/book'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=1.004E-4, duration(nanos)=100400.0, startTimeNanos=32453838672800}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@7304aa3f'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@36062a3b} created for the request. New headers are [Content-Type:"application/json", Authorization:"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4ZmY4Yzc1My02NzM0LTQ4NDYtOTFkMi1mOTkyYjRjZWRkMmQiLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlzcyI6IkZQVCIsImV4cCI6MTcyNzM0NTIwNCwiaWF0IjoxNzI2NzQwNDA0LCJlbWFpbCI6IlRlc3RlcjEwQGdtYWlsLmNvbSJ9.tAz2zQeI4YFtI2q3-6Gmu6IhDnpk3PZmNuSALHt7iknFGEOSTJEPv2vSyxhkBZ9KbJCs96BgiqywwfPaDqzTXFv-oeqz4gFeiM6pDyl0vAb9inp30Y5GBroD_qJ7Rkh_hYPRh6ZXZDlPqvKW9XlqvItxfSeo10BVVWx8J3T8NVjfbgE6JMmbR0KL6gRwstVLupeen6r7NYwezFqJBFMbDWXZIxsKQinWyukoHIZsH8OoGjWfD1LQNpVHzQGwJiPkJiioN0P3pQiD-kO0xuywv9XH-mUd8PA9vOMVlQnfp86YaQRoczx6lq7dt41oXv5m5tjmKTJ_CC1XX1coH-l1rA", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"1030f4d3-1d98-4196-81c8-320fb737ae43", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Content-Length:"120", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50525"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-19 17:07:09 - Will instrument the response
+2024-09-19 17:07:09 - The response was handled for observation {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='POST', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='booking-service', spring.cloud.gateway.route.uri='lb://booking-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/bookings/customer/book'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=0.1255098, duration(nanos)=1.255098E8, startTimeNanos=32453838672800}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@7304aa3f'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@36062a3b}
+2024-09-19 17:07:09 - Response: 500 INTERNAL_SERVER_ERROR for POST http://localhost:8080/api/v1/bookings/customer/book
+2024-09-19 17:07:09 - [1d78d418-4] Completed 500 INTERNAL_SERVER_ERROR
+2024-09-19 17:07:16 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service?status=UP&lastDirtyTimestamp=1726740226575
+2024-09-19 17:07:16 - Accept=[application/json, application/*+json]
+2024-09-19 17:07:16 - Response 200 OK
+2024-09-19 17:07:16 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-19 17:07:16 - Accept=[application/json, application/*+json]
+2024-09-19 17:07:16 - Response 200 OK
+2024-09-19 17:07:16 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-19 17:07:16 - RouteDefinition ReactiveCompositeDiscoveryClient_BOOKING-SERVICE applying {pattern=/booking-service/**} to Path
+2024-09-19 17:07:16 - RouteDefinition ReactiveCompositeDiscoveryClient_BOOKING-SERVICE applying filter {regexp=/booking-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:07:16 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_BOOKING-SERVICE
+2024-09-19 17:07:16 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-19 17:07:16 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:07:16 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-19 17:07:16 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-19 17:07:16 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:07:16 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-19 17:07:16 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-19 17:07:16 - RouteDefinition matched: auth-service
+2024-09-19 17:07:16 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-19 17:07:16 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:07:16 - RouteDefinition matched: user-service
+2024-09-19 17:07:16 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-19 17:07:16 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:07:16 - RouteDefinition matched: booking-service
+2024-09-19 17:07:16 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-19 17:07:16 - RouteDefinition matched: schedule-service
+2024-09-19 17:07:16 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-19 17:07:16 - RouteDefinition matched: movie-service
+2024-09-19 17:07:16 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-19 17:07:16 - RouteDefinition matched: studio-service
+2024-09-19 17:07:16 - New routes count: 9
+2024-09-19 17:07:46 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service?status=UP&lastDirtyTimestamp=1726740226575
+2024-09-19 17:07:46 - Accept=[application/json, application/*+json]
+2024-09-19 17:07:46 - Response 200 OK
+2024-09-19 17:07:46 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-19 17:07:46 - Accept=[application/json, application/*+json]
+2024-09-19 17:07:46 - Response 200 OK
+2024-09-19 17:07:46 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-19 17:07:46 - RouteDefinition ReactiveCompositeDiscoveryClient_BOOKING-SERVICE applying {pattern=/booking-service/**} to Path
+2024-09-19 17:07:46 - RouteDefinition ReactiveCompositeDiscoveryClient_BOOKING-SERVICE applying filter {regexp=/booking-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:07:46 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_BOOKING-SERVICE
+2024-09-19 17:07:46 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-19 17:07:46 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:07:46 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-19 17:07:46 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-19 17:07:46 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:07:46 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-19 17:07:46 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-19 17:07:46 - RouteDefinition matched: auth-service
+2024-09-19 17:07:46 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-19 17:07:46 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:07:46 - RouteDefinition matched: user-service
+2024-09-19 17:07:46 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-19 17:07:46 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:07:46 - RouteDefinition matched: booking-service
+2024-09-19 17:07:46 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-19 17:07:46 - RouteDefinition matched: schedule-service
+2024-09-19 17:07:46 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-19 17:07:46 - RouteDefinition matched: movie-service
+2024-09-19 17:07:46 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-19 17:07:46 - RouteDefinition matched: studio-service
+2024-09-19 17:07:46 - New routes count: 9
+2024-09-19 17:07:56 - [1d78d418-5] HTTP GET "/api/v1/bookings/customer/booking-history?page=0"
+2024-09-19 17:07:56 - Created new WebSession.
+2024-09-19 17:07:56 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+2024-09-19 17:07:56 - Request 'GET /api/v1/bookings/customer/booking-history' doesn't match 'POST /logout'
+2024-09-19 17:07:56 - No matches found
+2024-09-19 17:07:56 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/register', method=null}
+2024-09-19 17:07:56 - Request 'GET /api/v1/bookings/customer/booking-history' doesn't match 'null /api/v1/auth/register'
+2024-09-19 17:07:56 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/login', method=null}
+2024-09-19 17:07:56 - Request 'GET /api/v1/bookings/customer/booking-history' doesn't match 'null /api/v1/auth/login'
+2024-09-19 17:07:56 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/grouped', method=null}
+2024-09-19 17:07:56 - Request 'GET /api/v1/bookings/customer/booking-history' doesn't match 'null /api/v1/schedules/grouped'
+2024-09-19 17:07:56 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/detail/**', method=null}
+2024-09-19 17:07:56 - Request 'GET /api/v1/bookings/customer/booking-history' doesn't match 'null /api/v1/schedules/detail/**'
+2024-09-19 17:07:56 - No matches found
+2024-09-19 17:07:56 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/movies/**', method=null}
+2024-09-19 17:07:56 - Request 'GET /api/v1/bookings/customer/booking-history' doesn't match 'null /api/v1/movies/**'
+2024-09-19 17:07:56 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/admin/**', method=null}
+2024-09-19 17:07:56 - Request 'GET /api/v1/bookings/customer/booking-history' doesn't match 'null /api/v1/bookings/admin/**'
+2024-09-19 17:07:56 - No matches found
+2024-09-19 17:07:56 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/customer/**', method=null}
+2024-09-19 17:07:56 - Checking match of request : '/api/v1/bookings/customer/booking-history'; against '/api/v1/bookings/customer/**'
+2024-09-19 17:07:56 - matched
+2024-09-19 17:07:56 - Checking authorization on '/api/v1/bookings/customer/booking-history' using org.springframework.security.authorization.AuthorityReactiveAuthorizationManager@385c31fa
+2024-09-19 17:07:56 - Authorization successful
+2024-09-19 17:07:56 - Route matched: booking-service
+2024-09-19 17:07:56 - Mapping [Exchange: GET http://localhost:8080/api/v1/bookings/customer/booking-history?page=0] to Route{id='booking-service', uri=lb://booking-service, order=0, predicate=Paths: [/api/v1/bookings/**], match trailing slash: true, gatewayFilters=[[findo.gateway.filter.JwtAuthenticationFilter$$Lambda$1337/0x000000080112d670@4056ea1f, order = 1]], metadata={}}
+2024-09-19 17:07:56 - [1d78d418-5] Mapped to org.springframework.cloud.gateway.handler.FilteringWebHandler@28aac4af
+2024-09-19 17:07:56 - Sorted gatewayFilterFactories: [[GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RemoveCachedBodyFilter@5e2deb44}, order = -2147483648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.AdaptCachedBodyGlobalFilter@6ce89884}, order = -2147482648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyWriteResponseFilter@5e33140a}, order = -1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardPathFilter@1d208889}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.GatewayMetricsFilter@2376f96e}, order = 0], [findo.gateway.filter.JwtAuthenticationFilter$$Lambda$1337/0x000000080112d670@4056ea1f, order = 1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RouteToRequestUrlFilter@703ff414}, order = 10000], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter@4fc9eaf2}, order = 10150], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.LoadBalancerServiceInstanceCookieFilter@6039c0bd}, order = 10151], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.WebsocketRoutingFilter@2c6627a2}, order = 2147483646], [GatewayFilterAdapter{delegate=findo.gateway.filter.LoggingGlobalFilter@e951b47}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyRoutingFilter@78da7775}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardRoutingFilter@5bf544b9}, order = 2147483647]]
+2024-09-19 17:07:56 - Request: GET http://localhost:8080/api/v1/bookings/customer/booking-history?page=0 from IP: /[0:0:0:0:0:0:0:1]:50525
+2024-09-19 17:07:56 - Will instrument the HTTP request headers [Authorization:"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4ZmY4Yzc1My02NzM0LTQ4NDYtOTFkMi1mOTkyYjRjZWRkMmQiLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlzcyI6IkZQVCIsImV4cCI6MTcyNzM0NTIwNCwiaWF0IjoxNzI2NzQwNDA0LCJlbWFpbCI6IlRlc3RlcjEwQGdtYWlsLmNvbSJ9.tAz2zQeI4YFtI2q3-6Gmu6IhDnpk3PZmNuSALHt7iknFGEOSTJEPv2vSyxhkBZ9KbJCs96BgiqywwfPaDqzTXFv-oeqz4gFeiM6pDyl0vAb9inp30Y5GBroD_qJ7Rkh_hYPRh6ZXZDlPqvKW9XlqvItxfSeo10BVVWx8J3T8NVjfbgE6JMmbR0KL6gRwstVLupeen6r7NYwezFqJBFMbDWXZIxsKQinWyukoHIZsH8OoGjWfD1LQNpVHzQGwJiPkJiioN0P3pQiD-kO0xuywv9XH-mUd8PA9vOMVlQnfp86YaQRoczx6lq7dt41oXv5m5tjmKTJ_CC1XX1coH-l1rA", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"fff4b6cd-1cb3-4e9f-b7ab-8bb7cec81b22", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50525"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-19 17:07:56 - Client observation  {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='GET', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='booking-service', spring.cloud.gateway.route.uri='lb://booking-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/bookings/customer/booking-history?page=0'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=9.95E-5, duration(nanos)=99500.0, startTimeNanos=32501302808700}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@4aae816f'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@fac165e} created for the request. New headers are [Authorization:"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4ZmY4Yzc1My02NzM0LTQ4NDYtOTFkMi1mOTkyYjRjZWRkMmQiLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlzcyI6IkZQVCIsImV4cCI6MTcyNzM0NTIwNCwiaWF0IjoxNzI2NzQwNDA0LCJlbWFpbCI6IlRlc3RlcjEwQGdtYWlsLmNvbSJ9.tAz2zQeI4YFtI2q3-6Gmu6IhDnpk3PZmNuSALHt7iknFGEOSTJEPv2vSyxhkBZ9KbJCs96BgiqywwfPaDqzTXFv-oeqz4gFeiM6pDyl0vAb9inp30Y5GBroD_qJ7Rkh_hYPRh6ZXZDlPqvKW9XlqvItxfSeo10BVVWx8J3T8NVjfbgE6JMmbR0KL6gRwstVLupeen6r7NYwezFqJBFMbDWXZIxsKQinWyukoHIZsH8OoGjWfD1LQNpVHzQGwJiPkJiioN0P3pQiD-kO0xuywv9XH-mUd8PA9vOMVlQnfp86YaQRoczx6lq7dt41oXv5m5tjmKTJ_CC1XX1coH-l1rA", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"fff4b6cd-1cb3-4e9f-b7ab-8bb7cec81b22", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50525"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-19 17:07:56 - Will instrument the response
+2024-09-19 17:07:56 - The response was handled for observation {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='GET', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='booking-service', spring.cloud.gateway.route.uri='lb://booking-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/bookings/customer/booking-history?page=0'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=0.0207023, duration(nanos)=2.07023E7, startTimeNanos=32501302808700}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@4aae816f'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@fac165e}
+2024-09-19 17:07:56 - Response: 200 OK for GET http://localhost:8080/api/v1/bookings/customer/booking-history?page=0
+2024-09-19 17:07:56 - [1d78d418-5] Completed 200 OK
+2024-09-19 17:08:09 - [1d78d418-6] HTTP GET "/api/v1/bookings/customer/history/detail/bc44f029-5804-4f28-82b9-43e90e45ffc4"
+2024-09-19 17:08:09 - Created new WebSession.
+2024-09-19 17:08:09 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+2024-09-19 17:08:09 - Request 'GET /api/v1/bookings/customer/history/detail/bc44f029-5804-4f28-82b9-43e90e45ffc4' doesn't match 'POST /logout'
+2024-09-19 17:08:09 - No matches found
+2024-09-19 17:08:09 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/register', method=null}
+2024-09-19 17:08:09 - Request 'GET /api/v1/bookings/customer/history/detail/bc44f029-5804-4f28-82b9-43e90e45ffc4' doesn't match 'null /api/v1/auth/register'
+2024-09-19 17:08:09 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/login', method=null}
+2024-09-19 17:08:09 - Request 'GET /api/v1/bookings/customer/history/detail/bc44f029-5804-4f28-82b9-43e90e45ffc4' doesn't match 'null /api/v1/auth/login'
+2024-09-19 17:08:09 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/grouped', method=null}
+2024-09-19 17:08:09 - Request 'GET /api/v1/bookings/customer/history/detail/bc44f029-5804-4f28-82b9-43e90e45ffc4' doesn't match 'null /api/v1/schedules/grouped'
+2024-09-19 17:08:09 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/detail/**', method=null}
+2024-09-19 17:08:09 - Request 'GET /api/v1/bookings/customer/history/detail/bc44f029-5804-4f28-82b9-43e90e45ffc4' doesn't match 'null /api/v1/schedules/detail/**'
+2024-09-19 17:08:09 - No matches found
+2024-09-19 17:08:09 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/movies/**', method=null}
+2024-09-19 17:08:09 - Request 'GET /api/v1/bookings/customer/history/detail/bc44f029-5804-4f28-82b9-43e90e45ffc4' doesn't match 'null /api/v1/movies/**'
+2024-09-19 17:08:09 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/admin/**', method=null}
+2024-09-19 17:08:09 - Request 'GET /api/v1/bookings/customer/history/detail/bc44f029-5804-4f28-82b9-43e90e45ffc4' doesn't match 'null /api/v1/bookings/admin/**'
+2024-09-19 17:08:09 - No matches found
+2024-09-19 17:08:09 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/customer/**', method=null}
+2024-09-19 17:08:09 - Checking match of request : '/api/v1/bookings/customer/history/detail/bc44f029-5804-4f28-82b9-43e90e45ffc4'; against '/api/v1/bookings/customer/**'
+2024-09-19 17:08:09 - matched
+2024-09-19 17:08:09 - Checking authorization on '/api/v1/bookings/customer/history/detail/bc44f029-5804-4f28-82b9-43e90e45ffc4' using org.springframework.security.authorization.AuthorityReactiveAuthorizationManager@385c31fa
+2024-09-19 17:08:09 - Authorization successful
+2024-09-19 17:08:09 - Route matched: booking-service
+2024-09-19 17:08:09 - Mapping [Exchange: GET http://localhost:8080/api/v1/bookings/customer/history/detail/bc44f029-5804-4f28-82b9-43e90e45ffc4] to Route{id='booking-service', uri=lb://booking-service, order=0, predicate=Paths: [/api/v1/bookings/**], match trailing slash: true, gatewayFilters=[[findo.gateway.filter.JwtAuthenticationFilter$$Lambda$1337/0x000000080112d670@4056ea1f, order = 1]], metadata={}}
+2024-09-19 17:08:09 - [1d78d418-6] Mapped to org.springframework.cloud.gateway.handler.FilteringWebHandler@28aac4af
+2024-09-19 17:08:09 - Sorted gatewayFilterFactories: [[GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RemoveCachedBodyFilter@5e2deb44}, order = -2147483648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.AdaptCachedBodyGlobalFilter@6ce89884}, order = -2147482648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyWriteResponseFilter@5e33140a}, order = -1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardPathFilter@1d208889}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.GatewayMetricsFilter@2376f96e}, order = 0], [findo.gateway.filter.JwtAuthenticationFilter$$Lambda$1337/0x000000080112d670@4056ea1f, order = 1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RouteToRequestUrlFilter@703ff414}, order = 10000], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter@4fc9eaf2}, order = 10150], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.LoadBalancerServiceInstanceCookieFilter@6039c0bd}, order = 10151], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.WebsocketRoutingFilter@2c6627a2}, order = 2147483646], [GatewayFilterAdapter{delegate=findo.gateway.filter.LoggingGlobalFilter@e951b47}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyRoutingFilter@78da7775}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardRoutingFilter@5bf544b9}, order = 2147483647]]
+2024-09-19 17:08:09 - Request: GET http://localhost:8080/api/v1/bookings/customer/history/detail/bc44f029-5804-4f28-82b9-43e90e45ffc4 from IP: /[0:0:0:0:0:0:0:1]:50525
+2024-09-19 17:08:09 - Will instrument the HTTP request headers [Authorization:"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4ZmY4Yzc1My02NzM0LTQ4NDYtOTFkMi1mOTkyYjRjZWRkMmQiLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlzcyI6IkZQVCIsImV4cCI6MTcyNzMyMTkwNSwiaWF0IjoxNzI2NzE3MTA1LCJlbWFpbCI6IlRlc3RlcjEwQGdtYWlsLmNvbSJ9.fztAw8N4ml430IduJM9s2FvKCztZNiJLdjcs5k9_7eUBOY6zGofam8sICuI7Tk3owQiNVz0KNt-BWBU-e0f80OG5BmM1Vds8k870rh5BRrA4oEl3EAQKnXgOxggajpawWdPbDMKQgm-AzgZcn_PQ4PkXe1slSxSTQmh9BLY1VZ9tZ-3BkZfX6KsPc6Ehcdsnfv59Qf8PeYT-V4XglukJ0DT-dZhHcvK_7ce2PavF00jb6hEtw8YgeVoq2AVG1wMSMH8x9hyqzl5M73McdxAV1J2Hsbyn6lz_-Rw4p2h6NdAq_idLKV6TJsq5dE6vJScbJWiWRsBulVHGxg49j1yNmA", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"8ca6cf2a-d128-41c9-9775-4ecc99dd3f8f", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50525"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-19 17:08:09 - Client observation  {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='GET', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='booking-service', spring.cloud.gateway.route.uri='lb://booking-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/bookings/customer/history/detail/bc44f029-5804-4f28-82b9-43e90e45ffc4'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=9.74E-5, duration(nanos)=97400.0, startTimeNanos=32514743090500}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@6e869523'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@60417683} created for the request. New headers are [Authorization:"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4ZmY4Yzc1My02NzM0LTQ4NDYtOTFkMi1mOTkyYjRjZWRkMmQiLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlzcyI6IkZQVCIsImV4cCI6MTcyNzMyMTkwNSwiaWF0IjoxNzI2NzE3MTA1LCJlbWFpbCI6IlRlc3RlcjEwQGdtYWlsLmNvbSJ9.fztAw8N4ml430IduJM9s2FvKCztZNiJLdjcs5k9_7eUBOY6zGofam8sICuI7Tk3owQiNVz0KNt-BWBU-e0f80OG5BmM1Vds8k870rh5BRrA4oEl3EAQKnXgOxggajpawWdPbDMKQgm-AzgZcn_PQ4PkXe1slSxSTQmh9BLY1VZ9tZ-3BkZfX6KsPc6Ehcdsnfv59Qf8PeYT-V4XglukJ0DT-dZhHcvK_7ce2PavF00jb6hEtw8YgeVoq2AVG1wMSMH8x9hyqzl5M73McdxAV1J2Hsbyn6lz_-Rw4p2h6NdAq_idLKV6TJsq5dE6vJScbJWiWRsBulVHGxg49j1yNmA", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"8ca6cf2a-d128-41c9-9775-4ecc99dd3f8f", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50525"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-19 17:08:09 - Will instrument the response
+2024-09-19 17:08:09 - The response was handled for observation {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='GET', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='booking-service', spring.cloud.gateway.route.uri='lb://booking-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/bookings/customer/history/detail/bc44f029-5804-4f28-82b9-43e90e45ffc4'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=0.0443219, duration(nanos)=4.43219E7, startTimeNanos=32514743090500}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@6e869523'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@60417683}
+2024-09-19 17:08:09 - Response: 200 OK for GET http://localhost:8080/api/v1/bookings/customer/history/detail/bc44f029-5804-4f28-82b9-43e90e45ffc4
+2024-09-19 17:08:09 - [1d78d418-6] Completed 200 OK
+2024-09-19 17:08:16 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service?status=UP&lastDirtyTimestamp=1726740226575
+2024-09-19 17:08:16 - Accept=[application/json, application/*+json]
+2024-09-19 17:08:16 - Response 200 OK
+2024-09-19 17:08:16 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-19 17:08:16 - Accept=[application/json, application/*+json]
+2024-09-19 17:08:16 - Response 200 OK
+2024-09-19 17:08:16 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-19 17:08:16 - RouteDefinition ReactiveCompositeDiscoveryClient_BOOKING-SERVICE applying {pattern=/booking-service/**} to Path
+2024-09-19 17:08:16 - RouteDefinition ReactiveCompositeDiscoveryClient_BOOKING-SERVICE applying filter {regexp=/booking-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:08:16 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_BOOKING-SERVICE
+2024-09-19 17:08:16 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-19 17:08:16 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:08:16 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-19 17:08:16 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-19 17:08:16 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:08:16 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-19 17:08:16 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-19 17:08:16 - RouteDefinition matched: auth-service
+2024-09-19 17:08:16 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-19 17:08:16 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:08:16 - RouteDefinition matched: user-service
+2024-09-19 17:08:16 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-19 17:08:16 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:08:16 - RouteDefinition matched: booking-service
+2024-09-19 17:08:16 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-19 17:08:16 - RouteDefinition matched: schedule-service
+2024-09-19 17:08:16 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-19 17:08:16 - RouteDefinition matched: movie-service
+2024-09-19 17:08:16 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-19 17:08:16 - RouteDefinition matched: studio-service
+2024-09-19 17:08:16 - New routes count: 9
+2024-09-19 17:08:20 - [1d78d418-7] HTTP POST "/api/v1/bookings/customer/book"
+2024-09-19 17:08:20 - Created new WebSession.
+2024-09-19 17:08:20 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+2024-09-19 17:08:20 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'POST /logout'
+2024-09-19 17:08:20 - No matches found
+2024-09-19 17:08:20 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/register', method=null}
+2024-09-19 17:08:20 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'null /api/v1/auth/register'
+2024-09-19 17:08:20 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/login', method=null}
+2024-09-19 17:08:20 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'null /api/v1/auth/login'
+2024-09-19 17:08:20 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/grouped', method=null}
+2024-09-19 17:08:20 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'null /api/v1/schedules/grouped'
+2024-09-19 17:08:20 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/detail/**', method=null}
+2024-09-19 17:08:20 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'null /api/v1/schedules/detail/**'
+2024-09-19 17:08:20 - No matches found
+2024-09-19 17:08:20 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/movies/**', method=null}
+2024-09-19 17:08:20 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'null /api/v1/movies/**'
+2024-09-19 17:08:20 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/admin/**', method=null}
+2024-09-19 17:08:20 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'null /api/v1/bookings/admin/**'
+2024-09-19 17:08:20 - No matches found
+2024-09-19 17:08:20 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/customer/**', method=null}
+2024-09-19 17:08:20 - Checking match of request : '/api/v1/bookings/customer/book'; against '/api/v1/bookings/customer/**'
+2024-09-19 17:08:20 - matched
+2024-09-19 17:08:20 - Checking authorization on '/api/v1/bookings/customer/book' using org.springframework.security.authorization.AuthorityReactiveAuthorizationManager@385c31fa
+2024-09-19 17:08:20 - Authorization successful
+2024-09-19 17:08:20 - Route matched: booking-service
+2024-09-19 17:08:20 - Mapping [Exchange: POST http://localhost:8080/api/v1/bookings/customer/book] to Route{id='booking-service', uri=lb://booking-service, order=0, predicate=Paths: [/api/v1/bookings/**], match trailing slash: true, gatewayFilters=[[findo.gateway.filter.JwtAuthenticationFilter$$Lambda$1337/0x000000080112d670@7cde50f2, order = 1]], metadata={}}
+2024-09-19 17:08:20 - [1d78d418-7] Mapped to org.springframework.cloud.gateway.handler.FilteringWebHandler@28aac4af
+2024-09-19 17:08:20 - Sorted gatewayFilterFactories: [[GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RemoveCachedBodyFilter@5e2deb44}, order = -2147483648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.AdaptCachedBodyGlobalFilter@6ce89884}, order = -2147482648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyWriteResponseFilter@5e33140a}, order = -1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardPathFilter@1d208889}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.GatewayMetricsFilter@2376f96e}, order = 0], [findo.gateway.filter.JwtAuthenticationFilter$$Lambda$1337/0x000000080112d670@7cde50f2, order = 1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RouteToRequestUrlFilter@703ff414}, order = 10000], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter@4fc9eaf2}, order = 10150], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.LoadBalancerServiceInstanceCookieFilter@6039c0bd}, order = 10151], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.WebsocketRoutingFilter@2c6627a2}, order = 2147483646], [GatewayFilterAdapter{delegate=findo.gateway.filter.LoggingGlobalFilter@e951b47}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyRoutingFilter@78da7775}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardRoutingFilter@5bf544b9}, order = 2147483647]]
+2024-09-19 17:08:20 - Request: POST http://localhost:8080/api/v1/bookings/customer/book from IP: /[0:0:0:0:0:0:0:1]:50525
+2024-09-19 17:08:20 - Will instrument the HTTP request headers [Content-Type:"application/json", Authorization:"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4ZmY4Yzc1My02NzM0LTQ4NDYtOTFkMi1mOTkyYjRjZWRkMmQiLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlzcyI6IkZQVCIsImV4cCI6MTcyNzM0NTIwNCwiaWF0IjoxNzI2NzQwNDA0LCJlbWFpbCI6IlRlc3RlcjEwQGdtYWlsLmNvbSJ9.tAz2zQeI4YFtI2q3-6Gmu6IhDnpk3PZmNuSALHt7iknFGEOSTJEPv2vSyxhkBZ9KbJCs96BgiqywwfPaDqzTXFv-oeqz4gFeiM6pDyl0vAb9inp30Y5GBroD_qJ7Rkh_hYPRh6ZXZDlPqvKW9XlqvItxfSeo10BVVWx8J3T8NVjfbgE6JMmbR0KL6gRwstVLupeen6r7NYwezFqJBFMbDWXZIxsKQinWyukoHIZsH8OoGjWfD1LQNpVHzQGwJiPkJiioN0P3pQiD-kO0xuywv9XH-mUd8PA9vOMVlQnfp86YaQRoczx6lq7dt41oXv5m5tjmKTJ_CC1XX1coH-l1rA", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"1c0e920a-bb07-4dd1-8ee3-8d53af8f178f", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Content-Length:"120", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50525"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-19 17:08:20 - Client observation  {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='POST', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='booking-service', spring.cloud.gateway.route.uri='lb://booking-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/bookings/customer/book'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=1.073E-4, duration(nanos)=107300.0, startTimeNanos=32524923683200}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@7219a119'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@76263b82} created for the request. New headers are [Content-Type:"application/json", Authorization:"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4ZmY4Yzc1My02NzM0LTQ4NDYtOTFkMi1mOTkyYjRjZWRkMmQiLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlzcyI6IkZQVCIsImV4cCI6MTcyNzM0NTIwNCwiaWF0IjoxNzI2NzQwNDA0LCJlbWFpbCI6IlRlc3RlcjEwQGdtYWlsLmNvbSJ9.tAz2zQeI4YFtI2q3-6Gmu6IhDnpk3PZmNuSALHt7iknFGEOSTJEPv2vSyxhkBZ9KbJCs96BgiqywwfPaDqzTXFv-oeqz4gFeiM6pDyl0vAb9inp30Y5GBroD_qJ7Rkh_hYPRh6ZXZDlPqvKW9XlqvItxfSeo10BVVWx8J3T8NVjfbgE6JMmbR0KL6gRwstVLupeen6r7NYwezFqJBFMbDWXZIxsKQinWyukoHIZsH8OoGjWfD1LQNpVHzQGwJiPkJiioN0P3pQiD-kO0xuywv9XH-mUd8PA9vOMVlQnfp86YaQRoczx6lq7dt41oXv5m5tjmKTJ_CC1XX1coH-l1rA", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"1c0e920a-bb07-4dd1-8ee3-8d53af8f178f", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Content-Length:"120", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50525"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-19 17:08:20 - Will instrument the response
+2024-09-19 17:08:20 - The response was handled for observation {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='POST', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='booking-service', spring.cloud.gateway.route.uri='lb://booking-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/bookings/customer/book'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=0.0472291, duration(nanos)=4.72291E7, startTimeNanos=32524923683200}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@7219a119'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@76263b82}
+2024-09-19 17:08:20 - Response: 500 INTERNAL_SERVER_ERROR for POST http://localhost:8080/api/v1/bookings/customer/book
+2024-09-19 17:08:20 - [1d78d418-7] Completed 500 INTERNAL_SERVER_ERROR
+2024-09-19 17:08:30 - [1d78d418-8] HTTP POST "/api/v1/bookings/customer/book"
+2024-09-19 17:08:30 - Created new WebSession.
+2024-09-19 17:08:30 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+2024-09-19 17:08:30 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'POST /logout'
+2024-09-19 17:08:30 - No matches found
+2024-09-19 17:08:30 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/register', method=null}
+2024-09-19 17:08:30 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'null /api/v1/auth/register'
+2024-09-19 17:08:30 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/login', method=null}
+2024-09-19 17:08:30 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'null /api/v1/auth/login'
+2024-09-19 17:08:30 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/grouped', method=null}
+2024-09-19 17:08:30 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'null /api/v1/schedules/grouped'
+2024-09-19 17:08:30 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/detail/**', method=null}
+2024-09-19 17:08:30 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'null /api/v1/schedules/detail/**'
+2024-09-19 17:08:30 - No matches found
+2024-09-19 17:08:30 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/movies/**', method=null}
+2024-09-19 17:08:30 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'null /api/v1/movies/**'
+2024-09-19 17:08:30 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/admin/**', method=null}
+2024-09-19 17:08:30 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'null /api/v1/bookings/admin/**'
+2024-09-19 17:08:30 - No matches found
+2024-09-19 17:08:30 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/customer/**', method=null}
+2024-09-19 17:08:30 - Checking match of request : '/api/v1/bookings/customer/book'; against '/api/v1/bookings/customer/**'
+2024-09-19 17:08:30 - matched
+2024-09-19 17:08:30 - Checking authorization on '/api/v1/bookings/customer/book' using org.springframework.security.authorization.AuthorityReactiveAuthorizationManager@385c31fa
+2024-09-19 17:08:30 - Authorization successful
+2024-09-19 17:08:30 - Route matched: booking-service
+2024-09-19 17:08:30 - Mapping [Exchange: POST http://localhost:8080/api/v1/bookings/customer/book] to Route{id='booking-service', uri=lb://booking-service, order=0, predicate=Paths: [/api/v1/bookings/**], match trailing slash: true, gatewayFilters=[[findo.gateway.filter.JwtAuthenticationFilter$$Lambda$1337/0x000000080112d670@7cde50f2, order = 1]], metadata={}}
+2024-09-19 17:08:30 - [1d78d418-8] Mapped to org.springframework.cloud.gateway.handler.FilteringWebHandler@28aac4af
+2024-09-19 17:08:30 - Sorted gatewayFilterFactories: [[GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RemoveCachedBodyFilter@5e2deb44}, order = -2147483648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.AdaptCachedBodyGlobalFilter@6ce89884}, order = -2147482648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyWriteResponseFilter@5e33140a}, order = -1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardPathFilter@1d208889}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.GatewayMetricsFilter@2376f96e}, order = 0], [findo.gateway.filter.JwtAuthenticationFilter$$Lambda$1337/0x000000080112d670@7cde50f2, order = 1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RouteToRequestUrlFilter@703ff414}, order = 10000], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter@4fc9eaf2}, order = 10150], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.LoadBalancerServiceInstanceCookieFilter@6039c0bd}, order = 10151], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.WebsocketRoutingFilter@2c6627a2}, order = 2147483646], [GatewayFilterAdapter{delegate=findo.gateway.filter.LoggingGlobalFilter@e951b47}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyRoutingFilter@78da7775}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardRoutingFilter@5bf544b9}, order = 2147483647]]
+2024-09-19 17:08:30 - Request: POST http://localhost:8080/api/v1/bookings/customer/book from IP: /[0:0:0:0:0:0:0:1]:50525
+2024-09-19 17:08:30 - Will instrument the HTTP request headers [Content-Type:"application/json", Authorization:"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4ZmY4Yzc1My02NzM0LTQ4NDYtOTFkMi1mOTkyYjRjZWRkMmQiLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlzcyI6IkZQVCIsImV4cCI6MTcyNzM0NTIwNCwiaWF0IjoxNzI2NzQwNDA0LCJlbWFpbCI6IlRlc3RlcjEwQGdtYWlsLmNvbSJ9.tAz2zQeI4YFtI2q3-6Gmu6IhDnpk3PZmNuSALHt7iknFGEOSTJEPv2vSyxhkBZ9KbJCs96BgiqywwfPaDqzTXFv-oeqz4gFeiM6pDyl0vAb9inp30Y5GBroD_qJ7Rkh_hYPRh6ZXZDlPqvKW9XlqvItxfSeo10BVVWx8J3T8NVjfbgE6JMmbR0KL6gRwstVLupeen6r7NYwezFqJBFMbDWXZIxsKQinWyukoHIZsH8OoGjWfD1LQNpVHzQGwJiPkJiioN0P3pQiD-kO0xuywv9XH-mUd8PA9vOMVlQnfp86YaQRoczx6lq7dt41oXv5m5tjmKTJ_CC1XX1coH-l1rA", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"780e9aae-8d8d-489a-bbc2-895679cf4b76", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Content-Length:"123", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50525"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-19 17:08:30 - Client observation  {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='POST', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='booking-service', spring.cloud.gateway.route.uri='lb://booking-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/bookings/customer/book'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=1.413E-4, duration(nanos)=141300.0, startTimeNanos=32535753122400}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@1503e917'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@1bc405c7} created for the request. New headers are [Content-Type:"application/json", Authorization:"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4ZmY4Yzc1My02NzM0LTQ4NDYtOTFkMi1mOTkyYjRjZWRkMmQiLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlzcyI6IkZQVCIsImV4cCI6MTcyNzM0NTIwNCwiaWF0IjoxNzI2NzQwNDA0LCJlbWFpbCI6IlRlc3RlcjEwQGdtYWlsLmNvbSJ9.tAz2zQeI4YFtI2q3-6Gmu6IhDnpk3PZmNuSALHt7iknFGEOSTJEPv2vSyxhkBZ9KbJCs96BgiqywwfPaDqzTXFv-oeqz4gFeiM6pDyl0vAb9inp30Y5GBroD_qJ7Rkh_hYPRh6ZXZDlPqvKW9XlqvItxfSeo10BVVWx8J3T8NVjfbgE6JMmbR0KL6gRwstVLupeen6r7NYwezFqJBFMbDWXZIxsKQinWyukoHIZsH8OoGjWfD1LQNpVHzQGwJiPkJiioN0P3pQiD-kO0xuywv9XH-mUd8PA9vOMVlQnfp86YaQRoczx6lq7dt41oXv5m5tjmKTJ_CC1XX1coH-l1rA", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"780e9aae-8d8d-489a-bbc2-895679cf4b76", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Content-Length:"123", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50525"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-19 17:08:30 - Will instrument the response
+2024-09-19 17:08:30 - The response was handled for observation {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='POST', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='booking-service', spring.cloud.gateway.route.uri='lb://booking-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/bookings/customer/book'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=0.0459624, duration(nanos)=4.59624E7, startTimeNanos=32535753122400}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@1503e917'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@1bc405c7}
+2024-09-19 17:08:30 - Response: 500 INTERNAL_SERVER_ERROR for POST http://localhost:8080/api/v1/bookings/customer/book
+2024-09-19 17:08:30 - [1d78d418-8] Completed 500 INTERNAL_SERVER_ERROR
+2024-09-19 17:08:46 - Resolving eureka endpoints via configuration
+2024-09-19 17:08:46 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service?status=UP&lastDirtyTimestamp=1726740226575
+2024-09-19 17:08:46 - Accept=[application/json, application/*+json]
+2024-09-19 17:08:46 - Response 200 OK
+2024-09-19 17:08:46 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-19 17:08:46 - Accept=[application/json, application/*+json]
+2024-09-19 17:08:46 - Response 200 OK
+2024-09-19 17:08:46 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-19 17:08:46 - RouteDefinition ReactiveCompositeDiscoveryClient_BOOKING-SERVICE applying {pattern=/booking-service/**} to Path
+2024-09-19 17:08:46 - RouteDefinition ReactiveCompositeDiscoveryClient_BOOKING-SERVICE applying filter {regexp=/booking-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:08:46 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_BOOKING-SERVICE
+2024-09-19 17:08:46 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-19 17:08:46 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:08:46 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-19 17:08:46 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-19 17:08:46 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-19 17:08:46 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-19 17:08:46 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-19 17:08:46 - RouteDefinition matched: auth-service
+2024-09-19 17:08:46 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-19 17:08:46 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:08:46 - RouteDefinition matched: user-service
+2024-09-19 17:08:46 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-19 17:08:46 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-19 17:08:46 - RouteDefinition matched: booking-service
+2024-09-19 17:08:46 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-19 17:08:46 - RouteDefinition matched: schedule-service
+2024-09-19 17:08:46 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-19 17:08:46 - RouteDefinition matched: movie-service
+2024-09-19 17:08:46 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-19 17:08:46 - RouteDefinition matched: studio-service
+2024-09-19 17:08:46 - New routes count: 9
+2024-09-19 17:08:50 - [1d78d418-9] HTTP POST "/api/v1/bookings/customer/book"
+2024-09-19 17:08:50 - Created new WebSession.
+2024-09-19 17:08:50 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+2024-09-19 17:08:50 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'POST /logout'
+2024-09-19 17:08:50 - No matches found
+2024-09-19 17:08:50 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/register', method=null}
+2024-09-19 17:08:50 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'null /api/v1/auth/register'
+2024-09-19 17:08:50 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/login', method=null}
+2024-09-19 17:08:50 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'null /api/v1/auth/login'
+2024-09-19 17:08:50 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/grouped', method=null}
+2024-09-19 17:08:50 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'null /api/v1/schedules/grouped'
+2024-09-19 17:08:50 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/detail/**', method=null}
+2024-09-19 17:08:50 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'null /api/v1/schedules/detail/**'
+2024-09-19 17:08:50 - No matches found
+2024-09-19 17:08:50 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/movies/**', method=null}
+2024-09-19 17:08:50 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'null /api/v1/movies/**'
+2024-09-19 17:08:50 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/admin/**', method=null}
+2024-09-19 17:08:50 - Request 'POST /api/v1/bookings/customer/book' doesn't match 'null /api/v1/bookings/admin/**'
+2024-09-19 17:08:50 - No matches found
+2024-09-19 17:08:50 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/customer/**', method=null}
+2024-09-19 17:08:50 - Checking match of request : '/api/v1/bookings/customer/book'; against '/api/v1/bookings/customer/**'
+2024-09-19 17:08:50 - matched
+2024-09-19 17:08:50 - Checking authorization on '/api/v1/bookings/customer/book' using org.springframework.security.authorization.AuthorityReactiveAuthorizationManager@385c31fa
+2024-09-19 17:08:50 - Authorization successful
+2024-09-19 17:08:50 - Route matched: booking-service
+2024-09-19 17:08:50 - Mapping [Exchange: POST http://localhost:8080/api/v1/bookings/customer/book] to Route{id='booking-service', uri=lb://booking-service, order=0, predicate=Paths: [/api/v1/bookings/**], match trailing slash: true, gatewayFilters=[[findo.gateway.filter.JwtAuthenticationFilter$$Lambda$1337/0x000000080112d670@318adc73, order = 1]], metadata={}}
+2024-09-19 17:08:50 - [1d78d418-9] Mapped to org.springframework.cloud.gateway.handler.FilteringWebHandler@28aac4af
+2024-09-19 17:08:50 - Sorted gatewayFilterFactories: [[GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RemoveCachedBodyFilter@5e2deb44}, order = -2147483648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.AdaptCachedBodyGlobalFilter@6ce89884}, order = -2147482648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyWriteResponseFilter@5e33140a}, order = -1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardPathFilter@1d208889}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.GatewayMetricsFilter@2376f96e}, order = 0], [findo.gateway.filter.JwtAuthenticationFilter$$Lambda$1337/0x000000080112d670@318adc73, order = 1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RouteToRequestUrlFilter@703ff414}, order = 10000], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter@4fc9eaf2}, order = 10150], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.LoadBalancerServiceInstanceCookieFilter@6039c0bd}, order = 10151], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.WebsocketRoutingFilter@2c6627a2}, order = 2147483646], [GatewayFilterAdapter{delegate=findo.gateway.filter.LoggingGlobalFilter@e951b47}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyRoutingFilter@78da7775}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardRoutingFilter@5bf544b9}, order = 2147483647]]
+2024-09-19 17:08:50 - Request: POST http://localhost:8080/api/v1/bookings/customer/book from IP: /[0:0:0:0:0:0:0:1]:50525
+2024-09-19 17:08:50 - Will instrument the HTTP request headers [Content-Type:"application/json", Authorization:"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4ZmY4Yzc1My02NzM0LTQ4NDYtOTFkMi1mOTkyYjRjZWRkMmQiLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlzcyI6IkZQVCIsImV4cCI6MTcyNzM0NTIwNCwiaWF0IjoxNzI2NzQwNDA0LCJlbWFpbCI6IlRlc3RlcjEwQGdtYWlsLmNvbSJ9.tAz2zQeI4YFtI2q3-6Gmu6IhDnpk3PZmNuSALHt7iknFGEOSTJEPv2vSyxhkBZ9KbJCs96BgiqywwfPaDqzTXFv-oeqz4gFeiM6pDyl0vAb9inp30Y5GBroD_qJ7Rkh_hYPRh6ZXZDlPqvKW9XlqvItxfSeo10BVVWx8J3T8NVjfbgE6JMmbR0KL6gRwstVLupeen6r7NYwezFqJBFMbDWXZIxsKQinWyukoHIZsH8OoGjWfD1LQNpVHzQGwJiPkJiioN0P3pQiD-kO0xuywv9XH-mUd8PA9vOMVlQnfp86YaQRoczx6lq7dt41oXv5m5tjmKTJ_CC1XX1coH-l1rA", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"113a1a78-68a4-4b79-93f9-a8c8e95386ef", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Content-Length:"123", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50525"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-19 17:08:50 - Client observation  {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='POST', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='booking-service', spring.cloud.gateway.route.uri='lb://booking-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/bookings/customer/book'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=6.16E-5, duration(nanos)=61600.0, startTimeNanos=32555594414600}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@4a2bfb59'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@4dca3004} created for the request. New headers are [Content-Type:"application/json", Authorization:"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4ZmY4Yzc1My02NzM0LTQ4NDYtOTFkMi1mOTkyYjRjZWRkMmQiLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlzcyI6IkZQVCIsImV4cCI6MTcyNzM0NTIwNCwiaWF0IjoxNzI2NzQwNDA0LCJlbWFpbCI6IlRlc3RlcjEwQGdtYWlsLmNvbSJ9.tAz2zQeI4YFtI2q3-6Gmu6IhDnpk3PZmNuSALHt7iknFGEOSTJEPv2vSyxhkBZ9KbJCs96BgiqywwfPaDqzTXFv-oeqz4gFeiM6pDyl0vAb9inp30Y5GBroD_qJ7Rkh_hYPRh6ZXZDlPqvKW9XlqvItxfSeo10BVVWx8J3T8NVjfbgE6JMmbR0KL6gRwstVLupeen6r7NYwezFqJBFMbDWXZIxsKQinWyukoHIZsH8OoGjWfD1LQNpVHzQGwJiPkJiioN0P3pQiD-kO0xuywv9XH-mUd8PA9vOMVlQnfp86YaQRoczx6lq7dt41oXv5m5tjmKTJ_CC1XX1coH-l1rA", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"113a1a78-68a4-4b79-93f9-a8c8e95386ef", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Content-Length:"123", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50525"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-19 17:08:50 - Will instrument the response
+2024-09-19 17:08:50 - The response was handled for observation {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='POST', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='booking-service', spring.cloud.gateway.route.uri='lb://booking-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/bookings/customer/book'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=0.0340252, duration(nanos)=3.40252E7, startTimeNanos=32555594414600}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@4a2bfb59'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@4dca3004}
+2024-09-19 17:08:50 - Response: 500 INTERNAL_SERVER_ERROR for POST http://localhost:8080/api/v1/bookings/customer/book
+2024-09-19 17:08:50 - [1d78d418-9] Completed 500 INTERNAL_SERVER_ERROR
