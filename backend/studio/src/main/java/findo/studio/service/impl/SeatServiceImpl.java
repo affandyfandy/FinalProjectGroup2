@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import findo.studio.data.entity.Seat;
 import findo.studio.data.entity.Studio;
 import findo.studio.data.repository.SeatRepository;
+import findo.studio.exception.NotFoundException;
 import findo.studio.service.SeatService;
 import lombok.AllArgsConstructor;
 
@@ -48,11 +49,18 @@ public class SeatServiceImpl implements SeatService {
 
     @Override
     public Seat findSeatById(Integer id) {
-        return seatRepository.findById(id).orElse(null);
+        return seatRepository.findById(id)
+            .orElseThrow(() -> new NotFoundException("Seat not found!"));
     }
 
     @Override
     public List<Seat> findAllSeatByStudioId(Integer studioId) {
-        return seatRepository.findByStudioId(studioId);
+        List<Seat> seatStudio = seatRepository.findByStudioId(studioId);
+
+        if(seatStudio.isEmpty()) {
+            throw new NotFoundException("Studio seat not found!");
+        }
+        
+        return seatStudio;
     }
 }

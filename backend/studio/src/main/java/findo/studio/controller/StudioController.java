@@ -62,20 +62,12 @@ public class StudioController {
     public ResponseEntity<Studio> getStudioById(@PathVariable("id") Integer id) {
         Studio studio = studioService.findStudioById(id);
 
-        if(studio == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-
         return ResponseEntity.status(HttpStatus.OK).body(studio);
     }
 
     @GetMapping(value = "/{id}/seats")
     public ResponseEntity<List<Seat>> getSeatsByStudioId(@PathVariable("id") Integer studioId) {
         List<Seat> seats = seatService.findAllSeatByStudioId(studioId);
-
-        if(seats.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
 
         return ResponseEntity.status(HttpStatus.OK).body(seats);
     }
@@ -84,10 +76,6 @@ public class StudioController {
     public ResponseEntity<Seat> getSeatById(@PathVariable("id") Integer id) {
         Seat seat = seatService.findSeatById(id);
 
-        if(seat == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-
         return ResponseEntity.status(HttpStatus.OK).body(seat);
     }
 
@@ -95,20 +83,12 @@ public class StudioController {
     public ResponseEntity<Studio> createStudio(@Valid @RequestBody StudioSaveDTO studioSaveDTO) {
         Studio studio = studioService.createStudio(studioSaveDTO);
 
-        if(studio == null) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        }
-
         return ResponseEntity.status(HttpStatus.CREATED).body(studio);
     }
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Studio> updateStudio(@PathVariable("id") Integer id, @Valid @RequestBody StudioSaveDTO studioSaveDTO) {
         Studio studio = studioService.updateStudio(id, studioSaveDTO);
-        
-        if(studio == null) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        }
 
         return ResponseEntity.status(HttpStatus.CREATED).body(studio);
     }
@@ -116,10 +96,6 @@ public class StudioController {
     @PatchMapping(value = "/{id}/change-status")
     public ResponseEntity<Studio> updateStatusStudio(@PathVariable("id") Integer id) {
         Studio studio = studioService.deleteStudio(id);
-        
-        if(studio == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
 
         return ResponseEntity.status(HttpStatus.CREATED).body(studio);
     }

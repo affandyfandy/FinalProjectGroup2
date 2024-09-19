@@ -13,6 +13,8 @@ import lombok.AllArgsConstructor;
 import findo.studio.data.entity.Studio;
 import findo.studio.data.repository.StudioRepository;
 import findo.studio.dto.StudioSaveDTO;
+import findo.studio.exception.DuplicateStudioException;
+import findo.studio.exception.NotFoundException;
 import findo.studio.mapper.StudioMapper;
 import findo.studio.service.SeatService;
 
@@ -36,13 +38,14 @@ public class StudioServiceImpl implements StudioService {
 
     @Override
     public Studio findStudioById(Integer id) {
-        return studioRepository.findById(id).orElse(null);
+        return studioRepository.findById(id)
+            .orElseThrow(() -> new NotFoundException("Studio not found!"));
     }
 
     @Override
     public Studio createStudio(StudioSaveDTO studioSaveDTO) {
         if(studioRepository.existsByName(studioSaveDTO.getName())) {
-            return null;
+            throw new DuplicateStudioException("Studio with this name already exists!");
         }
         
         Studio savedStudio = studioMapper.toStudio(studioSaveDTO);
@@ -64,10 +67,8 @@ public class StudioServiceImpl implements StudioService {
     public Studio updateStudio(Integer id, StudioSaveDTO studioSaveDTO) {
         Studio checkStudio = findStudioById(id);
 
-        if(checkStudio == null) {
-            return null;
-        } else if(!checkStudio.getName().equals(studioSaveDTO.getName()) && studioRepository.existsByName(studioSaveDTO.getName())) {
-            return null;
+        if(!checkStudio.getName().equals(studioSaveDTO.getName()) && studioRepository.existsByName(studioSaveDTO.getName())) {
+            throw new DuplicateStudioException("Studio with this name already exists!");
         }
 
         checkStudio.setName(studioSaveDTO.getName());
@@ -82,10 +83,6 @@ public class StudioServiceImpl implements StudioService {
     @Override
     public Studio deleteStudio(Integer id) {
         Studio checkStudio = findStudioById(id);
-
-        if(checkStudio == null) {
-            return null;
-        }
 
         checkStudio.setDeleted(!checkStudio.isDeleted());
         
