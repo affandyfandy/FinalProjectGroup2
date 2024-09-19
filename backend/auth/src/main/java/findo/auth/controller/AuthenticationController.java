@@ -11,6 +11,7 @@ import findo.auth.data.entity.User;
 import findo.auth.dto.LoginDTO;
 import findo.auth.dto.LoginResponseDTO;
 import findo.auth.dto.RegisterDTO;
+import findo.auth.dto.RegisterResponseDTO;
 import findo.auth.service.AuthenticationService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -24,9 +25,11 @@ public class AuthenticationController {
     final private AuthenticationService authenticationService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@Valid @RequestBody RegisterDTO user) {
+    public ResponseEntity<RegisterResponseDTO> register(@Valid @RequestBody RegisterDTO user) {
         User response = authenticationService.register(user);
-        return ResponseEntity.ok("User registered successfully: " + response.getEmail());
+        RegisterResponseDTO registerResponse = new RegisterResponseDTO();
+        registerResponse.setMessage("User registered successfully: "+response.getEmail());
+        return ResponseEntity.ok(registerResponse);
     }
 
     @PostMapping("/login")
