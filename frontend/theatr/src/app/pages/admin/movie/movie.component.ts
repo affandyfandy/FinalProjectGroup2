@@ -1,18 +1,42 @@
-import { Component, OnInit } from '@angular/core';
-import { Movie } from '../../../model/movie.model';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AddMovieDTO, Movie } from '../../../model/movie.model';
 import { CommonModule } from '@angular/common';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-movie',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   templateUrl: './movie.component.html'
 })
 export class MovieComponent implements OnInit {
+
+  @ViewChild('movieForm') movieForm: NgForm = {} as NgForm;
+
+  previewImage = '';
+
   movieList: Movie[] = [];
-  currentMovie?: Movie;
+  currentMovie: AddMovieDTO = {
+    title: '',
+    synopsis: '',
+    year: 0,
+    duration: 0,
+    posterUrl: ''
+  };
+  tempMovie: AddMovieDTO = {
+    title: '',
+    synopsis: '',
+    year: 0,
+    duration: 0,
+    posterUrl: ''
+  };
+  charCount: number = 0;
+
+  isEdit = false;
+  isPosterChanged = false;
 
   constructor() { }
 
@@ -32,6 +56,101 @@ export class MovieComponent implements OnInit {
         year: 2024
       };
       this.movieList.push(movie);
+    }
+  }
+
+  showMovieModal(isEdit: boolean, movie?: Movie) {
+    this.previewImage = '';
+    this.isEdit = isEdit;
+    this.currentMovie = {
+      title: movie?.title || '',
+      synopsis: movie?.synopsis || '',
+      year: movie?.year || 2024,
+      duration: movie?.duration || 0,
+      posterUrl: movie?.posterUrl || ''
+    };
+
+    this.tempMovie = {
+      title: movie?.title || '',
+      synopsis: movie?.synopsis || '',
+      year: movie?.year || 2024,
+      duration: movie?.duration || 0,
+      posterUrl: movie?.posterUrl || ''
+    };
+
+    this.charCount = isEdit ? this.currentMovie.synopsis.length : 0;
+
+    const modal = document.getElementById('movie-modal') as HTMLDialogElement;
+    modal.showModal();
+  }
+
+  closeMovieModal() {
+    this.movieForm.resetForm();
+    const modal = document.getElementById('movie-modal') as HTMLDialogElement;
+    this.charCount = 0;
+    this.isPosterChanged = false;
+    this.previewImage = '';
+    modal.close();
+  }
+
+  isSaveButtonDisabled() {
+    if (this.isEdit) {
+      return this.currentMovie.title === this.tempMovie.title &&
+        this.currentMovie.synopsis === this.tempMovie.synopsis &&
+        this.currentMovie.year === this.tempMovie.year;
+    } else {
+      return !this.currentMovie?.title ||
+        !this.currentMovie ||
+        !this.currentMovie?.synopsis ||
+        !this.currentMovie?.year ||
+        !this.previewImage;
+    }
+  }
+
+  limitCharacters(event: any) {
+    let value = event.target.value;
+
+    if (value.length > 1000) {
+      value = value.slice(0, 1000);
+    }
+
+    this.currentMovie.synopsis = value;
+    this.charCount = this.currentMovie.synopsis.length;
+
+    event.target.value = this.currentMovie.synopsis;
+  }
+
+  handlePaste(event: ClipboardEvent) {
+    const pasteData = event.clipboardData?.getData('text') || '';
+    const currentText = this.currentMovie.synopsis;
+
+    let combinedText = currentText + pasteData;
+
+    if (combinedText.length > 1000) {
+      combinedText = combinedText.slice(0, 1000);
+      event.preventDefault();
+    }
+
+    this.currentMovie.synopsis = combinedText;
+    this.charCount = this.currentMovie.synopsis.length;
+
+    (event.target as HTMLTextAreaElement).value = this.currentMovie.synopsis;
+  }
+
+  triggerFileInput() {
+    const fileInput = document.getElementById('posterInput') as HTMLInputElement;
+    fileInput.click();
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.isPosterChanged = true;
+        this.previewImage = e.target.result;
+      };
+      reader.readAsDataURL(file);
     }
   }
 }
