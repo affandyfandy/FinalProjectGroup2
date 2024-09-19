@@ -4,12 +4,14 @@ import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user/user.service';
 import { RouterConfig } from '../../../config/app.constants';
+import { TruncateNamePipe } from '../../../core/pipes/truncate-name/truncate-name.pipe';
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
+    TruncateNamePipe
   ],
   providers: [
     AuthService,
@@ -41,6 +43,7 @@ export class HeaderComponent implements OnInit {
         this.checkLoginStatus();
         this.currentUrl = event.url;
         this.isAdmin = this.authService.isAdmin();
+        this.getProfile();
       }
     });
   }

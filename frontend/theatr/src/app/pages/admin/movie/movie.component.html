@@ -1,1 +1,48 @@
-<p>movie works!</p>
+<div class="pt-[100px] px-14">
+    <!-- Search Bar & Add Button -->
+    <div class="flex justify-between items-center max-w-full">
+        <label class="input input-bordered flex items-center gap-2 max-w-[500px] w-full">
+            <img src="assets/icons/search-white.svg" alt="Search Icon" class="w-5 h-5">
+            <input type="text" class="grow" placeholder="Search here..." />
+        </label>
+
+        <button class="btn btn-primary rounded-full px-5">
+            <div class="flex items-center gap-2">
+                <img src="assets/icons/plus-black.svg" alt="Plus Icon" class="w-[22px] h-[22px]">
+                Add Movie
+            </div>
+        </button>
+    </div>
+
+    <!-- Table -->
+    <div *ngIf="movieList !== []" class="overflow-x-auto pt-4">
+        <table class="table">
+            <!-- head -->
+            <thead>
+                <tr>
+                    <th>Poster</th>
+                    <th>Title</th>
+                    <th>Year</th>
+                    <th>Duration</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- row -->
+                <tr *ngFor="let movie of movieList">
+                    <td>
+                        <img [src]="movie.posterUrl" alt="Poster" class="w-[95px] h-[147px] rounded-xl">
+                    </td>
+                    <td>{{ movie.title }}</td>
+                    <td>{{ movie.year }}</td>
+                    <td>{{ movie.duration }} minutes</td>
+                    <td>
+                        <button class="btn btn-square btn-secondary btn-sm">
+                            <img src="assets/icons/edit-white.svg" alt="Edit Icon" class="w-5 h-5">
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

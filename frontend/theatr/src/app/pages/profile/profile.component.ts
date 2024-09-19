@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { ChangePasswordDTO, User } from '../../model/user.model';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -21,6 +21,8 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './profile.component.html',
 })
 export class ProfileComponent {
+
+  @ViewChild('passwordForm') passwordForm: NgForm = {} as NgForm;
 
   user = {} as User;
   tempUsername = '';
@@ -108,6 +110,7 @@ export class ProfileComponent {
   }
 
   closeChangePasswordModal() {
+    this.passwordForm.resetForm();
     const modal = document.getElementById('change-password-modal') as HTMLDialogElement;
     modal.close();
     this.setUpDTO();
