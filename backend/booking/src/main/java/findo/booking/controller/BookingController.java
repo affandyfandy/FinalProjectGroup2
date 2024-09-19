@@ -1,19 +1,20 @@
 package findo.booking.controller;
 
-import findo.booking.dto.BookingDetailDTO;
-import findo.booking.dto.BookingResponseDTO;
-import findo.booking.dto.CreateBookingDTO;
-import findo.booking.dto.CustomerBookingHistoryDTO;
+import findo.booking.dto.*;
 import findo.booking.entity.Booking;
 import findo.booking.service.impl.BookingServiceImpl;
 import reactor.core.publisher.Mono;
-
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -28,19 +29,34 @@ public class BookingController {
 
     // Show All Booking History (Admin)
     @GetMapping("/admin/history")
-    public List<BookingResponseDTO> getAllBookingHistory() {
-        return bookingService.getAllBookings();
+    public ResponseEntity<Page<BookingResponseDTO>> getAllBookingHistory(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "updatedTime") String sortBy,
+            @RequestParam(defaultValue = "DESC") String sortDir) {
+
+        Sort sort = Sort.by(sortDir.equalsIgnoreCase("DESC") ? Sort.Direction.DESC : Sort.Direction.ASC, sortBy);
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        Page<BookingResponseDTO> bookingHistory = bookingService.getAllBookings(pageable);
+        return ResponseEntity.ok(bookingHistory);
     }
 
     // Show Booking History (Customer)
     @GetMapping("/customer/booking-history")
-    public Mono<ResponseEntity<List<CustomerBookingHistoryDTO>>> getBookingHistory(
-            @AuthenticationPrincipal JwtAuthenticationToken principal) {
+    public Mono<ResponseEntity<Page<CustomerBookingHistoryDTO>>> getBookingHistory(
+            @AuthenticationPrincipal JwtAuthenticationToken principal,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "updatedTime") String sortBy,
+            @RequestParam(defaultValue = "DESC") String sortDir) {
 
-        // Extract user ID from JWT token's "sub" claim
         String userId = principal.getToken().getClaimAsString("sub");
 
-        return bookingService.getBookingHistoryByUser(UUID.fromString(userId))
+        Sort sort = Sort.by(sortDir.equalsIgnoreCase("DESC") ? Sort.Direction.DESC : Sort.Direction.ASC, sortBy);
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        return bookingService.getBookingHistoryByUser(UUID.fromString(userId), pageable)
                 .map(ResponseEntity::ok);
     }
 
@@ -51,11 +67,30 @@ public class BookingController {
     }
 
     @PostMapping("/customer/book")
-    public Booking createBooking(@AuthenticationPrincipal JwtAuthenticationToken principal,
+    public Mono<Booking> createBooking(
+            @AuthenticationPrincipal JwtAuthenticationToken principal,
             @RequestBody CreateBookingDTO request) {
 
+        // Extract user ID from JWT token's "sub" claim
         String userId = principal.getToken().getClaimAsString("sub");
+        String token = principal.getToken().getTokenValue();
+        String email = principal.getToken().getClaimAsString("email");
 
-        return bookingService.createBooking(request, UUID.fromString(userId));
+        return bookingService.createBooking(request, UUID.fromString(userId), token, email);
+    }
+
+    @PatchMapping("/customer/print-ticket/{bookingId}")
+    public Mono<ResponseEntity<InputStreamResource>> printTicket(
+            @PathVariable UUID bookingId) {
+        return bookingService.printTicket(bookingId)
+                .map(responseDTO -> {
+                    HttpHeaders headers = new HttpHeaders();
+                    headers.add("Content-Disposition", "inline; filename=booking.pdf");
+
+                    return ResponseEntity.ok()
+                            .headers(headers)
+                            .contentType(MediaType.APPLICATION_PDF)
+                            .body(new InputStreamResource(responseDTO.getPdfInputStream()));
+                });
     }
 }

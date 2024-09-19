@@ -1,21 +1,22 @@
 package findo.booking.service;
 
-import findo.booking.dto.BookingDetailDTO;
-import findo.booking.dto.BookingResponseDTO;
-import findo.booking.dto.CreateBookingDTO;
-import findo.booking.dto.CustomerBookingHistoryDTO;
+import findo.booking.dto.*;
 import findo.booking.entity.Booking;
 import reactor.core.publisher.Mono;
-
-import java.util.List;
 import java.util.UUID;
 
-public interface BookingService {
-    List<BookingResponseDTO> getAllBookings();
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-    Mono<List<CustomerBookingHistoryDTO>> getBookingHistoryByUser(UUID userId);
+public interface BookingService {
+    Page<BookingResponseDTO> getAllBookings(Pageable pageable);
+
+    Mono<Page<CustomerBookingHistoryDTO>> getBookingHistoryByUser(UUID userId, Pageable pageable);
 
     BookingDetailDTO getBookingDetail(UUID bookingId);
 
-    Booking createBooking(CreateBookingDTO request, UUID userId);
+    Mono<Booking> createBooking(CreateBookingDTO request, UUID userId, String token, String email);
+
+    Mono<PrintTicketResponseDTO> printTicket(UUID bookingId);
+
 }
