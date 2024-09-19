@@ -1,5 +1,7 @@
 package findo.studio.controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -40,6 +42,17 @@ public class StudioController {
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(studioPage);
+    }
+
+    @GetMapping(value = "/active")
+    public ResponseEntity<List<Studio>> getAllActiveStudios() {
+        List<Studio> studios = studioService.findAllActiveStudio();
+
+        if(studios.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(studios);
     }
 
     @GetMapping(value = "/{id}")

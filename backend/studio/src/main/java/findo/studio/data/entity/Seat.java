@@ -27,7 +27,7 @@ public class Seat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(unique=true, nullable=false)
+    @Column(nullable=false)
     private String seatCode;
 
     private LocalDate createdTime;

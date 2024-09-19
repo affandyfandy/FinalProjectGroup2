@@ -1,6 +1,7 @@
 package findo.studio.service.impl;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +27,11 @@ public class StudioServiceImpl implements StudioService {
     @Override
     public Page<Studio> findAllStudio(Pageable pageable) {
         return studioRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<Studio> findAllActiveStudio() {
+        return studioRepository.findByDeleted(false);
     }
 
     @Override
