@@ -1,0 +1,113 @@
+<div class="pt-[100px] px-14">
+    <!-- Search Bar & Add Button -->
+    <div class="flex justify-between items-center max-w-full">
+        <div class="flex space-x-2">
+            <select class="select select-bordered w-full max-w-44 bg-base-300 border-none">
+                <option>Latest</option>
+                <option>Earliest</option>
+            </select>
+            <input type="date" (change)="onDateChange($event)" [ngModel]="currentDateTime"
+                class="p-2 px-6 h-12 rounded-md text-white bg-base-300" />
+        </div>
+
+        <button (click)="showModal()" class="btn btn-primary rounded-full px-5">
+            <div class="flex items-center gap-2">
+                <img src="assets/icons/plus-black.svg" alt="Plus Icon" class="w-[22px] h-[22px]">
+                Create Schedule
+            </div>
+        </button>
+    </div>
+
+    <!-- Table -->
+    <div *ngIf="movieList !== []" class="overflow-x-auto pt-4">
+        <table class="table">
+            <!-- head -->
+            <thead>
+                <tr class="text-center">
+                    <th>Show Time</th>
+                    <th>Studio</th>
+                    <th>Title</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- row -->
+                <tr *ngFor="let schedule of scheduleList" class="text-center">
+                    <td>{{ schedule.showTime ? (schedule.showTime | timeFormat) : 'N/A' }}</td>
+                    <td>{{ schedule.studio?.name }}</td>
+                    <td>{{ schedule.movie?.title }} {{"(" + schedule.movie?.year + ")" }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- SCHEDULE MODAL -->
+<dialog id="schedule-modal" class="modal">
+    <div class="modal-box flex flex-col max-w-[672px] items-center space-y-6 justify-center bg-base-300">
+        <h1 class="text-2xl font-semibold">Create Schedule</h1>
+
+        <form #scheduleForm="ngForm" class="w-full space-y-3">
+            <div class="flex items-center space-x-2 w-full">
+                <img src="assets/icons/calendar-white.svg" alt="Calendar Icon" class="w-[28px] h-[28px]">
+                <div class="w-full">
+                    <input (change)="getAvailableShowTime()" type="date" [(ngModel)]="currentSchedule.showTime"
+                        #showDate="ngModel" class="p-2 px-6 h-12 rounded-md text-white bg-base-100 w-full" required />
+                    <p *ngIf="showDate.invalid && showDate.touched" class="text-error text-sm font-medium">
+                        *this field is required
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-2 w-full">
+                <img src="assets/icons/play-white.svg" alt="Play Icon" class="w-[28px] h-[28px]">
+                <div [ngModel]="currentMovie" class="w-full">
+                    <select class="select select-bordered w-full bg-base-100 border-none">
+                        <option disabled>Select a Movie</option>
+                        <option *ngFor="let movie of movieList">{{movie.title}}</option>
+                    </select>
+                    <p *ngIf="currentMovie == undefined || currentMovie == null" class="text-error text-sm font-medium">
+                        *this field is required
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-2 w-full">
+                <img src="assets/icons/location-white.svg" alt="Calendar Icon" class="w-[28px] h-[28px]">
+                <div class="w-full">
+                    <select class="select select-bordered w-full bg-base-100 border-none">
+                        <option disabled>Select a Studio</option>
+                        <option *ngFor="let studio of studioList">{{studio.name}}</option>
+                    </select>
+                    <p *ngIf="currentStudio == undefined || currentStudio == null"
+                        class="text-error text-sm font-medium">
+                        *this field is required
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-2 w-full">
+                <img src="assets/icons/clock-white.svg" alt="Clock Icon" class="w-[28px] h-[28px]">
+                <div class="w-full">
+                    <div class="w-full">
+                        <select (change)="getAvailableShowTime()" [disabled]="availableShowTime.length == 0"
+                            class="select select-bordered w-full bg-base-100 border-none">
+                            <option disabled>Select a Show Time</option>
+                            <option *ngFor="let time of availableShowTime">{{time | timeFormat}}</option>
+                        </select>
+                        <p *ngIf="currentSchedule.showTime == undefined || currentSchedule.showTime == null"
+                            class="text-error text-sm font-medium">
+                            *this field is required
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="flex space-x-2 w-full">
+            <button class="btn btn-secondary bg-opacity-50 max-w-[310px] w-full rounded-full"
+                (click)="closeModal()">Cancel</button>
+            <button (click)="closeModal()" [disabled]="scheduleForm.invalid"
+                class="btn btn-primary max-w-[310px] w-full rounded-full">Save</button>
+        </div>
+    </div>
+</dialog>

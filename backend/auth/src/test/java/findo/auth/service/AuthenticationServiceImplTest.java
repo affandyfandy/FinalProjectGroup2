@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
@@ -31,6 +30,7 @@ import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import findo.auth.data.entity.User;
 import findo.auth.data.repository.UserRepository;
 import findo.auth.dto.LoginDTO;
+import findo.auth.dto.LoginResponseDTO;
 import findo.auth.dto.RegisterDTO;
 import findo.auth.dto.UserDetailsDTO;
 import findo.auth.service.impl.AuthenticationServiceImpl;
@@ -159,10 +159,9 @@ class AuthenticationServiceImplTest {
         when(jwt.getTokenValue()).thenReturn("mockedJwtToken");
         when(jwtEncoder.encode(any(JwtEncoderParameters.class))).thenReturn(jwt);
 
-        Optional<String> result = authenticationService.login(loginDTO);
+        LoginResponseDTO result = authenticationService.login(loginDTO);
 
-        assertTrue(result.isPresent());
-        assertEquals("mockedJwtToken", result.get());
+        assertEquals("mockedJwtToken", result.getToken());
 
         verify(authenticationManager, times(1)).authenticate(any(UsernamePasswordAuthenticationToken.class));
         verify(jwtEncoder, times(1)).encode(any(JwtEncoderParameters.class));

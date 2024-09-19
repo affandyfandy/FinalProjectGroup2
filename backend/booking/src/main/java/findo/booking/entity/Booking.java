@@ -10,7 +10,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.*;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
 
@@ -41,11 +41,11 @@ public class Booking {
 
     @CreatedDate
     @Column(name = "created_time", updatable = false)
-    private LocalDate createdTime;
+    private Timestamp createdTime;
 
     @LastModifiedDate
     @Column(name = "updated_time")
-    private LocalDate updatedTime;
+    private Timestamp updatedTime;
 
     @CreatedBy
     @Column(name = "created_by", updatable = false)
