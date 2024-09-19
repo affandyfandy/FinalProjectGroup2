@@ -1,1 +1,42 @@
-<p>schedule works!</p>
+<div class="pt-[100px] px-14">
+    <!-- Search Bar & Add Button -->
+    <div class="flex justify-between items-center max-w-full">
+        <div class="flex space-x-2">
+            <select class="select select-bordered w-full max-w-44 bg-base-300 border-none">
+                <option>Latest</option>
+                <option>Earliest</option>
+            </select>
+            <input type="date" [value]="currentDateTime" class="p-2 px-6 h-12 rounded-md text-white bg-base-300"
+                (change)="onDateChange($event)" />
+        </div>
+
+        <button (click)="showModal()" class="btn btn-primary rounded-full px-5">
+            <div class="flex items-center gap-2">
+                <img src="assets/icons/plus-black.svg" alt="Plus Icon" class="w-[22px] h-[22px]">
+                Create Schedule
+            </div>
+        </button>
+    </div>
+
+    <!-- Table -->
+    <div *ngIf="movieList !== []" class="overflow-x-auto pt-4">
+        <table class="table">
+            <!-- head -->
+            <thead>
+                <tr class="text-center">
+                    <th>Show Time</th>
+                    <th>Studio</th>
+                    <th>Title</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- row -->
+                <tr *ngFor="let schedule of scheduleList" class="text-center">
+                    <td>{{ schedule.showTime ? (schedule.showTime | timeFormat) : 'N/A' }}</td>
+                    <td>{{ schedule.studio?.name }}</td>
+                    <td>{{ schedule.movie?.title }} {{"(" + schedule.movie?.year + ")" }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
