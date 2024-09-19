@@ -10,42 +10,35 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.*;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "bookings")
+@Table(name = "booking_seats")
 @EntityListeners(AuditingEntityListener.class)
-public class Booking {
+public class BookingSeat {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    @Column(name = "user_id")
-    private UUID userIds;
+    @ManyToOne
+    @JoinColumn(name = "booking_id", nullable = false)
+    private Booking booking; // Reference to the Booking entity
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "booking_schedule", joinColumns = @JoinColumn(name = "booking_id"))
-    @Column(name = "user_id")
-    private List<UUID> scheduleIds;
-
-    @Column(nullable = false)
-    private double totalAmount;
-
-    @Column(nullable = false)
-    private Boolean isPrinted;
+    @ElementCollection
+    @Column(name = "seat_id")
+    private List<Integer> seatIds; // List of seat IDs
 
     @CreatedDate
     @Column(name = "created_time", updatable = false)
-    private LocalDate createdTime;
+    private LocalDateTime createdTime;
 
     @LastModifiedDate
     @Column(name = "updated_time")
-    private LocalDate updatedTime;
+    private LocalDateTime updatedTime;
 
     @CreatedBy
     @Column(name = "created_by", updatable = false)

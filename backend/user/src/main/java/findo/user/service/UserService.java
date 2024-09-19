@@ -9,11 +9,11 @@ import findo.user.dto.ShowDataDTO;
 import reactor.core.publisher.Mono;
 
 public interface UserService {
-    Mono<String> updateUserName(UUID userId, ChangeNameDTO changeNameDTO);
+    Mono<ShowDataDTO> updateUserName(UUID userId, ChangeNameDTO changeNameDTO);
 
     Mono<String> changePassword(UUID userId, ChangePasswordDTO changePasswordDTO);
 
-    Mono<String> addBalance(UUID userId, AddBalanceDTO addBalanceDTO);
+    Mono<AddBalanceDTO> addBalance(UUID userId, AddBalanceDTO addBalanceDTO);
 
     Mono<ShowDataDTO> getUserDataById(UUID userId);
 }
