@@ -4,6 +4,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { Booking } from '../../../model/booking.model';
 import { FullDateTimePipe } from '../../../core/pipes/full-date-time/full-date-time.pipe';
 import { FullTimePipe } from '../../../core/pipes/full-time/full-time.pipe';
+import { PriceFormatPipe } from '../../../core/pipes/price-format/price-format.pipe';
 
 @Component({
   selector: 'app-bookings',
@@ -12,13 +13,12 @@ import { FullTimePipe } from '../../../core/pipes/full-time/full-time.pipe';
     CommonModule,
     FormsModule,
     FullDateTimePipe,
-    FullTimePipe
+    FullTimePipe,
+    PriceFormatPipe
   ],
   templateUrl: './bookings.component.html'
 })
 export class BookingsComponent implements OnInit {
-
-  @ViewChild('bookingForm') bookingForm: NgForm = {} as NgForm;
 
   currentDateTime = '';
 
@@ -61,10 +61,12 @@ export class BookingsComponent implements OnInit {
         schedule: {
           id: i.toString(),
           showTime: date,
+          price: 40000,
           movie: {
             id: i.toString(),
             title: 'Movie ' + i,
             year: 2019 + i,
+            posterUrl: 'https://image.tmdb.org/t/p/w1280/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg',
           },
           studio: {
             id: i,
@@ -93,7 +95,6 @@ export class BookingsComponent implements OnInit {
   }
 
   closeModal() {
-    this.bookingForm.resetForm();
     this.currentBooking = {};
     const modal = document.getElementById('booking-modal') as HTMLDialogElement;
     modal.close();
