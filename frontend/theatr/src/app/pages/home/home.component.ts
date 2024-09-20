@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Schedule } from '../../model/schedule.model';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { RouterConfig } from '../../config/app.constants';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +22,9 @@ export class HomeComponent implements OnInit {
   slidingBanner: Schedule[] = []
   scheduleList: Schedule[] = []
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.currentDateTime = this.getTodayDate();
@@ -38,7 +42,6 @@ export class HomeComponent implements OnInit {
 
   onDateChange(event: any) {
     this.currentDateTime = event.target.value;
-    console.log("Tanggal dipilih: ", this.currentDateTime);
     this.getScheduleList();
   }
 
@@ -74,5 +77,9 @@ export class HomeComponent implements OnInit {
         showTime: new Date()
       });
     }
+  }
+
+  navigateToSchedule(id: string) {
+    this.router.navigate([RouterConfig.SCHEDULES.path, id]);
   }
 }

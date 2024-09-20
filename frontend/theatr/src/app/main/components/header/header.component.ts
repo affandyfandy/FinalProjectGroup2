@@ -46,6 +46,10 @@ export class HeaderComponent implements OnInit {
     return this.currentUrl === ('/' + section);
   }
 
+  isBackgroundTransparent(): boolean {
+    return this.currentUrl === '/' || (this.currentUrl.includes('schedules') && !this.currentUrl.includes('admin'));
+  }
+
   navigateToLogin() {
     this.router.navigate([RouterConfig.LOGIN.link]);
   }
