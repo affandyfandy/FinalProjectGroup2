@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { RouterConfig } from '../../config/app.constants';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { User } from '../../model/user.model';
 
 @Component({
@@ -19,12 +19,15 @@ import { User } from '../../model/user.model';
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
+
+  @ViewChild('authForm') authForm: NgForm = {} as NgForm;
+
   isRegister = false;
   user: User = {} as User;
 
-  isShowSuccess = false;
-  isShowError = false;
+  isShowAlert = false;
   alertMessage = '';
+  isAlertSuccess = true;
 
   constructor(
     private authService: AuthService,
@@ -47,7 +50,12 @@ export class LoginComponent {
         this.router.navigate([RouterConfig.HOME.link]);
       },
       error: (err) => {
-        this.handleError(err);
+        this.isAlertSuccess = false;
+        this.alertMessage = 'Login failed';
+        this.isShowAlert = true;
+        setTimeout(() => {
+          this.isShowAlert = false;
+        }, 3000);
       }
     });
   }
@@ -55,23 +63,23 @@ export class LoginComponent {
   private register() {
     this.authService.register({ name: this.user.name!, email: this.user.email!, password: this.user.password! }).subscribe({
       next: () => {
-        this.isShowSuccess = true;
+        this.isAlertSuccess = true;
         this.alertMessage = 'Register successfully';
-        this.resetField();
+        this.authForm.resetForm();
+        this.isRegister = false;
+        this.isShowAlert = true;
+        setTimeout(() => {
+          this.isShowAlert = false;
+        }, 3000);
       },
       error: (err) => {
-        this.handleError(err);
+        this.isAlertSuccess = false;
+        this.alertMessage = 'Register failed';
+        this.isShowAlert = true;
+        setTimeout(() => {
+          this.isShowAlert = false;
+        }, 3000);
       }
     });
   };
-
-  private resetField() {
-    this.user = {} as User;
-    this.isRegister = false;
-  }
-
-  private handleError(err: any) {
-    this.isShowError = true;
-    this.alertMessage = err.error.message;
-  }
 }

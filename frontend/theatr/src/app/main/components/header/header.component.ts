@@ -32,12 +32,6 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.authService.isLoggedIn$.subscribe((status) => {
-      this.isLoggedIn = status;
-      this.getProfile();
-      this.isAdmin = this.authService.isAdmin();
-    });
-
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.checkLoginStatus();

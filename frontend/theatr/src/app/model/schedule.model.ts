@@ -15,4 +15,5 @@ export interface AddScheduleDTO {
     showTime: Date;
     movieId: String;
     studioId: number;
+    price: number;
 }

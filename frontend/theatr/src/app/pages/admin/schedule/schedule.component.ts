@@ -5,6 +5,7 @@ import { AddScheduleDTO, Schedule } from '../../../model/schedule.model';
 import { Movie } from '../../../model/movie.model';
 import { Studio } from '../../../model/studio.model';
 import { TimeFormatPipe } from '../../../core/pipes/time-format/time-format.pipe';
+import { PriceFormatPipe } from '../../../core/pipes/price-format/price-format.pipe';
 
 @Component({
   selector: 'app-schedule',
@@ -13,6 +14,7 @@ import { TimeFormatPipe } from '../../../core/pipes/time-format/time-format.pipe
     CommonModule,
     FormsModule,
     TimeFormatPipe,
+    PriceFormatPipe
   ],
   templateUrl: './schedule.component.html',
   styleUrl: './schedule.component.css'
@@ -31,6 +33,7 @@ export class ScheduleComponent implements OnInit {
   currentMovie: Movie = {} as Movie;
   currentStudio: Studio = {} as Studio;
   currentSchedule: AddScheduleDTO = {} as AddScheduleDTO;
+  currentScheduleDateTime = '';
 
   constructor() { }
 
@@ -65,6 +68,27 @@ export class ScheduleComponent implements OnInit {
       });
     }
   }
+
+  onScheduleTimeChange(event: any) {
+    this.currentScheduleDateTime = event.target.value;
+    this.getPrice(event.target.value);
+    this.getAvailableShowTime();
+  }
+
+  getPrice(dateTime: string) {
+    const [year, month, day] = dateTime.split('-').map(Number);
+
+    const date = new Date(year, month - 1, day);
+
+    const showDay = date.getDay();
+
+    if (showDay === 0 || showDay === 6) {
+      this.currentSchedule.price = 50000;
+    } else {
+      this.currentSchedule.price = 40000;
+    }
+  }
+
 
   getAvailableShowTime() {
     this.availableShowTime = [];
@@ -121,13 +145,16 @@ export class ScheduleComponent implements OnInit {
       showTime: new Date(),
       movieId: '',
       studioId: 0,
+      price: 0
     };
 
     this.getMovieList();
     this.getStudioList();
 
-    const modal = document.getElementById('schedule-modal') as HTMLDialogElement;
-    modal.showModal();
+    setTimeout(() => {
+      const modal = document.getElementById('schedule-modal') as HTMLDialogElement;
+      modal.showModal();
+    }, 500);
   }
 
   getTodayDate(): string {
@@ -151,5 +178,9 @@ export class ScheduleComponent implements OnInit {
     this.currentDateTime = event.target.value;
     console.log("Tanggal dipilih: ", this.currentDateTime);
     this.getScheduleList();
+  }
+
+  isSaveButtonDisabled(): boolean {
+    return this.currentScheduleDateTime === '';
   }
 }
