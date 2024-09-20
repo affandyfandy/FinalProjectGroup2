@@ -1,0 +1,41 @@
+<header
+    class="fixed flex items-center justify-between h-20 px-10 w-full z-40 {{ isBackgroundTransparent() ? 'bg-transparent' : 'bg-base-100'}}">
+    <div class="text-2xl font-bold">
+        Theatr.
+    </div>
+
+    <nav class="flex space-x-8">
+        <a *ngIf="!isAdmin" (click)="navigateToHome()"
+            ngClass="{{ isSectionActive('') ? 'font-semibold border-white' : '' }}"
+            class="font-light border-b-2 border-transparent px-3 py-1 hover:border-white transition-all">Home</a>
+        <a *ngIf="!isAdmin" (click)="navigateToBookings()"
+            ngClass="{{ isSectionActive('bookings') ? 'font-semibold border-white' : '' }}"
+            class="font-light border-b-2 border-transparent px-3 py-1 hover:border-white transition-all">Bookings</a>
+
+        <a *ngIf="isAdmin" (click)="navigateToAdminSchedule()"
+            ngClass="{{ isSectionActive('admin/schedules') ? 'font-semibold border-white' : '' }}"
+            class="font-light border-b-2 border-transparent px-3 py-1 hover:border-white transition-all">Schedule</a>
+        <a *ngIf="isAdmin" (click)="navigateToAdminMovies()"
+            ngClass="{{ isSectionActive('admin/movies') ? 'font-semibold border-white' : '' }}"
+            class="font-light border-b-2 border-transparent px-3 py-1 hover:border-white transition-all">Movie</a>
+        <a *ngIf="isAdmin" (click)="navigateToAdminStudio()"
+            ngClass="{{ isSectionActive('admin/studios') ? 'font-semibold border-white' : '' }}"
+            class="font-light border-b-2 border-transparent px-3 py-1 hover:border-white transition-all">Studio</a>
+        <a *ngIf="isAdmin" (click)="navigateToAdminBookings()"
+            ngClass="{{ isSectionActive('admin/bookings') ? 'font-semibold border-white' : '' }}"
+            class="font-light border-b-2 border-transparent px-3 py-1 hover:border-white transition-all">Booking
+            History</a>
+    </nav>
+
+    <div *ngIf="!isLoggedIn; else profileButton">
+        <button (click)="navigateToLogin()" class="btn btn-primary px-8 py-2 rounded-full">Login</button>
+    </div>
+    <ng-template #profileButton>
+        <button (click)="navigateToProfile()" class="btn btn-ghost">
+            <div class="flex space-x-2 items-center">
+                <img src="assets/icons/profile-circle-white.svg" alt="Profile" class="w-8 h-8 rounded-full">
+                <h1>{{ username | truncateName }}</h1>
+            </div>
+        </button>
+    </ng-template>
+</header>
