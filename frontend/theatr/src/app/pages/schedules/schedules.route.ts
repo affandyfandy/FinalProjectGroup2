@@ -4,7 +4,12 @@ import { BookScheduleComponent } from "./book-schedule/book-schedule.component";
 import { accessGuard } from "../../main/guards/access.guard";
 
 export const scheduleRoutes: Routes = [
-    { path: ':id', component: MovieScheduleComponent },
+    {
+        path: ':id',
+        data: { roles: ['ROLE_CUSTOMER', 'ROLE_GUEST'] },
+        canActivate: [accessGuard],
+        component: MovieScheduleComponent
+    },
     {
         path: ':id/book',
         data: { roles: ['ROLE_CUSTOMER'] },
