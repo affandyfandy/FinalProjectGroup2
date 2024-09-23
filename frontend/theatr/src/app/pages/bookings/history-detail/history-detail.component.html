@@ -1,1 +1,80 @@
-<p>history-detail works!</p>
+<div class="max-w-full w-full p-16 pt-28 flex flex-col items-center space-y-10">
+    <div class="flex flex-col max-w-[672px] w-full space-y-6 bg-base-300 p-8 rounded-2xl">
+        <div class="flex items-center w-full space-x-4">
+            <img [src]="bookingData.schedule?.movie?.posterUrl" alt="Poster"
+                class="w-[120px] h-[186px] rounded-xl object-cover">
+
+            <div class="space-y-2">
+                <h1 class="text-2xl font-bold">{{ bookingData.schedule?.movie?.title }} {{'(' +
+                    bookingData.schedule?.movie?.year + ')'}}</h1>
+                <div class="text-zinc-400 flex items-center space-x-2">
+                    <img src="assets/icons/location-gray.svg" alt="Edit Icon" class="w-6 h-6">
+                    <p>{{ bookingData.schedule?.studio?.name }}</p>
+                </div>
+
+                <div class="flex items-center space-x-2">
+                    <img src="assets/icons/ticket-gray.svg" alt="Edit Icon" class="w-6 h-6">
+                    <p class="text-zinc-400">{{ bookingData.seats?.length }} Tickets</p>
+                    <p *ngFor="let seat of bookingData.seats" class="font-bold">{{seat.seatCode}}</p>
+                </div>
+                <p>{{ bookingData.schedule?.showTime ? (bookingData.schedule!.showTime! | fullDateTime) : 'N/A' }}
+                </p>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="space-y-2">
+            <div class="flex justify-between">
+                <p class="text-zinc-400">ORDER ID</p>
+                <p class="font-semibold">{{ bookingData.id }}</p>
+            </div>
+            <div class="flex justify-between">
+                <p class="text-zinc-400">ORDERED AT</p>
+                <p class="font-semibold">{{ bookingData.updatedTime ? (bookingData.updatedTime | fullDateTime) :
+                    'N/A'
+                    }}</p>
+            </div>
+            <div class="flex justify-between">
+                <p class="text-zinc-400">PRICE</p>
+                <p class="font-semibold">{{ bookingData.schedule?.price ? (bookingData.schedule!.price! |
+                    priceFormat) : '' }} x {{bookingData.seats?.length}}</p>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="flex justify-between">
+            <p class="text-zinc-400">TOTAL PRICE</p>
+            <p class="text-xl font-semibold">{{ bookingData.totalAmount ? (bookingData.totalAmount |
+                priceFormat) : '' }}</p>
+        </div>
+    </div>
+
+    <div *ngIf="bookingData.isPrinted; else printTicket"
+        class="flex max-w-[672px] w-full items-center justify-center text-center space-x-2 bg-success rounded-lg py-4">
+        <img src="assets/icons/printer-white.svg" alt="Print Icon" class="w-6 h-6">
+        Ticket Printed
+    </div>
+
+    <ng-template #printTicket>
+        <button (click)="showModal()"
+            class="btn btn-primary max-w-[672px] w-full flex items-center text-center space-x-2 rounded-full">
+            <img src="assets/icons/printer-black.svg" alt="Print Icon" class="w-6 h-6">
+            Print Ticket
+        </button>
+    </ng-template>
+</div>
+
+<!-- CONFIRMATION MODAL -->
+<dialog id="confirmation-modal" class="modal">
+    <div class="modal-box flex flex-col items-center space-y-6 justify-center bg-base-300">
+        <h1 class="text-lg font-semibold">Continue?</h1>
+        <p class="text-center">Tickets can only be printed <b>ONCE</b>. Make sure you keep them after printing.</p>
+        <div class="flex space-x-2 w-full">
+            <button class="btn btn-secondary bg-opacity-50 max-w-[230px] w-full rounded-full"
+                (click)="closeModal()">Cancel</button>
+            <button (click)="closeModal()" class="btn btn-primary max-w-[230px] w-full rounded-full">Continue</button>
+        </div>
+    </div>
+</dialog>
