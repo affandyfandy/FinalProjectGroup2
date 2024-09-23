@@ -3,7 +3,6 @@ package findo.user.service;
 import java.util.UUID;
 
 import findo.user.dto.*;
-import org.hibernate.sql.Update;
 import reactor.core.publisher.Mono;
 
 public interface UserService {

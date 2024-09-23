@@ -1,7 +1,11 @@
 package findo.booking.service.impl;
 
 import findo.booking.client.UserClient;
-import findo.booking.dto.*;
+import findo.booking.dto.BookingDetailDTO;
+import findo.booking.dto.BookingResponseDTO;
+import findo.booking.dto.CreateBookingDTO;
+import findo.booking.dto.CustomerBookingHistoryDTO;
+import findo.booking.dto.PrintTicketResponseDTO;
 import findo.booking.entity.Booking;
 import findo.booking.entity.BookingSeat;
 import findo.booking.exception.TicketAlreadyPrintedException;
@@ -131,5 +135,4 @@ public class BookingServiceImpl implements BookingService {
                             pdfInputStream));
                 });
     }
-
 }
