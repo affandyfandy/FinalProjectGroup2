@@ -1,18 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
-import { ChangePasswordDTO, User } from '../../model/user.model';
+import { ChangePasswordDTO, TopUpDTO, User } from '../../model/user.model';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { FormsModule, NgForm } from '@angular/forms';
+import { PriceFormatPipe } from '../../core/pipes/price-format/price-format.pipe';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    PriceFormatPipe
   ],
   providers: [
     UserService,
@@ -32,6 +34,9 @@ export class ProfileComponent {
   isAlertSuccess = true;
 
   changePasswordDTO = {} as ChangePasswordDTO;
+
+  topUpDTO: TopUpDTO = { balance: 0 };
+  amountList = [10000, 20000, 50000, 100000, 200000, 250000];
 
   constructor(
     private userService: UserService,
@@ -79,6 +84,19 @@ export class ProfileComponent {
     });
   }
 
+  topUp() {
+    this.userService.topUpBalance(this.topUpDTO).subscribe({
+      next: (res: any) => {
+        this.closeTopUpModal();
+        this.user.balance = res.balance ?? this.user.balance;
+        this.showAlert('Top Up Success!', true);
+      },
+      error: (err) => {
+        this.showAlert('Top Up Failed: ' + err.message, false);
+      }
+    });
+  }
+
   changePassword() {
     console.log('BODY:', this.changePasswordDTO);
 
@@ -115,6 +133,17 @@ export class ProfileComponent {
     modal.close();
     this.setUpDTO();
     this.user.confirmPassword = '';
+  }
+
+  showTopUpModal() {
+    const modal = document.getElementById('top-up-modal') as HTMLDialogElement;
+    modal.showModal();
+  }
+
+  closeTopUpModal() {
+    this.topUpDTO.balance = 0;
+    const modal = document.getElementById('top-up-modal') as HTMLDialogElement;
+    modal.close();
   }
 
   isButtonDisabled(): boolean {
