@@ -15,4 +15,5 @@ public class MovieDTO {
     private String synopsis;
     private int year;
     private int duration;
+    private String posterUrl;
 }

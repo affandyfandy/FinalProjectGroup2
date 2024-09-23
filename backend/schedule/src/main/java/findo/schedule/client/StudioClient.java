@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
-
 @Service
 public class StudioClient {
 
@@ -35,8 +33,9 @@ public class StudioClient {
 
         return "http://" + hostName + ":" + port + "/api/v1/studios/";
     }
-    public Mono<StudioDTO> getStudioById(List<Integer> studioId, String token) {
-        String url = getServiceUrl() + studioId;
+
+    public Mono<StudioDTO> getStudioById(Integer integer, String token) {
+        String url = getServiceUrl() + integer;
         return webClientBuilder.build()
                 .get()
                 .uri(url)

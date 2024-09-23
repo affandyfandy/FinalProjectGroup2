@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -36,8 +35,9 @@ public class MovieClient {
 
         return "http://" + hostName + ":" + port + "/api/v1/movies/";
     }
-    public Mono<MovieDTO> getMovieById(List<UUID> movieId, String token) {
-        String url = getServiceUrl() + movieId;
+
+    public Mono<MovieDTO> getMovieById(UUID movieId, String token) {
+        String url = getServiceUrl() + "anonymous/" + movieId;
         return webClientBuilder.build()
                 .get()
                 .uri(url)

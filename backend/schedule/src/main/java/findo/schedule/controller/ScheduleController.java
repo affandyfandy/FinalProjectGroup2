@@ -15,9 +15,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -27,18 +25,19 @@ public class ScheduleController {
 
     private final ScheduleServiceImpl scheduleService;
 
-
-    @GetMapping
-    public ResponseEntity<Page<Schedule>> getAllSchedule(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size) {
+    @GetMapping("/admin")
+    public ResponseEntity<Page<Schedule>> getAllSchedule(@RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Schedule> schedulePage = scheduleService.findAllSchedule(pageable);
 
-        if(schedulePage.isEmpty()) {
+        if (schedulePage.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(schedulePage);
     }
+
     @PostMapping("/admin/create-schedule")
     public ResponseEntity<ScheduleResponseDTO> createSchedule(@Valid @RequestBody CreateScheduleDTO dto,
             @AuthenticationPrincipal JwtAuthenticationToken principal) {
@@ -48,36 +47,39 @@ public class ScheduleController {
     }
 
     @GetMapping("/available")
-    public Mono<ResponseEntity<List<AvailableScheduleDTO>>> getAvailableSchedules(
+    public Mono<ResponseEntity<Page<AvailableScheduleDTO>>> getAvailableSchedules(
             @RequestParam @Valid LocalDate showDate,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size,
             @AuthenticationPrincipal JwtAuthenticationToken principal) {
-String token = principal.getToken().getTokenValue();
+        String token = principal.getToken().getTokenValue();
         return scheduleService.getAvailableSchedules(showDate, page, size, token)
                 .map(availableSchedulesPage -> {
-                    List<AvailableScheduleDTO> availableSchedules = availableSchedulesPage.getContent();
-                    if (availableSchedules.isEmpty()) {
+                    if (availableSchedulesPage.isEmpty()) {
                         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
                     }
-                    return ResponseEntity.status(HttpStatus.OK).body(availableSchedules);
+                    return ResponseEntity.status(HttpStatus.OK).body(availableSchedulesPage);
                 });
     }
-    // Endpoint to get showtimes for a specific movie
-    @GetMapping("/{movieId}/showtimes")
-    public ResponseEntity<List<ShowtimeDTO>> getShowtimes(
-            @PathVariable List<UUID> movieId,
-            @RequestParam @Valid Timestamp date,
-            @AuthenticationPrincipal JwtAuthenticationToken principal,
-            Pageable pageable) {
 
+    @GetMapping("/movie/{movieId}")
+    public Mono<ResponseEntity<Page<ScheduleDetailDTO>>> getSchedulesByMovieId(
+            @PathVariable UUID movieId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(required = false) @Valid LocalDate showDate,
+            @AuthenticationPrincipal JwtAuthenticationToken principal) {
+
+        // Get the JWT token from the authenticated user
         String token = principal.getToken().getTokenValue();
-        List<ShowtimeDTO> showtimes = (List<ShowtimeDTO>) scheduleService.getShowtimes(movieId, date, pageable, token);
 
-        if (showtimes.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        }
-
-        return ResponseEntity.ok(showtimes);
+        // Call the service method and return the response
+        return scheduleService.getSchedulesByMovieId(movieId, page, size, showDate, token)
+                .map(schedulePage -> {
+                    if (schedulePage.isEmpty()) {
+                        return ResponseEntity.status(HttpStatus.NO_CONTENT).build(); // Return 204 if no content
+                    }
+                    return ResponseEntity.ok(schedulePage); // Return 200 with the page of schedule details
+                });
     }
 }
