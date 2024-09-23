@@ -34,20 +34,23 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrfCustomizer -> csrfCustomizer.disable()) // Disable CSRF
-            .authorizeHttpRequests(authorizeRequests ->
-                authorizeRequests
-                    .requestMatchers(
-                        "/api/v1/auth/register", 
-                        "/api/v1/auth/login",
-                        "/api/v1/schedules/grouped",
-                        "/api/v1/schedules/detail/**").permitAll()
-                    .requestMatchers(
-                        "/api/v1/movies/**").hasRole("ADMIN") // Allow public access to register and login
-                    .anyRequest().authenticated() // Protect all other endpoints
-            )
-            .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults())); // Enable JWT-based authentication for protected endpoints
-        
+                .csrf(csrfCustomizer -> csrfCustomizer.disable()) // Disable CSRF
+                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                        .requestMatchers(
+                                "/api/v1/auth/register",
+                                "/api/v1/auth/login",
+                                "/api/v1/schedules/grouped",
+                                "/api/v1/schedules/detail/**")
+                        .permitAll()
+                        .requestMatchers(
+                                "/api/v1/movies/**")
+                        .hasRole("ADMIN") // Allow public access to register and login
+                        .anyRequest().authenticated() // Protect all other endpoints
+                )
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults())); // Enable JWT-based
+                                                                                        // authentication for protected
+                                                                                        // endpoints
+
         return http.build();
     }
 
@@ -85,7 +88,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 }

@@ -2,11 +2,15 @@ package findo.schedule.client;
 
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
-import findo.schedule.dto.GetStudioDTO;
+
+import findo.schedule.dto.StudioDTO;
+import reactor.core.publisher.Mono;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 
 @Service
 public class StudioClient {
@@ -33,12 +37,12 @@ public class StudioClient {
         return "http://" + hostName + ":" + port + "/api/v1/studios";
     }
 
-    public Mono<GetStudioDTO> getStudioData(String token){
+    public Mono<StudioDTO> getStudioById(List<Integer> list, String token) {
         return webClientBuilder.build()
                 .get()
-                .uri(getServiceUrl() + "/studios")
+                .uri(getServiceUrl() + "/" + list)
                 .headers(httpHeaders -> httpHeaders.setBearerAuth(token))
                 .retrieve()
-                .bodyToMono(GetStudioDTO.class);
+                .bodyToMono(StudioDTO.class);
     }
 }

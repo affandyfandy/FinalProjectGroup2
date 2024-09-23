@@ -25,7 +25,6 @@ public class JwtAuthenticationFilter extends AbstractGatewayFilterFactory<JwtAut
             if (authHeader == null || !authHeader.startsWith("Bearer ")) {
                 return unauthorizedResponse(exchange);
             }
-
             try {
                 return chain.filter(exchange);
             } catch (JwtException e) {
