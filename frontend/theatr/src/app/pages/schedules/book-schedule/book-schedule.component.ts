@@ -4,6 +4,10 @@ import { Schedule } from '../../../model/schedule.model';
 import { Seat } from '../../../model/seat.model';
 import { FullDateTimePipe } from '../../../core/pipes/full-date-time/full-date-time.pipe';
 import { PriceFormatPipe } from '../../../core/pipes/price-format/price-format.pipe';
+import { User } from '../../../model/user.model';
+import { UserService } from '../../../services/user/user.service';
+import { Router } from '@angular/router';
+import { RouterConfig } from '../../../config/app.constants';
 
 @Component({
   selector: 'app-book-schedule',
@@ -13,17 +17,25 @@ import { PriceFormatPipe } from '../../../core/pipes/price-format/price-format.p
     FullDateTimePipe,
     PriceFormatPipe
   ],
+  providers: [
+    UserService
+  ],
   templateUrl: './book-schedule.component.html'
 })
 export class BookScheduleComponent implements OnInit {
 
   scheduleData: Schedule = {};
+  userData: User = {};
 
   selectedSeats: Seat[] = [];
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private userService: UserService
+  ) { }
 
   ngOnInit(): void {
+    this.getUserData();
     this.getScheduleData();
   }
 
@@ -64,6 +76,22 @@ export class BookScheduleComponent implements OnInit {
     return seats;
   }
 
+  private getUserData() {
+    this.userService.getProfile().subscribe({
+      next: (res: any) => {
+        this.userData = res;
+        console.log(this.userData);
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  }
+
+  isBalanceNotEnough(): boolean {
+    return (this.userData.balance ?? 0) < (this.scheduleData.price ?? 0) * this.selectedSeats.length;
+  }
+
   onSeatClick(seat: Seat) {
     if (seat.status === 'AVAILABLE') {
       const index = this.selectedSeats.findIndex(selectedSeat => selectedSeat.id === seat.id);
@@ -77,5 +105,27 @@ export class BookScheduleComponent implements OnInit {
 
   isSeatSelected(seat: Seat): boolean {
     return this.selectedSeats.some(selectedSeat => selectedSeat.id === seat.id);
+  }
+
+  showModal() {
+    const modal = document.getElementById('booking-modal') as HTMLDialogElement;
+    modal.showModal();
+  }
+
+  closeModal() {
+    const modal = document.getElementById('booking-modal') as HTMLDialogElement;
+    modal.close();
+  }
+
+  bookSchedule() {
+    if (this.isBalanceNotEnough()) {
+      this.navigateToProfile();
+    } else {
+
+    }
+  }
+
+  private navigateToProfile() {
+    this.router.navigate([RouterConfig.PROFILE.link]);
   }
 }
