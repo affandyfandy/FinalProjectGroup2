@@ -36,11 +36,12 @@ public class StudioController {
     private final SeatService seatService;
 
     @GetMapping
-    public ResponseEntity<Page<Studio>> getAllStudios(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size) {
+    public ResponseEntity<Page<Studio>> getAllStudios(@RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Studio> studioPage = studioService.findAllStudio(pageable);
 
-        if(studioPage.isEmpty()) {
+        if (studioPage.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
 
@@ -51,7 +52,7 @@ public class StudioController {
     public ResponseEntity<List<Studio>> getAllActiveStudios() {
         List<Studio> studios = studioService.findAllActiveStudio();
 
-        if(studios.isEmpty()) {
+        if (studios.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
 
@@ -79,21 +80,22 @@ public class StudioController {
         return ResponseEntity.status(HttpStatus.OK).body(seat);
     }
 
-    @PostMapping
+    @PostMapping(value = "/admin/create-studio")
     public ResponseEntity<Studio> createStudio(@Valid @RequestBody StudioSaveDTO studioSaveDTO) {
         Studio studio = studioService.createStudio(studioSaveDTO);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(studio);
     }
 
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Studio> updateStudio(@PathVariable("id") Integer id, @Valid @RequestBody StudioSaveDTO studioSaveDTO) {
+    @PutMapping(value = "/admin/{id}")
+    public ResponseEntity<Studio> updateStudio(@PathVariable("id") Integer id,
+            @Valid @RequestBody StudioSaveDTO studioSaveDTO) {
         Studio studio = studioService.updateStudio(id, studioSaveDTO);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(studio);
     }
 
-    @PatchMapping(value = "/{id}/change-status")
+    @PatchMapping(value = "/admin/{id}/change-status")
     public ResponseEntity<Studio> updateStatusStudio(@PathVariable("id") Integer id) {
         Studio studio = studioService.deleteStudio(id);
 

@@ -31,43 +31,45 @@ import lombok.AllArgsConstructor;
 @Validated
 @AllArgsConstructor
 public class MovieController {
-    
+
     private final MovieService movieService;
 
-    @GetMapping
-    public ResponseEntity<Page<Movie>> getAllMovies(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size) {
+    @GetMapping(value = "/admin/get-all")
+    public ResponseEntity<Page<Movie>> getAllMovies(@RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Movie> moviePage = movieService.findAllMovies(pageable);
 
-        if(moviePage.isEmpty()) {
+        if (moviePage.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(moviePage);
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/anonymous/{id}")
     public ResponseEntity<Movie> getMovieById(@PathVariable("id") UUID id) {
         Movie movie = movieService.findMovieById(id);
 
         return ResponseEntity.status(HttpStatus.OK).body(movie);
     }
 
-    @PostMapping
+    @PostMapping(value = "/admin/create-movie")
     public ResponseEntity<Movie> createMovie(@Valid @RequestBody MovieSaveDTO movieSaveDTO) {
         Movie movie = movieService.createMovie(movieSaveDTO);
-        
+
         return ResponseEntity.status(HttpStatus.CREATED).body(movie);
     }
 
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Movie> updateMovie(@PathVariable("id") UUID id, @Valid @RequestBody MovieSaveDTO movieSaveDTO) {
+    @PutMapping(value = "/admin/{id}")
+    public ResponseEntity<Movie> updateMovie(@PathVariable("id") UUID id,
+            @Valid @RequestBody MovieSaveDTO movieSaveDTO) {
         Movie movie = movieService.updateMovie(id, movieSaveDTO);
 
         return ResponseEntity.status(HttpStatus.OK).body(movie);
     }
 
-    @PostMapping(value = "/upload-poster")
+    @PostMapping(value = "/admin/upload-poster")
     public ResponseEntity<Map<String, String>> uploadFile(@RequestParam("file") MultipartFile file) {
         String url = movieService.uploadFile(file);
 

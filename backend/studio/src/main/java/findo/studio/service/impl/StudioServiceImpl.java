@@ -39,15 +39,15 @@ public class StudioServiceImpl implements StudioService {
     @Override
     public Studio findStudioById(Integer id) {
         return studioRepository.findById(id)
-            .orElseThrow(() -> new NotFoundException("Studio not found!"));
+                .orElseThrow(() -> new NotFoundException("Studio not found!"));
     }
 
     @Override
     public Studio createStudio(StudioSaveDTO studioSaveDTO) {
-        if(studioRepository.existsByName(studioSaveDTO.getName())) {
+        if (studioRepository.existsByName(studioSaveDTO.getName())) {
             throw new DuplicateStudioException("Studio with this name already exists!");
         }
-        
+
         Studio savedStudio = studioMapper.toStudio(studioSaveDTO);
 
         savedStudio.setCreatedBy("admin");
@@ -56,7 +56,7 @@ public class StudioServiceImpl implements StudioService {
         savedStudio.setUpdatedTime(LocalDate.now());
 
         Studio createdStudio = studioRepository.save(savedStudio);
-        
+
         // Generate Seat
         seatService.generateSeats(createdStudio);
 
@@ -67,7 +67,8 @@ public class StudioServiceImpl implements StudioService {
     public Studio updateStudio(Integer id, StudioSaveDTO studioSaveDTO) {
         Studio checkStudio = findStudioById(id);
 
-        if(!checkStudio.getName().equals(studioSaveDTO.getName()) && studioRepository.existsByName(studioSaveDTO.getName())) {
+        if (!checkStudio.getName().equals(studioSaveDTO.getName())
+                && studioRepository.existsByName(studioSaveDTO.getName())) {
             throw new DuplicateStudioException("Studio with this name already exists!");
         }
 
@@ -85,7 +86,7 @@ public class StudioServiceImpl implements StudioService {
         Studio checkStudio = findStudioById(id);
 
         checkStudio.setDeleted(!checkStudio.isDeleted());
-        
+
         Studio updatedStudio = studioRepository.save(checkStudio);
 
         return updatedStudio;
