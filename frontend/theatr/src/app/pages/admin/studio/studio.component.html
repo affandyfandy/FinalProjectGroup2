@@ -26,12 +26,12 @@
                     <td>{{ studio.name }}</td>
 
                     <td>
-                        <input type="checkbox" class="toggle toggle-success" [checked]="!studio.deleted" />
+                        <input type="checkbox" class="toggle toggle-success" [checked]="!studio.deleted"
+                            (change)="changeStatus(studio.id ?? 0)" />
                     </td>
 
                     <td>
-                        <button (click)="showStudioModal(true, studio.name)"
-                            class="btn btn-square btn-secondary btn-sm">
+                        <button (click)="showStudioModal(true, studio)" class="btn btn-square btn-secondary btn-sm">
                             <img src="assets/icons/edit-white.svg" alt="Edit Icon" class="w-5 h-5">
                         </button>
                     </td>
@@ -61,7 +61,7 @@
         <div class="flex space-x-2 w-full">
             <button class="btn btn-secondary bg-opacity-50 max-w-[310px] w-full rounded-full"
                 (click)="closeStudioModal()">Cancel</button>
-            <button (click)="closeStudioModal()" [disabled]="title.invalid"
+            <button (click)="onClickSave()" [disabled]="title.invalid"
                 class="btn btn-primary max-w-[310px] w-full rounded-full">Save</button>
         </div>
     </div>

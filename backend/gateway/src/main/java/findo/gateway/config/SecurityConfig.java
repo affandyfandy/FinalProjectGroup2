@@ -30,7 +30,7 @@ public class SecurityConfig {
                                                 .permitAll() // Allow public access to these endpoints
                                                 .pathMatchers("/api/v1/bookings/admin/**",
                                                                 "/api/v1/schedules/admin/**")
-                                                .hasRole("ADMIN") // Only accessible with ADMIN role
+                                                .hasRole("ROLE_ADMIN") // Only accessible with ADMIN role
                                                 .pathMatchers("/api/v1/bookings/customer/**").hasRole("ROLE_CUSTOMER") // Accessible
                                                                                                                        // to
                                                                                                                        // customers
