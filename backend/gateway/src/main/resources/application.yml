@@ -4,7 +4,7 @@ server:
 spring:
   application:
     name: gateway-service
-    
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -43,9 +43,11 @@ spring:
             - JwtAuthenticationFilter
 
         - id: movie-service
-          uri: lb://movie
+          uri: lb://movie-service
           predicates:
             - Path=/api/v1/movies/**
+          filters:
+            - JwtAuthenticationFilter
 
         - id: studio-service
           uri: lb://studio
@@ -61,7 +63,7 @@ logging:
 
   file:
     name: logs/gateway.log
-    
+
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"

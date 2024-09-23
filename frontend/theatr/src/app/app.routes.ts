@@ -36,6 +36,12 @@ export const routes: Routes = [
         title: RouterConfig.BOOKINGS.title,
     },
     {
+        path: RouterConfig.SCHEDULES.path,
+        loadChildren: () =>
+            import('./pages/schedules/schedules.route').then((m) => m.scheduleRoutes),
+        title: RouterConfig.SCHEDULES.title,
+    },
+    {
         path: RouterConfig.ADMIN_BOOKINGS.path,
         data: { roles: ['ROLE_ADMIN'] },
         canActivate: [accessGuard],
