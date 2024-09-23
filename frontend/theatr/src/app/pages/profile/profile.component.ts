@@ -92,6 +92,7 @@ export class ProfileComponent {
         this.showAlert('Top Up Success!', true);
       },
       error: (err) => {
+        this.closeTopUpModal();
         this.showAlert('Top Up Failed: ' + err.error, false);
       }
     });
