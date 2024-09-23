@@ -1,1 +1,132 @@
-<p>book-schedule works!</p>
+<div class="max-w-full w-full p-16 pt-28 flex flex-col items-center space-y-10">
+    <!-- Header: Legends -->
+    <div class="flex space-x-8 p-2 w-full justify-center">
+        <div class="flex space-x-3">
+            <div class="w-7 h-7 bg-primary rounded"></div>
+            <p class="font-semibold">Available Seat</p>
+        </div>
+
+        <div class="flex space-x-3">
+            <div class="w-7 h-7 bg-base-200 rounded"></div>
+            <p class="font-semibold">Unavailable Seat</p>
+        </div>
+
+        <div class="flex space-x-3">
+            <div class="w-7 h-7 bg-secondary rounded"></div>
+            <p class="font-semibold">Your Choices</p>
+        </div>
+    </div>
+
+    <!-- Seats Grid -->
+    <div class="grid grid-cols-6 grid-rows-5 gap-5">
+        <button *ngFor="let seat of scheduleData.studio?.seats" (click)="onSeatClick(seat)"
+            [disabled]="seat.status == 'BOOKED'"
+            [ngClass]="{'bg-primary': seat.status == 'AVAILABLE', 'bg-secondary': isSeatSelected(seat)}"
+            class="w-12 h-12 btn btn-square flex items-center justify-center disabled:bg-base-200 disabled:text-zinc-400">
+            <p [ngClass]="{'text-primary-content': seat.status == 'AVAILABLE', 'text-white': isSeatSelected(seat)}"
+                class="font-semibold">{{ seat.seatCode }}</p>
+        </button>
+    </div>
+
+    <!-- Screen -->
+    <div class="max-w-[740px] w-full bg-primary text-center font-bold text-primary-content">SCREEN</div>
+
+    <!-- Info -->
+    <div class="flex p-3 px-6 space-x-10 bg-base-300 rounded-md items-center">
+        <div class="text-center">
+            <p class="text-zinc-400 font-medium">{{scheduleData.studio?.name?.toUpperCase()}}</p>
+            <p>{{scheduleData.showTime ? (scheduleData.showTime | fullDateTime) : 'N/A'}}</p>
+        </div>
+
+        <svg width="2" height="57" viewBox="0 0 2 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1V56" stroke="#454452" stroke-width="2" stroke-linecap="round" />
+        </svg>
+
+        <div class="text-center w-[120px]">
+            <p class="text-zinc-400 font-medium">TOTAL PRICE</p>
+            <p>{{(scheduleData.price ?? 0) * selectedSeats.length | priceFormat }}</p>
+        </div>
+
+        <svg width="2" height="57" viewBox="0 0 2 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1V56" stroke="#454452" stroke-width="2" stroke-linecap="round" />
+        </svg>
+
+        <div class="text-center">
+            <p class="text-zinc-400 font-medium">QUANTITY</p>
+            <p>{{selectedSeats.length }}x</p>
+        </div>
+
+        <svg width="2" height="57" viewBox="0 0 2 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1V56" stroke="#454452" stroke-width="2" stroke-linecap="round" />
+        </svg>
+
+        <button [disabled]="selectedSeats.length < 1" (click)="showModal()" class="btn btn-primary px-6 rounded-full">
+            Buy Ticket
+        </button>
+    </div>
+</div>
+
+<!-- MODAL -->
+<dialog id="booking-modal" class="modal">
+    <div class="modal-box flex flex-col max-w-[672px] items-center space-y-6 justify-center bg-base-300">
+        <h1 class="text-2xl font-semibold">Payment Confirmation</h1>
+
+        <div class="space-y-4 w-full">
+            <div class="flex items-center w-full space-x-4">
+                <img [src]="scheduleData.movie?.posterUrl" alt="Poster"
+                    class="w-[120px] h-[186px] rounded-xl object-cover">
+
+                <div class="space-y-2">
+                    <h1 class="text-2xl font-bold">{{ scheduleData.movie?.title }} {{'(' +
+                        scheduleData.movie?.year + ')'}}</h1>
+                    <div class="text-zinc-400 flex items-center space-x-2">
+                        <img src="assets/icons/location-gray.svg" alt="Edit Icon" class="w-6 h-6">
+                        <p>{{ scheduleData.studio?.name }}</p>
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        <img src="assets/icons/ticket-gray.svg" alt="Edit Icon" class="w-6 h-6">
+                        <p class="text-zinc-400">{{ selectedSeats.length }} Tickets</p>
+                        <p *ngFor="let seat of selectedSeats" class="font-bold">{{seat.seatCode}}</p>
+                    </div>
+                    <p>{{ scheduleData.showTime ? (scheduleData.showTime! | fullDateTime) : 'N/A' }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex justify-between">
+                <p class="text-zinc-400">PRICE</p>
+                <p class="text-xl font-semibold">{{ (scheduleData.price ?? 0) * selectedSeats.length | priceFormat }}
+                </p>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="space-y-3">
+                <div class="flex p-6 space-x-4 bg-base-200 rounded-xl">
+                    <img src="assets/icons/wallet-white.svg" alt="Wallet Icon"
+                        class="p-2 w-9 h-9 text-center rounded-lg bg-secondary">
+                    <div>
+                        <p class="font-medium text-zinc-400">Your Wallet Balance</p>
+                        <p class="font-semibold text-2xl">{{(userData.balance ?? 0) | priceFormat}}</p>
+                    </div>
+                </div>
+
+                <div *ngIf="isBalanceNotEnough()"
+                    class="flex space-x-4 p-6 py-4 w-full items-center bg-warning rounded-lg">
+                    <img src="assets/icons/danger-black.svg" alt="Warning Icon">
+                    <p class="font-medium text-primary-content">Insufficient balance. Please top up your wallet balance
+                        first.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex space-x-2 w-full">
+            <button class="btn btn-secondary bg-opacity-50 max-w-[310px] w-full rounded-full"
+                (click)="closeModal()">Cancel</button>
+            <button (click)="bookSchedule()"
+                class="btn btn-primary max-w-[310px] w-full rounded-full">{{isBalanceNotEnough() ? 'Top Up' :
+                'Confirm'}}</button>
+        </div>
+    </div>
+</dialog>

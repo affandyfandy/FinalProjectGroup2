@@ -17,5 +17,5 @@ public class ScheduleDetailDTO {
     private int movieYear;
     private int movieDuration;
     private String posterUrl;
-    private List<ScheduleShowDTO> shows; // List of shows containing details
+    private List<ScheduleShowDTO> shows;
 }

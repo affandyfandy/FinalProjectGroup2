@@ -1,3 +1,4 @@
+import { Booking } from "./booking.model";
 import { Movie } from "./movie.model";
 import { Studio } from "./studio.model";
 
@@ -9,6 +10,7 @@ export interface Schedule {
     showTime?: Date;
     movie?: Movie;
     studio?: Studio;
+    booking?: Booking;
 }
 
 export interface AddScheduleDTO {
