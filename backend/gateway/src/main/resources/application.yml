@@ -50,9 +50,11 @@ spring:
             - JwtAuthenticationFilter
 
         - id: studio-service
-          uri: lb://studio
+          uri: lb://studio-service
           predicates:
             - Path=/api/v1/studios/**
+          filters:
+            - JwtAuthenticationFilter
 
 logging:
   level:
