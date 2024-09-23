@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AddMovieDTO, Movie } from '../../../model/movie.model';
+import { SaveMovieDTO, Movie, ShowMovieDTO } from '../../../model/movie.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
+import { MovieService } from '../../../services/movie/movie.service';
 
 @Component({
   selector: 'app-movie',
@@ -19,14 +20,14 @@ export class MovieComponent implements OnInit {
   previewImage = '';
 
   movieList: Movie[] = [];
-  currentMovie: AddMovieDTO = {
+  currentMovie: ShowMovieDTO = {
     title: '',
     synopsis: '',
     year: 0,
     duration: 0,
     posterUrl: ''
   };
-  tempMovie: AddMovieDTO = {
+  tempMovie: ShowMovieDTO = {
     title: '',
     synopsis: '',
     year: 0,
@@ -38,7 +39,7 @@ export class MovieComponent implements OnInit {
   isEdit = false;
   isPosterChanged = false;
 
-  constructor() { }
+  constructor(private movieService: MovieService) { }
 
   ngOnInit(): void {
     this.getMovieList();
@@ -93,7 +94,7 @@ export class MovieComponent implements OnInit {
     this.charCount = 0;
     this.isPosterChanged = false;
     this.previewImage = '';
-    this.tempMovie = {} as AddMovieDTO;
+    this.tempMovie = {} as ShowMovieDTO;
     modal.close();
   }
 

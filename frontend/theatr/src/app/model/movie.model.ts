@@ -7,10 +7,17 @@ export interface Movie {
     year?: number;
 }
 
-export interface AddMovieDTO {
+export interface SaveMovieDTO {
     title: string;
     synopsis: string;
-    duration: number;
+    posterUrl: string;
+    year: number;
+}
+
+export interface ShowMovieDTO {
+    title: string;
+    synopsis: string;
+    duration: number,
     posterUrl: string;
     year: number;
 }
