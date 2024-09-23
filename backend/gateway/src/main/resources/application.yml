@@ -4,7 +4,7 @@ server:
 spring:
   application:
     name: gateway-service
-    
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -63,7 +63,7 @@ logging:
 
   file:
     name: logs/gateway.log
-    
+
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"

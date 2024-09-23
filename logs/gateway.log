@@ -8676,3 +8676,137 @@ Caused by: java.net.ConnectException: Connection refused: no further information
 2024-09-19 17:08:50 - The response was handled for observation {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='POST', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='booking-service', spring.cloud.gateway.route.uri='lb://booking-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/bookings/customer/book'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=0.0340252, duration(nanos)=3.40252E7, startTimeNanos=32555594414600}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@4a2bfb59'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@4dca3004}
 2024-09-19 17:08:50 - Response: 500 INTERNAL_SERVER_ERROR for POST http://localhost:8080/api/v1/bookings/customer/book
 2024-09-19 17:08:50 - [1d78d418-9] Completed 500 INTERNAL_SERVER_ERROR
+2024-09-23 10:02:02 - HV000001: Hibernate Validator 8.0.1.Final
+2024-09-23 10:02:02 - Starting GatewayApplication using Java 17.0.3 with PID 7220 (D:\FPT\New Data FPT\FPT\Project FinalTerm\FinalProjectGroup\FinalProjectGroup2\backend\gateway\target\classes started by Chandra H in D:\FPT\New Data FPT\FPT\Project FinalTerm\FinalProjectGroup\FinalProjectGroup2)
+2024-09-23 10:02:02 - No active profile set, falling back to 1 default profile: "default"
+2024-09-23 10:02:02 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-23 10:02:02 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-23 10:02:04 - BeanFactory id=74d6d9e2-27e6-30d8-b3c5-fa81781b0eb4
+2024-09-23 10:02:04 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2024-09-23 10:02:04 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2024-09-23 10:02:04 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2024-09-23 10:02:04 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2024-09-23 10:02:04 - Bean 'reactorDeferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2024-09-23 10:02:05 - Routes supplied from Gateway Properties: [RouteDefinition{id='auth-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/auth/**}}], filters=[], uri=lb://auth-service, order=0, metadata={}}, RouteDefinition{id='user-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/users/**}}], filters=[FilterDefinition{name='JwtAuthenticationFilter', args={}}], uri=lb://user-service, order=0, metadata={}}, RouteDefinition{id='booking-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/bookings/**}}], filters=[FilterDefinition{name='JwtAuthenticationFilter', args={}}], uri=lb://booking-service, order=0, metadata={}}, RouteDefinition{id='schedule-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/schedules/**}}], filters=[], uri=lb://schedule, order=0, metadata={}}, RouteDefinition{id='movie-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/movies/**}}], filters=[FilterDefinition{name='JwtAuthenticationFilter', args={}}], uri=lb://movie-service, order=0, metadata={}}, RouteDefinition{id='studio-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/studios/**}}], filters=[FilterDefinition{name='JwtAuthenticationFilter', args={}}], uri=lb://studio-service, order=0, metadata={}}]
+2024-09-23 10:02:05 - Loaded RoutePredicateFactory [After]
+2024-09-23 10:02:05 - Loaded RoutePredicateFactory [Before]
+2024-09-23 10:02:05 - Loaded RoutePredicateFactory [Between]
+2024-09-23 10:02:05 - Loaded RoutePredicateFactory [Cookie]
+2024-09-23 10:02:05 - Loaded RoutePredicateFactory [Header]
+2024-09-23 10:02:05 - Loaded RoutePredicateFactory [Host]
+2024-09-23 10:02:05 - Loaded RoutePredicateFactory [Method]
+2024-09-23 10:02:05 - Loaded RoutePredicateFactory [Path]
+2024-09-23 10:02:05 - Loaded RoutePredicateFactory [Query]
+2024-09-23 10:02:05 - Loaded RoutePredicateFactory [ReadBody]
+2024-09-23 10:02:05 - Loaded RoutePredicateFactory [RemoteAddr]
+2024-09-23 10:02:05 - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2024-09-23 10:02:05 - Loaded RoutePredicateFactory [Weight]
+2024-09-23 10:02:05 - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2024-09-23 10:02:05 - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2024-09-23 10:02:05 - Exposing 18 endpoints beneath base path '/actuator'
+2024-09-23 10:02:06 - ControllerAdvice beans: none
+2024-09-23 10:02:06 - enableLoggingRequestDetails='false': form data and headers will be masked to prevent unsafe logging of potentially sensitive data
+2024-09-23 10:02:06 - LiveReload server is running on port 35729
+2024-09-23 10:02:06 - Eureka HTTP Client uses RestTemplate.
+2024-09-23 10:02:06 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2024-09-23 10:02:07 - Setting initial instance status as: STARTING
+2024-09-23 10:02:07 - Initializing Eureka in region us-east-1
+2024-09-23 10:02:07 - Resolving eureka endpoints via configuration
+2024-09-23 10:02:07 - Disable delta property : false
+2024-09-23 10:02:07 - Single vip registry refresh property : null
+2024-09-23 10:02:07 - Force full registry fetch : false
+2024-09-23 10:02:07 - Application is null : false
+2024-09-23 10:02:07 - Registered Applications size is zero : true
+2024-09-23 10:02:07 - Application version is -1: true
+2024-09-23 10:02:07 - Getting all instance registry info from the eureka server
+2024-09-23 10:02:07 - HTTP GET http://localhost:8761/eureka/apps/
+2024-09-23 10:02:07 - Accept=[application/json, application/*+json]
+2024-09-23 10:02:07 - Response 200 OK
+2024-09-23 10:02:07 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-23 10:02:07 - The response status is 200
+2024-09-23 10:02:07 - Starting heartbeat executor: renew interval is: 30
+2024-09-23 10:02:07 - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2024-09-23 10:02:07 - Discovery Client initialized at timestamp 1727060527607 with initial instances count: 0
+2024-09-23 10:02:07 - Registering application GATEWAY-SERVICE with eureka with status UP
+2024-09-23 10:02:07 - Saw local status change event StatusChangeEvent [timestamp=1727060527616, current=UP, previous=STARTING]
+2024-09-23 10:02:07 - DiscoveryClient_GATEWAY-SERVICE/gateway-service: registering service...
+2024-09-23 10:02:07 - HTTP POST http://localhost:8761/eureka/apps/GATEWAY-SERVICE
+2024-09-23 10:02:07 - Accept=[application/json, application/*+json]
+2024-09-23 10:02:07 - Writing [InstanceInfo [instanceId = gateway-service, appName = GATEWAY-SERVICE, hostName = localhost, status = UP, ipAddr = 26.86.151.172, port = 8080, securePort = 443, dataCenterInfo = com.netflix.appinfo.MyDataCenterInfo@64b2c372] as "application/json"
+2024-09-23 10:02:07 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-23 10:02:07 - RouteDefinition matched: auth-service
+2024-09-23 10:02:07 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-23 10:02:07 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 10:02:07 - RouteDefinition matched: user-service
+2024-09-23 10:02:07 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-23 10:02:07 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 10:02:07 - RouteDefinition matched: booking-service
+2024-09-23 10:02:07 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-23 10:02:07 - RouteDefinition matched: schedule-service
+2024-09-23 10:02:07 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-23 10:02:07 - RouteDefinition movie-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 10:02:07 - RouteDefinition matched: movie-service
+2024-09-23 10:02:07 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-23 10:02:07 - RouteDefinition studio-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 10:02:07 - RouteDefinition matched: studio-service
+2024-09-23 10:02:07 - New routes count: 6
+2024-09-23 10:02:07 - Response 204 NO_CONTENT
+2024-09-23 10:02:07 - DiscoveryClient_GATEWAY-SERVICE/gateway-service - registration status: 204
+2024-09-23 10:02:08 - Netty started on port 8080 (http)
+2024-09-23 10:02:08 - Updating port to 8080
+2024-09-23 10:02:08 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-23 10:02:08 - RouteDefinition matched: auth-service
+2024-09-23 10:02:08 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-23 10:02:08 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 10:02:08 - RouteDefinition matched: user-service
+2024-09-23 10:02:08 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-23 10:02:08 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 10:02:08 - RouteDefinition matched: booking-service
+2024-09-23 10:02:08 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-23 10:02:08 - RouteDefinition matched: schedule-service
+2024-09-23 10:02:08 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-23 10:02:08 - RouteDefinition movie-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 10:02:08 - RouteDefinition matched: movie-service
+2024-09-23 10:02:08 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-23 10:02:08 - RouteDefinition studio-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 10:02:08 - RouteDefinition matched: studio-service
+2024-09-23 10:02:08 - New routes count: 6
+2024-09-23 10:02:08 - Started GatewayApplication in 6.12 seconds (process running for 6.73)
+2024-09-23 10:02:37 - Disable delta property : false
+2024-09-23 10:02:37 - Single vip registry refresh property : null
+2024-09-23 10:02:37 - Force full registry fetch : false
+2024-09-23 10:02:37 - Application is null : false
+2024-09-23 10:02:37 - Registered Applications size is zero : true
+2024-09-23 10:02:37 - Application version is -1: false
+2024-09-23 10:02:37 - Getting all instance registry info from the eureka server
+2024-09-23 10:02:37 - HTTP GET http://localhost:8761/eureka/apps/
+2024-09-23 10:02:37 - Accept=[application/json, application/*+json]
+2024-09-23 10:02:37 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service?status=UP&lastDirtyTimestamp=1727060527615
+2024-09-23 10:02:37 - Response 200 OK
+2024-09-23 10:02:37 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-23 10:02:37 - Accept=[application/json, application/*+json]
+2024-09-23 10:02:37 - The response status is 200
+2024-09-23 10:02:37 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-23 10:02:37 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 10:02:37 - Response 200 OK
+2024-09-23 10:02:37 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-23 10:02:37 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-23 10:02:37 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 10:02:37 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-23 10:02:37 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-23 10:02:37 - RouteDefinition matched: auth-service
+2024-09-23 10:02:37 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-23 10:02:37 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 10:02:37 - RouteDefinition matched: user-service
+2024-09-23 10:02:37 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-23 10:02:37 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 10:02:37 - RouteDefinition matched: booking-service
+2024-09-23 10:02:37 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-23 10:02:37 - RouteDefinition matched: schedule-service
+2024-09-23 10:02:37 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-23 10:02:37 - RouteDefinition movie-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 10:02:37 - RouteDefinition matched: movie-service
+2024-09-23 10:02:37 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-23 10:02:37 - RouteDefinition studio-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 10:02:37 - RouteDefinition matched: studio-service
+2024-09-23 10:02:37 - New routes count: 8
