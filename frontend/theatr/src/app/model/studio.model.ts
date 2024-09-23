@@ -6,3 +6,7 @@ export interface Studio {
     deleted?: boolean;
     seats?: Seat[];
 }
+
+export interface AddStudioDTO {
+    name: string;
+}
