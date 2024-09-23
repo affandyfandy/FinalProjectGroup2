@@ -15,47 +15,57 @@ spring:
 
   cloud:
     gateway:
-
       routes:
         - id: auth-service
-          uri: http://localhost:8081
+          uri: lb://auth-service
           predicates:
             - Path=/api/v1/auth/**
 
         - id: user-service
-          uri: http://localhost:8082
+          uri: lb://user-service
           predicates:
             - Path=/api/v1/users/**
           filters:
-            - name: JwtAuthenticationFilter
+            - JwtAuthenticationFilter
 
         - id: booking-service
-          uri: http://localhost:8083
+          uri: lb://booking-service
           predicates:
             - Path=/api/v1/bookings/**
           filters:
-            - name: JwtAuthenticationFilter
+            - JwtAuthenticationFilter
 
         - id: schedule-service
-          uri: http://localhost:8084
+          uri: lb://schedule
           predicates:
             - Path=/api/v1/schedules/**
-          filters:
-            - name: JwtAuthenticationFilter
 
         - id: movie-service
-          uri: http://localhost:8085
+          uri: lb://movie
           predicates:
             - Path=/api/v1/movies/**
 
         - id: studio-service
-          uri: http://localhost:8086
+          uri: lb://studio
           predicates:
             - Path=/api/v1/studios/**
-          filters:
-            - name: JwtAuthenticationFilter
 
 logging:
   level:
     org.springframework.cloud.gateway: DEBUG
     org.springframework.security: DEBUG
+    root: INFO
+    org.springframework.web: DEBUG
+
+  file:
+    name: logs/gateway.log
+    
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
