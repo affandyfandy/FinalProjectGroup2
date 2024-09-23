@@ -1,1 +1,67 @@
-<p>book-schedule works!</p>
+<div class="max-w-full w-full p-16 pt-28 flex flex-col items-center space-y-10">
+    <!-- Header: Legends -->
+    <div class="flex space-x-8 p-2 w-full justify-center">
+        <div class="flex space-x-3">
+            <div class="w-7 h-7 bg-primary rounded"></div>
+            <p class="font-semibold">Available Seat</p>
+        </div>
+
+        <div class="flex space-x-3">
+            <div class="w-7 h-7 bg-base-200 rounded"></div>
+            <p class="font-semibold">Unavailable Seat</p>
+        </div>
+
+        <div class="flex space-x-3">
+            <div class="w-7 h-7 bg-secondary rounded"></div>
+            <p class="font-semibold">Your Choices</p>
+        </div>
+    </div>
+
+    <!-- Seats Grid -->
+    <div class="grid grid-cols-6 grid-rows-5 gap-5">
+        <button *ngFor="let seat of scheduleData.studio?.seats" (click)="onSeatClick(seat)"
+            [disabled]="seat.status == 'BOOKED'"
+            [ngClass]="{'bg-primary': seat.status == 'AVAILABLE', 'bg-secondary': isSeatSelected(seat)}"
+            class="w-12 h-12 btn btn-square flex items-center justify-center disabled:bg-base-200 disabled:text-zinc-400">
+            <p [ngClass]="{'text-primary-content': seat.status == 'AVAILABLE', 'text-white': isSeatSelected(seat)}"
+                class="font-semibold">{{ seat.seatCode }}</p>
+        </button>
+    </div>
+
+    <!-- Screen -->
+    <div class="max-w-[740px] w-full bg-primary text-center font-bold text-primary-content">SCREEN</div>
+
+    <!-- Info -->
+    <div class="flex p-3 px-6 space-x-10 bg-base-300 rounded-md items-center">
+        <div class="text-center">
+            <p class="text-zinc-400 font-medium">{{scheduleData.studio?.name?.toUpperCase()}}</p>
+            <p>{{scheduleData.showTime ? (scheduleData.showTime | fullDateTime) : 'N/A'}}</p>
+        </div>
+
+        <svg width="2" height="57" viewBox="0 0 2 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1V56" stroke="#454452" stroke-width="2" stroke-linecap="round" />
+        </svg>
+
+        <div class="text-center w-[120px]">
+            <p class="text-zinc-400 font-medium">TOTAL PRICE</p>
+            <p>{{(scheduleData.price ?? 0) * selectedSeats.length | priceFormat }}</p>
+        </div>
+
+        <svg width="2" height="57" viewBox="0 0 2 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1V56" stroke="#454452" stroke-width="2" stroke-linecap="round" />
+        </svg>
+
+        <div class="text-center">
+            <p class="text-zinc-400 font-medium">QUANTITY</p>
+            <p>{{selectedSeats.length }}x</p>
+        </div>
+
+        <svg width="2" height="57" viewBox="0 0 2 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1V56" stroke="#454452" stroke-width="2" stroke-linecap="round" />
+        </svg>
+
+        <button class="btn btn-primary px-6 rounded-full">
+            Buy Ticket
+        </button>
+    </div>
+</div>
