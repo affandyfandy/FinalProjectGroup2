@@ -41,14 +41,18 @@ spring:
             - Path=/api/v1/schedules/**
 
         - id: movie-service
-          uri: lb://movie
+          uri: lb://movie-service
           predicates:
             - Path=/api/v1/movies/**
+          filters:
+            - JwtAuthenticationFilter
 
         - id: studio-service
-          uri: lb://studio
+          uri: lb://studio-service
           predicates:
             - Path=/api/v1/studios/**
+          filters:
+            - JwtAuthenticationFilter
 
 logging:
   level:
