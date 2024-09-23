@@ -8676,3 +8676,1053 @@ Caused by: java.net.ConnectException: Connection refused: no further information
 2024-09-19 17:08:50 - The response was handled for observation {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='POST', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='booking-service', spring.cloud.gateway.route.uri='lb://booking-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/bookings/customer/book'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=0.0340252, duration(nanos)=3.40252E7, startTimeNanos=32555594414600}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@4a2bfb59'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@4dca3004}
 2024-09-19 17:08:50 - Response: 500 INTERNAL_SERVER_ERROR for POST http://localhost:8080/api/v1/bookings/customer/book
 2024-09-19 17:08:50 - [1d78d418-9] Completed 500 INTERNAL_SERVER_ERROR
+2024-09-23 08:34:16 - HV000001: Hibernate Validator 8.0.1.Final
+2024-09-23 08:34:16 - Starting GatewayApplication using Java 17.0.3 with PID 11744 (D:\FPT\New Data FPT\FPT\Project FinalTerm\FinalProjectGroup\FinalProjectGroup2\backend\gateway\target\classes started by Chandra H in D:\FPT\New Data FPT\FPT\Project FinalTerm\FinalProjectGroup\FinalProjectGroup2)
+2024-09-23 08:34:16 - No active profile set, falling back to 1 default profile: "default"
+2024-09-23 08:34:16 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-23 08:34:16 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-23 08:34:17 - BeanFactory id=74d6d9e2-27e6-30d8-b3c5-fa81781b0eb4
+2024-09-23 08:34:17 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2024-09-23 08:34:17 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2024-09-23 08:34:17 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2024-09-23 08:34:17 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2024-09-23 08:34:17 - Bean 'reactorDeferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2024-09-23 08:34:19 - Routes supplied from Gateway Properties: [RouteDefinition{id='auth-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/auth/**}}], filters=[], uri=lb://auth-service, order=0, metadata={}}, RouteDefinition{id='user-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/users/**}}], filters=[FilterDefinition{name='JwtAuthenticationFilter', args={}}], uri=lb://user-service, order=0, metadata={}}, RouteDefinition{id='booking-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/bookings/**}}], filters=[FilterDefinition{name='JwtAuthenticationFilter', args={}}], uri=lb://booking-service, order=0, metadata={}}, RouteDefinition{id='schedule-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/schedules/**}}], filters=[], uri=lb://schedule, order=0, metadata={}}, RouteDefinition{id='movie-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/movies/**}}], filters=[], uri=lb://movie, order=0, metadata={}}, RouteDefinition{id='studio-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/studios/**}}], filters=[], uri=lb://studio, order=0, metadata={}}]
+2024-09-23 08:34:19 - Loaded RoutePredicateFactory [After]
+2024-09-23 08:34:19 - Loaded RoutePredicateFactory [Before]
+2024-09-23 08:34:19 - Loaded RoutePredicateFactory [Between]
+2024-09-23 08:34:19 - Loaded RoutePredicateFactory [Cookie]
+2024-09-23 08:34:19 - Loaded RoutePredicateFactory [Header]
+2024-09-23 08:34:19 - Loaded RoutePredicateFactory [Host]
+2024-09-23 08:34:19 - Loaded RoutePredicateFactory [Method]
+2024-09-23 08:34:19 - Loaded RoutePredicateFactory [Path]
+2024-09-23 08:34:19 - Loaded RoutePredicateFactory [Query]
+2024-09-23 08:34:19 - Loaded RoutePredicateFactory [ReadBody]
+2024-09-23 08:34:19 - Loaded RoutePredicateFactory [RemoteAddr]
+2024-09-23 08:34:19 - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2024-09-23 08:34:19 - Loaded RoutePredicateFactory [Weight]
+2024-09-23 08:34:19 - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2024-09-23 08:34:19 - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2024-09-23 08:34:19 - Exposing 18 endpoints beneath base path '/actuator'
+2024-09-23 08:34:19 - ControllerAdvice beans: none
+2024-09-23 08:34:19 - enableLoggingRequestDetails='false': form data and headers will be masked to prevent unsafe logging of potentially sensitive data
+2024-09-23 08:34:20 - LiveReload server is running on port 35729
+2024-09-23 08:34:20 - Eureka HTTP Client uses RestTemplate.
+2024-09-23 08:34:20 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2024-09-23 08:34:20 - Setting initial instance status as: STARTING
+2024-09-23 08:34:20 - Initializing Eureka in region us-east-1
+2024-09-23 08:34:20 - Resolving eureka endpoints via configuration
+2024-09-23 08:34:20 - Disable delta property : false
+2024-09-23 08:34:20 - Single vip registry refresh property : null
+2024-09-23 08:34:20 - Force full registry fetch : false
+2024-09-23 08:34:20 - Application is null : false
+2024-09-23 08:34:20 - Registered Applications size is zero : true
+2024-09-23 08:34:20 - Application version is -1: true
+2024-09-23 08:34:20 - Getting all instance registry info from the eureka server
+2024-09-23 08:34:20 - HTTP GET http://localhost:8761/eureka/apps/
+2024-09-23 08:34:20 - Accept=[application/json, application/*+json]
+2024-09-23 08:34:20 - Response 200 OK
+2024-09-23 08:34:20 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-23 08:34:20 - The response status is 200
+2024-09-23 08:34:20 - Starting heartbeat executor: renew interval is: 30
+2024-09-23 08:34:20 - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2024-09-23 08:34:20 - Discovery Client initialized at timestamp 1727055260983 with initial instances count: 0
+2024-09-23 08:34:20 - Registering application GATEWAY-SERVICE with eureka with status UP
+2024-09-23 08:34:20 - Saw local status change event StatusChangeEvent [timestamp=1727055260989, current=UP, previous=STARTING]
+2024-09-23 08:34:20 - DiscoveryClient_GATEWAY-SERVICE/gateway-service: registering service...
+2024-09-23 08:34:20 - HTTP POST http://localhost:8761/eureka/apps/GATEWAY-SERVICE
+2024-09-23 08:34:20 - Accept=[application/json, application/*+json]
+2024-09-23 08:34:21 - Writing [InstanceInfo [instanceId = gateway-service, appName = GATEWAY-SERVICE, hostName = localhost, status = UP, ipAddr = 26.86.151.172, port = 8080, securePort = 443, dataCenterInfo = com.netflix.appinfo.MyDataCenterInfo@6abc8ad2] as "application/json"
+2024-09-23 08:34:21 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-23 08:34:21 - RouteDefinition matched: auth-service
+2024-09-23 08:34:21 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-23 08:34:21 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:34:21 - RouteDefinition matched: user-service
+2024-09-23 08:34:21 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-23 08:34:21 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:34:21 - RouteDefinition matched: booking-service
+2024-09-23 08:34:21 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-23 08:34:21 - RouteDefinition matched: schedule-service
+2024-09-23 08:34:21 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-23 08:34:21 - RouteDefinition matched: movie-service
+2024-09-23 08:34:21 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-23 08:34:21 - RouteDefinition matched: studio-service
+2024-09-23 08:34:21 - New routes count: 6
+2024-09-23 08:34:21 - Response 204 NO_CONTENT
+2024-09-23 08:34:21 - DiscoveryClient_GATEWAY-SERVICE/gateway-service - registration status: 204
+2024-09-23 08:34:21 - Netty started on port 8080 (http)
+2024-09-23 08:34:21 - Updating port to 8080
+2024-09-23 08:34:21 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-23 08:34:21 - RouteDefinition matched: auth-service
+2024-09-23 08:34:21 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-23 08:34:21 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:34:21 - RouteDefinition matched: user-service
+2024-09-23 08:34:21 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-23 08:34:21 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:34:21 - RouteDefinition matched: booking-service
+2024-09-23 08:34:21 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-23 08:34:21 - RouteDefinition matched: schedule-service
+2024-09-23 08:34:21 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-23 08:34:21 - RouteDefinition matched: movie-service
+2024-09-23 08:34:21 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-23 08:34:21 - RouteDefinition matched: studio-service
+2024-09-23 08:34:21 - New routes count: 6
+2024-09-23 08:34:21 - Started GatewayApplication in 5.93 seconds (process running for 6.513)
+2024-09-23 08:34:50 - Disable delta property : false
+2024-09-23 08:34:50 - Single vip registry refresh property : null
+2024-09-23 08:34:50 - Force full registry fetch : false
+2024-09-23 08:34:50 - Application is null : false
+2024-09-23 08:34:50 - Registered Applications size is zero : true
+2024-09-23 08:34:50 - Application version is -1: false
+2024-09-23 08:34:50 - Getting all instance registry info from the eureka server
+2024-09-23 08:34:50 - HTTP GET http://localhost:8761/eureka/apps/
+2024-09-23 08:34:50 - Accept=[application/json, application/*+json]
+2024-09-23 08:34:50 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service?status=UP&lastDirtyTimestamp=1727055260989
+2024-09-23 08:34:50 - Response 200 OK
+2024-09-23 08:34:50 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-23 08:34:50 - The response status is 200
+2024-09-23 08:34:50 - Accept=[application/json, application/*+json]
+2024-09-23 08:34:51 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-23 08:34:51 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:34:51 - Response 200 OK
+2024-09-23 08:34:51 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-23 08:34:51 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-23 08:34:51 - RouteDefinition matched: auth-service
+2024-09-23 08:34:51 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-23 08:34:51 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:34:51 - RouteDefinition matched: user-service
+2024-09-23 08:34:51 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-23 08:34:51 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:34:51 - RouteDefinition matched: booking-service
+2024-09-23 08:34:51 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-23 08:34:51 - RouteDefinition matched: schedule-service
+2024-09-23 08:34:51 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-23 08:34:51 - RouteDefinition matched: movie-service
+2024-09-23 08:34:51 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-23 08:34:51 - RouteDefinition matched: studio-service
+2024-09-23 08:34:51 - New routes count: 7
+2024-09-23 08:35:21 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service?status=UP&lastDirtyTimestamp=1727055260989
+2024-09-23 08:35:21 - Accept=[application/json, application/*+json]
+2024-09-23 08:35:21 - Response 200 OK
+2024-09-23 08:35:21 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-23 08:35:21 - Accept=[application/json, application/*+json]
+2024-09-23 08:35:21 - Response 200 OK
+2024-09-23 08:35:21 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-23 08:35:21 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-23 08:35:21 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:35:21 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-23 08:35:21 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-23 08:35:21 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:35:21 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-23 08:35:21 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-23 08:35:21 - RouteDefinition matched: auth-service
+2024-09-23 08:35:21 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-23 08:35:21 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:35:21 - RouteDefinition matched: user-service
+2024-09-23 08:35:21 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-23 08:35:21 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:35:21 - RouteDefinition matched: booking-service
+2024-09-23 08:35:21 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-23 08:35:21 - RouteDefinition matched: schedule-service
+2024-09-23 08:35:21 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-23 08:35:21 - RouteDefinition matched: movie-service
+2024-09-23 08:35:21 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-23 08:35:21 - RouteDefinition matched: studio-service
+2024-09-23 08:35:21 - New routes count: 8
+2024-09-23 08:35:51 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service?status=UP&lastDirtyTimestamp=1727055260989
+2024-09-23 08:35:51 - Accept=[application/json, application/*+json]
+2024-09-23 08:35:51 - Response 200 OK
+2024-09-23 08:35:51 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-23 08:35:51 - Accept=[application/json, application/*+json]
+2024-09-23 08:35:51 - Response 200 OK
+2024-09-23 08:35:51 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-23 08:35:51 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-23 08:35:51 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:35:51 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-23 08:35:51 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-23 08:35:51 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:35:51 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-23 08:35:51 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-23 08:35:51 - RouteDefinition matched: auth-service
+2024-09-23 08:35:51 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-23 08:35:51 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:35:51 - RouteDefinition matched: user-service
+2024-09-23 08:35:51 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-23 08:35:51 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:35:51 - RouteDefinition matched: booking-service
+2024-09-23 08:35:51 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-23 08:35:51 - RouteDefinition matched: schedule-service
+2024-09-23 08:35:51 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-23 08:35:51 - RouteDefinition matched: movie-service
+2024-09-23 08:35:51 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-23 08:35:51 - RouteDefinition matched: studio-service
+2024-09-23 08:35:51 - New routes count: 8
+2024-09-23 08:36:21 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service?status=UP&lastDirtyTimestamp=1727055260989
+2024-09-23 08:36:21 - Accept=[application/json, application/*+json]
+2024-09-23 08:36:21 - Response 200 OK
+2024-09-23 08:36:21 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-23 08:36:21 - Accept=[application/json, application/*+json]
+2024-09-23 08:36:21 - Response 200 OK
+2024-09-23 08:36:21 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-23 08:36:21 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-23 08:36:21 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:36:21 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-23 08:36:21 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-23 08:36:21 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:36:21 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-23 08:36:21 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-23 08:36:21 - RouteDefinition matched: auth-service
+2024-09-23 08:36:21 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-23 08:36:21 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:36:21 - RouteDefinition matched: user-service
+2024-09-23 08:36:21 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-23 08:36:21 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:36:21 - RouteDefinition matched: booking-service
+2024-09-23 08:36:21 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-23 08:36:21 - RouteDefinition matched: schedule-service
+2024-09-23 08:36:21 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-23 08:36:21 - RouteDefinition matched: movie-service
+2024-09-23 08:36:21 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-23 08:36:21 - RouteDefinition matched: studio-service
+2024-09-23 08:36:21 - New routes count: 8
+2024-09-23 08:36:51 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service?status=UP&lastDirtyTimestamp=1727055260989
+2024-09-23 08:36:51 - Accept=[application/json, application/*+json]
+2024-09-23 08:36:51 - Response 200 OK
+2024-09-23 08:36:51 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-23 08:36:51 - Accept=[application/json, application/*+json]
+2024-09-23 08:36:51 - Response 200 OK
+2024-09-23 08:36:51 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-23 08:36:51 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-23 08:36:51 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:36:51 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-23 08:36:51 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-23 08:36:51 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:36:51 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-23 08:36:51 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-23 08:36:51 - RouteDefinition matched: auth-service
+2024-09-23 08:36:51 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-23 08:36:51 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:36:51 - RouteDefinition matched: user-service
+2024-09-23 08:36:51 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-23 08:36:51 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:36:51 - RouteDefinition matched: booking-service
+2024-09-23 08:36:51 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-23 08:36:51 - RouteDefinition matched: schedule-service
+2024-09-23 08:36:51 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-23 08:36:51 - RouteDefinition matched: movie-service
+2024-09-23 08:36:51 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-23 08:36:51 - RouteDefinition matched: studio-service
+2024-09-23 08:36:51 - New routes count: 8
+2024-09-23 08:37:21 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service?status=UP&lastDirtyTimestamp=1727055260989
+2024-09-23 08:37:21 - Accept=[application/json, application/*+json]
+2024-09-23 08:37:21 - Response 200 OK
+2024-09-23 08:37:21 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-23 08:37:21 - Accept=[application/json, application/*+json]
+2024-09-23 08:37:21 - Response 200 OK
+2024-09-23 08:37:21 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-23 08:37:21 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-23 08:37:21 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:37:21 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-23 08:37:21 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-23 08:37:21 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:37:21 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-23 08:37:21 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying {pattern=/movie-service/**} to Path
+2024-09-23 08:37:21 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying filter {regexp=/movie-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:37:21 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_MOVIE-SERVICE
+2024-09-23 08:37:21 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-23 08:37:21 - RouteDefinition matched: auth-service
+2024-09-23 08:37:21 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-23 08:37:21 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:37:21 - RouteDefinition matched: user-service
+2024-09-23 08:37:21 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-23 08:37:21 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:37:21 - RouteDefinition matched: booking-service
+2024-09-23 08:37:21 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-23 08:37:21 - RouteDefinition matched: schedule-service
+2024-09-23 08:37:21 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-23 08:37:21 - RouteDefinition matched: movie-service
+2024-09-23 08:37:21 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-23 08:37:21 - RouteDefinition matched: studio-service
+2024-09-23 08:37:21 - New routes count: 9
+2024-09-23 08:37:45 - [5fa9007e-1] HTTP POST "/api/v1/auth/login"
+2024-09-23 08:37:45 - Created new WebSession.
+2024-09-23 08:37:45 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+2024-09-23 08:37:45 - Request 'POST /api/v1/auth/login' doesn't match 'POST /logout'
+2024-09-23 08:37:45 - No matches found
+2024-09-23 08:37:45 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/register', method=null}
+2024-09-23 08:37:45 - Request 'POST /api/v1/auth/login' doesn't match 'null /api/v1/auth/register'
+2024-09-23 08:37:45 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/login', method=null}
+2024-09-23 08:37:45 - Checking match of request : '/api/v1/auth/login'; against '/api/v1/auth/login'
+2024-09-23 08:37:45 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/grouped', method=null}
+2024-09-23 08:37:45 - Request 'POST /api/v1/auth/login' doesn't match 'null /api/v1/schedules/grouped'
+2024-09-23 08:37:45 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/detail/**', method=null}
+2024-09-23 08:37:45 - Request 'POST /api/v1/auth/login' doesn't match 'null /api/v1/schedules/detail/**'
+2024-09-23 08:37:45 - matched
+2024-09-23 08:37:45 - Checking authorization on '/api/v1/auth/login' using org.springframework.security.config.web.server.ServerHttpSecurity$AuthorizeExchangeSpec$Access$$Lambda$825/0x000000080112f360@25f93073
+2024-09-23 08:37:45 - Authorization successful
+2024-09-23 08:37:45 - Route matched: auth-service
+2024-09-23 08:37:45 - Mapping [Exchange: POST http://localhost:8080/api/v1/auth/login] to Route{id='auth-service', uri=lb://auth-service, order=0, predicate=Paths: [/api/v1/auth/**], match trailing slash: true, gatewayFilters=[], metadata={}}
+2024-09-23 08:37:45 - [5fa9007e-1] Mapped to org.springframework.cloud.gateway.handler.FilteringWebHandler@502d2e60
+2024-09-23 08:37:45 - Sorted gatewayFilterFactories: [[GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RemoveCachedBodyFilter@a91cba8}, order = -2147483648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.AdaptCachedBodyGlobalFilter@7c02921}, order = -2147482648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyWriteResponseFilter@21c830cc}, order = -1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardPathFilter@c67fa28}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.GatewayMetricsFilter@1862af10}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RouteToRequestUrlFilter@2de7a74d}, order = 10000], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter@4f9c9dc0}, order = 10150], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.LoadBalancerServiceInstanceCookieFilter@2c71741b}, order = 10151], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.WebsocketRoutingFilter@8afac87}, order = 2147483646], [GatewayFilterAdapter{delegate=findo.gateway.filter.LoggingGlobalFilter@5b3f830e}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyRoutingFilter@648e4f8}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardRoutingFilter@6cc9e92d}, order = 2147483647]]
+2024-09-23 08:37:45 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-23 08:37:45 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:37:45 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-23 08:37:45 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-23 08:37:45 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:37:45 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-23 08:37:45 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying {pattern=/movie-service/**} to Path
+2024-09-23 08:37:45 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying filter {regexp=/movie-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:37:45 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_MOVIE-SERVICE
+2024-09-23 08:37:45 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-23 08:37:45 - RouteDefinition matched: auth-service
+2024-09-23 08:37:45 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-23 08:37:45 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:37:45 - RouteDefinition matched: user-service
+2024-09-23 08:37:45 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-23 08:37:45 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:37:45 - RouteDefinition matched: booking-service
+2024-09-23 08:37:45 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-23 08:37:45 - RouteDefinition matched: schedule-service
+2024-09-23 08:37:45 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-23 08:37:45 - RouteDefinition matched: movie-service
+2024-09-23 08:37:45 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-23 08:37:45 - RouteDefinition matched: studio-service
+2024-09-23 08:37:45 - New routes count: 9
+2024-09-23 08:37:45 - Request: POST http://localhost:8080/api/v1/auth/login from IP: /[0:0:0:0:0:0:0:1]:50939
+2024-09-23 08:37:45 - Will instrument the HTTP request headers [Content-Type:"application/json", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"a5164117-4028-47e9-bd24-7a25c6db83c8", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Content-Length:"69", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50939"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-23 08:37:45 - Client observation  {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='POST', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='auth-service', spring.cloud.gateway.route.uri='lb://auth-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/auth/login'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=0.001107, duration(nanos)=1107000.0, startTimeNanos=1757163503900}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@13c96102'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@6d6b1cc1} created for the request. New headers are [Content-Type:"application/json", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"a5164117-4028-47e9-bd24-7a25c6db83c8", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Content-Length:"69", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:50939"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-23 08:37:46 - Will instrument the response
+2024-09-23 08:37:46 - The response was handled for observation {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='POST', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='auth-service', spring.cloud.gateway.route.uri='lb://auth-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/auth/login'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=0.8164063, duration(nanos)=8.164063E8, startTimeNanos=1757163503900}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@13c96102'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@6d6b1cc1}
+2024-09-23 08:37:46 - Response: 200 OK for POST http://localhost:8080/api/v1/auth/login
+2024-09-23 08:37:46 - [5fa9007e-1] Completed 200 OK
+2024-09-23 08:37:51 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service?status=UP&lastDirtyTimestamp=1727055260989
+2024-09-23 08:37:51 - Accept=[application/json, application/*+json]
+2024-09-23 08:37:51 - Response 200 OK
+2024-09-23 08:37:51 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-23 08:37:51 - Accept=[application/json, application/*+json]
+2024-09-23 08:37:51 - Response 200 OK
+2024-09-23 08:37:51 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-23 08:37:51 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-23 08:37:51 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:37:51 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-23 08:37:51 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-23 08:37:51 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:37:51 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-23 08:37:51 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying {pattern=/movie-service/**} to Path
+2024-09-23 08:37:51 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying filter {regexp=/movie-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:37:51 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_MOVIE-SERVICE
+2024-09-23 08:37:51 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-23 08:37:51 - RouteDefinition matched: auth-service
+2024-09-23 08:37:51 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-23 08:37:51 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:37:51 - RouteDefinition matched: user-service
+2024-09-23 08:37:51 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-23 08:37:51 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:37:51 - RouteDefinition matched: booking-service
+2024-09-23 08:37:51 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-23 08:37:51 - RouteDefinition matched: schedule-service
+2024-09-23 08:37:51 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-23 08:37:51 - RouteDefinition matched: movie-service
+2024-09-23 08:37:51 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-23 08:37:51 - RouteDefinition matched: studio-service
+2024-09-23 08:37:51 - New routes count: 9
+2024-09-23 08:37:57 - [5fa9007e-2] HTTP GET "/api/v1/movies"
+2024-09-23 08:37:57 - Created new WebSession.
+2024-09-23 08:37:57 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+2024-09-23 08:37:57 - Request 'GET /api/v1/movies' doesn't match 'POST /logout'
+2024-09-23 08:37:57 - No matches found
+2024-09-23 08:37:57 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/register', method=null}
+2024-09-23 08:37:57 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/auth/register'
+2024-09-23 08:37:57 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/login', method=null}
+2024-09-23 08:37:57 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/auth/login'
+2024-09-23 08:37:57 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/grouped', method=null}
+2024-09-23 08:37:57 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/schedules/grouped'
+2024-09-23 08:37:57 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/detail/**', method=null}
+2024-09-23 08:37:57 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/schedules/detail/**'
+2024-09-23 08:37:57 - No matches found
+2024-09-23 08:37:57 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/movies/**', method=null}
+2024-09-23 08:37:57 - Checking match of request : '/api/v1/movies'; against '/api/v1/movies/**'
+2024-09-23 08:37:57 - matched
+2024-09-23 08:37:57 - Checking authorization on '/api/v1/movies' using org.springframework.security.authorization.AuthorityReactiveAuthorizationManager@2e864a5b
+2024-09-23 08:37:57 - No SecurityContext found in WebSession: 'org.springframework.web.server.session.InMemoryWebSessionStore$InMemoryWebSession@4f5359ee'
+2024-09-23 08:37:57 - Authorization failed: Access Denied
+2024-09-23 08:37:57 - No SecurityContext found in WebSession: 'org.springframework.web.server.session.InMemoryWebSessionStore$InMemoryWebSession@4f5359ee'
+2024-09-23 08:37:57 - [5fa9007e-2] Completed 401 UNAUTHORIZED
+2024-09-23 08:38:07 - [5fa9007e-3] HTTP GET "/api/v1/movies"
+2024-09-23 08:38:07 - Created new WebSession.
+2024-09-23 08:38:07 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+2024-09-23 08:38:07 - Request 'GET /api/v1/movies' doesn't match 'POST /logout'
+2024-09-23 08:38:07 - No matches found
+2024-09-23 08:38:07 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/register', method=null}
+2024-09-23 08:38:07 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/auth/register'
+2024-09-23 08:38:07 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/login', method=null}
+2024-09-23 08:38:07 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/auth/login'
+2024-09-23 08:38:07 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/grouped', method=null}
+2024-09-23 08:38:07 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/schedules/grouped'
+2024-09-23 08:38:07 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/detail/**', method=null}
+2024-09-23 08:38:07 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/schedules/detail/**'
+2024-09-23 08:38:07 - No matches found
+2024-09-23 08:38:07 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/movies/**', method=null}
+2024-09-23 08:38:07 - Checking match of request : '/api/v1/movies'; against '/api/v1/movies/**'
+2024-09-23 08:38:07 - matched
+2024-09-23 08:38:07 - Checking authorization on '/api/v1/movies' using org.springframework.security.authorization.AuthorityReactiveAuthorizationManager@2e864a5b
+2024-09-23 08:38:07 - Authorization failed: Access Denied
+2024-09-23 08:38:07 - [5fa9007e-3] Completed 403 FORBIDDEN
+2024-09-23 08:38:11 - [5fa9007e-4] HTTP GET "/api/v1/movies"
+2024-09-23 08:38:11 - Created new WebSession.
+2024-09-23 08:38:11 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+2024-09-23 08:38:11 - Request 'GET /api/v1/movies' doesn't match 'POST /logout'
+2024-09-23 08:38:11 - No matches found
+2024-09-23 08:38:11 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/register', method=null}
+2024-09-23 08:38:11 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/auth/register'
+2024-09-23 08:38:11 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/login', method=null}
+2024-09-23 08:38:11 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/auth/login'
+2024-09-23 08:38:11 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/grouped', method=null}
+2024-09-23 08:38:11 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/schedules/grouped'
+2024-09-23 08:38:11 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/detail/**', method=null}
+2024-09-23 08:38:11 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/schedules/detail/**'
+2024-09-23 08:38:11 - No matches found
+2024-09-23 08:38:11 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/movies/**', method=null}
+2024-09-23 08:38:11 - Checking match of request : '/api/v1/movies'; against '/api/v1/movies/**'
+2024-09-23 08:38:11 - matched
+2024-09-23 08:38:11 - Checking authorization on '/api/v1/movies' using org.springframework.security.authorization.AuthorityReactiveAuthorizationManager@2e864a5b
+2024-09-23 08:38:11 - Authorization failed: Access Denied
+2024-09-23 08:38:11 - [5fa9007e-4] Completed 403 FORBIDDEN
+2024-09-23 08:38:21 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service?status=UP&lastDirtyTimestamp=1727055260989
+2024-09-23 08:38:21 - Accept=[application/json, application/*+json]
+2024-09-23 08:38:21 - Response 200 OK
+2024-09-23 08:38:21 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-23 08:38:21 - Accept=[application/json, application/*+json]
+2024-09-23 08:38:21 - Response 200 OK
+2024-09-23 08:38:21 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-23 08:38:21 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-23 08:38:21 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:38:21 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-23 08:38:21 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-23 08:38:21 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:38:21 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-23 08:38:21 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying {pattern=/movie-service/**} to Path
+2024-09-23 08:38:21 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying filter {regexp=/movie-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:38:21 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_MOVIE-SERVICE
+2024-09-23 08:38:21 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-23 08:38:21 - RouteDefinition matched: auth-service
+2024-09-23 08:38:21 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-23 08:38:21 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:38:21 - RouteDefinition matched: user-service
+2024-09-23 08:38:21 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-23 08:38:21 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:38:21 - RouteDefinition matched: booking-service
+2024-09-23 08:38:21 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-23 08:38:21 - RouteDefinition matched: schedule-service
+2024-09-23 08:38:21 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-23 08:38:21 - RouteDefinition matched: movie-service
+2024-09-23 08:38:21 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-23 08:38:21 - RouteDefinition matched: studio-service
+2024-09-23 08:38:21 - New routes count: 9
+2024-09-23 08:38:45 - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-09-23 08:38:45 - Unregistering application GATEWAY-SERVICE with eureka with status DOWN
+2024-09-23 08:38:45 - Saw local status change event StatusChangeEvent [timestamp=1727055525787, current=DOWN, previous=UP]
+2024-09-23 08:38:45 - DiscoveryClient_GATEWAY-SERVICE/gateway-service: registering service...
+2024-09-23 08:38:45 - HTTP POST http://localhost:8761/eureka/apps/GATEWAY-SERVICE
+2024-09-23 08:38:45 - Accept=[application/json, application/*+json]
+2024-09-23 08:38:45 - Writing [InstanceInfo [instanceId = gateway-service, appName = GATEWAY-SERVICE, hostName = localhost, status = DOWN, ipAddr = 26.86.151.172, port = 8080, securePort = 443, dataCenterInfo = com.netflix.appinfo.MyDataCenterInfo@6abc8ad2] as "application/json"
+2024-09-23 08:38:45 - Response 204 NO_CONTENT
+2024-09-23 08:38:45 - DiscoveryClient_GATEWAY-SERVICE/gateway-service - registration status: 204
+2024-09-23 08:38:45 - Shutting down DiscoveryClient ...
+2024-09-23 08:38:48 - Unregistering ...
+2024-09-23 08:38:48 - HTTP DELETE http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service
+2024-09-23 08:38:48 - Accept=[application/json, application/*+json]
+2024-09-23 08:38:48 - Response 200 OK
+2024-09-23 08:38:48 - DiscoveryClient_GATEWAY-SERVICE/gateway-service - deregister  status: 200
+2024-09-23 08:38:48 - Completed shut down of DiscoveryClient
+2024-09-23 08:38:49 - Starting GatewayApplication using Java 17.0.3 with PID 11744 (D:\FPT\New Data FPT\FPT\Project FinalTerm\FinalProjectGroup\FinalProjectGroup2\backend\gateway\target\classes started by Chandra H in D:\FPT\New Data FPT\FPT\Project FinalTerm\FinalProjectGroup\FinalProjectGroup2)
+2024-09-23 08:38:49 - No active profile set, falling back to 1 default profile: "default"
+2024-09-23 08:38:49 - BeanFactory id=74d6d9e2-27e6-30d8-b3c5-fa81781b0eb4
+2024-09-23 08:38:49 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2024-09-23 08:38:49 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2024-09-23 08:38:49 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2024-09-23 08:38:49 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2024-09-23 08:38:49 - Bean 'reactorDeferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2024-09-23 08:38:49 - Routes supplied from Gateway Properties: [RouteDefinition{id='auth-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/auth/**}}], filters=[], uri=lb://auth-service, order=0, metadata={}}, RouteDefinition{id='user-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/users/**}}], filters=[FilterDefinition{name='JwtAuthenticationFilter', args={}}], uri=lb://user-service, order=0, metadata={}}, RouteDefinition{id='booking-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/bookings/**}}], filters=[FilterDefinition{name='JwtAuthenticationFilter', args={}}], uri=lb://booking-service, order=0, metadata={}}, RouteDefinition{id='schedule-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/schedules/**}}], filters=[], uri=lb://schedule, order=0, metadata={}}, RouteDefinition{id='movie-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/movies/**}}], filters=[], uri=lb://movie, order=0, metadata={}}, RouteDefinition{id='studio-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/studios/**}}], filters=[], uri=lb://studio, order=0, metadata={}}]
+2024-09-23 08:38:50 - Loaded RoutePredicateFactory [After]
+2024-09-23 08:38:50 - Loaded RoutePredicateFactory [Before]
+2024-09-23 08:38:50 - Loaded RoutePredicateFactory [Between]
+2024-09-23 08:38:50 - Loaded RoutePredicateFactory [Cookie]
+2024-09-23 08:38:50 - Loaded RoutePredicateFactory [Header]
+2024-09-23 08:38:50 - Loaded RoutePredicateFactory [Host]
+2024-09-23 08:38:50 - Loaded RoutePredicateFactory [Method]
+2024-09-23 08:38:50 - Loaded RoutePredicateFactory [Path]
+2024-09-23 08:38:50 - Loaded RoutePredicateFactory [Query]
+2024-09-23 08:38:50 - Loaded RoutePredicateFactory [ReadBody]
+2024-09-23 08:38:50 - Loaded RoutePredicateFactory [RemoteAddr]
+2024-09-23 08:38:50 - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2024-09-23 08:38:50 - Loaded RoutePredicateFactory [Weight]
+2024-09-23 08:38:50 - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2024-09-23 08:38:50 - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2024-09-23 08:38:50 - Exposing 18 endpoints beneath base path '/actuator'
+2024-09-23 08:38:50 - ControllerAdvice beans: none
+2024-09-23 08:38:50 - enableLoggingRequestDetails='false': form data and headers will be masked to prevent unsafe logging of potentially sensitive data
+2024-09-23 08:38:50 - LiveReload server is running on port 35729
+2024-09-23 08:38:50 - Eureka HTTP Client uses RestTemplate.
+2024-09-23 08:38:50 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2024-09-23 08:38:50 - Setting initial instance status as: STARTING
+2024-09-23 08:38:50 - Initializing Eureka in region us-east-1
+2024-09-23 08:38:50 - Resolving eureka endpoints via configuration
+2024-09-23 08:38:50 - Disable delta property : false
+2024-09-23 08:38:50 - Single vip registry refresh property : null
+2024-09-23 08:38:50 - Force full registry fetch : false
+2024-09-23 08:38:50 - Application is null : false
+2024-09-23 08:38:50 - Registered Applications size is zero : true
+2024-09-23 08:38:50 - Application version is -1: true
+2024-09-23 08:38:50 - Getting all instance registry info from the eureka server
+2024-09-23 08:38:50 - HTTP GET http://localhost:8761/eureka/apps/
+2024-09-23 08:38:50 - Accept=[application/json, application/*+json]
+2024-09-23 08:38:50 - Response 200 OK
+2024-09-23 08:38:50 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-23 08:38:50 - The response status is 200
+2024-09-23 08:38:50 - Starting heartbeat executor: renew interval is: 30
+2024-09-23 08:38:50 - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2024-09-23 08:38:50 - Discovery Client initialized at timestamp 1727055530345 with initial instances count: 3
+2024-09-23 08:38:50 - Registering application GATEWAY-SERVICE with eureka with status UP
+2024-09-23 08:38:50 - Saw local status change event StatusChangeEvent [timestamp=1727055530347, current=UP, previous=STARTING]
+2024-09-23 08:38:50 - DiscoveryClient_GATEWAY-SERVICE/gateway-service: registering service...
+2024-09-23 08:38:50 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-23 08:38:50 - HTTP POST http://localhost:8761/eureka/apps/GATEWAY-SERVICE
+2024-09-23 08:38:50 - Accept=[application/json, application/*+json]
+2024-09-23 08:38:50 - Writing [InstanceInfo [instanceId = gateway-service, appName = GATEWAY-SERVICE, hostName = localhost, status = UP, ipAddr = 26.86.151.172, port = 8080, securePort = 443, dataCenterInfo = com.netflix.appinfo.MyDataCenterInfo@7c763c2d] as "application/json"
+2024-09-23 08:38:50 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:38:50 - Response 204 NO_CONTENT
+2024-09-23 08:38:50 - DiscoveryClient_GATEWAY-SERVICE/gateway-service - registration status: 204
+2024-09-23 08:38:50 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-23 08:38:50 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-23 08:38:50 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:38:50 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-23 08:38:50 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying {pattern=/movie-service/**} to Path
+2024-09-23 08:38:50 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying filter {regexp=/movie-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:38:50 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_MOVIE-SERVICE
+2024-09-23 08:38:50 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-23 08:38:50 - RouteDefinition matched: auth-service
+2024-09-23 08:38:50 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-23 08:38:50 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:38:50 - RouteDefinition matched: user-service
+2024-09-23 08:38:50 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-23 08:38:50 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:38:50 - RouteDefinition matched: booking-service
+2024-09-23 08:38:50 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-23 08:38:50 - RouteDefinition matched: schedule-service
+2024-09-23 08:38:50 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-23 08:38:50 - RouteDefinition matched: movie-service
+2024-09-23 08:38:50 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-23 08:38:50 - RouteDefinition matched: studio-service
+2024-09-23 08:38:50 - New routes count: 9
+2024-09-23 08:38:50 - Netty started on port 8080 (http)
+2024-09-23 08:38:50 - Updating port to 8080
+2024-09-23 08:38:50 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-23 08:38:50 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:38:50 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-23 08:38:50 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-23 08:38:50 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:38:50 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-23 08:38:50 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying {pattern=/movie-service/**} to Path
+2024-09-23 08:38:50 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying filter {regexp=/movie-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:38:50 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_MOVIE-SERVICE
+2024-09-23 08:38:50 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-23 08:38:50 - RouteDefinition matched: auth-service
+2024-09-23 08:38:50 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-23 08:38:50 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:38:50 - RouteDefinition matched: user-service
+2024-09-23 08:38:50 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-23 08:38:50 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:38:50 - RouteDefinition matched: booking-service
+2024-09-23 08:38:50 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-23 08:38:50 - RouteDefinition matched: schedule-service
+2024-09-23 08:38:50 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-23 08:38:50 - RouteDefinition matched: movie-service
+2024-09-23 08:38:50 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-23 08:38:50 - RouteDefinition matched: studio-service
+2024-09-23 08:38:50 - New routes count: 9
+2024-09-23 08:38:50 - Started GatewayApplication in 1.731 seconds (process running for 275.622)
+2024-09-23 08:38:50 - Condition evaluation unchanged
+2024-09-23 08:39:03 - [241454a4-5] HTTP GET "/api/v1/movies"
+2024-09-23 08:39:03 - Created new WebSession.
+2024-09-23 08:39:03 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+2024-09-23 08:39:03 - Request 'GET /api/v1/movies' doesn't match 'POST /logout'
+2024-09-23 08:39:03 - No matches found
+2024-09-23 08:39:03 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/register', method=null}
+2024-09-23 08:39:03 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/auth/register'
+2024-09-23 08:39:03 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/login', method=null}
+2024-09-23 08:39:03 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/auth/login'
+2024-09-23 08:39:03 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/grouped', method=null}
+2024-09-23 08:39:03 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/schedules/grouped'
+2024-09-23 08:39:03 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/detail/**', method=null}
+2024-09-23 08:39:03 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/schedules/detail/**'
+2024-09-23 08:39:03 - No matches found
+2024-09-23 08:39:03 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/admin/**', method=null}
+2024-09-23 08:39:03 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/bookings/admin/**'
+2024-09-23 08:39:03 - No matches found
+2024-09-23 08:39:03 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/customer/**', method=null}
+2024-09-23 08:39:03 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/bookings/customer/**'
+2024-09-23 08:39:03 - No matches found
+2024-09-23 08:39:03 - Checking authorization on '/api/v1/movies' using org.springframework.security.authorization.AuthenticatedReactiveAuthorizationManager@33f1f198
+2024-09-23 08:39:03 - Authorization successful
+2024-09-23 08:39:03 - Route matched: movie-service
+2024-09-23 08:39:03 - Mapping [Exchange: GET http://localhost:8080/api/v1/movies] to Route{id='movie-service', uri=lb://movie, order=0, predicate=Paths: [/api/v1/movies/**], match trailing slash: true, gatewayFilters=[], metadata={}}
+2024-09-23 08:39:03 - [241454a4-5] Mapped to org.springframework.cloud.gateway.handler.FilteringWebHandler@7c0b03ad
+2024-09-23 08:39:03 - Sorted gatewayFilterFactories: [[GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RemoveCachedBodyFilter@7507b4de}, order = -2147483648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.AdaptCachedBodyGlobalFilter@68a87dca}, order = -2147482648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyWriteResponseFilter@38dc5362}, order = -1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardPathFilter@502e52a6}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.GatewayMetricsFilter@2e2084b8}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RouteToRequestUrlFilter@658a6b72}, order = 10000], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter@6ee47e51}, order = 10150], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.LoadBalancerServiceInstanceCookieFilter@6e7fdc50}, order = 10151], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.WebsocketRoutingFilter@1847bd39}, order = 2147483646], [GatewayFilterAdapter{delegate=findo.gateway.filter.LoggingGlobalFilter@22eb6567}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyRoutingFilter@4165c674}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardRoutingFilter@ab347d1}, order = 2147483647]]
+2024-09-23 08:39:03 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-23 08:39:03 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:39:03 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-23 08:39:03 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-23 08:39:03 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:39:03 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-23 08:39:03 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying {pattern=/movie-service/**} to Path
+2024-09-23 08:39:03 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying filter {regexp=/movie-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:39:03 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_MOVIE-SERVICE
+2024-09-23 08:39:03 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-23 08:39:03 - RouteDefinition matched: auth-service
+2024-09-23 08:39:03 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-23 08:39:03 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:39:03 - RouteDefinition matched: user-service
+2024-09-23 08:39:03 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-23 08:39:03 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:39:03 - RouteDefinition matched: booking-service
+2024-09-23 08:39:03 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-23 08:39:03 - RouteDefinition matched: schedule-service
+2024-09-23 08:39:03 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-23 08:39:03 - RouteDefinition matched: movie-service
+2024-09-23 08:39:03 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-23 08:39:03 - RouteDefinition matched: studio-service
+2024-09-23 08:39:03 - New routes count: 9
+2024-09-23 08:39:03 - No servers available for service: movie
+2024-09-23 08:39:03 - [241454a4-5] Resolved [NotFoundException: 503 SERVICE_UNAVAILABLE "Unable to find instance for movie"] for HTTP GET /api/v1/movies
+2024-09-23 08:39:03 - [241454a4-5] Encoding [{timestamp=Mon Sep 23 08:39:03 WIB 2024, path=/api/v1/movies, status=503, error=Service Unavailable, (truncated)...]
+2024-09-23 08:39:03 - [241454a4-5] Completed 503 SERVICE_UNAVAILABLE
+2024-09-23 08:39:18 - [241454a4-6] HTTP GET "/api/v1/movies"
+2024-09-23 08:39:18 - Created new WebSession.
+2024-09-23 08:39:18 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+2024-09-23 08:39:18 - Request 'GET /api/v1/movies' doesn't match 'POST /logout'
+2024-09-23 08:39:18 - No matches found
+2024-09-23 08:39:18 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/register', method=null}
+2024-09-23 08:39:18 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/auth/register'
+2024-09-23 08:39:18 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/login', method=null}
+2024-09-23 08:39:18 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/auth/login'
+2024-09-23 08:39:18 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/grouped', method=null}
+2024-09-23 08:39:18 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/schedules/grouped'
+2024-09-23 08:39:18 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/detail/**', method=null}
+2024-09-23 08:39:18 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/schedules/detail/**'
+2024-09-23 08:39:18 - No matches found
+2024-09-23 08:39:18 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/admin/**', method=null}
+2024-09-23 08:39:18 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/bookings/admin/**'
+2024-09-23 08:39:18 - No matches found
+2024-09-23 08:39:18 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/customer/**', method=null}
+2024-09-23 08:39:18 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/bookings/customer/**'
+2024-09-23 08:39:18 - No matches found
+2024-09-23 08:39:18 - Checking authorization on '/api/v1/movies' using org.springframework.security.authorization.AuthenticatedReactiveAuthorizationManager@33f1f198
+2024-09-23 08:39:18 - Authorization successful
+2024-09-23 08:39:18 - Route matched: movie-service
+2024-09-23 08:39:18 - Mapping [Exchange: GET http://localhost:8080/api/v1/movies] to Route{id='movie-service', uri=lb://movie, order=0, predicate=Paths: [/api/v1/movies/**], match trailing slash: true, gatewayFilters=[], metadata={}}
+2024-09-23 08:39:18 - [241454a4-6] Mapped to org.springframework.cloud.gateway.handler.FilteringWebHandler@7c0b03ad
+2024-09-23 08:39:18 - Sorted gatewayFilterFactories: [[GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RemoveCachedBodyFilter@7507b4de}, order = -2147483648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.AdaptCachedBodyGlobalFilter@68a87dca}, order = -2147482648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyWriteResponseFilter@38dc5362}, order = -1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardPathFilter@502e52a6}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.GatewayMetricsFilter@2e2084b8}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RouteToRequestUrlFilter@658a6b72}, order = 10000], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter@6ee47e51}, order = 10150], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.LoadBalancerServiceInstanceCookieFilter@6e7fdc50}, order = 10151], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.WebsocketRoutingFilter@1847bd39}, order = 2147483646], [GatewayFilterAdapter{delegate=findo.gateway.filter.LoggingGlobalFilter@22eb6567}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyRoutingFilter@4165c674}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardRoutingFilter@ab347d1}, order = 2147483647]]
+2024-09-23 08:39:18 - No servers available for service: movie
+2024-09-23 08:39:18 - [241454a4-6] Resolved [NotFoundException: 503 SERVICE_UNAVAILABLE "Unable to find instance for movie"] for HTTP GET /api/v1/movies
+2024-09-23 08:39:18 - [241454a4-6] Encoding [{timestamp=Mon Sep 23 08:39:18 WIB 2024, path=/api/v1/movies, status=503, error=Service Unavailable, (truncated)...]
+2024-09-23 08:39:18 - [241454a4-6] Completed 503 SERVICE_UNAVAILABLE
+2024-09-23 08:39:19 - [241454a4-7] HTTP GET "/api/v1/movies"
+2024-09-23 08:39:19 - Created new WebSession.
+2024-09-23 08:39:19 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+2024-09-23 08:39:19 - Request 'GET /api/v1/movies' doesn't match 'POST /logout'
+2024-09-23 08:39:19 - No matches found
+2024-09-23 08:39:19 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/register', method=null}
+2024-09-23 08:39:19 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/auth/register'
+2024-09-23 08:39:19 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/login', method=null}
+2024-09-23 08:39:19 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/auth/login'
+2024-09-23 08:39:19 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/grouped', method=null}
+2024-09-23 08:39:19 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/schedules/grouped'
+2024-09-23 08:39:19 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/detail/**', method=null}
+2024-09-23 08:39:19 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/schedules/detail/**'
+2024-09-23 08:39:19 - No matches found
+2024-09-23 08:39:19 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/admin/**', method=null}
+2024-09-23 08:39:19 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/bookings/admin/**'
+2024-09-23 08:39:19 - No matches found
+2024-09-23 08:39:19 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/customer/**', method=null}
+2024-09-23 08:39:19 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/bookings/customer/**'
+2024-09-23 08:39:19 - No matches found
+2024-09-23 08:39:19 - Checking authorization on '/api/v1/movies' using org.springframework.security.authorization.AuthenticatedReactiveAuthorizationManager@33f1f198
+2024-09-23 08:39:19 - Authorization successful
+2024-09-23 08:39:19 - Route matched: movie-service
+2024-09-23 08:39:19 - Mapping [Exchange: GET http://localhost:8080/api/v1/movies] to Route{id='movie-service', uri=lb://movie, order=0, predicate=Paths: [/api/v1/movies/**], match trailing slash: true, gatewayFilters=[], metadata={}}
+2024-09-23 08:39:19 - [241454a4-7] Mapped to org.springframework.cloud.gateway.handler.FilteringWebHandler@7c0b03ad
+2024-09-23 08:39:19 - Sorted gatewayFilterFactories: [[GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RemoveCachedBodyFilter@7507b4de}, order = -2147483648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.AdaptCachedBodyGlobalFilter@68a87dca}, order = -2147482648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyWriteResponseFilter@38dc5362}, order = -1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardPathFilter@502e52a6}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.GatewayMetricsFilter@2e2084b8}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RouteToRequestUrlFilter@658a6b72}, order = 10000], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter@6ee47e51}, order = 10150], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.LoadBalancerServiceInstanceCookieFilter@6e7fdc50}, order = 10151], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.WebsocketRoutingFilter@1847bd39}, order = 2147483646], [GatewayFilterAdapter{delegate=findo.gateway.filter.LoggingGlobalFilter@22eb6567}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyRoutingFilter@4165c674}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardRoutingFilter@ab347d1}, order = 2147483647]]
+2024-09-23 08:39:19 - No servers available for service: movie
+2024-09-23 08:39:19 - [241454a4-7] Resolved [NotFoundException: 503 SERVICE_UNAVAILABLE "Unable to find instance for movie"] for HTTP GET /api/v1/movies
+2024-09-23 08:39:19 - [241454a4-7] Encoding [{timestamp=Mon Sep 23 08:39:19 WIB 2024, path=/api/v1/movies, status=503, error=Service Unavailable, (truncated)...]
+2024-09-23 08:39:19 - [241454a4-7] Completed 503 SERVICE_UNAVAILABLE
+2024-09-23 08:39:20 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-23 08:39:20 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service?status=UP&lastDirtyTimestamp=1727055530347
+2024-09-23 08:39:20 - Accept=[application/json, application/*+json]
+2024-09-23 08:39:20 - Response 200 OK
+2024-09-23 08:39:20 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-23 08:39:20 - Accept=[application/json, application/*+json]
+2024-09-23 08:39:20 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-23 08:39:20 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:39:20 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-23 08:39:20 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-23 08:39:20 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:39:20 - Response 200 OK
+2024-09-23 08:39:20 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-23 08:39:20 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying {pattern=/movie-service/**} to Path
+2024-09-23 08:39:20 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying filter {regexp=/movie-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:39:20 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_MOVIE-SERVICE
+2024-09-23 08:39:20 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-23 08:39:20 - RouteDefinition matched: auth-service
+2024-09-23 08:39:20 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-23 08:39:20 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:39:20 - RouteDefinition matched: user-service
+2024-09-23 08:39:20 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-23 08:39:20 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:39:20 - RouteDefinition matched: booking-service
+2024-09-23 08:39:20 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-23 08:39:20 - RouteDefinition matched: schedule-service
+2024-09-23 08:39:20 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-23 08:39:20 - RouteDefinition matched: movie-service
+2024-09-23 08:39:20 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-23 08:39:20 - RouteDefinition matched: studio-service
+2024-09-23 08:39:20 - New routes count: 9
+2024-09-23 08:39:32 - [241454a4-8] HTTP GET "/api/v1/movies"
+2024-09-23 08:39:32 - Created new WebSession.
+2024-09-23 08:39:32 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+2024-09-23 08:39:32 - Request 'GET /api/v1/movies' doesn't match 'POST /logout'
+2024-09-23 08:39:32 - No matches found
+2024-09-23 08:39:32 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/register', method=null}
+2024-09-23 08:39:32 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/auth/register'
+2024-09-23 08:39:32 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/login', method=null}
+2024-09-23 08:39:32 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/auth/login'
+2024-09-23 08:39:32 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/grouped', method=null}
+2024-09-23 08:39:32 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/schedules/grouped'
+2024-09-23 08:39:32 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/detail/**', method=null}
+2024-09-23 08:39:32 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/schedules/detail/**'
+2024-09-23 08:39:32 - No matches found
+2024-09-23 08:39:32 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/admin/**', method=null}
+2024-09-23 08:39:32 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/bookings/admin/**'
+2024-09-23 08:39:32 - No matches found
+2024-09-23 08:39:32 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/customer/**', method=null}
+2024-09-23 08:39:32 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/bookings/customer/**'
+2024-09-23 08:39:32 - No matches found
+2024-09-23 08:39:32 - Checking authorization on '/api/v1/movies' using org.springframework.security.authorization.AuthenticatedReactiveAuthorizationManager@33f1f198
+2024-09-23 08:39:32 - Authorization successful
+2024-09-23 08:39:32 - Route matched: movie-service
+2024-09-23 08:39:32 - Mapping [Exchange: GET http://localhost:8080/api/v1/movies] to Route{id='movie-service', uri=lb://movie, order=0, predicate=Paths: [/api/v1/movies/**], match trailing slash: true, gatewayFilters=[], metadata={}}
+2024-09-23 08:39:32 - [241454a4-8] Mapped to org.springframework.cloud.gateway.handler.FilteringWebHandler@7c0b03ad
+2024-09-23 08:39:32 - Sorted gatewayFilterFactories: [[GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RemoveCachedBodyFilter@7507b4de}, order = -2147483648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.AdaptCachedBodyGlobalFilter@68a87dca}, order = -2147482648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyWriteResponseFilter@38dc5362}, order = -1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardPathFilter@502e52a6}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.GatewayMetricsFilter@2e2084b8}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RouteToRequestUrlFilter@658a6b72}, order = 10000], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter@6ee47e51}, order = 10150], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.LoadBalancerServiceInstanceCookieFilter@6e7fdc50}, order = 10151], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.WebsocketRoutingFilter@1847bd39}, order = 2147483646], [GatewayFilterAdapter{delegate=findo.gateway.filter.LoggingGlobalFilter@22eb6567}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyRoutingFilter@4165c674}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardRoutingFilter@ab347d1}, order = 2147483647]]
+2024-09-23 08:39:32 - No servers available for service: movie
+2024-09-23 08:39:32 - [241454a4-8] Resolved [NotFoundException: 503 SERVICE_UNAVAILABLE "Unable to find instance for movie"] for HTTP GET /api/v1/movies
+2024-09-23 08:39:32 - [241454a4-8] Encoding [{timestamp=Mon Sep 23 08:39:32 WIB 2024, path=/api/v1/movies, status=503, error=Service Unavailable, (truncated)...]
+2024-09-23 08:39:32 - [241454a4-8] Completed 503 SERVICE_UNAVAILABLE
+2024-09-23 08:39:33 - [241454a4-9] HTTP GET "/api/v1/movies"
+2024-09-23 08:39:33 - Created new WebSession.
+2024-09-23 08:39:33 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+2024-09-23 08:39:33 - Request 'GET /api/v1/movies' doesn't match 'POST /logout'
+2024-09-23 08:39:33 - No matches found
+2024-09-23 08:39:33 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/register', method=null}
+2024-09-23 08:39:33 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/auth/register'
+2024-09-23 08:39:33 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/login', method=null}
+2024-09-23 08:39:33 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/auth/login'
+2024-09-23 08:39:33 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/grouped', method=null}
+2024-09-23 08:39:33 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/schedules/grouped'
+2024-09-23 08:39:33 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/detail/**', method=null}
+2024-09-23 08:39:33 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/schedules/detail/**'
+2024-09-23 08:39:33 - No matches found
+2024-09-23 08:39:33 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/admin/**', method=null}
+2024-09-23 08:39:33 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/bookings/admin/**'
+2024-09-23 08:39:33 - No matches found
+2024-09-23 08:39:33 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/customer/**', method=null}
+2024-09-23 08:39:33 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/bookings/customer/**'
+2024-09-23 08:39:33 - No matches found
+2024-09-23 08:39:33 - Checking authorization on '/api/v1/movies' using org.springframework.security.authorization.AuthenticatedReactiveAuthorizationManager@33f1f198
+2024-09-23 08:39:33 - Authorization successful
+2024-09-23 08:39:33 - Route matched: movie-service
+2024-09-23 08:39:33 - Mapping [Exchange: GET http://localhost:8080/api/v1/movies] to Route{id='movie-service', uri=lb://movie, order=0, predicate=Paths: [/api/v1/movies/**], match trailing slash: true, gatewayFilters=[], metadata={}}
+2024-09-23 08:39:33 - [241454a4-9] Mapped to org.springframework.cloud.gateway.handler.FilteringWebHandler@7c0b03ad
+2024-09-23 08:39:33 - Sorted gatewayFilterFactories: [[GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RemoveCachedBodyFilter@7507b4de}, order = -2147483648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.AdaptCachedBodyGlobalFilter@68a87dca}, order = -2147482648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyWriteResponseFilter@38dc5362}, order = -1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardPathFilter@502e52a6}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.GatewayMetricsFilter@2e2084b8}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RouteToRequestUrlFilter@658a6b72}, order = 10000], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter@6ee47e51}, order = 10150], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.LoadBalancerServiceInstanceCookieFilter@6e7fdc50}, order = 10151], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.WebsocketRoutingFilter@1847bd39}, order = 2147483646], [GatewayFilterAdapter{delegate=findo.gateway.filter.LoggingGlobalFilter@22eb6567}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyRoutingFilter@4165c674}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardRoutingFilter@ab347d1}, order = 2147483647]]
+2024-09-23 08:39:33 - No servers available for service: movie
+2024-09-23 08:39:33 - [241454a4-9] Resolved [NotFoundException: 503 SERVICE_UNAVAILABLE "Unable to find instance for movie"] for HTTP GET /api/v1/movies
+2024-09-23 08:39:33 - [241454a4-9] Encoding [{timestamp=Mon Sep 23 08:39:33 WIB 2024, path=/api/v1/movies, status=503, error=Service Unavailable, (truncated)...]
+2024-09-23 08:39:33 - [241454a4-9] Completed 503 SERVICE_UNAVAILABLE
+2024-09-23 08:39:50 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-23 08:39:50 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service?status=UP&lastDirtyTimestamp=1727055530347
+2024-09-23 08:39:50 - Accept=[application/json, application/*+json]
+2024-09-23 08:39:50 - Accept=[application/json, application/*+json]
+2024-09-23 08:39:50 - Response 200 OK
+2024-09-23 08:39:50 - Response 200 OK
+2024-09-23 08:39:50 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-23 08:39:50 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-23 08:39:50 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:39:50 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-23 08:39:50 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-23 08:39:50 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:39:50 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-23 08:39:50 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying {pattern=/movie-service/**} to Path
+2024-09-23 08:39:50 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying filter {regexp=/movie-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:39:50 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_MOVIE-SERVICE
+2024-09-23 08:39:50 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-23 08:39:50 - RouteDefinition matched: auth-service
+2024-09-23 08:39:50 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-23 08:39:50 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:39:50 - RouteDefinition matched: user-service
+2024-09-23 08:39:50 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-23 08:39:50 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:39:50 - RouteDefinition matched: booking-service
+2024-09-23 08:39:50 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-23 08:39:50 - RouteDefinition matched: schedule-service
+2024-09-23 08:39:50 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-23 08:39:50 - RouteDefinition matched: movie-service
+2024-09-23 08:39:50 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-23 08:39:50 - RouteDefinition matched: studio-service
+2024-09-23 08:39:50 - New routes count: 9
+2024-09-23 08:40:20 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service?status=UP&lastDirtyTimestamp=1727055530347
+2024-09-23 08:40:20 - Accept=[application/json, application/*+json]
+2024-09-23 08:40:20 - Response 200 OK
+2024-09-23 08:40:20 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-23 08:40:20 - Accept=[application/json, application/*+json]
+2024-09-23 08:40:20 - Response 200 OK
+2024-09-23 08:40:20 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-23 08:40:20 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-23 08:40:20 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:40:20 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-23 08:40:20 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-23 08:40:20 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:40:20 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-23 08:40:20 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying {pattern=/movie-service/**} to Path
+2024-09-23 08:40:20 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying filter {regexp=/movie-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:40:20 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_MOVIE-SERVICE
+2024-09-23 08:40:20 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-23 08:40:20 - RouteDefinition matched: auth-service
+2024-09-23 08:40:20 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-23 08:40:20 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:40:20 - RouteDefinition matched: user-service
+2024-09-23 08:40:20 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-23 08:40:20 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:40:20 - RouteDefinition matched: booking-service
+2024-09-23 08:40:20 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-23 08:40:20 - RouteDefinition matched: schedule-service
+2024-09-23 08:40:20 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-23 08:40:20 - RouteDefinition matched: movie-service
+2024-09-23 08:40:20 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-23 08:40:20 - RouteDefinition matched: studio-service
+2024-09-23 08:40:20 - New routes count: 9
+2024-09-23 08:40:25 - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-09-23 08:40:25 - Unregistering application GATEWAY-SERVICE with eureka with status DOWN
+2024-09-23 08:40:25 - Saw local status change event StatusChangeEvent [timestamp=1727055625183, current=DOWN, previous=UP]
+2024-09-23 08:40:25 - DiscoveryClient_GATEWAY-SERVICE/gateway-service: registering service...
+2024-09-23 08:40:25 - HTTP POST http://localhost:8761/eureka/apps/GATEWAY-SERVICE
+2024-09-23 08:40:25 - Accept=[application/json, application/*+json]
+2024-09-23 08:40:25 - Writing [InstanceInfo [instanceId = gateway-service, appName = GATEWAY-SERVICE, hostName = localhost, status = DOWN, ipAddr = 26.86.151.172, port = 8080, securePort = 443, dataCenterInfo = com.netflix.appinfo.MyDataCenterInfo@7c763c2d] as "application/json"
+2024-09-23 08:40:25 - Shutting down DiscoveryClient ...
+2024-09-23 08:40:25 - Response 204 NO_CONTENT
+2024-09-23 08:40:25 - DiscoveryClient_GATEWAY-SERVICE/gateway-service - registration status: 204
+2024-09-23 08:40:25 - Unregistering ...
+2024-09-23 08:40:25 - HTTP DELETE http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service
+2024-09-23 08:40:25 - Accept=[application/json, application/*+json]
+2024-09-23 08:40:25 - Response 200 OK
+2024-09-23 08:40:25 - DiscoveryClient_GATEWAY-SERVICE/gateway-service - deregister  status: 200
+2024-09-23 08:40:25 - Completed shut down of DiscoveryClient
+2024-09-23 08:40:25 - Starting GatewayApplication using Java 17.0.3 with PID 11744 (D:\FPT\New Data FPT\FPT\Project FinalTerm\FinalProjectGroup\FinalProjectGroup2\backend\gateway\target\classes started by Chandra H in D:\FPT\New Data FPT\FPT\Project FinalTerm\FinalProjectGroup\FinalProjectGroup2)
+2024-09-23 08:40:25 - No active profile set, falling back to 1 default profile: "default"
+2024-09-23 08:40:25 - BeanFactory id=74d6d9e2-27e6-30d8-b3c5-fa81781b0eb4
+2024-09-23 08:40:25 - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2024-09-23 08:40:25 - Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2024-09-23 08:40:25 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2024-09-23 08:40:25 - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2024-09-23 08:40:25 - Bean 'reactorDeferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [loadBalancerWebClientBuilderBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2024-09-23 08:40:26 - Routes supplied from Gateway Properties: [RouteDefinition{id='auth-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/auth/**}}], filters=[], uri=lb://auth-service, order=0, metadata={}}, RouteDefinition{id='user-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/users/**}}], filters=[FilterDefinition{name='JwtAuthenticationFilter', args={}}], uri=lb://user-service, order=0, metadata={}}, RouteDefinition{id='booking-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/bookings/**}}], filters=[FilterDefinition{name='JwtAuthenticationFilter', args={}}], uri=lb://booking-service, order=0, metadata={}}, RouteDefinition{id='schedule-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/schedules/**}}], filters=[], uri=lb://schedule, order=0, metadata={}}, RouteDefinition{id='movie-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/movies/**}}], filters=[FilterDefinition{name='JwtAuthenticationFilter', args={}}], uri=lb://movie-service, order=0, metadata={}}, RouteDefinition{id='studio-service', predicates=[PredicateDefinition{name='Path', args={_genkey_0=/api/v1/studios/**}}], filters=[], uri=lb://studio, order=0, metadata={}}]
+2024-09-23 08:40:26 - Loaded RoutePredicateFactory [After]
+2024-09-23 08:40:26 - Loaded RoutePredicateFactory [Before]
+2024-09-23 08:40:26 - Loaded RoutePredicateFactory [Between]
+2024-09-23 08:40:26 - Loaded RoutePredicateFactory [Cookie]
+2024-09-23 08:40:26 - Loaded RoutePredicateFactory [Header]
+2024-09-23 08:40:26 - Loaded RoutePredicateFactory [Host]
+2024-09-23 08:40:26 - Loaded RoutePredicateFactory [Method]
+2024-09-23 08:40:26 - Loaded RoutePredicateFactory [Path]
+2024-09-23 08:40:26 - Loaded RoutePredicateFactory [Query]
+2024-09-23 08:40:26 - Loaded RoutePredicateFactory [ReadBody]
+2024-09-23 08:40:26 - Loaded RoutePredicateFactory [RemoteAddr]
+2024-09-23 08:40:26 - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2024-09-23 08:40:26 - Loaded RoutePredicateFactory [Weight]
+2024-09-23 08:40:26 - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2024-09-23 08:40:26 - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2024-09-23 08:40:26 - Exposing 18 endpoints beneath base path '/actuator'
+2024-09-23 08:40:26 - ControllerAdvice beans: none
+2024-09-23 08:40:26 - enableLoggingRequestDetails='false': form data and headers will be masked to prevent unsafe logging of potentially sensitive data
+2024-09-23 08:40:26 - LiveReload server is running on port 35729
+2024-09-23 08:40:26 - Eureka HTTP Client uses RestTemplate.
+2024-09-23 08:40:26 - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2024-09-23 08:40:26 - Setting initial instance status as: STARTING
+2024-09-23 08:40:26 - Initializing Eureka in region us-east-1
+2024-09-23 08:40:26 - Resolving eureka endpoints via configuration
+2024-09-23 08:40:26 - Disable delta property : false
+2024-09-23 08:40:26 - Single vip registry refresh property : null
+2024-09-23 08:40:26 - Force full registry fetch : false
+2024-09-23 08:40:26 - Application is null : false
+2024-09-23 08:40:26 - Registered Applications size is zero : true
+2024-09-23 08:40:26 - Application version is -1: true
+2024-09-23 08:40:26 - Getting all instance registry info from the eureka server
+2024-09-23 08:40:26 - HTTP GET http://localhost:8761/eureka/apps/
+2024-09-23 08:40:26 - Accept=[application/json, application/*+json]
+2024-09-23 08:40:26 - Response 200 OK
+2024-09-23 08:40:26 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-23 08:40:26 - The response status is 200
+2024-09-23 08:40:26 - Starting heartbeat executor: renew interval is: 30
+2024-09-23 08:40:26 - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2024-09-23 08:40:26 - Discovery Client initialized at timestamp 1727055626611 with initial instances count: 3
+2024-09-23 08:40:26 - Registering application GATEWAY-SERVICE with eureka with status UP
+2024-09-23 08:40:26 - Saw local status change event StatusChangeEvent [timestamp=1727055626612, current=UP, previous=STARTING]
+2024-09-23 08:40:26 - DiscoveryClient_GATEWAY-SERVICE/gateway-service: registering service...
+2024-09-23 08:40:26 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-23 08:40:26 - HTTP POST http://localhost:8761/eureka/apps/GATEWAY-SERVICE
+2024-09-23 08:40:26 - Accept=[application/json, application/*+json]
+2024-09-23 08:40:26 - Writing [InstanceInfo [instanceId = gateway-service, appName = GATEWAY-SERVICE, hostName = localhost, status = UP, ipAddr = 26.86.151.172, port = 8080, securePort = 443, dataCenterInfo = com.netflix.appinfo.MyDataCenterInfo@7186c1aa] as "application/json"
+2024-09-23 08:40:26 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:40:26 - Response 204 NO_CONTENT
+2024-09-23 08:40:26 - DiscoveryClient_GATEWAY-SERVICE/gateway-service - registration status: 204
+2024-09-23 08:40:26 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-23 08:40:26 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-23 08:40:26 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:40:26 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-23 08:40:26 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying {pattern=/movie-service/**} to Path
+2024-09-23 08:40:26 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying filter {regexp=/movie-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:40:26 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_MOVIE-SERVICE
+2024-09-23 08:40:26 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-23 08:40:26 - RouteDefinition matched: auth-service
+2024-09-23 08:40:26 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-23 08:40:26 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:40:26 - RouteDefinition matched: user-service
+2024-09-23 08:40:26 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-23 08:40:26 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:40:26 - RouteDefinition matched: booking-service
+2024-09-23 08:40:26 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-23 08:40:26 - RouteDefinition matched: schedule-service
+2024-09-23 08:40:26 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-23 08:40:26 - RouteDefinition movie-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:40:26 - RouteDefinition matched: movie-service
+2024-09-23 08:40:26 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-23 08:40:26 - RouteDefinition matched: studio-service
+2024-09-23 08:40:26 - New routes count: 9
+2024-09-23 08:40:26 - Netty started on port 8080 (http)
+2024-09-23 08:40:26 - Updating port to 8080
+2024-09-23 08:40:26 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-23 08:40:26 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:40:26 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-23 08:40:26 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-23 08:40:26 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:40:26 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-23 08:40:26 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying {pattern=/movie-service/**} to Path
+2024-09-23 08:40:26 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying filter {regexp=/movie-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:40:26 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_MOVIE-SERVICE
+2024-09-23 08:40:26 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-23 08:40:26 - RouteDefinition matched: auth-service
+2024-09-23 08:40:26 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-23 08:40:26 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:40:26 - RouteDefinition matched: user-service
+2024-09-23 08:40:26 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-23 08:40:26 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:40:26 - RouteDefinition matched: booking-service
+2024-09-23 08:40:26 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-23 08:40:26 - RouteDefinition matched: schedule-service
+2024-09-23 08:40:26 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-23 08:40:26 - RouteDefinition movie-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:40:26 - RouteDefinition matched: movie-service
+2024-09-23 08:40:26 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-23 08:40:26 - RouteDefinition matched: studio-service
+2024-09-23 08:40:26 - New routes count: 9
+2024-09-23 08:40:26 - Started GatewayApplication in 1.601 seconds (process running for 371.866)
+2024-09-23 08:40:26 - Condition evaluation unchanged
+2024-09-23 08:40:52 - [ede2156a-10] HTTP GET "/api/v1/movies"
+2024-09-23 08:40:52 - Created new WebSession.
+2024-09-23 08:40:52 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+2024-09-23 08:40:52 - Request 'GET /api/v1/movies' doesn't match 'POST /logout'
+2024-09-23 08:40:52 - No matches found
+2024-09-23 08:40:52 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/register', method=null}
+2024-09-23 08:40:52 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/auth/register'
+2024-09-23 08:40:52 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/auth/login', method=null}
+2024-09-23 08:40:52 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/auth/login'
+2024-09-23 08:40:52 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/grouped', method=null}
+2024-09-23 08:40:52 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/schedules/grouped'
+2024-09-23 08:40:52 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/schedules/detail/**', method=null}
+2024-09-23 08:40:52 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/schedules/detail/**'
+2024-09-23 08:40:52 - No matches found
+2024-09-23 08:40:52 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/admin/**', method=null}
+2024-09-23 08:40:52 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/bookings/admin/**'
+2024-09-23 08:40:52 - No matches found
+2024-09-23 08:40:52 - Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/v1/bookings/customer/**', method=null}
+2024-09-23 08:40:52 - Request 'GET /api/v1/movies' doesn't match 'null /api/v1/bookings/customer/**'
+2024-09-23 08:40:52 - No matches found
+2024-09-23 08:40:52 - Checking authorization on '/api/v1/movies' using org.springframework.security.authorization.AuthenticatedReactiveAuthorizationManager@d4cea8c
+2024-09-23 08:40:52 - Authorization successful
+2024-09-23 08:40:52 - Route matched: movie-service
+2024-09-23 08:40:52 - Mapping [Exchange: GET http://localhost:8080/api/v1/movies] to Route{id='movie-service', uri=lb://movie-service, order=0, predicate=Paths: [/api/v1/movies/**], match trailing slash: true, gatewayFilters=[[findo.gateway.filter.JwtAuthenticationFilter$$Lambda$1807/0x00000008014a5b30@345e828f, order = 1]], metadata={}}
+2024-09-23 08:40:52 - [ede2156a-10] Mapped to org.springframework.cloud.gateway.handler.FilteringWebHandler@5c156c74
+2024-09-23 08:40:52 - Sorted gatewayFilterFactories: [[GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RemoveCachedBodyFilter@63b8a36f}, order = -2147483648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.AdaptCachedBodyGlobalFilter@33da81e0}, order = -2147482648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyWriteResponseFilter@7ab2ed8c}, order = -1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardPathFilter@3f8514b}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.GatewayMetricsFilter@3fa524df}, order = 0], [findo.gateway.filter.JwtAuthenticationFilter$$Lambda$1807/0x00000008014a5b30@345e828f, order = 1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RouteToRequestUrlFilter@425b133b}, order = 10000], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter@1ec0ea67}, order = 10150], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.LoadBalancerServiceInstanceCookieFilter@21f0064d}, order = 10151], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.WebsocketRoutingFilter@257d2980}, order = 2147483646], [GatewayFilterAdapter{delegate=findo.gateway.filter.LoggingGlobalFilter@2ab1738b}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyRoutingFilter@5b3ef04b}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardRoutingFilter@6ecb1f93}, order = 2147483647]]
+2024-09-23 08:40:52 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-23 08:40:52 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:40:52 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-23 08:40:52 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-23 08:40:52 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:40:52 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-23 08:40:52 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying {pattern=/movie-service/**} to Path
+2024-09-23 08:40:52 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying filter {regexp=/movie-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:40:52 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_MOVIE-SERVICE
+2024-09-23 08:40:52 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-23 08:40:52 - RouteDefinition matched: auth-service
+2024-09-23 08:40:52 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-23 08:40:52 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:40:52 - RouteDefinition matched: user-service
+2024-09-23 08:40:52 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-23 08:40:52 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:40:52 - RouteDefinition matched: booking-service
+2024-09-23 08:40:52 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-23 08:40:52 - RouteDefinition matched: schedule-service
+2024-09-23 08:40:52 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-23 08:40:52 - RouteDefinition movie-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:40:52 - RouteDefinition matched: movie-service
+2024-09-23 08:40:52 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-23 08:40:52 - RouteDefinition matched: studio-service
+2024-09-23 08:40:52 - New routes count: 9
+2024-09-23 08:40:52 - Request: GET http://localhost:8080/api/v1/movies from IP: /[0:0:0:0:0:0:0:1]:51035
+2024-09-23 08:40:53 - Will instrument the HTTP request headers [Authorization:"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4ZmY4Yzc1My02NzM0LTQ4NDYtOTFkMi1mOTkyYjRjZWRkMmQiLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlzcyI6IkZQVCIsImV4cCI6MTcyNzY2MDI2NiwiaWF0IjoxNzI3MDU1NDY2LCJlbWFpbCI6IlRlc3RlcjEwQGdtYWlsLmNvbSJ9.ooHHQ4qmDUEf5_rPbMUmz57JX15J0qdhh5wmZkPzcYrQVtF3DKBTKpJKKtuXaNwryWo0Lts0J3n-mMDbPWiI2yHt_3UtyX865bbV9paZoWUg_p9Lvx6vCm34n_t1NmfQh-pzhAVcjzXCCEI5UoBkLI8As4aH7iyKYR9TcTn7V_qF2T8GrDFqsYHjfFj3kekGRYaAGNzc1IRqTyB9veSPuKG33ecbjsXh_PnfxPIOUW0wIKEKh0gZl4_SfI7Zr674GLLT5zdGMpAT9fQb5tabD_h4jMroZn9XEZ72pjAZTV_pFkB_TRVLCqCDHqceypeHduhQ0NBGpL_OOeGb2a8rgg", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"69a94a1f-0f87-40b7-823b-80b3eaf396e4", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:51035"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-23 08:40:53 - Client observation  {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='GET', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='movie-service', spring.cloud.gateway.route.uri='lb://movie-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/movies'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=1.477E-4, duration(nanos)=147700.0, startTimeNanos=1944777443800}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@44fc4d9c'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@51b83fdf} created for the request. New headers are [Authorization:"Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4ZmY4Yzc1My02NzM0LTQ4NDYtOTFkMi1mOTkyYjRjZWRkMmQiLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlzcyI6IkZQVCIsImV4cCI6MTcyNzY2MDI2NiwiaWF0IjoxNzI3MDU1NDY2LCJlbWFpbCI6IlRlc3RlcjEwQGdtYWlsLmNvbSJ9.ooHHQ4qmDUEf5_rPbMUmz57JX15J0qdhh5wmZkPzcYrQVtF3DKBTKpJKKtuXaNwryWo0Lts0J3n-mMDbPWiI2yHt_3UtyX865bbV9paZoWUg_p9Lvx6vCm34n_t1NmfQh-pzhAVcjzXCCEI5UoBkLI8As4aH7iyKYR9TcTn7V_qF2T8GrDFqsYHjfFj3kekGRYaAGNzc1IRqTyB9veSPuKG33ecbjsXh_PnfxPIOUW0wIKEKh0gZl4_SfI7Zr674GLLT5zdGMpAT9fQb5tabD_h4jMroZn9XEZ72pjAZTV_pFkB_TRVLCqCDHqceypeHduhQ0NBGpL_OOeGb2a8rgg", User-Agent:"PostmanRuntime/7.42.0", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"69a94a1f-0f87-40b7-823b-80b3eaf396e4", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Forwarded:"proto=http;host="localhost:8080";for="[0:0:0:0:0:0:0:1]:51035"", X-Forwarded-For:"0:0:0:0:0:0:0:1", X-Forwarded-Proto:"http", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+2024-09-23 08:40:53 - Will instrument the response
+2024-09-23 08:40:53 - The response was handled for observation {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='GET', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='movie-service', spring.cloud.gateway.route.uri='lb://movie-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/v1/movies'], map=[class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=0.2689968, duration(nanos)=2.689968E8, startTimeNanos=1944777443800}', class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@44fc4d9c'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@51b83fdf}
+2024-09-23 08:40:53 - Response: 204 NO_CONTENT for GET http://localhost:8080/api/v1/movies
+2024-09-23 08:40:53 - [ede2156a-10] Completed 204 NO_CONTENT
+2024-09-23 08:40:56 - HTTP GET http://localhost:8761/eureka/apps/delta
+2024-09-23 08:40:56 - HTTP PUT http://localhost:8761/eureka/apps/GATEWAY-SERVICE/gateway-service?status=UP&lastDirtyTimestamp=1727055626612
+2024-09-23 08:40:56 - Accept=[application/json, application/*+json]
+2024-09-23 08:40:56 - Response 200 OK
+2024-09-23 08:40:56 - Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+2024-09-23 08:40:56 - Accept=[application/json, application/*+json]
+2024-09-23 08:40:56 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying {pattern=/auth-service/**} to Path
+2024-09-23 08:40:56 - RouteDefinition ReactiveCompositeDiscoveryClient_AUTH-SERVICE applying filter {regexp=/auth-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:40:56 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_AUTH-SERVICE
+2024-09-23 08:40:56 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying {pattern=/gateway-service/**} to Path
+2024-09-23 08:40:56 - RouteDefinition ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE applying filter {regexp=/gateway-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:40:56 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_GATEWAY-SERVICE
+2024-09-23 08:40:56 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying {pattern=/movie-service/**} to Path
+2024-09-23 08:40:56 - Response 200 OK
+2024-09-23 08:40:56 - RouteDefinition ReactiveCompositeDiscoveryClient_MOVIE-SERVICE applying filter {regexp=/movie-service/?(?<remaining>.*), replacement=/${remaining}} to RewritePath
+2024-09-23 08:40:56 - RouteDefinition matched: ReactiveCompositeDiscoveryClient_MOVIE-SERVICE
+2024-09-23 08:40:56 - RouteDefinition auth-service applying {_genkey_0=/api/v1/auth/**} to Path
+2024-09-23 08:40:56 - RouteDefinition matched: auth-service
+2024-09-23 08:40:56 - RouteDefinition user-service applying {_genkey_0=/api/v1/users/**} to Path
+2024-09-23 08:40:56 - RouteDefinition user-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:40:56 - RouteDefinition matched: user-service
+2024-09-23 08:40:56 - RouteDefinition booking-service applying {_genkey_0=/api/v1/bookings/**} to Path
+2024-09-23 08:40:56 - RouteDefinition booking-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:40:56 - RouteDefinition matched: booking-service
+2024-09-23 08:40:56 - RouteDefinition schedule-service applying {_genkey_0=/api/v1/schedules/**} to Path
+2024-09-23 08:40:56 - RouteDefinition matched: schedule-service
+2024-09-23 08:40:56 - RouteDefinition movie-service applying {_genkey_0=/api/v1/movies/**} to Path
+2024-09-23 08:40:56 - RouteDefinition movie-service applying filter {} to JwtAuthenticationFilter
+2024-09-23 08:40:56 - RouteDefinition matched: movie-service
+2024-09-23 08:40:56 - RouteDefinition studio-service applying {_genkey_0=/api/v1/studios/**} to Path
+2024-09-23 08:40:56 - RouteDefinition matched: studio-service
+2024-09-23 08:40:56 - New routes count: 9
