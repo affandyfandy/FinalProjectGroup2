@@ -25,11 +25,12 @@ export class StudioService {
     };
   }
 
-  getStudioList(page: number = 0) {
+  getStudioList(page: number = 0, size: number = 10) {
     return this.http.get(`${this.apiUrl}`, {
       headers: this.getHeaders(),
       params: {
-        page: page.toString()
+        page: page.toString(),
+        size: size.toString()
       }
     });
   }

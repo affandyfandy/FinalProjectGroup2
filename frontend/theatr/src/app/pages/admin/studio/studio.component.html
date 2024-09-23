@@ -1,6 +1,6 @@
 <div class="pt-[100px] px-14 pb-10">
     <!-- Add Button -->
-    <div class="flex justify-end max-w-full">
+    <div class="flex items-center justify-end max-w-full">
         <button (click)="showStudioModal(false)" class="btn btn-primary rounded-full px-5">
             <div class="flex items-center gap-2">
                 <img src="assets/icons/plus-black.svg" alt="Plus Icon" class="w-[22px] h-[22px]">
@@ -10,7 +10,7 @@
     </div>
 
     <!-- Table -->
-    <div *ngIf="studioList !== []" class="overflow-x-auto pt-4">
+    <div *ngIf="studioList.length > 0; else emptyView" class="overflow-x-auto pt-4">
         <table class="table">
             <!-- head -->
             <thead>
@@ -38,6 +38,20 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+    <ng-template #emptyView>
+        <div class="w-full text-center">
+            <h1 class="text-xl font-semibold">There's no data here...</h1>
+            <p class="font-light">You can <b class="font-semibold">add a studio</b> anyway.</p>
+        </div>
+    </ng-template>
+
+    <div *ngIf="totalPages > 1" class="w-full flex justify-center mt-4 py-8">
+        <div class="join">
+            <input *ngFor="let item of [].constructor(totalPages); let i = index" (change)="getStudioList(i)"
+                class="join-item btn btn-square" type="radio" name="options" [attr.aria-label]="i + 1"
+                [checked]="i === 0" />
+        </div>
     </div>
 </div>
 

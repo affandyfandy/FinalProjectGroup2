@@ -37,11 +37,11 @@ export class StudioComponent implements OnInit {
     this.getStudioList();
   }
 
-  getStudioList() {
-    this.studioService.getStudioList().subscribe({
+  getStudioList(page: number = 0) {
+    this.studioService.getStudioList(page).subscribe({
       next: (res: any) => {
         this.studioList = res.content;
-        this.currentPage = res.pageable.pageNumber + 1;
+        this.currentPage = page;
         this.totalPages = res.totalPages;
       },
       error: (err) => {
@@ -53,7 +53,7 @@ export class StudioComponent implements OnInit {
   addStudio() {
     this.studioService.addStudio({ name: this.currentStudioName }).subscribe({
       next: () => {
-        this.getStudioList();
+        this.getStudioList(this.currentPage);
         this.closeStudioModal();
       },
       error: (err) => {
@@ -65,7 +65,7 @@ export class StudioComponent implements OnInit {
   editStudio() {
     this.studioService.editStudio(this.currentStudio.id!, { name: this.currentStudioName }).subscribe({
       next: () => {
-        this.getStudioList();
+        this.getStudioList(this.currentPage);
         this.closeStudioModal();
       },
       error: (err) => {
@@ -77,7 +77,7 @@ export class StudioComponent implements OnInit {
   changeStatus(id: number) {
     this.studioService.changeStatus(id).subscribe({
       next: () => {
-        this.getStudioList();
+        this.getStudioList(this.currentPage);
       },
       error: (err) => {
         console.error('Failed to change studio status: ', err);
