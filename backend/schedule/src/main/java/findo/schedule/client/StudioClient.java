@@ -4,13 +4,12 @@ import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 
 import findo.schedule.dto.StudioDTO;
-import reactor.core.publisher.Mono;
-
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 @Service
 public class StudioClient {
@@ -34,15 +33,18 @@ public class StudioClient {
         String hostName = service.getHostName();
         int port = service.getPort();
 
-        return "http://" + hostName + ":" + port + "/api/v1/studios";
+        return "http://" + hostName + ":" + port + "/api/v1/studios/";
     }
-
-    public Mono<StudioDTO> getStudioById(List<Integer> list, String token) {
+    public Mono<StudioDTO> getStudioById(List<Integer> studioId, String token) {
+        String url = getServiceUrl() + studioId;
         return webClientBuilder.build()
                 .get()
-                .uri(getServiceUrl() + "/" + list)
+                .uri(url)
                 .headers(httpHeaders -> httpHeaders.setBearerAuth(token))
                 .retrieve()
-                .bodyToMono(StudioDTO.class);
+                .bodyToMono(StudioDTO.class)
+                .onErrorResume(e -> {
+                    return Mono.empty();
+                });
     }
 }

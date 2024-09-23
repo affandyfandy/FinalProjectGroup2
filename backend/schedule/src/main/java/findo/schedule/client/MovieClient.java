@@ -4,12 +4,13 @@ import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 
 import findo.schedule.dto.MovieDTO;
-import reactor.core.publisher.Mono;
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
+
+import java.util.List;
+import java.util.UUID;
 
 @Service
 public class MovieClient {
@@ -35,13 +36,16 @@ public class MovieClient {
 
         return "http://" + hostName + ":" + port + "/api/v1/movies/";
     }
-
-    public Mono<MovieDTO> getMovieById(UUID movieId, String token) {
+    public Mono<MovieDTO> getMovieById(List<UUID> movieId, String token) {
+        String url = getServiceUrl() + movieId;
         return webClientBuilder.build()
                 .get()
-                .uri(getServiceUrl() + "/" + movieId)
+                .uri(url)
                 .headers(httpHeaders -> httpHeaders.setBearerAuth(token))
                 .retrieve()
-                .bodyToMono(MovieDTO.class);
+                .bodyToMono(MovieDTO.class)
+                .onErrorResume(e -> {
+                    return Mono.empty();
+                });
     }
 }

@@ -4,12 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class MovieScheduleDTO {
+@AllArgsConstructor
+public class AvailableScheduleDTO {
+    private UUID movieId;
     private String movieTitle;
     private String movieSynopsis;
     private int movieYear;
-    private double price;
+    private int movieDuration;
+    private String studioName;
 }
