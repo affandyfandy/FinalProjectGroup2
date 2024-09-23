@@ -51,7 +51,7 @@ export class LoginComponent {
       },
       error: (err) => {
         this.isAlertSuccess = false;
-        this.alertMessage = 'Login failed';
+        this.alertMessage = 'Login failed' + err.error;
         this.isShowAlert = true;
         setTimeout(() => {
           this.isShowAlert = false;
@@ -74,7 +74,7 @@ export class LoginComponent {
       },
       error: (err) => {
         this.isAlertSuccess = false;
-        this.alertMessage = 'Register failed';
+        this.alertMessage = 'Register failed: ' + err.error;
         this.isShowAlert = true;
         setTimeout(() => {
           this.isShowAlert = false;
