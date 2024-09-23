@@ -29,6 +29,10 @@ export class StudioComponent implements OnInit {
   currentPage = 1;
   totalPages = 1;
 
+  isShowAlert = false;
+  alertMessage = '';
+  isAlertSuccess = true;
+
   constructor(
     private studioService: StudioService
   ) { }
@@ -45,7 +49,7 @@ export class StudioComponent implements OnInit {
         this.totalPages = res.totalPages;
       },
       error: (err) => {
-        console.error('Failed to get studio list: ', err);
+        this.showAlert('Failed to get studio list: ' + err.error, false);
       }
     });
   }
@@ -55,9 +59,10 @@ export class StudioComponent implements OnInit {
       next: () => {
         this.getStudioList(this.currentPage);
         this.closeStudioModal();
+        this.showAlert('Studio added successfully', true);
       },
       error: (err) => {
-        console.error('Failed to add studio: ', err);
+        this.showAlert('Failed to add studio: ' + err.error, false);
       }
     });
   }
@@ -67,9 +72,10 @@ export class StudioComponent implements OnInit {
       next: () => {
         this.getStudioList(this.currentPage);
         this.closeStudioModal();
+        this.showAlert('Studio edited successfully', true);
       },
       error: (err) => {
-        console.error('Failed to edit studio: ', err);
+        this.showAlert('Failed to edit studio: ' + err.error, false);
       }
     });
   }
@@ -77,10 +83,11 @@ export class StudioComponent implements OnInit {
   changeStatus(id: number) {
     this.studioService.changeStatus(id).subscribe({
       next: () => {
+        this.showAlert('Studio status changed successfully', true);
         this.getStudioList(this.currentPage);
       },
       error: (err) => {
-        console.error('Failed to change studio status: ', err);
+        this.showAlert('Failed to change studio status: ' + err.error, false);
       }
     });
   }
@@ -109,5 +116,18 @@ export class StudioComponent implements OnInit {
     } else {
       this.addStudio();
     }
+  }
+
+  showAlert(message: string, success: boolean) {
+    this.isAlertSuccess = success;
+    this.alertMessage = message;
+    this.isShowAlert = true;
+    setTimeout(() => {
+      this.isShowAlert = false;
+    }, 3000);
+  }
+
+  isSaveButtonDisabled(): boolean {
+    return this.currentStudioName === this.tempStudioName || this.currentStudioName === '' || !this.currentStudioName;
   }
 }

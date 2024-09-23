@@ -75,8 +75,19 @@
         <div class="flex space-x-2 w-full">
             <button class="btn btn-secondary bg-opacity-50 max-w-[310px] w-full rounded-full"
                 (click)="closeStudioModal()">Cancel</button>
-            <button (click)="onClickSave()" [disabled]="title.invalid"
+            <button (click)="onClickSave()" [disabled]="isSaveButtonDisabled()"
                 class="btn btn-primary max-w-[310px] w-full rounded-full">Save</button>
         </div>
     </div>
 </dialog>
+
+<!-- ALERT -->
+<div *ngIf="isShowAlert" role="alert"
+    class="alert {{ isAlertSuccess ? 'alert-success' : 'alert-error' }} fixed transition-all top-0 left-1/2 -translate-x-1/2 mt-4 z-50 max-w-[800px]">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+        class="h-6 w-6 shrink-0 text-primary stroke-current">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    <span class="text-primary">{{alertMessage}}</span>
+</div>
