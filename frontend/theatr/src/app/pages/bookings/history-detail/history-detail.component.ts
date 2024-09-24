@@ -54,7 +54,7 @@ export class HistoryDetailComponent implements OnInit {
           posterUrl: 'https://image.tmdb.org/t/p/w1280/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg',
           synopsis: "Teenager Riley's mind headquarters is undergoing a sudden demolition to make room for something entirely unexpected: new Emotions! Joy, Sadness, Anger, Fear and Disgust, who’ve long been running a successful operation by all accounts, aren’t sure how to feel when Anxiety shows up. And it looks like she’s not alone."
         },
-        showTime: new Date(),
+        showDate: new Date(),
         price: 40000,
         studio: {
           name: 'Studio 1',

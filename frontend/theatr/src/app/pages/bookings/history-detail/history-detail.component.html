@@ -17,7 +17,7 @@
                     <p class="text-zinc-400">{{ bookingData.seats?.length }} Tickets</p>
                     <p *ngFor="let seat of bookingData.seats" class="font-bold">{{seat.seatCode}}</p>
                 </div>
-                <p>{{ bookingData.schedule?.showTime ? (bookingData.schedule!.showTime! | fullDateTime) : 'N/A' }}
+                <p>{{ bookingData.schedule?.showDate ? (bookingData.schedule!.showDate! | fullDateTime) : 'N/A' }}
                 </p>
             </div>
         </div>

@@ -12,6 +12,7 @@ import findo.schedule.dto.CreateScheduleDTO;
 import findo.schedule.dto.ScheduleDTO;
 import findo.schedule.dto.ScheduleDetailDTO;
 import findo.schedule.dto.ScheduleResponseDTO;
+import findo.schedule.entity.Schedule;
 import reactor.core.publisher.Mono;
 
 public interface ScheduleService {

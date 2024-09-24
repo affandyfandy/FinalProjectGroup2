@@ -27,7 +27,7 @@
             <button *ngFor="let schedule of scheduleList" (click)="navigateToBook(schedule.id!)"
                 class="flex justify-between items-center border-b border-b-base-200 p-4 hover:bg-base-200 hover:rounded-lg w-full transition-all">
                 <div class="flex flex-col items-start space-y-1">
-                    <h2 class="text-xl self-start font-semibold">{{schedule.showTime ? (schedule.showTime | timeFormat)
+                    <h2 class="text-xl self-start font-semibold">{{schedule.showDate ? (schedule.showDate | timeFormat)
                         : 'N/A'}}
                     </h2>
                     <div class="flex space-x-2">
