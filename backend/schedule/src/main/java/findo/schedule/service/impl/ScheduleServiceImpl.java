@@ -234,7 +234,54 @@ public class ScheduleServiceImpl implements ScheduleService {
         });
     }
 
-    public Mono<Page<ScheduleDTO>> findAllSchedule(Pageable pageable, String token) {
+    @Override
+    public Mono<Page<ScheduleDTO>> findAllSchedule(Pageable pageable, LocalDate date, String token) {
+        LocalDateTime startOfDay = date.atStartOfDay();
+        LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
+
+        Page<Schedule> schedules = scheduleRepository.findByShowDateBetween(Timestamp.valueOf(startOfDay),
+                Timestamp.valueOf(endOfDay), pageable);
+
+        // Map the schedules to a list of Mono<ScheduleDTO>
+        List<Mono<ScheduleDTO>> scheduleDTOs = schedules.getContent().stream().map(schedule -> {
+
+            // Fetch movie details asynchronously
+            Flux<MovieDTO> movieFlux = Flux.fromIterable(schedule.getMovieId())
+                    .flatMap(movieId -> movieClient.getMovieById(movieId, token));
+
+            // Fetch studio details asynchronously
+            Flux<StudioDTO> studioFlux = Flux.fromIterable(schedule.getStudioId())
+                    .flatMap(studioId -> studioClient.getStudioById(studioId, token));
+
+            // Combine movie and studio results asynchronously using Mono.zip
+            return Mono.zip(movieFlux.collectList(), studioFlux.collectList())
+                    .map(tuple -> {
+                        List<MovieDTO> movies = tuple.getT1();
+                        List<StudioDTO> studios = tuple.getT2();
+
+                        // Map to ScheduleDTO and include movie and studio data
+                        return new ScheduleDTO(
+                                schedule.getId(),
+                                movies,
+                                studios,
+                                schedule.getShowDate(),
+                                schedule.getPrice(),
+                                schedule.getCreatedTime(),
+                                schedule.getUpdatedTime(),
+                                schedule.getCreatedBy(),
+                                schedule.getUpdatedBy());
+                    });
+        }).collect(Collectors.toList());
+
+        // Combine all the Mono<ScheduleDTO> into a Flux and convert to
+        // Mono<Page<ScheduleDTO>>
+        return Flux.fromIterable(scheduleDTOs)
+                .flatMap(mono -> mono)
+                .collectList()
+                .map(list -> new PageImpl<>(list, pageable, schedules.getTotalElements()));
+    }
+
+    public Mono<Page<ScheduleDTO>> findAllSchedules(Pageable pageable, String token) {
         Page<Schedule> schedules = scheduleRepository.findAll(pageable);
 
         // Map the schedules to a list of Mono<ScheduleDTO>

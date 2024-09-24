@@ -28,6 +28,7 @@ public class ScheduleController {
     @GetMapping("/admin")
     public Mono<ResponseEntity<Page<ScheduleDTO>>> getAllSchedules(
             @AuthenticationPrincipal JwtAuthenticationToken principal,
+            @RequestParam @Valid LocalDate date,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size) {
 
@@ -36,7 +37,7 @@ public class ScheduleController {
         Pageable pageable = PageRequest.of(page, size);
 
         // Fetch paginated schedule details with movie and studio data
-        return scheduleService.findAllSchedule(pageable, token)
+        return scheduleService.findAllSchedule(pageable, date, token)
                 .map(schedulePage -> {
                     if (schedulePage.isEmpty()) {
                         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

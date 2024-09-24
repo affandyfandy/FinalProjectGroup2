@@ -5,13 +5,13 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import findo.schedule.dto.AvailableScheduleDTO;
 import findo.schedule.dto.CreateScheduleDTO;
+import findo.schedule.dto.ScheduleDTO;
 import findo.schedule.dto.ScheduleDetailDTO;
 import findo.schedule.dto.ScheduleResponseDTO;
-import findo.schedule.dto.SeatDTO;
-import findo.schedule.entity.Schedule;
 import reactor.core.publisher.Mono;
 
 public interface ScheduleService {
@@ -24,5 +24,7 @@ public interface ScheduleService {
                         String token);
 
         Mono<ScheduleDetailDTO> findScheduleDetailById(UUID scheduleId, String token);
+
+        Mono<Page<ScheduleDTO>> findAllSchedule(Pageable pageable, LocalDate date, String token);
 
 }
