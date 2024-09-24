@@ -6,6 +6,7 @@ import { TimeFormatPipe } from '../../../core/pipes/time-format/time-format.pipe
 import { Movie } from '../../../model/movie.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PriceFormatPipe } from '../../../core/pipes/price-format/price-format.pipe';
+import { RouterConfig } from '../../../config/app.constants';
 
 @Component({
   selector: 'app-movie-schedule',
@@ -83,5 +84,9 @@ export class MovieScheduleComponent implements OnInit {
         }
       });
     }
+  }
+
+  navigateToBook(scheduleId: string) {
+    this.router.navigate([RouterConfig.SCHEDULES.path, scheduleId, 'book']);
   }
 }

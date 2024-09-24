@@ -1,15 +1,15 @@
 package findo.schedule.dto;
 
-import java.sql.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
+
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class ShowtimeDTO {
     private Timestamp showDate;
     private String studioName;
-    private double price;
 }
