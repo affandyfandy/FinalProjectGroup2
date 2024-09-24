@@ -25,9 +25,10 @@ export class MovieService {
     };
   }
 
-  getAllMovies(page: number = 0, size: number = 10) {
+  getAllMovies(page: number = 0, searchKey?: string, size: number = 10) {
     const headers = this.getHeaders();
     const params = {
+      searchKey: searchKey || '',
       page: page.toString(),
       size: size.toString()
     };

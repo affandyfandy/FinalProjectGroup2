@@ -36,10 +36,10 @@ public class MovieController {
 
     @GetMapping(value = "/admin/get-all")
     public ResponseEntity<Page<Movie>> getAllMovies(@RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size, @RequestParam(defaultValue = "default") String searchKey) {
+            @RequestParam(defaultValue = "20") int size, @RequestParam(defaultValue = "") String searchKey) {
         Pageable pageable = PageRequest.of(page, size);
 
-        if (!searchKey.equals("default")) {
+        if (!searchKey.equals("")) {
             Page<Movie> movieSearchPage = movieService.findAllMoviesByTitle(searchKey, pageable);
 
             if (movieSearchPage.isEmpty()) {

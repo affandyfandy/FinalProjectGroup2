@@ -3,7 +3,8 @@
     <div class="flex justify-between items-center max-w-full">
         <label class="input input-bordered flex items-center gap-2 max-w-[500px] w-full">
             <img src="assets/icons/search-white.svg" alt="Search Icon" class="w-5 h-5">
-            <input type="text" class="grow" placeholder="Search here..." />
+            <input type="text" [(ngModel)]="searchText" class="grow" placeholder="Search here..."
+                (keyup.enter)="getMovieList()" />
         </label>
 
         <button (click)="showMovieModal(false)" class="btn btn-primary rounded-full px-5">

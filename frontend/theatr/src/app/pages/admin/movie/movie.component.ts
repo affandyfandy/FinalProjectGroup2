@@ -19,6 +19,8 @@ export class MovieComponent implements OnInit {
 
   previewImage = '';
 
+  searchText = '';
+
   movieList: Movie[] = [];
   currentMovie: ShowMovieDTO = {
     id: '',
@@ -56,7 +58,7 @@ export class MovieComponent implements OnInit {
 
 
   getMovieList(page: number = 0) {
-    this.movieService.getAllMovies(page).subscribe({
+    this.movieService.getAllMovies(page, this.searchText).subscribe({
       next: (res: any) => {
         this.movieList = res.content;
         this.currentPage = page;
