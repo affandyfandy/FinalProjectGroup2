@@ -32,6 +32,11 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    public Page<Movie> findAllMoviesByTitle(String title, Pageable pageable) {
+        return movieRepository.findByTitleContainingIgnoreCase(title, pageable);
+    }
+
+    @Override
     public Movie findMovieById(UUID id) {
         return movieRepository.findById(id)
             .orElseThrow(() -> new MovieNotFoundException("Movie not found!"));
