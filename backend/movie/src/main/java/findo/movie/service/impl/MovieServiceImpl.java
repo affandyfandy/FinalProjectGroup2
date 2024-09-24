@@ -45,7 +45,7 @@ public class MovieServiceImpl implements MovieService {
 
         Movie savedMovie = movieMapper.toMovie(movieSaveDTO);
 
-        savedMovie.setDuration(30);
+        savedMovie.setDuration(15);
         savedMovie.setCreatedBy("test");
         savedMovie.setUpdatedBy("test");
         savedMovie.setCreatedTime(LocalDate.now());

@@ -32,7 +32,7 @@ public class SecurityConfig {
                                                                 "/api/v1/schedules/admin/**",
                                                                 "/api/v1/studios/admin/**",
                                                                 "/api/v1/movies/admin/**")
-                                                .hasRole("ADMIN") // Only accessible with ADMIN role
+                                                .hasRole("ROLE_ADMIN") // Only accessible with ADMIN role
                                                 .pathMatchers("/api/v1/bookings/customer/**").hasRole("ROLE_CUSTOMER") // Accessible
                                                                                                                        // to
                                                                                                                        // customers
