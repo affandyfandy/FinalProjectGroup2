@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ScheduleShowDTO {
     private UUID scheduleId;
+    private Integer studioId;
     private Timestamp showDate;
     private String studioName;
     private double price;

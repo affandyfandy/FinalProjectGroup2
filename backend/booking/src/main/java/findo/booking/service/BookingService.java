@@ -9,9 +9,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface BookingService {
-    Page<BookingResponseDTO> getAllBookings(Pageable pageable);
+    Mono<Page<BookingResponseDTO>> getAllBookings(Pageable pageable, String token);
+    // Page<BookingResponseDTO> getAllBookings(Pageable pageable, String token);
 
-    Mono<Page<CustomerBookingHistoryDTO>> getBookingHistoryByUser(UUID userId, Pageable pageable);
+    Mono<Page<BookingResponseDTO>> getBookingHistoryByUser(UUID userId, Pageable pageable, String token);
 
     BookingDetailDTO getBookingDetail(UUID bookingId);
 

@@ -26,16 +26,24 @@ public class ScheduleController {
     private final ScheduleServiceImpl scheduleService;
 
     @GetMapping("/admin")
-    public ResponseEntity<Page<Schedule>> getAllSchedule(@RequestParam(defaultValue = "0") int page,
+    public Mono<ResponseEntity<Page<ScheduleDTO>>> getAllSchedules(
+            @AuthenticationPrincipal JwtAuthenticationToken principal,
+            @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size) {
+
+        String token = principal.getToken().getTokenValue();
+
         Pageable pageable = PageRequest.of(page, size);
-        Page<Schedule> schedulePage = scheduleService.findAllSchedule(pageable);
 
-        if (schedulePage.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        }
-
-        return ResponseEntity.status(HttpStatus.OK).body(schedulePage);
+        // Fetch paginated schedule details with movie and studio data
+        return scheduleService.findAllSchedule(pageable, token)
+                .map(schedulePage -> {
+                    if (schedulePage.isEmpty()) {
+                        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+                    } else {
+                        return ResponseEntity.status(HttpStatus.OK).body(schedulePage);
+                    }
+                });
     }
 
     @PostMapping("/admin/create-schedule")
@@ -44,6 +52,16 @@ public class ScheduleController {
         String email = principal.getToken().getClaimAsString("email");
         ScheduleResponseDTO schedule = scheduleService.createSchedule(dto, email);
         return new ResponseEntity<>(schedule, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{scheduleId}")
+    public Mono<ResponseEntity<ScheduleDetailDTO>> getScheduleById(@PathVariable UUID scheduleId,
+            @AuthenticationPrincipal JwtAuthenticationToken principal) {
+        String token = principal.getToken().getTokenValue();
+
+        return scheduleService.findScheduleDetailById(scheduleId, token)
+                .map(scheduleDetailDTO -> ResponseEntity.status(HttpStatus.OK).body(scheduleDetailDTO))
+                .defaultIfEmpty(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @GetMapping("/available")
