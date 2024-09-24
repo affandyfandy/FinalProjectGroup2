@@ -1,10 +1,11 @@
 package findo.schedule.controller;
 
+import findo.schedule.client.BookingClient;
 import findo.schedule.dto.*;
-import findo.schedule.entity.Schedule;
 import findo.schedule.service.impl.ScheduleServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -100,5 +102,15 @@ public class ScheduleController {
                     }
                     return ResponseEntity.ok(schedulePage); // Return 200 with the page of schedule details
                 });
+    }
+
+    @GetMapping("/{scheduleId}/available-seats")
+    public Mono<ResponseEntity<List<Integer>>> getAvailabilitySeats(@PathVariable("scheduleId") UUID scheduleId,
+            @AuthenticationPrincipal JwtAuthenticationToken principal) {
+        String token = principal.getToken().getTokenValue();
+
+        return scheduleService.testingWebClientConnection(scheduleId, token)
+                .map(seatIds -> ResponseEntity.ok(seatIds))
+                .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 }

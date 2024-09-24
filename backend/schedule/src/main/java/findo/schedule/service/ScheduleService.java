@@ -12,6 +12,7 @@ import findo.schedule.dto.CreateScheduleDTO;
 import findo.schedule.dto.ScheduleDTO;
 import findo.schedule.dto.ScheduleDetailDTO;
 import findo.schedule.dto.ScheduleResponseDTO;
+import findo.schedule.dto.ScheduleStudioSeatDTO;
 import reactor.core.publisher.Mono;
 
 public interface ScheduleService {
@@ -27,4 +28,5 @@ public interface ScheduleService {
 
         Mono<Page<ScheduleDTO>> findAllSchedule(Pageable pageable, LocalDate date, String token);
 
+        Mono<ScheduleStudioSeatDTO> findAvailabilityScheduleSeats(UUID scheduleId);
 }

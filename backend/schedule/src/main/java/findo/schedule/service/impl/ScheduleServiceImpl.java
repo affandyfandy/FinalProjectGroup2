@@ -1,5 +1,6 @@
 package findo.schedule.service.impl;
 
+import findo.schedule.client.BookingClient;
 import findo.schedule.client.MovieClient;
 import findo.schedule.client.StudioClient;
 import findo.schedule.dto.*;
@@ -37,13 +38,15 @@ public class ScheduleServiceImpl implements ScheduleService {
     private final MovieClient movieClient;
     private final ScheduleMapper scheduleMapper;
     private final StudioClient studioClient;
+    private final BookingClient bookingClient;
 
     ScheduleServiceImpl(ScheduleRepository scheduleRepository, MovieClient movieClient, ScheduleMapper scheduleMapper,
-            StudioClient studioClient) {
+            StudioClient studioClient, BookingClient bookingClient) {
         this.scheduleRepository = scheduleRepository;
         this.movieClient = movieClient;
         this.scheduleMapper = scheduleMapper;
         this.studioClient = studioClient;
+        this.bookingClient = bookingClient;
     }
 
     @Override
@@ -279,6 +282,16 @@ public class ScheduleServiceImpl implements ScheduleService {
                 .flatMap(mono -> mono)
                 .collectList()
                 .map(list -> new PageImpl<>(list, pageable, schedules.getTotalElements()));
+    }
+
+    @Override
+    public Mono<ScheduleStudioSeatDTO> findAvailabilityScheduleSeats(UUID scheduleId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findAvailabilityScheduleSeats'");
+    }
+
+    public Mono<List<Integer>> testingWebClientConnection(UUID scheduleId, String token) {
+        return bookingClient.getSeatIdsByScheduleId(scheduleId, token);
     }
 
 }
