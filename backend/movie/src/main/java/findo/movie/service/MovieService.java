@@ -11,6 +11,7 @@ import findo.movie.dto.MovieSaveDTO;
 
 public interface MovieService {
     Page<Movie> findAllMovies(Pageable pageable);
+    Page<Movie> findAllMoviesByTitle(String title, Pageable pageable);
     Movie findMovieById(UUID id);
     Movie createMovie(MovieSaveDTO movieSaveDTO);
     Movie updateMovie(UUID id, MovieSaveDTO movieSaveDTO);

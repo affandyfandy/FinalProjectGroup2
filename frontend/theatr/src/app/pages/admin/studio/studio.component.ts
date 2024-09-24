@@ -49,7 +49,7 @@ export class StudioComponent implements OnInit {
         this.totalPages = res.totalPages;
       },
       error: (err) => {
-        this.showAlert('Failed to get studio list: ' + err.error, false);
+        this.showAlert('Failed to get studio list: ' + err.error.message, false);
       }
     });
   }
@@ -62,7 +62,8 @@ export class StudioComponent implements OnInit {
         this.showAlert('Studio added successfully', true);
       },
       error: (err) => {
-        this.showAlert('Failed to add studio: ' + err.error, false);
+        this.closeStudioModal();
+        this.showAlert('Failed to add studio: ' + err.error.message, false);
       }
     });
   }
@@ -75,7 +76,8 @@ export class StudioComponent implements OnInit {
         this.showAlert('Studio edited successfully', true);
       },
       error: (err) => {
-        this.showAlert('Failed to edit studio: ' + err.error, false);
+        this.closeStudioModal();
+        this.showAlert('Failed to edit studio: ' + err.error.message, false);
       }
     });
   }
@@ -87,7 +89,8 @@ export class StudioComponent implements OnInit {
         this.getStudioList(this.currentPage);
       },
       error: (err) => {
-        this.showAlert('Failed to change studio status: ' + err.error, false);
+        this.closeStudioModal();
+        this.showAlert('Failed to change studio status: ' + err.error.message, false);
       }
     });
   }

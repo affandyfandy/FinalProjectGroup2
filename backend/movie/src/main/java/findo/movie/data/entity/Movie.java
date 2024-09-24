@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,7 +27,8 @@ public class Movie {
     @Column(unique=true, nullable=false)
     private String title;
 
-    @Column(nullable=false)
+    @Column(nullable=false, columnDefinition = "TEXT")
+    @Lob
     private String synopsis;
 
     private int duration;
