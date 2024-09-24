@@ -7,6 +7,7 @@ import findo.booking.service.impl.BookingServiceImpl;
 import reactor.core.publisher.Mono;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.apache.http.HttpStatus;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 @RestController
@@ -30,22 +33,24 @@ public class BookingController {
 
     // Show All Booking History (Admin)
     @GetMapping("/admin/history")
-    public ResponseEntity<Page<BookingResponseDTO>> getAllBookingHistory(
+    public Mono<ResponseEntity<Page<BookingResponseDTO>>> getAllBookingHistory(
+            @AuthenticationPrincipal JwtAuthenticationToken principal,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "updatedTime") String sortBy,
             @RequestParam(defaultValue = "DESC") String sortDir) {
-
+        String token = principal.getToken().getTokenValue();
         Sort sort = Sort.by(sortDir.equalsIgnoreCase("DESC") ? Sort.Direction.DESC : Sort.Direction.ASC, sortBy);
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        Page<BookingResponseDTO> bookingHistory = bookingService.getAllBookings(pageable);
-        return ResponseEntity.ok(bookingHistory);
+        return bookingService.getAllBookings(pageable, token)
+                .map(bookingHistory -> ResponseEntity.ok(bookingHistory))
+                .defaultIfEmpty(ResponseEntity.notFound().build()); // Handle case if there are no bookings
     }
 
     // Show Booking History (Customer)
     @GetMapping("/customer/booking-history")
-    public Mono<ResponseEntity<Page<CustomerBookingHistoryDTO>>> getBookingHistory(
+    public Mono<ResponseEntity<Page<BookingResponseDTO>>> getBookingHistory(
             @AuthenticationPrincipal JwtAuthenticationToken principal,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
@@ -57,13 +62,15 @@ public class BookingController {
         Sort sort = Sort.by(sortDir.equalsIgnoreCase("DESC") ? Sort.Direction.DESC : Sort.Direction.ASC, sortBy);
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        return bookingService.getBookingHistoryByUser(UUID.fromString(userId), pageable)
+        return bookingService
+                .getBookingHistoryByUser(UUID.fromString(userId), pageable, principal.getToken().getTokenValue())
                 .map(ResponseEntity::ok);
     }
 
     // Show Booking Detail (Customer)
     @GetMapping("/customer/history/detail/{bookingId}")
-    public BookingDetailDTO getBookingDetail(@PathVariable UUID bookingId) {
+    public BookingDetailDTO getBookingDetail(@AuthenticationPrincipal JwtAuthenticationToken principal,
+            @PathVariable UUID bookingId) {
         return bookingService.getBookingDetail(bookingId);
     }
 
