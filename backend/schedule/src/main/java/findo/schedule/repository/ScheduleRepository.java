@@ -25,4 +25,5 @@ public interface ScheduleRepository extends JpaRepository<Schedule, UUID> {
             @Param("startOfDay") Timestamp startOfDay,
             @Param("endOfDay") Timestamp endOfDay,
             Pageable pageable);
+
 }

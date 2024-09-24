@@ -28,7 +28,7 @@ public class BookingSeat {
     @JoinColumn(name = "booking_id", nullable = false)
     private Booking booking; // Reference to the Booking entity
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @Column(name = "seat_id")
     private List<Integer> seatIds; // List of seat IDs
 

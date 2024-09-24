@@ -8,6 +8,8 @@ import findo.schedule.mapper.ScheduleMapper;
 import findo.schedule.repository.ScheduleRepository;
 import findo.schedule.service.ScheduleService;
 import org.springframework.data.domain.PageRequest;
+
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import org.springframework.data.domain.Page;
@@ -57,6 +59,48 @@ public class ScheduleServiceImpl implements ScheduleService {
         } catch (Exception e) {
             throw new RuntimeException("Error while creating schedule", e);
         }
+    }
+
+    @Override
+    public Mono<ScheduleDetailDTO> findScheduleDetailById(UUID scheduleId, String token) {
+        // Fetch the schedule from the repository
+        return Mono.justOrEmpty(scheduleRepository.findById(scheduleId))
+                .flatMap(schedule -> {
+                    // Fetch movie details from the MovieClient
+                    UUID movieId = schedule.getMovieId().get(0); // Assuming a single movieId for simplicity
+                    Mono<MovieDTO> movieMono = movieClient.getMovieById(movieId, token);
+
+                    // Fetch studio details from the StudioClient
+                    Integer studioId = schedule.getStudioId().get(0); // Assuming a single studioId for simplicity
+                    Mono<StudioDTO> studioMono = studioClient.getStudioById(studioId, token);
+
+                    // Combine movie and studio details
+                    return Mono.zip(movieMono, studioMono)
+                            .map(tuple -> {
+                                MovieDTO movieDTO = tuple.getT1();
+                                StudioDTO studioDTO = tuple.getT2();
+
+                                // Create ScheduleShowDTO
+                                ScheduleShowDTO showDTO = new ScheduleShowDTO(
+                                        schedule.getId(),
+                                        studioDTO.getId(),
+                                        schedule.getShowDate(),
+                                        studioDTO.getName(), // Use studio name from StudioDTO
+                                        schedule.getPrice());
+
+                                // Create ScheduleDetailDTO
+                                return new ScheduleDetailDTO(
+                                        movieDTO.getId(),
+                                        movieDTO.getTitle(),
+                                        movieDTO.getSynopsis(),
+                                        movieDTO.getYear(),
+                                        movieDTO.getDuration(),
+                                        movieDTO.getPosterUrl(),
+                                        List.of(showDTO) // Assuming one schedule show for now
+                                );
+                            });
+                })
+                .switchIfEmpty(Mono.empty()); // Return empty if no schedule found
     }
 
     @Override
@@ -148,7 +192,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         // Iterate over found schedules
         for (Schedule schedule : schedules) {
             studioShowMap.computeIfAbsent(schedule.getStudioId().get(0), studioId -> new ArrayList<>())
-                    .add(new ScheduleShowDTO(schedule.getId(), schedule.getShowDate(), "", schedule.getPrice()));
+                    .add(new ScheduleShowDTO(schedule.getId(), size, schedule.getShowDate(), "", schedule.getPrice()));
         }
 
         return movieMono.flatMap(movie -> {
@@ -190,8 +234,51 @@ public class ScheduleServiceImpl implements ScheduleService {
         });
     }
 
-    public Page<Schedule> findAllSchedule(Pageable pageable) {
-        return scheduleRepository.findAll(pageable);
+    @Override
+    public Mono<Page<ScheduleDTO>> findAllSchedule(Pageable pageable, LocalDate date, String token) {
+        LocalDateTime startOfDay = date.atStartOfDay();
+        LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
+
+        Page<Schedule> schedules = scheduleRepository.findByShowDateBetween(Timestamp.valueOf(startOfDay),
+                Timestamp.valueOf(endOfDay), pageable);
+
+        // Map the schedules to a list of Mono<ScheduleDTO>
+        List<Mono<ScheduleDTO>> scheduleDTOs = schedules.getContent().stream().map(schedule -> {
+
+            // Fetch movie details asynchronously
+            Flux<MovieDTO> movieFlux = Flux.fromIterable(schedule.getMovieId())
+                    .flatMap(movieId -> movieClient.getMovieById(movieId, token));
+
+            // Fetch studio details asynchronously
+            Flux<StudioDTO> studioFlux = Flux.fromIterable(schedule.getStudioId())
+                    .flatMap(studioId -> studioClient.getStudioById(studioId, token));
+
+            // Combine movie and studio results asynchronously using Mono.zip
+            return Mono.zip(movieFlux.collectList(), studioFlux.collectList())
+                    .map(tuple -> {
+                        List<MovieDTO> movies = tuple.getT1();
+                        List<StudioDTO> studios = tuple.getT2();
+
+                        // Map to ScheduleDTO and include movie and studio data
+                        return new ScheduleDTO(
+                                schedule.getId(),
+                                movies,
+                                studios,
+                                schedule.getShowDate(),
+                                schedule.getPrice(),
+                                schedule.getCreatedTime(),
+                                schedule.getUpdatedTime(),
+                                schedule.getCreatedBy(),
+                                schedule.getUpdatedBy());
+                    });
+        }).collect(Collectors.toList());
+
+        // Combine all the Mono<ScheduleDTO> into a Flux and convert to
+        // Mono<Page<ScheduleDTO>>
+        return Flux.fromIterable(scheduleDTOs)
+                .flatMap(mono -> mono)
+                .collectList()
+                .map(list -> new PageImpl<>(list, pageable, schedules.getTotalElements()));
     }
 
 }

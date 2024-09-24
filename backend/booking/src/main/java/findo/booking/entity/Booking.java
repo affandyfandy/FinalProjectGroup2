@@ -30,8 +30,11 @@ public class Booking {
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "booking_schedule", joinColumns = @JoinColumn(name = "booking_id"))
-    @Column(name = "user_id")
+    @Column(name = "schedule_id")
     private List<UUID> scheduleIds;
+
+    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, fetch = FetchType.EAGER) // Add this line
+    private List<BookingSeat> bookingSeats;
 
     @Column(nullable = false)
     private double totalAmount;
