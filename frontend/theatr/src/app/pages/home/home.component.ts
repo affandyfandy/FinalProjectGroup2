@@ -4,6 +4,7 @@ import { Schedule } from '../../model/schedule.model';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterConfig } from '../../config/app.constants';
+import { ScheduleService } from '../../services/schedule/schedule.service';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,9 @@ import { RouterConfig } from '../../config/app.constants';
   imports: [
     CommonModule,
     FormsModule
+  ],
+  providers: [
+    ScheduleService
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
@@ -22,8 +26,16 @@ export class HomeComponent implements OnInit {
   slidingBanner: Schedule[] = []
   scheduleList: Schedule[] = []
 
+  currentPage = 1;
+  totalPages = 1;
+
+  isShowAlert = false;
+  alertMessage = '';
+  isAlertSuccess = true;
+
   constructor(
-    private router: Router
+    private router: Router,
+    private scheduleService: ScheduleService
   ) { }
 
   ngOnInit(): void {
@@ -46,40 +58,39 @@ export class HomeComponent implements OnInit {
   }
 
   getSlidingBanner() {
-    // Change this to get the list of schedules from the backend
-    for (let i = 0; i < 5; i++) {
-      this.slidingBanner.push({
-        id: i.toString(),
-        movie: {
-          id: i.toString(),
-          title: 'Inside Out ' + i,
-          year: 2015,
-          posterUrl: 'https://image.tmdb.org/t/p/w1280/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg',
-          synopsis: "Teenager Riley's mind headquarters is undergoing a sudden demolition to make room for something entirely unexpected: new Emotions! Joy, Sadness, Anger, Fear and Disgust, who’ve long been running a successful operation by all accounts, aren’t sure how to feel when Anxiety shows up. And it looks like she’s not alone."
-        },
-        showTime: new Date()
-      });
-    }
+    this.scheduleService.getAvailableSchedule(0, 6, this.currentDateTime).subscribe({
+      next: (res: any) => {
+        this.slidingBanner = res.content;
+      },
+      error: (err) => {
+        this.showAlert('Failed to get schedule list banner: ' + err.error.message, false);
+      }
+    });
   }
 
-  getScheduleList() {
-    // Change this to get the list of schedules from the backend
-    for (let i = 0; i < 6; i++) {
-      this.scheduleList.push({
-        id: i.toString(),
-        movie: {
-          id: i.toString(),
-          title: 'Inside Out ' + i,
-          year: 2015 + i,
-          posterUrl: 'https://image.tmdb.org/t/p/w1280/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg',
-          synopsis: "Teenager Riley's mind headquarters is undergoing a sudden demolition to make room for something entirely unexpected: new Emotions! Joy, Sadness, Anger, Fear and Disgust, who’ve long been running a successful operation by all accounts, aren’t sure how to feel when Anxiety shows up. And it looks like she’s not alone."
-        },
-        showTime: new Date()
-      });
-    }
+  getScheduleList(page: number = 0) {
+    this.scheduleService.getAvailableSchedule(page, 6, this.currentDateTime).subscribe({
+      next: (res: any) => {
+        this.scheduleList = res.content;
+        this.currentPage = page;
+        this.totalPages = res.totalPages;
+      },
+      error: (err) => {
+        this.showAlert('Failed to get schedule list: ' + err.error.message, false);
+      }
+    });
   }
 
   navigateToSchedule(id: string) {
     this.router.navigate([RouterConfig.SCHEDULES.path, id]);
+  }
+
+  showAlert(message: string, success: boolean) {
+    this.isAlertSuccess = success;
+    this.alertMessage = message;
+    this.isShowAlert = true;
+    setTimeout(() => {
+      this.isShowAlert = false;
+    }, 3000);
   }
 }

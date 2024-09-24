@@ -190,8 +190,13 @@ public class ScheduleServiceImpl implements ScheduleService {
         });
     }
 
-    public Page<Schedule> findAllSchedule(Pageable pageable) {
-        return scheduleRepository.findAll(pageable);
+    @Override
+    public Page<Schedule> findAllSchedule(Pageable pageable, LocalDate date) {
+        LocalDateTime startOfDay = date.atStartOfDay();
+        LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
+
+        return scheduleRepository.findByShowDateBetween(Timestamp.valueOf(startOfDay),
+                Timestamp.valueOf(endOfDay), pageable);
     }
 
 }

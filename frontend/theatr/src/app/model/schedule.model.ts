@@ -14,8 +14,15 @@ export interface Schedule {
 }
 
 export interface AddScheduleDTO {
-    showTime: Date;
-    movieId: String;
-    studioId: number;
+    showDate: Date;
+    movieId: String[];
+    studioId: number[];
+    price: number;
+}
+
+export interface CreateScheduleDTO {
+    showDate: string;
+    movieId: String[];
+    studioId: number[];
     price: number;
 }

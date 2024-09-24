@@ -1,11 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { AddScheduleDTO, Schedule } from '../../../model/schedule.model';
+import { AddScheduleDTO, CreateScheduleDTO, Schedule } from '../../../model/schedule.model';
 import { Movie } from '../../../model/movie.model';
 import { Studio } from '../../../model/studio.model';
 import { TimeFormatPipe } from '../../../core/pipes/time-format/time-format.pipe';
 import { PriceFormatPipe } from '../../../core/pipes/price-format/price-format.pipe';
+import { MovieService } from '../../../services/movie/movie.service';
+import { StudioService } from '../../../services/studio/studio.service';
+import { ScheduleService } from '../../../services/schedule/schedule.service';
 
 @Component({
   selector: 'app-schedule',
@@ -15,6 +18,11 @@ import { PriceFormatPipe } from '../../../core/pipes/price-format/price-format.p
     FormsModule,
     TimeFormatPipe,
     PriceFormatPipe
+  ],
+  providers: [
+    MovieService,
+    StudioService,
+    ScheduleService
   ],
   templateUrl: './schedule.component.html',
   styleUrl: './schedule.component.css'
@@ -30,43 +38,79 @@ export class ScheduleComponent implements OnInit {
   studioList: Studio[] = [];
   availableShowTime: Date[] = [];
 
-  currentMovie: Movie = {} as Movie;
-  currentStudio: Studio = {} as Studio;
-  currentSchedule: AddScheduleDTO = {} as AddScheduleDTO;
+  currentMovie: Movie = {};
+  currentStudio: Studio = {};
+  currentSchedule: AddScheduleDTO = {
+    showDate: new Date(),
+    movieId: [],
+    studioId: [],
+    price: 0
+  };
   currentScheduleDateTime = '';
 
-  constructor() { }
+  currentPage = 1;
+  totalPages = 1;
+
+  isShowAlert = false;
+  alertMessage = '';
+  isAlertSuccess = true;
+
+  constructor(
+    private movieService: MovieService,
+    private studioService: StudioService,
+    private scheduleService: ScheduleService
+  ) { }
 
   ngOnInit(): void {
     this.currentDateTime = this.getTodayDate();
+    this.getMovieList();
+    this.getStudioList();
     this.getScheduleList();
   }
 
-  getScheduleList() {
-    // call API to get schedule list
-    const date = new Date();
-    const [year, month, day] = this.currentDateTime.split('-').map(Number);
+  getScheduleList(page: number = 0) {
+    this.scheduleList = [];
+    this.scheduleService.getAllSchedules(this.currentDateTime, page).subscribe({
+      next: (res: any) => {
+        this.scheduleList = res.content;
+        this.currentPage = page;
+        this.totalPages = res.totalPages;
+      },
+      error: (err) => {
+        this.showAlert('Failed to get schedule list: ' + err.error.message, false);
+      }
+    });
+  }
 
-    date.setFullYear(year);
-    date.setMonth(month - 1);
-    date.setDate(day);
-    date.setHours(16, 0, 0, 0);
+  createSchedule() {
+    this.currentSchedule.movieId.push(this.currentMovie.id!);
+    this.currentSchedule.studioId.push(this.currentStudio.id!);
+    console.log("Movie yang dipilih: ", this.currentMovie);
+    console.log("Schedule yang dibuat: ", this.currentSchedule);
 
-    for (let i = 1; i < 10; i++) {
-      this.scheduleList.push({
-        id: 'id' + 1,
-        price: 40000,
-        showTime: date,
-        movieId: i,
-        movie: {
-          title: 'Inside Out 2',
-          year: 2024
-        },
-        studio: {
-          name: 'Studio ' + i
-        }
-      });
+    const dto: CreateScheduleDTO = {
+      showDate: this.formatDateTime(this.currentSchedule.showDate),
+      movieId: this.currentSchedule.movieId,
+      studioId: this.currentSchedule.studioId,
+      price: this.currentSchedule.price
     }
+    this.scheduleService.createSchedule(dto).subscribe({
+      next: (res: any) => {
+        this.closeModal();
+        this.getScheduleList();
+        this.showAlert('Schedule created successfully', true);
+      },
+      error: (err) => {
+        this.showAlert('Failed to get schedule list: ' + err.error.message, false);
+      }
+    });
+  }
+
+  formatDateTime(date: Date): string {
+    const pad = (n: number) => n < 10 ? '0' + n : n;
+
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T` +
+      `${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
   }
 
   onScheduleTimeChange(event: any) {
@@ -90,7 +134,12 @@ export class ScheduleComponent implements OnInit {
   }
 
 
-  getAvailableShowTime() {
+  getAvailableShowTime(event?: Event) {
+    if (!!event) {
+      const selectedStudioId = ((event!.target as HTMLSelectElement).value);
+      this.currentStudio = this.studioList.find(studio => studio.id === Number(selectedStudioId)) || ({} as Studio);
+    }
+
     this.availableShowTime = [];
 
     for (let hour = 13; hour <= 18; hour++) {
@@ -119,37 +168,40 @@ export class ScheduleComponent implements OnInit {
     }
   }
 
-  getMovieList() {
-    // call API to get movie list
-    for (let i = 1; i < 10; i++) {
-      this.movieList.push({
-        id: 'id' + i,
-        title: 'Inside Out ' + i,
-        year: 2020 + i
-      });
-    }
+  getMovieList(page: number = 0) {
+    this.movieService.getAllMovies(page, '', 10000).subscribe({
+      next: (res: any) => {
+        this.movieList = res.content;
+        this.currentPage = page;
+        this.totalPages = res.totalPages;
+      },
+      error: (err) => {
+        this.showAlert('Failed to get movie list: ' + err.error.message, false);
+      }
+    });
   }
 
-  getStudioList() {
-    // call API to get studio list
-    for (let i = 1; i < 6; i++) {
-      this.studioList.push({
-        id: i,
-        name: 'Studio ' + i
-      });
-    }
+  getStudioList(page: number = 0) {
+    this.studioService.getActiveStudioList().subscribe({
+      next: (res: any) => {
+        this.studioList = res;
+      },
+      error: (err) => {
+        this.showAlert('Failed to get studio list: ' + err.error.message, false);
+      }
+    });
   }
 
   showModal() {
     this.currentSchedule = {
-      showTime: new Date(),
-      movieId: '',
-      studioId: 0,
+      showDate: new Date(),
+      movieId: [],
+      studioId: [],
       price: 0
     };
 
-    this.getMovieList();
-    this.getStudioList();
+    this.currentMovie = {};
+    this.currentStudio = {};
 
     setTimeout(() => {
       const modal = document.getElementById('schedule-modal') as HTMLDialogElement;
@@ -183,4 +235,19 @@ export class ScheduleComponent implements OnInit {
   isSaveButtonDisabled(): boolean {
     return this.currentScheduleDateTime === '';
   }
+
+  showAlert(message: string, success: boolean) {
+    this.isAlertSuccess = success;
+    this.alertMessage = message;
+    this.isShowAlert = true;
+    setTimeout(() => {
+      this.isShowAlert = false;
+    }, 3000);
+  }
+
+  onMoviePickerChange(event: Event) {
+    const selectedMovieId = (event.target as HTMLSelectElement).value;
+    this.currentMovie = this.movieList.find(movie => movie.id === selectedMovieId) || ({} as Movie);
+  }
+
 }

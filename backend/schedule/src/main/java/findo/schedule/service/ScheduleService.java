@@ -4,11 +4,13 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import findo.schedule.dto.AvailableScheduleDTO;
 import findo.schedule.dto.CreateScheduleDTO;
 import findo.schedule.dto.ScheduleDetailDTO;
 import findo.schedule.dto.ScheduleResponseDTO;
+import findo.schedule.entity.Schedule;
 import reactor.core.publisher.Mono;
 
 public interface ScheduleService {
@@ -19,4 +21,6 @@ public interface ScheduleService {
 
     Mono<Page<AvailableScheduleDTO>> getAvailableSchedules(LocalDate showDate, int page, int size,
             String token);
+
+    Page<Schedule> findAllSchedule(Pageable pageable, LocalDate date);
 }

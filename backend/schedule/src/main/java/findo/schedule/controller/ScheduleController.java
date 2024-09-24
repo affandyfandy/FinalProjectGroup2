@@ -26,10 +26,12 @@ public class ScheduleController {
     private final ScheduleServiceImpl scheduleService;
 
     @GetMapping("/admin")
-    public ResponseEntity<Page<Schedule>> getAllSchedule(@RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size) {
+    public ResponseEntity<Page<Schedule>> getAllSchedule(
+        @RequestParam @Valid LocalDate date,
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "20") int size) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<Schedule> schedulePage = scheduleService.findAllSchedule(pageable);
+        Page<Schedule> schedulePage = scheduleService.findAllSchedule(pageable, date);
 
         if (schedulePage.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
