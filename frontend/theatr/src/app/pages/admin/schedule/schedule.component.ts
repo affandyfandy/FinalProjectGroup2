@@ -144,7 +144,7 @@ export class ScheduleComponent implements OnInit {
 
     for (let hour = 13; hour <= 18; hour++) {
       const date = new Date();
-      const [year, month, day] = this.currentDateTime.split('-').map(Number);
+      const [year, month, day] = this.currentScheduleDateTime.split('-').map(Number);
 
       date.setFullYear(year);
       date.setMonth(month - 1);
@@ -152,7 +152,7 @@ export class ScheduleComponent implements OnInit {
       date.setHours(hour, 0, 0, 0);
 
       const isOccupied = this.scheduleList.some((schedule: Schedule) => {
-        const scheduleDate = new Date(schedule.showTime ?? '');
+        const scheduleDate = new Date(schedule.showDate ?? '');
         return (
           schedule.studioId === this.currentStudio.id &&
           scheduleDate.getFullYear() === date.getFullYear() &&
@@ -250,4 +250,8 @@ export class ScheduleComponent implements OnInit {
     this.currentMovie = this.movieList.find(movie => movie.id === selectedMovieId) || ({} as Movie);
   }
 
+  onTimePickerChange(event: Event) {
+    const selectedTime = (event.target as HTMLSelectElement).value;
+    this.currentSchedule.showDate = new Date(selectedTime);
+  }
 }

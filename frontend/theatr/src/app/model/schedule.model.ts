@@ -7,10 +7,12 @@ export interface Schedule {
     movieId?: number;
     studioId?: number;
     price?: number;
-    showTime?: Date;
+    showDate?: Date;
     movie?: Movie;
     studio?: Studio;
     booking?: Booking;
+    movieIds?: Movie[];
+    studioIds?: Studio[];
 }
 
 export interface AddScheduleDTO {

@@ -60,7 +60,7 @@ export class BookingsComponent implements OnInit {
         },
         schedule: {
           id: i.toString(),
-          showTime: date,
+          showDate: date,
           price: 40000,
           movie: {
             id: i.toString(),

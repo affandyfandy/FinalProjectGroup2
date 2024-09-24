@@ -35,7 +35,7 @@
     <div class="flex p-3 px-6 space-x-10 bg-base-300 rounded-md items-center">
         <div class="text-center">
             <p class="text-zinc-400 font-medium">{{scheduleData.studio?.name?.toUpperCase()}}</p>
-            <p>{{scheduleData.showTime ? (scheduleData.showTime | fullDateTime) : 'N/A'}}</p>
+            <p>{{scheduleData.showDate ? (scheduleData.showDate | fullDateTime) : 'N/A'}}</p>
         </div>
 
         <svg width="2" height="57" viewBox="0 0 2 57" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -89,7 +89,7 @@
                         <p class="text-zinc-400">{{ selectedSeats.length }} Tickets</p>
                         <p *ngFor="let seat of selectedSeats" class="font-bold">{{seat.seatCode}}</p>
                     </div>
-                    <p>{{ scheduleData.showTime ? (scheduleData.showTime! | fullDateTime) : 'N/A' }}
+                    <p>{{ scheduleData.showDate ? (scheduleData.showDate! | fullDateTime) : 'N/A' }}
                     </p>
                 </div>
             </div>

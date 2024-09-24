@@ -32,9 +32,9 @@
             <tbody>
                 <!-- row -->
                 <tr *ngFor="let schedule of scheduleList" class="text-center">
-                    <td>{{ schedule.showTime ? (schedule.showTime | timeFormat) : 'N/A' }}</td>
-                    <td>{{ schedule.studio?.name }}</td>
-                    <td>{{ schedule.movie?.title }} {{"(" + schedule.movie?.year + ")" }}</td>
+                    <td>{{ schedule.showDate ? (schedule.showDate | timeFormat) : 'N/A' }}</td>
+                    <td>{{ schedule.studioIds?.[0]?.name || 'N/A' }}</td>
+                    <td>{{ schedule.movieIds?.[0]?.title }} {{"(" + schedule.movieIds?.[0]?.year + ")" }}</td>
                 </tr>
             </tbody>
         </table>
@@ -106,10 +106,10 @@
                 <img src="assets/icons/clock-white.svg" alt="Clock Icon" class="w-[28px] h-[28px]">
                 <div class="w-full">
                     <div class="w-full">
-                        <select [(ngModel)]="currentSchedule.showDate" [disabled]="availableShowTime.length == 0"
+                        <select (change)="onTimePickerChange($event)" [disabled]="availableShowTime.length == 0"
                             class="select select-bordered w-full bg-base-100 border-none">
-                            <option disabled>Select a Show Time</option>
-                            <option *ngFor="let time of availableShowTime" [ngValue]="time">{{time | timeFormat}}
+                            <option disabled [value]="null">Select a Show Time</option>
+                            <option *ngFor="let time of availableShowTime" [value]="time">{{time | timeFormat}}
                             </option>
                         </select>
                         <p *ngIf="currentSchedule.showDate == undefined || currentSchedule.showDate == null"
