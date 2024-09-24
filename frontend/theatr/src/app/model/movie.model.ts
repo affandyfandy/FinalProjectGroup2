@@ -10,11 +10,12 @@ export interface Movie {
 export interface SaveMovieDTO {
     title: string;
     synopsis: string;
-    posterUrl: string;
+    posterUrl?: string;
     year: number;
 }
 
 export interface ShowMovieDTO {
+    id: string;
     title: string;
     synopsis: string;
     duration: number,

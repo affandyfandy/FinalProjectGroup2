@@ -21,6 +21,7 @@ export class MovieComponent implements OnInit {
 
   movieList: Movie[] = [];
   currentMovie: ShowMovieDTO = {
+    id: '',
     title: '',
     synopsis: '',
     year: 0,
@@ -28,6 +29,7 @@ export class MovieComponent implements OnInit {
     posterUrl: ''
   };
   tempMovie: ShowMovieDTO = {
+    id: '',
     title: '',
     synopsis: '',
     year: 0,
@@ -39,6 +41,13 @@ export class MovieComponent implements OnInit {
   isEdit = false;
   isPosterChanged = false;
 
+  currentPage = 1;
+  totalPages = 1;
+
+  isShowAlert = false;
+  alertMessage = '';
+  isAlertSuccess = true;
+
   constructor(private movieService: MovieService) { }
 
   ngOnInit(): void {
@@ -46,18 +55,84 @@ export class MovieComponent implements OnInit {
   }
 
 
-  getMovieList() {
-    // TODO: CHANGE TO API CALL LATER
-    for (let i = 0; i < 10; i++) {
-      const movie: Movie = {
-        id: '1',
-        title: 'Inside Out',
-        posterUrl: 'https://image.tmdb.org/t/p/w1280/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg',
-        synopsis: "Teenager Riley's mind headquarters is undergoing a sudden demolition to make room for something entirely unexpected: new Emotions! Joy, Sadness, Anger, Fear and Disgust, who’ve long been running a successful operation by all accounts, aren’t sure how to feel when Anxiety shows up. And it looks like she’s not alone. ",
-        duration: 15,
-        year: 2024
-      };
-      this.movieList.push(movie);
+  getMovieList(page: number = 0) {
+    this.movieService.getAllMovies(page).subscribe({
+      next: (res: any) => {
+        this.movieList = res.content;
+        this.currentPage = page;
+        this.totalPages = res.totalPages;
+      },
+      error: (err) => {
+        this.showAlert('Failed to get movie list: ' + err.error.message, false);
+      }
+    });
+  }
+
+  onSaveClick() {
+    if (this.isEdit && this.isPosterChanged) {
+      this.uploadPoster();
+    } else if (!this.isEdit) {
+      this.uploadPoster();
+    } else {
+      this.updateMovie();
+    }
+  }
+
+  private updateMovie(url?: string) {
+    const body: SaveMovieDTO = {
+      title: this.currentMovie.title,
+      synopsis: this.currentMovie.synopsis,
+      year: this.currentMovie.year,
+      posterUrl: url ?? this.currentMovie.posterUrl
+    };
+    this.movieService.updateMovie(this.currentMovie.id, body).subscribe({
+      next: (res: any) => {
+        this.closeMovieModal();
+        this.getMovieList(this.currentPage);
+        this.showAlert('Movie updated successfully', true);
+      },
+      error: (err) => {
+        this.closeMovieModal();
+        this.showAlert('Failed to create a movie: ' + err.error.message, false);
+      }
+    });
+  }
+
+  private createMovie(url: string) {
+    const body: SaveMovieDTO = {
+      title: this.currentMovie.title,
+      synopsis: this.currentMovie.synopsis,
+      year: this.currentMovie.year,
+      posterUrl: url
+    };
+    this.movieService.createMovie(body).subscribe({
+      next: (res: any) => {
+        this.closeMovieModal();
+        this.getMovieList();
+        this.showAlert('Movie created successfully', true);
+      },
+      error: (err) => {
+        this.closeMovieModal();
+        this.showAlert('Failed to create a movie: ' + err.error.message, false);
+      }
+    });
+  }
+
+  private uploadPoster() {
+    const file = (document.getElementById('posterInput') as HTMLInputElement).files?.[0];
+    if (file) {
+      this.movieService.uploadImagePoster(file).subscribe({
+        next: (res: any) => {
+          if (this.isEdit) {
+            this.updateMovie(res.posterUrl);
+          } else {
+            this.createMovie(res.posterUrl);
+          }
+        },
+        error: (err) => {
+          this.showAlert('Failed to upload poster: ' + err.error.message, false);
+        }
+      });
     }
   }
 
@@ -65,6 +140,7 @@ export class MovieComponent implements OnInit {
     this.previewImage = '';
     this.isEdit = isEdit;
     this.currentMovie = {
+      id: movie?.id || '',
       title: movie?.title || '',
       synopsis: movie?.synopsis || '',
       year: movie?.year || 2024,
@@ -74,6 +150,7 @@ export class MovieComponent implements OnInit {
 
     if (isEdit) {
       this.tempMovie = {
+        id: movie?.id || '',
         title: movie?.title || '',
         synopsis: movie?.synopsis || '',
         year: movie?.year || 2024,
@@ -158,5 +235,14 @@ export class MovieComponent implements OnInit {
       };
       reader.readAsDataURL(file);
     }
+  }
+
+  showAlert(message: string, success: boolean) {
+    this.isAlertSuccess = success;
+    this.alertMessage = message;
+    this.isShowAlert = true;
+    setTimeout(() => {
+      this.isShowAlert = false;
+    }, 3000);
   }
 }

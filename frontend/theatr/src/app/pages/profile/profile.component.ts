@@ -56,7 +56,7 @@ export class ProfileComponent {
         this.tempUsername = res.name;
       },
       error: (err) => {
-        this.showAlert('Failed to get your profile: ' + err.error, false);
+        this.showAlert('Failed to get your profile: ' + err.error.message, false);
       }
     });
   }
@@ -79,7 +79,7 @@ export class ProfileComponent {
         this.showAlert('Profile updated successfully', true);
       },
       error: (err) => {
-        this.showAlert('Failed to update your profile: ' + err.error, false);
+        this.showAlert('Failed to update your profile: ' + err.error.message, false);
       }
     });
   }
@@ -93,7 +93,7 @@ export class ProfileComponent {
       },
       error: (err) => {
         this.closeTopUpModal();
-        this.showAlert('Top Up Failed: ' + err.error, false);
+        this.showAlert('Top Up Failed: ' + err.error.message, false);
       }
     });
   }
@@ -107,7 +107,7 @@ export class ProfileComponent {
         this.showAlert('Password changed successfully', true);
       },
       error: (err) => {
-        this.showAlert('Failed to change your password: ' + err.error, false);
+        this.showAlert('Failed to change your password: ' + err.error.message, false);
       },
 
     });
