@@ -1,8 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Booking } from '../../../model/booking.model';
+import { BookingDetailResponse } from '../../../model/booking.model';
 import { PriceFormatPipe } from '../../../core/pipes/price-format/price-format.pipe';
 import { FullDateTimePipe } from '../../../core/pipes/full-date-time/full-date-time.pipe';
+import { BookingService } from '../../../services/booking/booking.service';
+import { ActivatedRoute } from '@angular/router';
+import { NormalFullDateTimePipe } from '../../../core/pipes/normal-full-date-time/normal-full-date-time.pipe';
 
 @Component({
   selector: 'app-history-detail',
@@ -10,56 +13,50 @@ import { FullDateTimePipe } from '../../../core/pipes/full-date-time/full-date-t
   imports: [
     CommonModule,
     PriceFormatPipe,
-    FullDateTimePipe
+    FullDateTimePipe,
+    NormalFullDateTimePipe
+  ],
+  providers: [
+    BookingService
   ],
   templateUrl: './history-detail.component.html'
 })
 export class HistoryDetailComponent implements OnInit {
 
-  bookingData: Booking = {};
+  bookingData: BookingDetailResponse = {};
 
-  constructor() { }
+  isShowAlert = false;
+  alertMessage = '';
+  isAlertSuccess = true;
+
+  isLoading = false;
+
+  constructor(
+    private route: ActivatedRoute,
+    private bookingService: BookingService,
+  ) { }
 
   ngOnInit(): void {
     this.getBookingData();
   }
 
   private getBookingData() {
-    // Change this to get the booking data from the backend
-    this.bookingData = {
-      id: '1',
-      totalAmount: 80000,
-      updatedTime: new Date(),
-      user: {
-        id: '1',
-        name: 'User 1'
-      },
-      seats: [
-        {
-          id: 1,
-          seatCode: 'A1',
+    const bookingId = this.route.snapshot.paramMap.get('id');
+    if (!!bookingId) {
+      this.isLoading = true;
+      this.bookingService.getDetailBooking(bookingId).subscribe({
+        next: (res: any) => {
+          this.bookingData = res;
+          this.isLoading = false;
         },
-        {
-          id: 2,
-          seatCode: 'A2',
-        }
-      ],
-      isPrinted: false,
-      schedule: {
-        id: '1',
-        movie: {
-          id: '1',
-          title: 'Inside Out',
-          year: 2015,
-          posterUrl: 'https://image.tmdb.org/t/p/w1280/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg',
-          synopsis: "Teenager Riley's mind headquarters is undergoing a sudden demolition to make room for something entirely unexpected: new Emotions! Joy, Sadness, Anger, Fear and Disgust, who’ve long been running a successful operation by all accounts, aren’t sure how to feel when Anxiety shows up. And it looks like she’s not alone."
+        error: (err: any) => {
+          this.isLoading = false;
+          this.showAlert('Failed to get booking detail: ' + err.error.message, false);
         },
-        showDate: new Date(),
-        price: 40000,
-        studio: {
-          name: 'Studio 1',
+        complete: () => {
+          this.isLoading = false;
         }
-      }
+      });
     }
   }
 
@@ -71,5 +68,14 @@ export class HistoryDetailComponent implements OnInit {
   closeModal() {
     const modal = document.getElementById('confirmation-modal') as HTMLDialogElement;
     modal.close();
+  }
+
+  showAlert(message: string, success: boolean) {
+    this.isAlertSuccess = success;
+    this.alertMessage = message;
+    this.isShowAlert = true;
+    setTimeout(() => {
+      this.isShowAlert = false;
+    }, 3000);
   }
 }

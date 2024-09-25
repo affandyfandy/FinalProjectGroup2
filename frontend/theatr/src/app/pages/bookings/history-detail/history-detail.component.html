@@ -1,68 +1,72 @@
 <div class="max-w-full w-full p-16 pt-28 flex flex-col items-center space-y-10">
-    <div class="flex flex-col max-w-[672px] w-full space-y-6 bg-base-300 p-8 rounded-2xl">
-        <div class="flex items-center w-full space-x-4">
-            <img [src]="bookingData.schedule?.movie?.posterUrl" alt="Poster"
-                class="w-[120px] h-[186px] rounded-xl object-cover">
+    <div *ngIf="isLoading; else mainContent" class="skeleton max-w-[672px] w-full h-[500px]"></div>
+
+    <ng-template #mainContent>
+        <div class="flex flex-col max-w-[672px] w-full space-y-6 bg-base-300 p-8 rounded-2xl">
+            <div class="flex items-center w-full space-x-4">
+                <img [src]="bookingData.movies?.[0]?.posterUrl" alt="Poster"
+                    class="w-[120px] h-[186px] rounded-xl object-cover">
+
+                <div class="space-y-2">
+                    <h1 class="text-2xl font-bold">{{ bookingData.movies?.[0]?.title }} {{'(' +
+                        bookingData.movies?.[0]?.year + ')'}}</h1>
+                    <div class="text-zinc-400 flex items-center space-x-2">
+                        <img src="assets/icons/location-gray.svg" alt="Edit Icon" class="w-6 h-6">
+                        <p>{{ bookingData.studios?.[0]?.name }}</p>
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        <img src="assets/icons/ticket-gray.svg" alt="Edit Icon" class="w-6 h-6">
+                        <p class="text-zinc-400">{{ bookingData.seats?.length }} Tickets</p>
+                        <p *ngFor="let seat of bookingData.seats" class="font-bold">{{seat.seatCode}}</p>
+                    </div>
+                    <p>{{ bookingData.showDate ? (bookingData.showDate! | fullDateTime) : 'N/A' }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
 
             <div class="space-y-2">
-                <h1 class="text-2xl font-bold">{{ bookingData.schedule?.movie?.title }} {{'(' +
-                    bookingData.schedule?.movie?.year + ')'}}</h1>
-                <div class="text-zinc-400 flex items-center space-x-2">
-                    <img src="assets/icons/location-gray.svg" alt="Edit Icon" class="w-6 h-6">
-                    <p>{{ bookingData.schedule?.studio?.name }}</p>
+                <div class="flex justify-between">
+                    <p class="text-zinc-400">ORDER ID</p>
+                    <p class="font-semibold">{{ bookingData.bookingId }}</p>
                 </div>
-
-                <div class="flex items-center space-x-2">
-                    <img src="assets/icons/ticket-gray.svg" alt="Edit Icon" class="w-6 h-6">
-                    <p class="text-zinc-400">{{ bookingData.seats?.length }} Tickets</p>
-                    <p *ngFor="let seat of bookingData.seats" class="font-bold">{{seat.seatCode}}</p>
+                <div class="flex justify-between">
+                    <p class="text-zinc-400">ORDERED AT</p>
+                    <p class="font-semibold">{{ bookingData.createdAt ? (bookingData.createdAt | normalFullDateTime) :
+                        'N/A'
+                        }}</p>
                 </div>
-                <p>{{ bookingData.schedule?.showDate ? (bookingData.schedule!.showDate! | fullDateTime) : 'N/A' }}
-                </p>
+                <div class="flex justify-between">
+                    <p class="text-zinc-400">PRICE</p>
+                    <p class="font-semibold">{{ bookingData.price ? (bookingData.price! |
+                        priceFormat) : '' }} x {{bookingData.seats?.length}}</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="flex justify-between">
+                <p class="text-zinc-400">TOTAL PRICE</p>
+                <p class="text-xl font-semibold">{{ bookingData.totalAmount ? (bookingData.totalAmount |
+                    priceFormat) : '' }}</p>
             </div>
         </div>
 
-        <div class="divider"></div>
-
-        <div class="space-y-2">
-            <div class="flex justify-between">
-                <p class="text-zinc-400">ORDER ID</p>
-                <p class="font-semibold">{{ bookingData.id }}</p>
-            </div>
-            <div class="flex justify-between">
-                <p class="text-zinc-400">ORDERED AT</p>
-                <p class="font-semibold">{{ bookingData.updatedTime ? (bookingData.updatedTime | fullDateTime) :
-                    'N/A'
-                    }}</p>
-            </div>
-            <div class="flex justify-between">
-                <p class="text-zinc-400">PRICE</p>
-                <p class="font-semibold">{{ bookingData.schedule?.price ? (bookingData.schedule!.price! |
-                    priceFormat) : '' }} x {{bookingData.seats?.length}}</p>
-            </div>
+        <div *ngIf="bookingData.isPrinted; else printTicket"
+            class="flex max-w-[672px] w-full items-center justify-center text-center space-x-2 bg-success rounded-lg py-4">
+            <img src="assets/icons/printer-white.svg" alt="Print Icon" class="w-6 h-6">
+            Ticket Printed
         </div>
 
-        <div class="divider"></div>
-
-        <div class="flex justify-between">
-            <p class="text-zinc-400">TOTAL PRICE</p>
-            <p class="text-xl font-semibold">{{ bookingData.totalAmount ? (bookingData.totalAmount |
-                priceFormat) : '' }}</p>
-        </div>
-    </div>
-
-    <div *ngIf="bookingData.isPrinted; else printTicket"
-        class="flex max-w-[672px] w-full items-center justify-center text-center space-x-2 bg-success rounded-lg py-4">
-        <img src="assets/icons/printer-white.svg" alt="Print Icon" class="w-6 h-6">
-        Ticket Printed
-    </div>
-
-    <ng-template #printTicket>
-        <button (click)="showModal()"
-            class="btn btn-primary max-w-[672px] w-full flex items-center text-center space-x-2 rounded-full">
-            <img src="assets/icons/printer-black.svg" alt="Print Icon" class="w-6 h-6">
-            Print Ticket
-        </button>
+        <ng-template #printTicket>
+            <button (click)="showModal()"
+                class="btn btn-primary max-w-[672px] w-full flex items-center text-center space-x-2 rounded-full">
+                <img src="assets/icons/printer-black.svg" alt="Print Icon" class="w-6 h-6">
+                Print Ticket
+            </button>
+        </ng-template>
     </ng-template>
 </div>
 

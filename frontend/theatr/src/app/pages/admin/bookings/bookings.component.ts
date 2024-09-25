@@ -59,7 +59,7 @@ export class BookingsComponent implements OnInit {
   }
 
   getBookingList(page: number = 0) {
-    this.bookingService.getAdminHistory(page, 10, this.sortDir).subscribe({
+    this.bookingService.getAdminHistory(page, 10, this.sortDir, this.currentDateTime).subscribe({
       next: (res: any) => {
         this.bookingList = res.content;
         this.currentPage = res.pageable.pageNumber + 1;

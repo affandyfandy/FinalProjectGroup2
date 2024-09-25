@@ -19,13 +19,14 @@ export class BookingService {
     };
   }
 
-  getAdminHistory(page: number = 0, size: number = 10, sortDir: string) {
+  getAdminHistory(page: number = 0, size: number = 10, sortDir: string, date: string) {
     return this.http.get(`${this.apiUrl}/admin/history`, {
       headers: this.getHeaders(),
       params: {
         page: page.toString(),
         size: size.toString(),
-        sortDir: sortDir
+        sortDir: sortDir,
+        date: date
       }
     });
   }
@@ -36,14 +37,21 @@ export class BookingService {
     });
   }
 
-  getCustomerHistory(page: number = 0, size: number = 10, sortDir: string) {
-    return this.http.get(`${this.apiUrl}/customer/booking-history`, {
+  getCustomerHistory(page: number = 0, size: number = 10, sortDir: string, date: string) {
+    return this.http.get(`${this.apiUrl}/customer/history`, {
       headers: this.getHeaders(),
       params: {
         page: page.toString(),
         size: size.toString(),
-        sortDir: sortDir
+        sortDir: sortDir,
+        date: date
       }
+    });
+  }
+
+  getDetailBooking(bookingId: string) {
+    return this.http.get(`${this.apiUrl}/history/detail/${bookingId}`, {
+      headers: this.getHeaders()
     });
   }
 }

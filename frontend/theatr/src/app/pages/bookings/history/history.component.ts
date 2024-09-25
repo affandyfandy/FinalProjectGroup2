@@ -41,11 +41,20 @@ export class HistoryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.currentDateTime = this.getTodayDate();
     this.getScheduleList();
   }
 
+  getTodayDate(): string {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = (today.getMonth() + 1).toString().padStart(2, '0');
+    const day = today.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
   getScheduleList(page: number = 0) {
-    this.bookingService.getCustomerHistory(page, 10, this.sortDir).subscribe({
+    this.bookingService.getCustomerHistory(page, 10, this.sortDir, this.currentDateTime).subscribe({
       next: (res: any) => {
         this.scheduleList = res.content;
         this.currentPage = res.pageable.pageNumber + 1;

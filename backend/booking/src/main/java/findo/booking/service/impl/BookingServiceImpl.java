@@ -355,6 +355,7 @@ public class BookingServiceImpl implements BookingService {
                     shceduleDetailsAdmin.setStudios(studios);
                     shceduleDetailsAdmin.setTotalAmount(booking.getTotalAmount());
                     shceduleDetailsAdmin.setPrice(listSchedule.getShows().get(0).getPrice());
+                    shceduleDetailsAdmin.setIsPrinted(booking.getIsPrinted());
 
                     return Mono.just(shceduleDetailsAdmin);
                 });
