@@ -42,14 +42,14 @@ export class StudioService {
   }
 
   addStudio(body: AddStudioDTO) {
-    return this.http.post(`${this.apiUrl}`, body, { headers: this.getHeaders() });
+    return this.http.post(`${this.apiUrl}/admin/create-studio`, body, { headers: this.getHeaders() });
   }
 
   editStudio(id: any, body: AddStudioDTO) {
-    return this.http.put(`${this.apiUrl}/${id}`, body, { headers: this.getHeaders() });
+    return this.http.put(`${this.apiUrl}/admin/${id}`, body, { headers: this.getHeaders() });
   }
 
   changeStatus(id: number) {
-    return this.http.patch(`${this.apiUrl}/${id}/change-status`, null, { headers: this.getHeaders() });
+    return this.http.patch(`${this.apiUrl}/admin/${id}/change-status`, null, { headers: this.getHeaders() });
   }
 }

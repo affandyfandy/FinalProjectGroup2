@@ -27,7 +27,7 @@
                 <tr *ngFor="let booking of bookingList" class="text-center">
                     <td>{{ booking.updatedTime ? (booking.updatedTime | fullTime) : 'N/A' }}</td>
                     <td>{{ booking.schedule?.studio?.name }}</td>
-                    <td>{{ booking.schedule?.showTime ? (booking.schedule!.showTime! | fullDateTime) : 'N/A' }}</td>
+                    <td>{{ booking.schedule?.showDate ? (booking.schedule!.showDate! | fullDateTime) : 'N/A' }}</td>
                     <td>{{ booking.schedule?.movie?.title }} {{"(" + booking.schedule?.movie?.year + ")" }}</td>
                     <td>
                         <button (click)="showModal(booking)" class="btn btn-square btn-secondary btn-sm">
@@ -70,7 +70,7 @@
                     <p class="text-zinc-400">{{ currentBooking.seats?.length }} Tickets</p>
                     <p *ngFor="let seat of currentBooking.seats" class="font-bold">{{seat.seatCode}}</p>
                 </div>
-                <p>{{ currentBooking.schedule?.showTime ? (currentBooking.schedule!.showTime! | fullDateTime) : 'N/A' }}
+                <p>{{ currentBooking.schedule?.showDate ? (currentBooking.schedule!.showDate! | fullDateTime) : 'N/A' }}
                 </p>
             </div>
         </div>
