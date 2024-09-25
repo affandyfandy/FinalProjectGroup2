@@ -1,15 +1,138 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Booking Details</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking Ticket</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #111827; /* primary-content - dark background */
+            color: #f3f4f6; /* secondary-content - white text */
+            margin: 20px;
+        }
+        h1 {
+            font-size: 32px;
+            color: #7a49fe; /* accent - purple highlight */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .booking-details {
+            background-color: #1e1d27; /* neutral - dark card background */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .booking-details h2 {
+            font-size: 22px;
+            color: #7a49fe; /* accent */
+            border-bottom: 2px solid #7a49fe;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .detail {
+            font-size: 16px;
+            margin: 10px 0;
+            color: #f3f4f6; /* white text for details */
+        }
+        .detail strong {
+            color: #ffffff; /* pure white for strong emphasis */
+        }
+        h5 {
+            font-size: 18px;
+            color: #7a49fe; /* accent */
+            margin-top: 20px;
+        }
+        .movie, .studio {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #292a2f; /* slightly lighter dark for contrast */
+            border-radius: 8px;
+        }
+        .movie img {
+            border-radius: 5px;
+            margin-right: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .movie-title {
+            font-size: 18px;
+            color: #f3f4f6; /* white for movie title */
+        }
+        .movie-year {
+            font-size: 14px;
+            color: #cccccc; /* grey for year */
+        }
+        .seat-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .seat {
+            display: inline-block;
+            background-color: #7a49fe; /* accent */
+            color: #f3f4f6; /* white seat text */
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+        .seat:hover {
+            background-color: #5c3ed7; /* Darker accent on hover */
+            cursor: pointer;
+        }
+        .studio-name {
+            font-size: 16px;
+            color: #f3f4f6; /* white studio name */
+            margin-left: 10px;
+        }
+        @media (max-width: 768px) {
+            .movie img {
+                width: 80px;
+            }
+            .seat {
+                padding: 8px;
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
-<h1>Booking Details</h1>
-<p><strong>Booking ID:</strong> <span th:text="${booking.bookingId}"></span></p>
-<p><strong>Total Amount:</strong> <span th:text="${booking.totalAmount}"></span></p>
-<p><strong>Seats:</strong> <span th:each="seat : ${booking.seatIds}" th:text="${seat}"> </span></p>
-<p><strong>Schedules:</strong> <span th:each="schedule : ${booking.scheduleIds}" th:text="${schedule}"> </span></p>
-<p><strong>Printed:</strong> <span th:text="${booking.isPrinted}"> </span></p>
-<p><strong>Created By:</strong> <span th:text="${booking.createdBy}"> </span></p>
+    <h1>Your Booking Confirmation</h1>
+    <div class="booking-details">
+        <h2>Booking Details</h2>
+        <div class="detail">Booking ID: <strong th:text="${booking.bookingId}"></strong></div>
+        <div class="detail">Customer Name: <strong th:text="${booking.custName}"></strong></div>
+        <div class="detail">Total Amount: <strong th:text="${booking.totalAmount}"></strong></div>
+        <div class="detail">Show Date: <strong th:text="${booking.showDate}"></strong></div>
+
+        <h5>Movies:</h5>
+        <div th:each="movie : ${booking.movies}">
+            <div class="movie">
+                <img th:src="${movie.posterUrl}" alt="Movie Poster" style="width:120px;"/>
+                <div>
+                    <div class="movie-title" th:text="${movie.title}"></div>
+                    <div class="movie-year" th:text="${movie.year}"></div>
+                </div>
+            </div>
+        </div>
+
+        <h5>Studio Details:</h5>
+        <div th:each="studio : ${booking.studios}" class="studio">
+            <i class="fas fa-tv" style="color: #7a49fe; font-size: 20px;"></i>
+            <div class="studio-name" th:text="${studio.studioName}"></div>
+        </div>
+
+        <h5>Seats:</h5>
+        <div class="seat-list">
+            <div th:each="seat : ${booking.seats}">
+                <span class="seat" th:text="${seat.id}"></span>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

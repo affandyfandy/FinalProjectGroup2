@@ -4,6 +4,7 @@ package findo.booking.controller;
 import findo.booking.dto.*;
 import findo.booking.entity.Booking;
 import findo.booking.service.impl.BookingServiceImpl;
+import jakarta.validation.Valid;
 import reactor.core.publisher.Mono;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -17,7 +18,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @RestController
@@ -34,6 +35,7 @@ public class BookingController {
     @GetMapping("/admin/history")
     public Mono<ResponseEntity<Page<BookingResponseDTO>>> getAllBookingHistory(
             @AuthenticationPrincipal JwtAuthenticationToken principal,
+            @RequestParam @Valid LocalDate date,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "updatedTime") String sortBy,
@@ -42,15 +44,16 @@ public class BookingController {
         Sort sort = Sort.by(sortDir.equalsIgnoreCase("DESC") ? Sort.Direction.DESC : Sort.Direction.ASC, sortBy);
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        return bookingService.getAllBookings(pageable, token)
+        return bookingService.getAllBookings(pageable, date, token)
                 .map(bookingHistory -> ResponseEntity.ok(bookingHistory))
                 .defaultIfEmpty(ResponseEntity.notFound().build()); // Handle case if there are no bookings
     }
 
     // Show Booking History (Customer)
-    @GetMapping("/customer/booking-history")
+    @GetMapping("/customer/history")
     public Mono<ResponseEntity<Page<BookingResponseDTO>>> getBookingHistory(
             @AuthenticationPrincipal JwtAuthenticationToken principal,
+            @RequestParam @Valid LocalDate date,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "updatedTime") String sortBy,
@@ -62,15 +65,8 @@ public class BookingController {
         Pageable pageable = PageRequest.of(page, size, sort);
 
         return bookingService
-                .getBookingHistoryByUser(UUID.fromString(userId), pageable, principal.getToken().getTokenValue())
+                .getBookingHistoryByUser(UUID.fromString(userId), pageable, date, principal.getToken().getTokenValue())
                 .map(ResponseEntity::ok);
-    }
-
-    // Show Booking Detail (Customer)
-    @GetMapping("/customer/history/detail/{bookingId}")
-    public BookingDetailDTO getBookingDetail(@AuthenticationPrincipal JwtAuthenticationToken principal,
-            @PathVariable UUID bookingId) {
-        return bookingService.getBookingDetail(bookingId);
     }
 
     @PostMapping("/customer/book")
@@ -90,7 +86,8 @@ public class BookingController {
     public Mono<ResponseEntity<InputStreamResource>> printTicket(
             @PathVariable UUID bookingId, @AuthenticationPrincipal JwtAuthenticationToken principal) {
         String email = principal.getToken().getClaimAsString("email");
-        return bookingService.printTicket(bookingId, email)
+        String token = principal.getToken().getTokenValue();
+        return bookingService.printTicket(bookingId, email, token)
                 .map(responseDTO -> {
                     HttpHeaders headers = new HttpHeaders();
                     headers.add("Content-Disposition", "inline; filename=booking.pdf");
@@ -107,5 +104,16 @@ public class BookingController {
         BookingSeatsDTO seatIds = bookingService.getAllSeatIds(scheduleId);
 
         return ResponseEntity.ok().body(seatIds);
+    }
+
+    @GetMapping("/history/detail/{bookingId}")
+    public ResponseEntity<Mono<ScheduleDetailsAdmin>> getBookingHistoryDetail(@PathVariable("bookingId") UUID bookingId,
+            @AuthenticationPrincipal JwtAuthenticationToken principal) {
+
+        String token = principal.getToken().getTokenValue();
+
+        Mono<ScheduleDetailsAdmin> scheduleDetails = bookingService.getBookingDetails(bookingId, token);
+
+        return ResponseEntity.ok().body(scheduleDetails);
     }
 }

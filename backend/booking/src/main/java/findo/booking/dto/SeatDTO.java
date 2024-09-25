@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SeatDTO {
     private Integer id;
-    private String seatName;
+    private String seatCode;
 }

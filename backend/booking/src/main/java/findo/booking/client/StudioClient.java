@@ -6,6 +6,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
+
+import findo.booking.dto.AllSeatStudioClientDTO;
 import findo.booking.dto.SeatDTO;
 import reactor.core.publisher.Mono;
 
@@ -42,6 +44,20 @@ public class StudioClient {
                 .headers(httpHeaders -> httpHeaders.setBearerAuth(token))
                 .retrieve()
                 .bodyToMono(SeatDTO.class)
+                .onErrorResume(e -> {
+                    return Mono.empty();
+                });
+    }
+
+    public Mono<AllSeatStudioClientDTO> getSeatsByStudioId(Integer integer, String token) {
+        String url = getServiceUrl() + integer + "/seats";
+
+        return webClientBuilder.build()
+                .get()
+                .uri(url)
+                .headers(httpHeaders -> httpHeaders.setBearerAuth(token))
+                .retrieve()
+                .bodyToMono(AllSeatStudioClientDTO.class)
                 .onErrorResume(e -> {
                     return Mono.empty();
                 });
