@@ -296,4 +296,8 @@ public class ScheduleServiceImpl implements ScheduleService {
         return bookingClient.getSeatIdsByScheduleId(scheduleId, token);
     }
 
+    public Mono<AllSeatStudioDTO> getScheduleStudioSeats(Integer studioId, String token) {
+        return studioClient.getSeatsByStudioId(studioId, token);
+    }
+
 }

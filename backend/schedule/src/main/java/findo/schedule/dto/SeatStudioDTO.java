@@ -12,7 +12,6 @@ import java.time.LocalDate;
 public class SeatStudioDTO {
     private Integer id;
     private String seatCode;
-
     private LocalDate createdTime;
     private LocalDate updatedTime;
     private String createdBy;

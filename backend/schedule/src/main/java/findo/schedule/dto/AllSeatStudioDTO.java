@@ -1,14 +1,14 @@
 package findo.schedule.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class SeatDTO {
-    private Integer id;
-    private String seatCode;
-    private String status;
+@AllArgsConstructor
+public class AllSeatStudioDTO {
+    List<SeatStudioDTO> studioSeats;
 }
