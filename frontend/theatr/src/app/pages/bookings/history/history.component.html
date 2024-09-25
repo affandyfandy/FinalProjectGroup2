@@ -9,7 +9,7 @@
             class="p-2 px-6 h-12 rounded-md text-white bg-base-300" />
     </div>
 
-    <div *ngIf="scheduleList !== []">
+    <div *ngIf="scheduleList.length > 0; else emptyView">
         <button *ngFor="let schedule of scheduleList" (click)="navigateToDetail(schedule.id!)"
             class="flex justify-between items-center border-b border-b-base-200 p-4 hover:bg-base-200 hover:rounded-lg w-full transition-all">
             <div class="flex space-x-3 items-center">
@@ -45,5 +45,20 @@
                     stroke-linejoin="round" />
             </svg>
         </button>
+    </div>
+
+    <ng-template #emptyView>
+        <div class="w-full text-center py-8">
+            <h1 class="text-xl font-semibold">There's no data here...</h1>
+            <p class="font-light">You can try to change the show date 😅</p>
+        </div>
+    </ng-template>
+
+    <div *ngIf="totalPages > 1" class="w-full flex justify-center mt-4 py-8">
+        <div class="join">
+            <input *ngFor="let item of [].constructor(totalPages); let i = index" (change)="getScheduleList(i)"
+                class="join-item btn btn-square" type="radio" name="options" [attr.aria-label]="i + 1"
+                [checked]="i === 0" />
+        </div>
     </div>
 </div>
