@@ -13,4 +13,6 @@ public interface BookingSeatRepository extends JpaRepository<BookingSeat, Intege
 
     @Query("SELECT bs FROM BookingSeat bs LEFT JOIN FETCH bs.seatIds WHERE bs.booking.id = :bookingId")
     List<BookingSeat> findByBookingIdWithSeatIds(@Param("bookingId") UUID bookingId);
+
+    List<BookingSeat> findByBooking_ScheduleIdsContaining(UUID scheduleId);
 }

@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class ScheduleStudioSeatDTO {
     private UUID scheduleId;
     private double price;
-    private Timestamp showTime;
+    private Timestamp showDate;
     private List<StudioDTO> studio;
     private List<SeatDTO> seats;
 }

@@ -5,6 +5,7 @@ import findo.booking.client.StudioClient;
 import findo.booking.client.UserClient;
 import findo.booking.dto.BookingDetailDTO;
 import findo.booking.dto.BookingResponseDTO;
+import findo.booking.dto.BookingSeatsDTO;
 import findo.booking.dto.CreateBookingDTO;
 import findo.booking.dto.CustomerBookingHistoryDTO;
 import findo.booking.dto.PrintTicketResponseDTO;
@@ -27,6 +28,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -179,5 +182,18 @@ public class BookingServiceImpl implements BookingService {
                     return Mono.just(new PrintTicketResponseDTO(booking.getId(), true, "Ticket successfully printed",
                             pdfInputStream));
                 });
+    }
+
+    @Override
+    public BookingSeatsDTO getAllSeatIds(UUID scheduleId) {
+        List<BookingSeat> seats = bookingSeatRepository.findByBooking_ScheduleIdsContaining(scheduleId);
+
+        List<Integer> seatIds = seats.stream()
+                .flatMap(seat -> seat.getSeatIds().stream()) // Flatten the stream of seat IDs
+                .collect(Collectors.toList());
+
+        BookingSeatsDTO bookSeatIds = new BookingSeatsDTO(seatIds);
+
+        return bookSeatIds;
     }
 }
