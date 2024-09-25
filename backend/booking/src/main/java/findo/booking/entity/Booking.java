@@ -33,7 +33,7 @@ public class Booking {
     @Column(name = "schedule_id")
     private List<UUID> scheduleIds;
 
-    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, fetch = FetchType.EAGER) // Add this line
+    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<BookingSeat> bookingSeats;
 
     @Column(nullable = false)

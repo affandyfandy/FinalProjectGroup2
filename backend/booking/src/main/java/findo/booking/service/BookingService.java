@@ -3,6 +3,8 @@ package findo.booking.service;
 import findo.booking.dto.*;
 import findo.booking.entity.Booking;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
@@ -19,5 +21,7 @@ public interface BookingService {
     Mono<Booking> createBooking(CreateBookingDTO request, UUID userId, String token, String email);
 
     Mono<PrintTicketResponseDTO> printTicket(UUID bookingId, String email);
+
+    BookingSeatsDTO getAllSeatIds(UUID scheduleId);
 
 }

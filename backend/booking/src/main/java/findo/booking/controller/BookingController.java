@@ -7,7 +7,6 @@ import findo.booking.service.impl.BookingServiceImpl;
 import reactor.core.publisher.Mono;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.apache.http.HttpStatus;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,7 +17,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.NoSuchElementException;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -101,5 +100,12 @@ public class BookingController {
                             .contentType(MediaType.APPLICATION_PDF)
                             .body(new InputStreamResource(responseDTO.getPdfInputStream()));
                 });
+    }
+
+    @GetMapping("/{scheduleId}/seats-ids")
+    public ResponseEntity<BookingSeatsDTO> getSeatIds(@PathVariable("scheduleId") UUID scheduleId) {
+        BookingSeatsDTO seatIds = bookingService.getAllSeatIds(scheduleId);
+
+        return ResponseEntity.ok().body(seatIds);
     }
 }
