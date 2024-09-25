@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StudioDetailDTO {
     private Integer id;
-    private String seatCode;
+    private String studioName;
 }

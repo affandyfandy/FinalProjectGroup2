@@ -4,16 +4,17 @@ import findo.booking.client.MovieClient;
 import findo.booking.client.ScheduleClient;
 import findo.booking.client.StudioClient;
 import findo.booking.client.UserClient;
-import findo.booking.dto.AllSeatStudioClientDTO;
 import findo.booking.dto.BookingDetailDTO;
 import findo.booking.dto.BookingResponseDTO;
 import findo.booking.dto.BookingSeatsDTO;
 import findo.booking.dto.CreateBookingDTO;
+import findo.booking.dto.MovieDetailDTO;
 import findo.booking.dto.PrintTicketResponseDTO;
 import findo.booking.dto.ScheduleDetailsAdmin;
 import findo.booking.dto.ScheduleMovieClientDTO;
-import findo.booking.dto.ScheduleMovieDTO;
 import findo.booking.dto.SeatDTO;
+import findo.booking.dto.StudioDetailDTO;
+import findo.booking.dto.UserDTO;
 import findo.booking.entity.Booking;
 import findo.booking.entity.BookingSeat;
 import findo.booking.exception.TicketAlreadyPrintedException;
@@ -33,8 +34,9 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.stream.Collectors;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 @Service
 public class BookingServiceImpl implements BookingService {
@@ -207,16 +209,62 @@ public class BookingServiceImpl implements BookingService {
         Booking booking = bookingRepository.findById(bookingId)
                 .orElseThrow(() -> new RuntimeException("Booking not found"));
 
-        List<UUID> scheduleIds = booking.getScheduleIds();
-        List<BookingSeat> seatIds = booking.getBookingSeats();
+        UUID custId = booking.getUserIds();
 
-        return null;
-    }
+        Mono<UserDTO> custMono = userClient.getUserById(custId, token);
 
-    public Booking getBookingById(UUID bookingId) {
-        Booking booking = bookingRepository.findById(bookingId)
-                .orElseThrow(() -> new RuntimeException("Booking not found"));
+        List<Integer> seatIds = booking.getBookingSeats().get(0).getSeatIds(); // list Seat ID
 
-        return booking;
+        List<Mono<SeatDTO>> seatIdsMono = seatIds.stream()
+                .map(seatId -> studioClient.getSeatById(seatId, token))
+                .collect(Collectors.toList());
+
+        Mono<List<SeatDTO>> seatMono = Mono.zip(seatIdsMono, array -> Arrays.stream(array)
+                .map(seat -> (SeatDTO) seat)
+                .collect(Collectors.toList()));
+
+        UUID scheduleIds = booking.getScheduleIds().get(0);
+        Mono<ScheduleMovieClientDTO> listScheduleMono = scheduleClient.getScheduleByIds(scheduleIds, token);
+
+        Mono<ScheduleDetailsAdmin> result = Mono.zip(custMono, listScheduleMono, seatMono)
+                .flatMap(tuple -> {
+                    UserDTO cust = tuple.getT1();
+                    ScheduleMovieClientDTO listSchedule = tuple.getT2();
+                    List<SeatDTO> seats = tuple.getT3();
+
+                    ScheduleDetailsAdmin shceduleDetailsAdmin = new ScheduleDetailsAdmin();
+
+                    List<MovieDetailDTO> movies = new ArrayList<>();
+
+                    MovieDetailDTO movie = new MovieDetailDTO();
+                    movie.setTitle(listSchedule.getMovieTitle());
+                    movie.setYear(listSchedule.getMovieYear());
+                    movie.setPosterUrl(listSchedule.getPosterUrl());
+
+                    movies.add(movie);
+
+                    List<StudioDetailDTO> studios = new ArrayList<>();
+
+                    StudioDetailDTO studio = new StudioDetailDTO();
+                    studio.setId(listSchedule.getShows().get(0).getStudioId());
+                    studio.setStudioName(listSchedule.getShows().get(0).getStudioName());
+
+                    studios.add(studio);
+
+                    shceduleDetailsAdmin.setBookingId(bookingId);
+                    shceduleDetailsAdmin.setCreatedAt(booking.getCreatedTime());
+                    shceduleDetailsAdmin.setCustId(custId);
+                    shceduleDetailsAdmin.setCustName(cust.getName());
+                    shceduleDetailsAdmin.setShowDate(listSchedule.getShows().get(0).getShowDate());
+                    shceduleDetailsAdmin.setMovies(movies);
+                    shceduleDetailsAdmin.setSeats(seats);
+                    shceduleDetailsAdmin.setStudios(studios);
+                    shceduleDetailsAdmin.setTotalAmount(booking.getTotalAmount());
+                    shceduleDetailsAdmin.setPrice(listSchedule.getShows().get(0).getPrice());
+
+                    return Mono.just(shceduleDetailsAdmin);
+                });
+
+        return result;
     }
 }

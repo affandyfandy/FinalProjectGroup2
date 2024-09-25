@@ -1,12 +1,8 @@
 
 package findo.booking.controller;
 
-import findo.booking.client.ScheduleClient;
-import findo.booking.client.StudioClient;
-import findo.booking.client.UserClient;
 import findo.booking.dto.*;
 import findo.booking.entity.Booking;
-import findo.booking.entity.BookingSeat;
 import findo.booking.service.impl.BookingServiceImpl;
 import reactor.core.publisher.Mono;
 import org.springframework.http.HttpHeaders;
@@ -21,26 +17,16 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/bookings")
 public class BookingController {
 
     private final BookingServiceImpl bookingService;
-    private final StudioClient studioClient;
-    private final ScheduleClient scheduleClient;
-    private final UserClient userClient;
 
-    public BookingController(BookingServiceImpl bookingService, StudioClient studioClient,
-            ScheduleClient scheduleClient, UserClient userClient) {
+    public BookingController(BookingServiceImpl bookingService) {
         this.bookingService = bookingService;
-        this.studioClient = studioClient;
-        this.scheduleClient = scheduleClient;
-        this.userClient = userClient;
     }
 
     // Show All Booking History (Admin)
@@ -123,42 +109,13 @@ public class BookingController {
     }
 
     @GetMapping("/test_connection/{bookingId}")
-    public ResponseEntity<?> testAja(@PathVariable("bookingId") UUID bookingId,
+    public ResponseEntity<Mono<ScheduleDetailsAdmin>> testAja(@PathVariable("bookingId") UUID bookingId,
             @AuthenticationPrincipal JwtAuthenticationToken principal) {
 
         String token = principal.getToken().getTokenValue();
 
-        Booking booking = bookingService.getBookingById(bookingId);
+        Mono<ScheduleDetailsAdmin> scheduleDetails = bookingService.getBookingDetails(bookingId, token);
 
-        UUID custId = booking.getUserIds();
-
-        Mono<UserDTO> custMono = userClient.getUserById(custId, token);
-
-        List<Integer> seatIds = booking.getBookingSeats().get(0).getSeatIds(); // list Seat ID
-        Mono<SeatDTO> seatCode = studioClient.getSeatById(seatIds.get(0), token); // convert Seat ID to SeatCode
-
-        UUID scheduleIds = booking.getScheduleIds().get(0);
-        Mono<ScheduleMovieClientDTO> listScheduleMono = scheduleClient.getScheduleByIds(scheduleIds, token);
-
-        Mono<ScheduleDetailsAdmin> result = Mono.zip(custMono, listScheduleMono)
-                .flatMap(tuple -> {
-                    UserDTO cust = tuple.getT1();
-                    ScheduleMovieClientDTO listSchedule = tuple.getT2();
-
-                    ScheduleDetailsAdmin test = new ScheduleDetailsAdmin();
-
-                    test.setBookingId(bookingId);
-                    test.setCustId(custId);
-                    test.setCustName(cust.getName());
-                    test.setMovies(null);
-                    test.setSchedules(null);
-                    test.setSeats(null);
-                    test.setStudios(null);
-                    test.setTotalAmount(0);
-
-                    return Mono.just(test);
-                });
-
-        return ResponseEntity.ok().body(result);
+        return ResponseEntity.ok().body(scheduleDetails);
     }
 }
