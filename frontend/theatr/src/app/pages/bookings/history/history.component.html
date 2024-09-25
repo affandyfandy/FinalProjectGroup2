@@ -1,8 +1,9 @@
 <div class="pt-[100px] px-14 space-y-8">
     <div class="flex space-x-2">
-        <select class="select select-bordered w-full max-w-44 bg-base-300 border-none">
-            <option>Latest</option>
-            <option>Earliest</option>
+        <select (change)="onOrderPickerChange($event)"
+            class="select select-bordered w-full max-w-44 bg-base-300 border-none">
+            <option value="DESC">Latest</option>
+            <option value="ASC">Earliest</option>
         </select>
         <input type="date" (change)="onDateChange($event)" [ngModel]="currentDateTime"
             class="p-2 px-6 h-12 rounded-md text-white bg-base-300" />
@@ -12,25 +13,27 @@
         <button *ngFor="let schedule of scheduleList" (click)="navigateToDetail(schedule.id!)"
             class="flex justify-between items-center border-b border-b-base-200 p-4 hover:bg-base-200 hover:rounded-lg w-full transition-all">
             <div class="flex space-x-3 items-center">
-                <img [src]="schedule.movie?.posterUrl" alt="Poster" class="w-[128px] h-[193px] object-cover rounded-xl">
+                <img [src]="schedule.scheduleIds?.[0]?.posterUrl" alt="Poster"
+                    class="w-[128px] h-[193px] object-cover rounded-xl">
 
                 <div class="flex flex-col items-start space-y-1">
                     <div class="flex space-x-2">
-                        <h1 class="text-white text-xl font-bold">{{schedule.movie?.title}}</h1>
-                        <h1 class="text-white text-xl">{{'(' + schedule.movie?.year + ')'}}</h1>
+                        <h1 class="text-white text-xl font-bold">{{schedule.scheduleIds?.[0]?.movieTitle}}</h1>
+                        <h1 class="text-white text-xl">{{'(' + schedule.scheduleIds?.[0]?.movieYear + ')'}}</h1>
                     </div>
 
                     <div class="flex space-x-2">
                         <img src="assets/icons/location-gray.svg" alt="Location Icon" class="w-[24px] h-[24px]">
-                        <p class="font-medium text-zinc-400">{{schedule.studio?.name}}</p>
+                        <p class="font-medium text-zinc-400">{{schedule.scheduleIds?.[0]?.shows?.[0]?.studioName}}</p>
                     </div>
 
                     <div class="flex space-x-2">
                         <img src="assets/icons/ticket-gray.svg" alt="Ticket Icon" class="w-[24px] h-[24px]">
-                        <p class="font-medium text-zinc-400">{{schedule.booking?.seats?.length}} Ticekts</p>
+                        <p class="font-medium text-zinc-400">{{2}} Ticekts</p>
                     </div>
 
-                    <h2 class="self-start">{{schedule.showDate ? (schedule.showDate | fullDateTime)
+                    <h2 class="self-start">{{schedule.scheduleIds?.[0]?.shows?.[0]?.showDate ?
+                        (schedule.scheduleIds?.[0]?.shows?.[0]?.showDate! | fullDateTime)
                         : 'N/A'}}
                     </h2>
                 </div>

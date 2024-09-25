@@ -35,4 +35,15 @@ export class BookingService {
       headers: this.getHeaders()
     });
   }
+
+  getCustomerHistory(page: number = 0, size: number = 10, sortDir: string) {
+    return this.http.get(`${this.apiUrl}/customer/booking-history`, {
+      headers: this.getHeaders(),
+      params: {
+        page: page.toString(),
+        size: size.toString(),
+        sortDir: sortDir
+      }
+    });
+  }
 }

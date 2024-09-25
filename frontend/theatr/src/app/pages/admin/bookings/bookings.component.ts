@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { Booking } from '../../../model/booking.model';
+import { Booking, BookingHistoryResponse } from '../../../model/booking.model';
 import { FullDateTimePipe } from '../../../core/pipes/full-date-time/full-date-time.pipe';
 import { FullTimePipe } from '../../../core/pipes/full-time/full-time.pipe';
 import { PriceFormatPipe } from '../../../core/pipes/price-format/price-format.pipe';
 import { BookingService } from '../../../services/booking/booking.service';
+import { NormalFullDateTimePipe } from '../../../core/pipes/normal-full-date-time/normal-full-date-time.pipe';
+import { NormalTimeFormatPipe } from '../../../core/pipes/normal-time-format/normal-time-format.pipe';
 
 @Component({
   selector: 'app-bookings',
@@ -15,7 +17,9 @@ import { BookingService } from '../../../services/booking/booking.service';
     FormsModule,
     FullDateTimePipe,
     FullTimePipe,
-    PriceFormatPipe
+    PriceFormatPipe,
+    NormalFullDateTimePipe,
+    NormalTimeFormatPipe
   ],
   providers: [
     BookingService
@@ -26,8 +30,8 @@ export class BookingsComponent implements OnInit {
 
   currentDateTime = '';
 
-  bookingList: Booking[] = [];
-  currentBooking: Booking = {};
+  bookingList: BookingHistoryResponse[] = [];
+  currentBooking: BookingHistoryResponse = {};
 
   currentPage = 1;
   totalPages = 1;
