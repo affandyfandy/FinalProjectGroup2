@@ -6,8 +6,8 @@ import java.util.UUID;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import findo.schedule.dto.AllSeatStudioDTO;
 import findo.schedule.dto.AvailableScheduleDTO;
-import findo.schedule.dto.BookingSeatsDTO;
 import findo.schedule.dto.CreateScheduleDTO;
 import findo.schedule.dto.ScheduleDTO;
 import findo.schedule.dto.ScheduleDetailDTO;
@@ -28,7 +28,5 @@ public interface ScheduleService {
 
         Mono<Page<ScheduleDTO>> findAllSchedule(Pageable pageable, LocalDate date, String token);
 
-        Mono<ScheduleStudioSeatDTO> findAvailabilityScheduleSeats(UUID scheduleId);
-
-        Mono<BookingSeatsDTO> getDataSeatUnavailable(UUID scheduleId, String token);
+        Mono<ScheduleStudioSeatDTO> findAllStudioSeats(UUID scheduleId, String token);
 }

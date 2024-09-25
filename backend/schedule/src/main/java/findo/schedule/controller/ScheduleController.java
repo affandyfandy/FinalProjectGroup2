@@ -124,4 +124,15 @@ public class ScheduleController {
                 .map(ResponseEntity::ok)
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
+
+    @GetMapping("/{scheduleId}/all-studio-seats")
+    public Mono<ResponseEntity<ScheduleStudioSeatDTO>> getAllStudioSeats(@PathVariable("scheduleId") UUID scheduleId,
+            @AuthenticationPrincipal JwtAuthenticationToken principal) {
+
+        String token = principal.getToken().getTokenValue();
+
+        return scheduleService.findAllStudioSeats(scheduleId, token)
+                .map(ResponseEntity::ok)
+                .defaultIfEmpty(ResponseEntity.notFound().build());
+    }
 }

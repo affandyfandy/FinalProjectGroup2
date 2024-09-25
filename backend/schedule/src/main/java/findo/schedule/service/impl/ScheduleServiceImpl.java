@@ -29,6 +29,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -284,18 +285,59 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public Mono<ScheduleStudioSeatDTO> findAvailabilityScheduleSeats(UUID scheduleId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAvailabilityScheduleSeats'");
-    }
+    public Mono<ScheduleStudioSeatDTO> findAllStudioSeats(UUID scheduleId, String token) {
+        Optional<Schedule> schedule = scheduleRepository.findById(scheduleId);
 
-    @Override
-    public Mono<BookingSeatsDTO> getDataSeatUnavailable(UUID scheduleId, String token) {
-        return bookingClient.getSeatIdsByScheduleId(scheduleId, token);
-    }
+        Mono<StudioDTO> scheduleStudioMono = studioClient.getStudioById(schedule.get().getStudioId().get(0), token);
+        Mono<BookingSeatsDTO> bookedSeatsMono = bookingClient.getSeatIdsByScheduleId(scheduleId, token);
+        Mono<AllSeatStudioDTO> allStudioSeatsMono = studioClient.getSeatsByStudioId(schedule.get().getStudioId().get(0),
+                token);
 
-    public Mono<AllSeatStudioDTO> getScheduleStudioSeats(Integer studioId, String token) {
-        return studioClient.getSeatsByStudioId(studioId, token);
-    }
+        Mono<ScheduleStudioSeatDTO> result = Mono.zip(bookedSeatsMono, allStudioSeatsMono, scheduleStudioMono)
+                .flatMap(tuple -> {
+                    BookingSeatsDTO bookedSeats = tuple.getT1();
+                    AllSeatStudioDTO allStudioSeats = tuple.getT2();
+                    StudioDTO scheduleStudio = tuple.getT3();
 
+                    List<Integer> seatIds = bookedSeats.getSeatIds();
+                    List<SeatStudioDTO> studioSeats = allStudioSeats.getStudioSeats();
+
+                    StudioDTO studio = new StudioDTO();
+                    studio.setId(scheduleStudio.getId());
+                    studio.setName(scheduleStudio.getName());
+
+                    List<StudioDTO> listStudio = new ArrayList<>();
+                    listStudio.add(studio);
+
+                    ScheduleStudioSeatDTO scheduleStudioSeat = new ScheduleStudioSeatDTO();
+                    scheduleStudioSeat.setScheduleId(scheduleId);
+                    scheduleStudioSeat.setPrice(schedule.get().getPrice());
+                    scheduleStudioSeat.setShowDate(schedule.get().getShowDate());
+                    scheduleStudioSeat.setStudio(listStudio);
+
+                    // Process seats based on matches
+                    List<SeatDTO> updatedSeats = studioSeats.stream()
+                            .map(seatStudio -> {
+                                SeatDTO seatDTO = new SeatDTO();
+                                seatDTO.setId(seatStudio.getId());
+                                seatDTO.setSeatCode(seatStudio.getSeatCode());
+
+                                // Check if the seat ID is in the booked seats
+                                if (seatIds.contains(seatStudio.getId())) {
+                                    seatDTO.setStatus("BOOKED"); // Set status to BOOKED if matched
+                                } else {
+                                    seatDTO.setStatus("AVAILABLE"); // Set status to AVAILABLE if not matched
+                                }
+
+                                return seatDTO; // Return the modified SeatDTO
+                            })
+                            .collect(Collectors.toList()); // Collect the results into a list
+
+                    scheduleStudioSeat.setSeats(updatedSeats); // Set the updated seats
+
+                    return Mono.just(scheduleStudioSeat); // Return the populated ScheduleStudioSeatDTO
+                });
+
+        return result;
+    }
 }
