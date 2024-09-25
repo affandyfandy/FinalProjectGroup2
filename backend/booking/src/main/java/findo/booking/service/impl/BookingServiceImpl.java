@@ -7,10 +7,7 @@ import findo.booking.dto.BookingDetailDTO;
 import findo.booking.dto.BookingResponseDTO;
 import findo.booking.dto.BookingSeatsDTO;
 import findo.booking.dto.CreateBookingDTO;
-import findo.booking.dto.CustomerBookingHistoryDTO;
 import findo.booking.dto.PrintTicketResponseDTO;
-import findo.booking.dto.ScheduleMovieDTO;
-import findo.booking.dto.SeatDTO;
 import findo.booking.entity.Booking;
 import findo.booking.entity.BookingSeat;
 import findo.booking.exception.TicketAlreadyPrintedException;
@@ -28,10 +25,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 @Service

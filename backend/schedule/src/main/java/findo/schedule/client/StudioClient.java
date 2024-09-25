@@ -4,14 +4,11 @@ import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 
 import findo.schedule.dto.AllSeatStudioDTO;
-import findo.schedule.dto.SeatStudioDTO;
 import findo.schedule.dto.StudioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-
-import java.util.List;
 
 @Service
 public class StudioClient {

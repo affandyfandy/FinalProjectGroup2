@@ -1,6 +1,5 @@
 package findo.schedule.controller;
 
-import findo.schedule.client.BookingClient;
 import findo.schedule.dto.*;
 import findo.schedule.service.impl.ScheduleServiceImpl;
 import jakarta.validation.Valid;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
 @RestController

@@ -1,6 +1,5 @@
 package findo.schedule.mapper;
 
-import findo.schedule.dto.BookingSeatsDTO;
 import findo.schedule.dto.CreateScheduleDTO;
 import findo.schedule.dto.ScheduleResponseDTO;
 import findo.schedule.entity.Schedule;

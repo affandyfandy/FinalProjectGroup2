@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import findo.studio.data.entity.Seat;
 import findo.studio.data.entity.Studio;
 import findo.studio.data.repository.SeatRepository;
+import findo.studio.dto.AllSeatStudioDTO;
 import findo.studio.exception.NotFoundException;
 import findo.studio.service.SeatService;
 import lombok.AllArgsConstructor;
@@ -25,14 +26,13 @@ public class SeatServiceImpl implements SeatService {
         List<Seat> listSeats = new ArrayList<>();
 
         List<String> listSeatCode = new ArrayList<>(Arrays.asList(
-            "A1", "A2", "A3", "A4", "A5", "A6",
-            "B1", "B2", "B3", "B4", "B5", "B6",
-            "C1", "C2", "C3", "C4", "C5", "C6",
-            "D1", "D2", "D3", "D4", "D5", "D6",
-            "E1", "E2", "E3", "E4", "E5", "E6"
-        ));
+                "A1", "A2", "A3", "A4", "A5", "A6",
+                "B1", "B2", "B3", "B4", "B5", "B6",
+                "C1", "C2", "C3", "C4", "C5", "C6",
+                "D1", "D2", "D3", "D4", "D5", "D6",
+                "E1", "E2", "E3", "E4", "E5", "E6"));
 
-        for(int i = 0; i < listSeatCode.size(); i++) {
+        for (int i = 0; i < listSeatCode.size(); i++) {
             Seat seat = new Seat();
             seat.setSeatCode(listSeatCode.get(i));
             seat.setCreatedBy("admin");
@@ -43,24 +43,26 @@ public class SeatServiceImpl implements SeatService {
 
             listSeats.add(seat);
         }
-        
+
         seatRepository.saveAll(listSeats);
     }
 
     @Override
     public Seat findSeatById(Integer id) {
         return seatRepository.findById(id)
-            .orElseThrow(() -> new NotFoundException("Seat not found!"));
+                .orElseThrow(() -> new NotFoundException("Seat not found!"));
     }
 
     @Override
-    public List<Seat> findAllSeatByStudioId(Integer studioId) {
+    public AllSeatStudioDTO findAllSeatByStudioId(Integer studioId) {
         List<Seat> seatStudio = seatRepository.findByStudioId(studioId);
 
-        if(seatStudio.isEmpty()) {
+        if (seatStudio.isEmpty()) {
             throw new NotFoundException("Studio seat not found!");
         }
-        
-        return seatStudio;
+
+        AllSeatStudioDTO listStudioSeats = new AllSeatStudioDTO(seatStudio);
+
+        return listStudioSeats;
     }
 }

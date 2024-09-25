@@ -200,8 +200,6 @@ public class ScheduleServiceImpl implements ScheduleService {
         }
 
         return movieMono.flatMap(movie -> {
-            List<ScheduleDetailDTO> detailDTOs = new ArrayList<>();
-
             // Process studio shows
             List<Mono<ScheduleDetailDTO>> detailDTOMonoList = studioShowMap.entrySet().stream()
                     .map(entry -> {

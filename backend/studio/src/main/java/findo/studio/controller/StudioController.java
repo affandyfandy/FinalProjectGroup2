@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import findo.studio.data.entity.Seat;
 import findo.studio.data.entity.Studio;
+import findo.studio.dto.AllSeatStudioDTO;
 import findo.studio.dto.StudioSaveDTO;
 import findo.studio.service.SeatService;
 import findo.studio.service.StudioService;
@@ -67,8 +68,8 @@ public class StudioController {
     }
 
     @GetMapping(value = "/{id}/seats")
-    public ResponseEntity<List<Seat>> getSeatsByStudioId(@PathVariable("id") Integer studioId) {
-        List<Seat> seats = seatService.findAllSeatByStudioId(studioId);
+    public ResponseEntity<AllSeatStudioDTO> getSeatsByStudioId(@PathVariable("id") Integer studioId) {
+        AllSeatStudioDTO seats = seatService.findAllSeatByStudioId(studioId);
 
         return ResponseEntity.status(HttpStatus.OK).body(seats);
     }
