@@ -30,7 +30,8 @@ public class UserController {
     }
 
     @PutMapping("/change-password")
-    public Mono<ResponseEntity<ChangePasswordResponseDTO>> changePassword(@AuthenticationPrincipal JwtAuthenticationToken principal,
+    public Mono<ResponseEntity<ChangePasswordResponseDTO>> changePassword(
+            @AuthenticationPrincipal JwtAuthenticationToken principal,
             @Valid @RequestBody ChangePasswordDTO changePasswordDTO) {
         String userId = principal.getToken().getClaimAsString("sub"); // Extract user ID from JWT token's "sub" claim
         return userService.changePassword(UUID.fromString(userId), changePasswordDTO)
@@ -52,9 +53,16 @@ public class UserController {
                 .map(ResponseEntity::ok);
     }
 
+    @GetMapping("/{id}")
+    public Mono<ResponseEntity<ShowDataDTO>> getUserById(@PathVariable("id") UUID userId) {
+        return userService.getUserDataById(userId)
+                .map(ResponseEntity::ok);
+    }
+
     @PutMapping("/update-balance")
-    public Mono<ResponseEntity<UpdateBalanceDTO>> updateBalance(@AuthenticationPrincipal JwtAuthenticationToken principal,
-                                                    @RequestBody UpdateBalanceDTO updateBalanceDTO) {
+    public Mono<ResponseEntity<UpdateBalanceDTO>> updateBalance(
+            @AuthenticationPrincipal JwtAuthenticationToken principal,
+            @RequestBody UpdateBalanceDTO updateBalanceDTO) {
         String userId = principal.getToken().getClaimAsString("sub");
         return userService.updateBalance(UUID.fromString(userId), updateBalanceDTO.getBalance())
                 .map(ResponseEntity::ok);

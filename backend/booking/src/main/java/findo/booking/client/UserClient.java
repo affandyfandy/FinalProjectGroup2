@@ -2,8 +2,11 @@ package findo.booking.client;
 
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
+
 import findo.booking.dto.UpdateBalanceDTO;
 import findo.booking.dto.UserBalanceDTO;
+import findo.booking.dto.UserDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -43,6 +46,19 @@ public class UserClient {
                 .headers(httpHeaders -> httpHeaders.setBearerAuth(token))
                 .retrieve()
                 .bodyToMono(UserBalanceDTO.class);
+    }
+
+    public Mono<UserDTO> getUserById(UUID userId, String token) {
+        String url = getServiceUrl() + "/" + userId;
+        return webClientBuilder.build()
+                .get()
+                .uri(url)
+                .headers(httpHeaders -> httpHeaders.setBearerAuth(token))
+                .retrieve()
+                .bodyToMono(UserDTO.class)
+                .onErrorResume(e -> {
+                    return Mono.empty();
+                });
     }
 
     public Mono<Void> updateUserBalance(UUID userId, double newBalance, String token) {

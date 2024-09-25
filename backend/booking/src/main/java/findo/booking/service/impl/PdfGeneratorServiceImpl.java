@@ -9,7 +9,7 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 
 import org.thymeleaf.context.Context;
-import findo.booking.dto.BookingDetailDTO;
+import findo.booking.dto.ScheduleDetailsAdmin;
 import findo.booking.service.PdfGeneratorService;
 
 import java.io.IOException;
@@ -23,9 +23,9 @@ public class PdfGeneratorServiceImpl implements PdfGeneratorService {
         this.templateEngine = templateEngine;
     }
 
-    public ByteArrayInputStream generatePdf(BookingDetailDTO bookingDetailDTO) throws IOException {
+    public ByteArrayInputStream generatePdf(ScheduleDetailsAdmin scheduleDetailsAdmin) throws IOException {
         Context context = new Context();
-        context.setVariable("booking", bookingDetailDTO);
+        context.setVariable("booking", scheduleDetailsAdmin);
 
         // Process the Thymeleaf template
         String html = templateEngine.process("pdf-template", context);
