@@ -24,30 +24,32 @@
             class="p-2 px-6 h-12 rounded-md text-white bg-base-300" />
 
         <div *ngIf="(detailSchedule.length) > 0; else emptyView">
-            <button *ngFor="let schedule of detailSchedule" (click)="navigateToBook(schedule.shows![0]!.scheduleId!)"
-                class="flex justify-between items-center border-b border-b-base-200 p-4 hover:bg-base-200 hover:rounded-lg w-full transition-all">
-                <div class="flex flex-col items-start space-y-1">
-                    <h2 class="text-xl self-start font-semibold">{{schedule.shows?.[0]?.showDate ?
-                        (schedule.shows![0]!.showDate! | timeFormat)
-                        : 'N/A'}}
-                    </h2>
-                    <div class="flex space-x-2">
-                        <img src="assets/icons/location-gray.svg" alt="Location Icon" class="w-[24px] h-[24px]">
-                        <p class="font-medium text-zinc-400">{{schedule.shows?.[0]?.studioName}}</p>
+            <div *ngFor="let schedule of detailSchedule">
+                <button *ngFor="let detail of schedule.shows" (click)="navigateToBook(detail.scheduleId!)"
+                    class="flex justify-between items-center border-b border-b-base-200 p-4 hover:bg-base-200 hover:rounded-lg w-full transition-all">
+                    <div class="flex flex-col items-start space-y-1">
+                        <h2 class="text-xl self-start font-semibold">{{detail.showDate ?
+                            (detail.showDate! | timeFormat)
+                            : 'N/A'}}
+                        </h2>
+                        <div class="flex space-x-2">
+                            <img src="assets/icons/location-gray.svg" alt="Location Icon" class="w-[24px] h-[24px]">
+                            <p class="font-medium text-zinc-400">{{detail.studioName}}</p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <img src="assets/icons/ticket-gray.svg" alt="Ticket Icon" class="w-[24px] h-[24px]">
+                            <p class="font-medium text-zinc-400">{{detail.price ? (detail.price!
+                                |
+                                priceFormat) : ''}}</p>
+                        </div>
                     </div>
-                    <div class="flex space-x-2">
-                        <img src="assets/icons/ticket-gray.svg" alt="Ticket Icon" class="w-[24px] h-[24px]">
-                        <p class="font-medium text-zinc-400">{{schedule.shows?.[0]?.price ? (schedule.shows![0]!.price!
-                            |
-                            priceFormat) : ''}}</p>
-                    </div>
-                </div>
-                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8.91 20.4201L15.43 13.9001C16.2 13.1301 16.2 11.8701 15.43 11.1001L8.91 4.58008"
-                        stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                </svg>
-            </button>
+                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.91 20.4201L15.43 13.9001C16.2 13.1301 16.2 11.8701 15.43 11.1001L8.91 4.58008"
+                            stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
         </div>
 
         <ng-template #emptyView>
