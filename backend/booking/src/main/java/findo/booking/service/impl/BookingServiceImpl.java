@@ -31,6 +31,9 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.stream.Collectors;
 import java.util.List;
 import java.util.UUID;
@@ -62,8 +65,12 @@ public class BookingServiceImpl implements BookingService {
 
     // Show All Booking History (Admin)
     @Override
-    public Mono<Page<BookingResponseDTO>> getAllBookings(Pageable pageable, String token) {
-        return Mono.fromCallable(() -> bookingRepository.findAll(pageable))
+    public Mono<Page<BookingResponseDTO>> getAllBookings(Pageable pageable, LocalDate date, String token) {
+        LocalDateTime startOfDay = date.atStartOfDay();
+        LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
+        return Mono
+                .fromCallable(() -> bookingRepository.findAllBookingTimeBetween(Timestamp.valueOf(startOfDay),
+                        Timestamp.valueOf(endOfDay), pageable))
                 .flatMap(bookingsPage -> {
                     // Process each booking reactively
                     return Flux.fromIterable(bookingsPage.getContent())
@@ -86,8 +93,13 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public Mono<Page<BookingResponseDTO>> getBookingHistoryByUser(UUID userId, Pageable pageable, String token) {
-        return Mono.fromCallable(() -> bookingRepository.findBookingsByUserIds(userId, pageable))
+    public Mono<Page<BookingResponseDTO>> getBookingHistoryByUser(UUID userId, Pageable pageable, LocalDate date,
+            String token) {
+        LocalDateTime startOfDay = date.atStartOfDay();
+        LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
+
+        return Mono.fromCallable(() -> bookingRepository.findBookingsByUserIdsAndUpdatedTimeBetween(
+                userId, Timestamp.valueOf(startOfDay), Timestamp.valueOf(endOfDay), pageable))
                 .flatMap(bookingsPage -> {
                     // Process each booking reactively
                     return Flux.fromIterable(bookingsPage.getContent())
