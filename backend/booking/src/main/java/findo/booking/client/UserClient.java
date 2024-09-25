@@ -3,7 +3,6 @@ package findo.booking.client;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 
-import findo.booking.dto.SeatDTO;
 import findo.booking.dto.UpdateBalanceDTO;
 import findo.booking.dto.UserBalanceDTO;
 import findo.booking.dto.UserDTO;

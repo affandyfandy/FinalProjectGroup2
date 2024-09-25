@@ -1,6 +1,5 @@
 package findo.booking.service.impl;
 
-import findo.booking.client.MovieClient;
 import findo.booking.client.ScheduleClient;
 import findo.booking.client.StudioClient;
 import findo.booking.client.UserClient;
@@ -45,12 +44,11 @@ public class BookingServiceImpl implements BookingService {
     private final UserClient userClient;
     private final ScheduleClient scheduleClient;
     private final StudioClient studioClient;
-    private final MovieClient movieClient;
     private final PdfGeneratorServiceImpl pdfGeneratorServiceImpl;
 
     public BookingServiceImpl(BookingRepository bookingRepository, BookingSeatRepository bookingSeatRepository,
             StudioClient studioClient,
-            UserClient userClient, ScheduleClient scheduleClient, MovieClient movieClient,
+            UserClient userClient, ScheduleClient scheduleClient,
             PdfGeneratorServiceImpl pdfGeneratorServiceImpl) {
         this.bookingRepository = bookingRepository;
         this.bookingSeatRepository = bookingSeatRepository;
@@ -58,7 +56,6 @@ public class BookingServiceImpl implements BookingService {
         this.pdfGeneratorServiceImpl = pdfGeneratorServiceImpl;
         this.scheduleClient = scheduleClient;
         this.studioClient = studioClient;
-        this.movieClient = movieClient;
     }
 
     private final BookingMapper bookingMapper = BookingMapper.INSTANCE;
