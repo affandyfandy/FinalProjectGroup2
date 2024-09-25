@@ -32,6 +32,7 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.checkLoginStatus();
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.checkLoginStatus();

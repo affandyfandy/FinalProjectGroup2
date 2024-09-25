@@ -142,7 +142,7 @@ export class ScheduleComponent implements OnInit {
 
     this.availableShowTime = [];
 
-    for (let hour = 13; hour <= 18; hour++) {
+    for (let hour = 12; hour <= 16; hour++) {
       const date = new Date();
       const [year, month, day] = this.currentScheduleDateTime.split('-').map(Number);
 
