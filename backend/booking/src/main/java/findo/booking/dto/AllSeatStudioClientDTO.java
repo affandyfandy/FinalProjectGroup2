@@ -3,11 +3,11 @@ package findo.booking.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SeatDTO {
-    private Integer id;
-    private String seatCode;
+public class AllSeatStudioClientDTO {
+    List<SeatStudioClientDTO> studioSeats;
 }

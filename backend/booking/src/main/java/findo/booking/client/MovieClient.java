@@ -3,23 +3,21 @@ package findo.booking.client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-
+import java.util.UUID;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 
-import findo.booking.dto.AllSeatStudioClientDTO;
-import findo.booking.dto.SeatDTO;
+import findo.booking.dto.ScheduleMovieDTO;
 import reactor.core.publisher.Mono;
 
 @Service
-public class StudioClient {
-
+public class MovieClient {
     private final WebClient.Builder webClientBuilder;
     private final EurekaClient eurekaClient;
-    private static final String SERVICE_NAME = "studio-service";
+    private static final String SERVICE_NAME = "movie-service";
 
     @Autowired
-    public StudioClient(EurekaClient eurekaClient, WebClient.Builder webClientBuilder) {
+    public MovieClient(EurekaClient eurekaClient, WebClient.Builder webClientBuilder) {
         this.eurekaClient = eurekaClient;
         this.webClientBuilder = webClientBuilder;
     }
@@ -33,31 +31,17 @@ public class StudioClient {
         String hostName = service.getHostName();
         int port = service.getPort();
 
-        return "http://" + hostName + ":" + port + "/api/v1/studios/";
+        return "http://" + hostName + ":" + port + "/api/v1/movies/";
     }
 
-    public Mono<SeatDTO> getSeatById(Integer seatId, String token) {
-        String url = getServiceUrl() + "seats/" + seatId;
+    public Mono<ScheduleMovieDTO> getMovieById(UUID movieId, String token) {
+        String url = getServiceUrl() + "anonymous/" + movieId;
         return webClientBuilder.build()
                 .get()
                 .uri(url)
                 .headers(httpHeaders -> httpHeaders.setBearerAuth(token))
                 .retrieve()
-                .bodyToMono(SeatDTO.class)
-                .onErrorResume(e -> {
-                    return Mono.empty();
-                });
-    }
-
-    public Mono<AllSeatStudioClientDTO> getSeatsByStudioId(Integer integer, String token) {
-        String url = getServiceUrl() + integer + "/seats";
-
-        return webClientBuilder.build()
-                .get()
-                .uri(url)
-                .headers(httpHeaders -> httpHeaders.setBearerAuth(token))
-                .retrieve()
-                .bodyToMono(AllSeatStudioClientDTO.class)
+                .bodyToMono(ScheduleMovieDTO.class)
                 .onErrorResume(e -> {
                     return Mono.empty();
                 });

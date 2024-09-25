@@ -5,8 +5,6 @@ import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import findo.schedule.dto.AllSeatStudioDTO;
 import findo.schedule.dto.AvailableScheduleDTO;
 import findo.schedule.dto.CreateScheduleDTO;
 import findo.schedule.dto.ScheduleDTO;

@@ -4,7 +4,6 @@ import findo.booking.dto.*;
 import findo.booking.entity.Booking;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
@@ -23,5 +22,7 @@ public interface BookingService {
     Mono<PrintTicketResponseDTO> printTicket(UUID bookingId, String email);
 
     BookingSeatsDTO getAllSeatIds(UUID scheduleId);
+
+    Mono<ScheduleDetailsAdmin> getBookingDetails(UUID scheduleId, String token);
 
 }

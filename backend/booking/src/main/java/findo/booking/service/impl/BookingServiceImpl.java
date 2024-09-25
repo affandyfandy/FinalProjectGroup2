@@ -1,13 +1,19 @@
 package findo.booking.service.impl;
 
+import findo.booking.client.MovieClient;
 import findo.booking.client.ScheduleClient;
 import findo.booking.client.StudioClient;
 import findo.booking.client.UserClient;
+import findo.booking.dto.AllSeatStudioClientDTO;
 import findo.booking.dto.BookingDetailDTO;
 import findo.booking.dto.BookingResponseDTO;
 import findo.booking.dto.BookingSeatsDTO;
 import findo.booking.dto.CreateBookingDTO;
 import findo.booking.dto.PrintTicketResponseDTO;
+import findo.booking.dto.ScheduleDetailsAdmin;
+import findo.booking.dto.ScheduleMovieClientDTO;
+import findo.booking.dto.ScheduleMovieDTO;
+import findo.booking.dto.SeatDTO;
 import findo.booking.entity.Booking;
 import findo.booking.entity.BookingSeat;
 import findo.booking.exception.TicketAlreadyPrintedException;
@@ -27,6 +33,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.stream.Collectors;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -36,17 +43,20 @@ public class BookingServiceImpl implements BookingService {
     private final UserClient userClient;
     private final ScheduleClient scheduleClient;
     private final StudioClient studioClient;
+    private final MovieClient movieClient;
     private final PdfGeneratorServiceImpl pdfGeneratorServiceImpl;
 
     public BookingServiceImpl(BookingRepository bookingRepository, BookingSeatRepository bookingSeatRepository,
             StudioClient studioClient,
-            UserClient userClient, ScheduleClient scheduleClient, PdfGeneratorServiceImpl pdfGeneratorServiceImpl) {
+            UserClient userClient, ScheduleClient scheduleClient, MovieClient movieClient,
+            PdfGeneratorServiceImpl pdfGeneratorServiceImpl) {
         this.bookingRepository = bookingRepository;
         this.bookingSeatRepository = bookingSeatRepository;
         this.userClient = userClient;
         this.pdfGeneratorServiceImpl = pdfGeneratorServiceImpl;
         this.scheduleClient = scheduleClient;
         this.studioClient = studioClient;
+        this.movieClient = movieClient;
     }
 
     private final BookingMapper bookingMapper = BookingMapper.INSTANCE;
@@ -190,5 +200,23 @@ public class BookingServiceImpl implements BookingService {
         BookingSeatsDTO bookSeatIds = new BookingSeatsDTO(seatIds);
 
         return bookSeatIds;
+    }
+
+    @Override
+    public Mono<ScheduleDetailsAdmin> getBookingDetails(UUID bookingId, String token) {
+        Booking booking = bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new RuntimeException("Booking not found"));
+
+        List<UUID> scheduleIds = booking.getScheduleIds();
+        List<BookingSeat> seatIds = booking.getBookingSeats();
+
+        return null;
+    }
+
+    public Booking getBookingById(UUID bookingId) {
+        Booking booking = bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new RuntimeException("Booking not found"));
+
+        return booking;
     }
 }

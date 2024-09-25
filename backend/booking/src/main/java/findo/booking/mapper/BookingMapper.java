@@ -1,12 +1,10 @@
 package findo.booking.mapper;
 
-import findo.booking.client.StudioClient;
 import findo.booking.dto.BookingDetailDTO;
 import findo.booking.dto.BookingResponseDTO;
 import findo.booking.dto.CreateBookingDTO;
 import findo.booking.dto.CustomerBookingHistoryDTO;
 import findo.booking.dto.ScheduleMovieDTO;
-import findo.booking.dto.SeatDTO;
 import findo.booking.entity.Booking;
 import findo.booking.entity.BookingSeat;
 import org.mapstruct.Mapper;

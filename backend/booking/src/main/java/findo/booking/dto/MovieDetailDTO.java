@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SeatDTO {
-    private Integer id;
-    private String seatCode;
+public class MovieDetailDTO {
+    private String title;
+    private int year;
+    private String posterUrl;
 }

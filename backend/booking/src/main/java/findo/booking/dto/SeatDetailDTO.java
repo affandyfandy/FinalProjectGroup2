@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SeatDTO {
-    private Integer id;
+public class SeatDetailDTO {
+    private int seatId;
     private String seatCode;
 }
