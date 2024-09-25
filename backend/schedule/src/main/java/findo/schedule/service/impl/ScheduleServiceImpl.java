@@ -195,7 +195,8 @@ public class ScheduleServiceImpl implements ScheduleService {
         // Iterate over found schedules
         for (Schedule schedule : schedules) {
             studioShowMap.computeIfAbsent(schedule.getStudioId().get(0), studioId -> new ArrayList<>())
-                    .add(new ScheduleShowDTO(schedule.getId(), size, schedule.getShowDate(), "", schedule.getPrice()));
+                    .add(new ScheduleShowDTO(schedule.getId(), schedule.getStudioId().get(0), schedule.getShowDate(),
+                            "", schedule.getPrice()));
         }
 
         return movieMono.flatMap(movie -> {
