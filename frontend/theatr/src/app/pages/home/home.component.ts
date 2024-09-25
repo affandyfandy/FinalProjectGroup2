@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Schedule } from '../../model/schedule.model';
+import { HomeSchedule, Schedule } from '../../model/schedule.model';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterConfig } from '../../config/app.constants';
@@ -23,8 +23,8 @@ export class HomeComponent implements OnInit {
 
   currentDateTime = '';
 
-  slidingBanner: Schedule[] = []
-  scheduleList: Schedule[] = []
+  slidingBanner: HomeSchedule[] = []
+  scheduleList: HomeSchedule[] = []
 
   currentPage = 1;
   totalPages = 1;
@@ -32,6 +32,8 @@ export class HomeComponent implements OnInit {
   isShowAlert = false;
   alertMessage = '';
   isAlertSuccess = true;
+
+  isLoading = false;
 
   constructor(
     private router: Router,
@@ -58,25 +60,31 @@ export class HomeComponent implements OnInit {
   }
 
   getSlidingBanner() {
+    this.isLoading = true;
     this.scheduleService.getAvailableSchedule(0, 6, this.currentDateTime).subscribe({
       next: (res: any) => {
         this.slidingBanner = res.content;
+        this.isLoading = false;
       },
       error: (err) => {
         this.showAlert('Failed to get schedule list banner: ' + err.error.message, false);
+        this.isLoading = false;
       }
     });
   }
 
   getScheduleList(page: number = 0) {
-    this.scheduleService.getAvailableSchedule(page, 6, this.currentDateTime).subscribe({
+    this.isLoading = true;
+    this.scheduleService.getAvailableSchedule(page, 10, this.currentDateTime).subscribe({
       next: (res: any) => {
-        this.scheduleList = res.content;
+        this.scheduleList = res?.content ?? [];
         this.currentPage = page;
-        this.totalPages = res.totalPages;
+        this.totalPages = res.page.totalPages;
+        this.isLoading = false;
       },
       error: (err) => {
         this.showAlert('Failed to get schedule list: ' + err.error.message, false);
+        this.isLoading = false;
       }
     });
   }

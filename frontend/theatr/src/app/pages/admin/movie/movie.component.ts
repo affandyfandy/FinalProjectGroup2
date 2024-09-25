@@ -21,6 +21,8 @@ export class MovieComponent implements OnInit {
 
   searchText = '';
 
+  isLoading = false;
+
   movieList: Movie[] = [];
   currentMovie: ShowMovieDTO = {
     id: '',
@@ -81,6 +83,7 @@ export class MovieComponent implements OnInit {
   }
 
   private updateMovie(url?: string) {
+    this.isLoading = true;
     const body: SaveMovieDTO = {
       title: this.currentMovie.title,
       synopsis: this.currentMovie.synopsis,
@@ -91,9 +94,11 @@ export class MovieComponent implements OnInit {
       next: (res: any) => {
         this.closeMovieModal();
         this.getMovieList(this.currentPage);
+        this.isLoading = false;
         this.showAlert('Movie updated successfully', true);
       },
       error: (err) => {
+        this.isLoading = false;
         this.closeMovieModal();
         this.showAlert('Failed to create a movie: ' + err.error.message, false);
       }
@@ -101,6 +106,7 @@ export class MovieComponent implements OnInit {
   }
 
   private createMovie(url: string) {
+    this.isLoading = true;
     const body: SaveMovieDTO = {
       title: this.currentMovie.title,
       synopsis: this.currentMovie.synopsis,
@@ -109,11 +115,13 @@ export class MovieComponent implements OnInit {
     };
     this.movieService.createMovie(body).subscribe({
       next: (res: any) => {
+        this.isLoading = false;
         this.closeMovieModal();
         this.getMovieList();
         this.showAlert('Movie created successfully', true);
       },
       error: (err) => {
+        this.isLoading = false;
         this.closeMovieModal();
         this.showAlert('Failed to create a movie: ' + err.error.message, false);
       }
@@ -121,6 +129,7 @@ export class MovieComponent implements OnInit {
   }
 
   private uploadPoster() {
+    this.isLoading = true;
     const file = (document.getElementById('posterInput') as HTMLInputElement).files?.[0];
     if (file) {
       this.movieService.uploadImagePoster(file).subscribe({
@@ -178,17 +187,21 @@ export class MovieComponent implements OnInit {
   }
 
   isSaveButtonDisabled() {
-    if (this.isEdit) {
-      return this.currentMovie.title === this.tempMovie.title &&
-        this.currentMovie.synopsis === this.tempMovie.synopsis &&
-        this.currentMovie.year === this.tempMovie.year &&
-        !this.isPosterChanged;
+    if (this.isLoading) {
+      return true;
     } else {
-      return !this.currentMovie?.title ||
-        !this.currentMovie ||
-        !this.currentMovie?.synopsis ||
-        !this.currentMovie?.year ||
-        this.previewImage === '';
+      if (this.isEdit) {
+        return this.currentMovie.title === this.tempMovie.title &&
+          this.currentMovie.synopsis === this.tempMovie.synopsis &&
+          this.currentMovie.year === this.tempMovie.year &&
+          !this.isPosterChanged;
+      } else {
+        return !this.currentMovie?.title ||
+          !this.currentMovie ||
+          !this.currentMovie?.synopsis ||
+          !this.currentMovie?.year ||
+          this.previewImage === '';
+      }
     }
   }
 

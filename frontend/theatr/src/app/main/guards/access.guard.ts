@@ -10,10 +10,6 @@ export const accessGuard: CanActivateFn = (route, state) => {
     const requiredRoles = route.data['roles'];
     const userRole = authService.getRole();
 
-    if (requiredRoles.includes('ROLE_GUEST') && !authService.isAdmin()) {
-        return true;
-    }
-
     if (authService.isLoggedIn()) {
         console.log('userRole', userRole);
         console.log('requiredRoles', requiredRoles);

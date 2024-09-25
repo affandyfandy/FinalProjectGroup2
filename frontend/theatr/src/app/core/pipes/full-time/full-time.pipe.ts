@@ -13,7 +13,7 @@ export class FullTimePipe implements PipeTransform {
 
     const date = new Date(value);
 
-    const hours = this.padZero(date.getHours());
+    const hours = this.padZero(date.getHours() - 7);
     const minutes = this.padZero(date.getMinutes());
     const seconds = this.padZero(date.getSeconds());
 

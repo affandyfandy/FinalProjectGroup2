@@ -5,6 +5,7 @@ import { Booking } from '../../../model/booking.model';
 import { FullDateTimePipe } from '../../../core/pipes/full-date-time/full-date-time.pipe';
 import { FullTimePipe } from '../../../core/pipes/full-time/full-time.pipe';
 import { PriceFormatPipe } from '../../../core/pipes/price-format/price-format.pipe';
+import { BookingService } from '../../../services/booking/booking.service';
 
 @Component({
   selector: 'app-bookings',
@@ -16,6 +17,9 @@ import { PriceFormatPipe } from '../../../core/pipes/price-format/price-format.p
     FullTimePipe,
     PriceFormatPipe
   ],
+  providers: [
+    BookingService
+  ],
   templateUrl: './bookings.component.html'
 })
 export class BookingsComponent implements OnInit {
@@ -25,7 +29,17 @@ export class BookingsComponent implements OnInit {
   bookingList: Booking[] = [];
   currentBooking: Booking = {};
 
-  constructor() { }
+  currentPage = 1;
+  totalPages = 1;
+  sortDir = "DESC";
+
+  isShowAlert = false;
+  alertMessage = '';
+  isAlertSuccess = true;
+
+  constructor(
+    private bookingService: BookingService
+  ) { }
 
   ngOnInit(): void {
     this.currentDateTime = this.getTodayDate();
@@ -40,51 +54,17 @@ export class BookingsComponent implements OnInit {
     return `${year}-${month}-${day}`;
   }
 
-  getBookingList() {
-    // Change this to get the list of bookings from the backend
-    const date = new Date();
-    const [year, month, day] = this.currentDateTime.split('-').map(Number);
-    date.setFullYear(year);
-    date.setMonth(month - 1);
-    date.setDate(day);
-    date.setHours(16, 0, 0, 0);
-
-    for (let i = 0; i < 10; i++) {
-      this.bookingList.push({
-        id: i.toString(),
-        totalAmount: 80000,
-        updatedTime: date,
-        user: {
-          id: i.toString(),
-          name: 'User ' + i
-        },
-        schedule: {
-          id: i.toString(),
-          showDate: date,
-          price: 40000,
-          movie: {
-            id: i.toString(),
-            title: 'Movie ' + i,
-            year: 2019 + i,
-            posterUrl: 'https://image.tmdb.org/t/p/w1280/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg',
-          },
-          studio: {
-            id: i,
-            name: 'Studio ' + i
-          }
-        },
-        seats: [
-          {
-            id: 1,
-            seatCode: 'A1',
-          },
-          {
-            id: 2,
-            seatCode: 'A2',
-          },
-        ],
-      });
-    }
+  getBookingList(page: number = 0) {
+    this.bookingService.getAdminHistory(page, 10, this.sortDir).subscribe({
+      next: (res: any) => {
+        this.bookingList = res.content;
+        this.currentPage = res.pageable.pageNumber + 1;
+        this.totalPages = res.totalPages;
+      },
+      error: (err) => {
+        this.showAlert('Failed to get booking list: ' + err.error.message, false);
+      }
+    });
   }
 
   showModal(booking: Booking) {
@@ -103,6 +83,21 @@ export class BookingsComponent implements OnInit {
   onDateChange(event: any) {
     this.currentDateTime = event.target.value;
     console.log("Tanggal dipilih: ", this.currentDateTime);
+    this.getBookingList();
+  }
+
+  showAlert(message: string, success: boolean) {
+    this.isAlertSuccess = success;
+    this.alertMessage = message;
+    this.isShowAlert = true;
+    setTimeout(() => {
+      this.isShowAlert = false;
+    }, 3000);
+  }
+
+  onOrderPickerChange(event: Event) {
+    const selectedOrder = (event.target as HTMLSelectElement).value;
+    this.sortDir = selectedOrder;
     this.getBookingList();
   }
 }
