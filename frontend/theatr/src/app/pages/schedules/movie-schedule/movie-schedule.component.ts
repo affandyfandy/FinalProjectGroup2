@@ -26,7 +26,7 @@ import { ScheduleService } from '../../../services/schedule/schedule.service';
 })
 export class MovieScheduleComponent implements OnInit {
 
-  detailSchedule: DetailSchedule = {};
+  detailSchedule: DetailSchedule[] = [];
   movie: DetailSchedule = {};
   currentDateTime = '';
 
@@ -75,7 +75,7 @@ export class MovieScheduleComponent implements OnInit {
     const movieId = this.route.snapshot.paramMap.get('id');
     this.scheduleService.getScheduleByMovieId(movieId!, page, 10, this.currentDateTime).subscribe({
       next: (res: any) => {
-        this.detailSchedule = res?.content[0] ?? [];
+        this.detailSchedule = res?.content ?? [];
       },
       error: (err: any) => {
         console.log(err);

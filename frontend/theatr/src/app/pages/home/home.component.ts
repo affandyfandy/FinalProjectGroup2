@@ -69,11 +69,11 @@ export class HomeComponent implements OnInit {
   }
 
   getScheduleList(page: number = 0) {
-    this.scheduleService.getAvailableSchedule(page, 6, this.currentDateTime).subscribe({
+    this.scheduleService.getAvailableSchedule(page, 10, this.currentDateTime).subscribe({
       next: (res: any) => {
         this.scheduleList = res?.content ?? [];
         this.currentPage = page;
-        this.totalPages = res.totalPages;
+        this.totalPages = res.page.totalPages;
       },
       error: (err) => {
         this.showAlert('Failed to get schedule list: ' + err.error.message, false);

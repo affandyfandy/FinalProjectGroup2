@@ -78,7 +78,7 @@
                 <div class="w-full">
                     <select (change)="onMoviePickerChange($event)"
                         class="select select-bordered w-full bg-base-100 border-none">
-                        <option disabled [value]="null">Select a Movie</option>
+                        <option disabled selected="true" [value]="null">Select a Movie</option>
                         <option *ngFor="let movie of movieList" [value]="movie.id">{{movie.title}}</option>
                     </select>
                     <p *ngIf="currentMovie == undefined || currentMovie == null" class="text-error text-sm font-medium">
@@ -92,7 +92,7 @@
                 <div class="w-full">
                     <select (change)="getAvailableShowTime($event)"
                         class="select select-bordered w-full bg-base-100 border-none">
-                        <option disabled [value]="null">Select a Studio</option>
+                        <option disabled selected="true" [value]="null">Select a Studio</option>
                         <option *ngFor="let studio of studioList" [value]="studio.id">{{studio.name}}</option>
                     </select>
                     <p *ngIf="currentStudio == undefined || currentStudio == null"
@@ -108,7 +108,7 @@
                     <div class="w-full">
                         <select (change)="onTimePickerChange($event)" [disabled]="availableShowTime.length == 0"
                             class="select select-bordered w-full bg-base-100 border-none">
-                            <option disabled [value]="null">Select a Show Time</option>
+                            <option disabled selected="true" [value]="null">Select a Show Time</option>
                             <option *ngFor="let time of availableShowTime" [value]="time">{{time | normalTimeFormat}}
                             </option>
                         </select>

@@ -23,20 +23,22 @@
         <input type="date" (change)="onDateChange($event)" [ngModel]="currentDateTime"
             class="p-2 px-6 h-12 rounded-md text-white bg-base-300" />
 
-        <div *ngIf="(detailSchedule.shows?.length ?? 0) > 0; else emptyView">
-            <button *ngFor="let schedule of detailSchedule.shows" (click)="navigateToBook(schedule.scheduleId!)"
+        <div *ngIf="(detailSchedule.length) > 0; else emptyView">
+            <button *ngFor="let schedule of detailSchedule" (click)="navigateToBook(schedule.shows![0]!.scheduleId!)"
                 class="flex justify-between items-center border-b border-b-base-200 p-4 hover:bg-base-200 hover:rounded-lg w-full transition-all">
                 <div class="flex flex-col items-start space-y-1">
-                    <h2 class="text-xl self-start font-semibold">{{schedule.showDate ? (schedule.showDate | timeFormat)
+                    <h2 class="text-xl self-start font-semibold">{{schedule.shows?.[0]?.showDate ?
+                        (schedule.shows![0]!.showDate! | timeFormat)
                         : 'N/A'}}
                     </h2>
                     <div class="flex space-x-2">
                         <img src="assets/icons/location-gray.svg" alt="Location Icon" class="w-[24px] h-[24px]">
-                        <p class="font-medium text-zinc-400">{{schedule.studioName}}</p>
+                        <p class="font-medium text-zinc-400">{{schedule.shows?.[0]?.studioName}}</p>
                     </div>
                     <div class="flex space-x-2">
                         <img src="assets/icons/ticket-gray.svg" alt="Ticket Icon" class="w-[24px] h-[24px]">
-                        <p class="font-medium text-zinc-400">{{schedule.price ? (schedule.price |
+                        <p class="font-medium text-zinc-400">{{schedule.shows?.[0]?.price ? (schedule.shows![0]!.price!
+                            |
                             priceFormat) : ''}}</p>
                     </div>
                 </div>

@@ -123,7 +123,8 @@
             <button class="btn btn-secondary bg-opacity-50 max-w-[310px] w-full rounded-full"
                 (click)="closeMovieModal()">Cancel</button>
             <button (click)="onSaveClick()" [disabled]="isSaveButtonDisabled()"
-                class="btn btn-primary max-w-[310px] w-full rounded-full">Save</button>
+                class="btn btn-primary max-w-[310px] w-full rounded-full">
+                <span *ngIf="isLoading" class="loading loading-spinner text-primary"></span>Save</button>
         </div>
     </div>
 </dialog>
