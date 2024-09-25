@@ -34,10 +34,4 @@ export class AppComponent implements OnInit {
       }
     });
   }
-
-  setGuestToken() {
-    if (!this.authService.isLoggedIn()) {
-      this.authService.setRole('ROLE_GUEST');
-    }
-  }
 }

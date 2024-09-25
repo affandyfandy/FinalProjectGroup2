@@ -13,7 +13,7 @@ export const routes: Routes = [
     },
     {
         path: RouterConfig.HOME.path,
-        data: { roles: ['ROLE_GUEST', 'ROLE_CUSTOMER'] },
+        data: { roles: ['ROLE_CUSTOMER'] },
         canActivate: [accessGuard],
         loadChildren: () =>
             import('./pages/home/home.routes').then((m) => m.homeRoutes),

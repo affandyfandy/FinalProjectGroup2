@@ -48,7 +48,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem(AppConstants.TOKEN_KEY);
-    this.setRole('ROLE_GUEST');
+    localStorage.removeItem(AppConstants.ROLE_KEY);
     this.isLoggedInSubject.next(false);
   }
 

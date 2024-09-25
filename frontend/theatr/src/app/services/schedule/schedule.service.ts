@@ -19,6 +19,12 @@ export class ScheduleService {
     };
   }
 
+  private getContenttHeaders() {
+    return {
+      'Content-Type': 'application/json'
+    };
+  }
+
   getAllSchedules(date: string, page: number = 0, size: number = 10) {
     return this.http.get(`${this.apiUrl}/admin`, {
       headers: this.getHeaders(),
@@ -45,11 +51,12 @@ export class ScheduleService {
     return this.http.post(`${this.apiUrl}/admin/create-schedule`, body, { headers: this.getHeaders() });
   }
 
-  getScheduleByMovieId(movieId: string, page: number = 0, size: number = 10) {
+  getScheduleByMovieId(movieId: string, page: number = 0, size: number = 10, showDate: string) {
     const headers = this.getHeaders();
     const params = {
       page: page.toString(),
-      size: size.toString()
+      size: size.toString(),
+      showDate: showDate.toString()
     };
 
     return this.http.get(`${this.apiUrl}/movie/${movieId}`, { headers, params });

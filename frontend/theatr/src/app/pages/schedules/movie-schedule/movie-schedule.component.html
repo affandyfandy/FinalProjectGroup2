@@ -1,6 +1,6 @@
 <div class="space-x-6">
     <!-- HEADER BANNER -->
-    <div class="relative w-full h-[460px] carousel-item">
+    <div class="{{isLoading ? 'skeleton' : ''}} relative w-full h-[460px] carousel-item">
         <img [src]="movie.posterUrl" alt="Movie Poster" class="absolute inset-0 w-full h-full object-cover z-0">
 
         <div class="absolute inset-0 bg-gradient-to-t from-base-100 to-transparent z-10"></div>
@@ -10,10 +10,10 @@
             <img [src]="movie.posterUrl" alt="Movie Poster" class="w-[128px] h-[192px] object-cover rounded-xl">
             <div class="w-full pb-4 space-y-1 flex flex-col">
                 <div class="flex space-x-1">
-                    <h1 class="text-white text-2xl font-bold">{{movie.title}}</h1>
-                    <h1 class="text-white text-2xl">{{'(' + movie.year + ')'}}</h1>
+                    <h1 class="text-white text-2xl font-bold">{{movie.movieTitle}}</h1>
+                    <h1 class="text-white text-2xl">{{'(' + movie.movieYear + ')'}}</h1>
                 </div>
-                <p class="text-gray-300 text-sm font-light max-w-[900px]">{{movie.synopsis}}</p>
+                <p class="text-gray-300 text-sm font-light max-w-[900px]">{{movie.movieSynopsis}}</p>
                 <p class="font-semibold">15 minutes</p>
             </div>
         </div>
@@ -23,29 +23,55 @@
         <input type="date" (change)="onDateChange($event)" [ngModel]="currentDateTime"
             class="p-2 px-6 h-12 rounded-md text-white bg-base-300" />
 
-        <div *ngIf="scheduleList !== []">
-            <button *ngFor="let schedule of scheduleList" (click)="navigateToBook(schedule.id!)"
-                class="flex justify-between items-center border-b border-b-base-200 p-4 hover:bg-base-200 hover:rounded-lg w-full transition-all">
-                <div class="flex flex-col items-start space-y-1">
-                    <h2 class="text-xl self-start font-semibold">{{schedule.showDate ? (schedule.showDate | timeFormat)
-                        : 'N/A'}}
-                    </h2>
-                    <div class="flex space-x-2">
-                        <img src="assets/icons/location-gray.svg" alt="Location Icon" class="w-[24px] h-[24px]">
-                        <p class="font-medium text-zinc-400">{{schedule.studio?.name}}</p>
-                    </div>
-                    <div class="flex space-x-2">
-                        <img src="assets/icons/ticket-gray.svg" alt="Ticket Icon" class="w-[24px] h-[24px]">
-                        <p class="font-medium text-zinc-400">{{schedule.price ? (schedule.price |
-                            priceFormat) : ''}}</p>
-                    </div>
-                </div>
-                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8.91 20.4201L15.43 13.9001C16.2 13.1301 16.2 11.8701 15.43 11.1001L8.91 4.58008"
-                        stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                </svg>
-            </button>
+        <div *ngIf="isLoading" class="space-y-3">
+            <div *ngFor="let item of [].constructor(6)" class="skeleton w-full h-24"></div>
         </div>
+
+        <div *ngIf="(detailSchedule.length) > 0; else emptyView">
+            <div *ngFor="let schedule of detailSchedule">
+                <button *ngFor="let detail of schedule.shows" (click)="navigateToBook(detail.scheduleId!)"
+                    class="flex justify-between items-center border-b border-b-base-200 p-4 hover:bg-base-200 hover:rounded-lg w-full transition-all">
+                    <div class="flex flex-col items-start space-y-1">
+                        <h2 class="text-xl self-start font-semibold">{{detail.showDate ?
+                            (detail.showDate! | timeFormat)
+                            : 'N/A'}}
+                        </h2>
+                        <div class="flex space-x-2">
+                            <img src="assets/icons/location-gray.svg" alt="Location Icon" class="w-[24px] h-[24px]">
+                            <p class="font-medium text-zinc-400">{{detail.studioName}}</p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <img src="assets/icons/ticket-gray.svg" alt="Ticket Icon" class="w-[24px] h-[24px]">
+                            <p class="font-medium text-zinc-400">{{detail.price ? (detail.price!
+                                |
+                                priceFormat) : ''}}</p>
+                        </div>
+                    </div>
+                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.91 20.4201L15.43 13.9001C16.2 13.1301 16.2 11.8701 15.43 11.1001L8.91 4.58008"
+                            stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <ng-template #emptyView>
+            <div class="w-full text-center py-7">
+                <h1 class="text-xl font-semibold">There's no schedule here...</h1>
+                <p class="font-light">You can try to change the show date 😅</p>
+            </div>
+        </ng-template>
     </div>
+</div>
+
+<!-- ALERT -->
+<div *ngIf="isShowAlert" role="alert"
+    class="alert {{ isAlertSuccess ? 'alert-success' : 'alert-error' }} fixed transition-all top-0 left-1/2 -translate-x-1/2 mt-4 z-50 max-w-[800px]">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+        class="h-6 w-6 shrink-0 text-primary stroke-current">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    <span class="text-primary">{{alertMessage}}</span>
 </div>
