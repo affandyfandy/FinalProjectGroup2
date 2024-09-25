@@ -33,6 +33,8 @@ export class HomeComponent implements OnInit {
   alertMessage = '';
   isAlertSuccess = true;
 
+  isLoading = false;
+
   constructor(
     private router: Router,
     private scheduleService: ScheduleService
@@ -58,25 +60,31 @@ export class HomeComponent implements OnInit {
   }
 
   getSlidingBanner() {
+    this.isLoading = true;
     this.scheduleService.getAvailableSchedule(0, 6, this.currentDateTime).subscribe({
       next: (res: any) => {
         this.slidingBanner = res.content;
+        this.isLoading = false;
       },
       error: (err) => {
         this.showAlert('Failed to get schedule list banner: ' + err.error.message, false);
+        this.isLoading = false;
       }
     });
   }
 
   getScheduleList(page: number = 0) {
+    this.isLoading = true;
     this.scheduleService.getAvailableSchedule(page, 10, this.currentDateTime).subscribe({
       next: (res: any) => {
         this.scheduleList = res?.content ?? [];
         this.currentPage = page;
         this.totalPages = res.page.totalPages;
+        this.isLoading = false;
       },
       error: (err) => {
         this.showAlert('Failed to get schedule list: ' + err.error.message, false);
+        this.isLoading = false;
       }
     });
   }

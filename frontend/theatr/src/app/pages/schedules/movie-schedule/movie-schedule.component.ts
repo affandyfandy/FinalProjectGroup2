@@ -34,6 +34,8 @@ export class MovieScheduleComponent implements OnInit {
   alertMessage = '';
   isAlertSuccess = true;
 
+  isLoading = false;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -60,25 +62,31 @@ export class MovieScheduleComponent implements OnInit {
   }
 
   getMovie() {
+    this.isLoading = true;
     const movieId = this.route.snapshot.paramMap.get('id');
     this.scheduleService.getScheduleByMovieId(movieId!, 0, 10, this.currentDateTime).subscribe({
       next: (res: any) => {
         this.movie = res?.content[0] ?? [];
+        this.isLoading = false;
       },
       error: (err: any) => {
-        console.log(err);
+        this.isLoading = false;
+        this.showAlert('Failed to get movie: ' + err.error.message, false);
       }
     });
   }
 
   getScheduleList(page: number = 0) {
+    this.isLoading = true;
     const movieId = this.route.snapshot.paramMap.get('id');
     this.scheduleService.getScheduleByMovieId(movieId!, page, 10, this.currentDateTime).subscribe({
       next: (res: any) => {
+        this.isLoading = false;
         this.detailSchedule = res?.content ?? [];
       },
       error: (err: any) => {
-        console.log(err);
+        this.isLoading = false;
+        this.showAlert('Failed to get schedule list: ' + err.error.message, false);
       }
     });
   }

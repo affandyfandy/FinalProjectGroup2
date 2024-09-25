@@ -1,7 +1,8 @@
 <div class="space-y-6">
     <!-- CAROUSEL -->
     <div *ngIf="slidingBanner.length > 0; else emptyBanner" class="carousel w-full">
-        <div *ngFor="let schedule of slidingBanner" class="relative w-full h-[460px] carousel-item">
+        <div *ngFor="let schedule of slidingBanner"
+            class="{{isLoading ? 'skeleton' : ''}} relative w-full h-[460px] carousel-item">
             <img [src]="schedule.posterUrl" alt="Movie Poster" class="absolute inset-0 w-full h-full object-cover z-0">
 
             <div class="absolute inset-0 bg-gradient-to-t from-base-100 to-transparent z-10"></div>
@@ -32,6 +33,9 @@
     <div class="p-12 space-y-6">
         <input type="date" (change)="onDateChange($event)" [ngModel]="currentDateTime"
             class="p-2 px-6 h-12 rounded-md text-white bg-base-300" />
+        <div *ngIf="isLoading" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8">
+            <div *ngFor="let item of [].constructor(6)" class="skeleton w-full h-96"></div>
+        </div>
         <div *ngIf="scheduleList.length > 0; else emptyView"
             class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8">
             <button *ngFor="let schedule of scheduleList" (click)="navigateToSchedule(schedule.movieId!)"
