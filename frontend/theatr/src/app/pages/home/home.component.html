@@ -1,6 +1,6 @@
 <div class="space-y-6">
     <!-- CAROUSEL -->
-    <div class="carousel w-full">
+    <div *ngIf="slidingBanner.length > 0; else emptyBanner" class="carousel w-full">
         <div *ngFor="let schedule of slidingBanner" class="relative w-full h-[460px] carousel-item">
             <img [src]="schedule.posterUrl" alt="Movie Poster" class="absolute inset-0 w-full h-full object-cover z-0">
 
@@ -21,6 +21,13 @@
             </div>
         </div>
     </div>
+
+    <ng-template #emptyBanner>
+        <div class="w-full h-[460px] text-center py-7">
+            <p class="font-medium pt-[180px]">Something Cool is</p>
+            <h1 class="text-6xl font-semibold">COMING SOON</h1>
+        </div>
+    </ng-template>
 
     <div class="p-12 space-y-6">
         <input type="date" (change)="onDateChange($event)" [ngModel]="currentDateTime"

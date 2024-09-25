@@ -9,6 +9,7 @@ import { PriceFormatPipe } from '../../../core/pipes/price-format/price-format.p
 import { MovieService } from '../../../services/movie/movie.service';
 import { StudioService } from '../../../services/studio/studio.service';
 import { ScheduleService } from '../../../services/schedule/schedule.service';
+import { NormalTimeFormatPipe } from '../../../core/pipes/normal-time-format/normal-time-format.pipe';
 
 @Component({
   selector: 'app-schedule',
@@ -17,7 +18,8 @@ import { ScheduleService } from '../../../services/schedule/schedule.service';
     CommonModule,
     FormsModule,
     TimeFormatPipe,
-    PriceFormatPipe
+    PriceFormatPipe,
+    NormalTimeFormatPipe
   ],
   providers: [
     MovieService,
@@ -135,6 +137,7 @@ export class ScheduleComponent implements OnInit {
 
 
   getAvailableShowTime(event?: Event) {
+    this.getPrice(this.currentScheduleDateTime);
     if (!!event) {
       const selectedStudioId = ((event!.target as HTMLSelectElement).value);
       this.currentStudio = this.studioList.find(studio => studio.id === Number(selectedStudioId)) || ({} as Studio);

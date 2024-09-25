@@ -109,7 +109,7 @@
                         <select (change)="onTimePickerChange($event)" [disabled]="availableShowTime.length == 0"
                             class="select select-bordered w-full bg-base-100 border-none">
                             <option disabled [value]="null">Select a Show Time</option>
-                            <option *ngFor="let time of availableShowTime" [value]="time">{{time | timeFormat}}
+                            <option *ngFor="let time of availableShowTime" [value]="time">{{time | normalTimeFormat}}
                             </option>
                         </select>
                         <p *ngIf="currentSchedule.showDate == undefined || currentSchedule.showDate == null"
