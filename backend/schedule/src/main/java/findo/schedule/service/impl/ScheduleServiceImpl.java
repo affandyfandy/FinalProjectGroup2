@@ -290,7 +290,8 @@ public class ScheduleServiceImpl implements ScheduleService {
         throw new UnsupportedOperationException("Unimplemented method 'findAvailabilityScheduleSeats'");
     }
 
-    public Mono<List<Integer>> testingWebClientConnection(UUID scheduleId, String token) {
+    @Override
+    public Mono<BookingSeatsDTO> getDataSeatUnavailable(UUID scheduleId, String token) {
         return bookingClient.getSeatIdsByScheduleId(scheduleId, token);
     }
 

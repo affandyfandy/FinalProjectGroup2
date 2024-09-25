@@ -105,12 +105,14 @@ public class ScheduleController {
     }
 
     @GetMapping("/{scheduleId}/available-seats")
-    public Mono<ResponseEntity<List<Integer>>> getAvailabilitySeats(@PathVariable("scheduleId") UUID scheduleId,
-            @AuthenticationPrincipal JwtAuthenticationToken principal) {
+    public Mono<ResponseEntity<BookingSeatsDTO>> getAvailableSeats(
+            @PathVariable("scheduleId") UUID scheduleId,
+            JwtAuthenticationToken principal) {
+
         String token = principal.getToken().getTokenValue();
 
-        return scheduleService.testingWebClientConnection(scheduleId, token)
-                .map(seatIds -> ResponseEntity.ok(seatIds))
+        return scheduleService.getDataSeatUnavailable(scheduleId, token)
+                .map(ResponseEntity::ok)
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 }

@@ -10,13 +10,14 @@ import org.springframework.web.reactive.function.client.WebClient;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 
+import findo.schedule.dto.BookingSeatsDTO;
 import reactor.core.publisher.Mono;
 
 @Service
 public class BookingClient {
     private final WebClient.Builder webClientBuilder;
     private final EurekaClient eurekaClient;
-    private static final String SERVICE_NAME = "movie-service";
+    private static final String SERVICE_NAME = "booking-service";
 
     @Autowired
     public BookingClient(EurekaClient eurekaClient, WebClient.Builder webClientBuilder) {
@@ -36,17 +37,20 @@ public class BookingClient {
         return "http://" + hostName + ":" + port + "/api/v1/bookings/";
     }
 
-    public Mono<List<Integer>> getSeatIdsByScheduleId(UUID scheduleId, String token) {
+    public Mono<BookingSeatsDTO> getSeatIdsByScheduleId(UUID scheduleId, String token) {
         // Build the URL for the request
         String url = getServiceUrl() + scheduleId + "/seats-ids";
 
-        // Make the GET request and convert the response to a List<Integer>
+        // Make the HTTP GET request
         return webClientBuilder.build()
                 .get()
                 .uri(url)
-                .headers(httpHeaders -> httpHeaders.setBearerAuth(token))
+                .headers(headers -> headers.setBearerAuth(token))
                 .retrieve()
-                .bodyToFlux(Integer.class) // Get response body as Flux of Integers
-                .collectList(); // Collect into a list
+                .bodyToMono(BookingSeatsDTO.class)
+                .onErrorResume(ex -> {
+                    return Mono.empty();
+                });
+
     }
 }

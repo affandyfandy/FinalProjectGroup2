@@ -4,6 +4,7 @@ import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 
 import findo.schedule.dto.SeatDTO;
+import findo.schedule.dto.SeatStudioDTO;
 import findo.schedule.dto.StudioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,14 +49,14 @@ public class StudioClient {
                 });
     }
 
-    public Mono<SeatDTO> getSeatsByStudioId(Integer integer, String token) {
+    public Mono<SeatStudioDTO> getSeatsByStudioId(Integer integer, String token) {
         String url = getServiceUrl() + integer + "/seats";
         return webClientBuilder.build()
                 .get()
                 .uri(url)
                 .headers(httpHeaders -> httpHeaders.setBearerAuth(token))
                 .retrieve()
-                .bodyToMono(SeatDTO.class)
+                .bodyToMono(SeatStudioDTO.class)
                 .onErrorResume(e -> {
                     return Mono.empty();
                 });
