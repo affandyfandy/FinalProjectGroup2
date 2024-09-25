@@ -11,3 +11,9 @@ export interface Booking {
     seats?: Seat[];
     updatedTime?: Date;
 }
+
+export interface CreateBookingDTO {
+    scheduleIds: string[];
+    seatIds: number[];
+    totalAmount: number;
+}

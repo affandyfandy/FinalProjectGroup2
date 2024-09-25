@@ -292,12 +292,14 @@ public class ScheduleServiceImpl implements ScheduleService {
         Mono<BookingSeatsDTO> bookedSeatsMono = bookingClient.getSeatIdsByScheduleId(scheduleId, token);
         Mono<AllSeatStudioDTO> allStudioSeatsMono = studioClient.getSeatsByStudioId(schedule.get().getStudioId().get(0),
                 token);
+        Mono<MovieDTO> movieMono = movieClient.getMovieById(schedule.get().getMovieId().get(0), token);
 
-        Mono<ScheduleStudioSeatDTO> result = Mono.zip(bookedSeatsMono, allStudioSeatsMono, scheduleStudioMono)
+        Mono<ScheduleStudioSeatDTO> result = Mono.zip(bookedSeatsMono, allStudioSeatsMono, scheduleStudioMono, movieMono)
                 .flatMap(tuple -> {
                     BookingSeatsDTO bookedSeats = tuple.getT1();
                     AllSeatStudioDTO allStudioSeats = tuple.getT2();
                     StudioDTO scheduleStudio = tuple.getT3();
+                    MovieDTO movie = tuple.getT4();
 
                     List<Integer> seatIds = bookedSeats.getSeatIds();
                     List<SeatStudioDTO> studioSeats = allStudioSeats.getStudioSeats();
@@ -334,6 +336,20 @@ public class ScheduleServiceImpl implements ScheduleService {
                             .collect(Collectors.toList()); // Collect the results into a list
 
                     scheduleStudioSeat.setSeats(updatedSeats); // Set the updated seats
+
+
+                    List<MovieDTO> listMovie = new ArrayList<>();
+                    MovieDTO movieDTO = new MovieDTO();
+                    movieDTO.setId(movie.getId());
+                    movieDTO.setTitle(movie.getTitle());
+                    movieDTO.setSynopsis(movie.getSynopsis());
+                    movieDTO.setYear(movie.getYear());
+                    movieDTO.setDuration(movie.getDuration());
+                    movieDTO.setPosterUrl(movie.getPosterUrl());
+
+                    listMovie.add(movieDTO);
+
+                    scheduleStudioSeat.setMovie(listMovie);
 
                     return Mono.just(scheduleStudioSeat); // Return the populated ScheduleStudioSeatDTO
                 });

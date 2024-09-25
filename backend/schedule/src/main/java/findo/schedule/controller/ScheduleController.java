@@ -1,9 +1,7 @@
 package findo.schedule.controller;
 
-import findo.schedule.dto.*;
-import findo.schedule.service.impl.ScheduleServiceImpl;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
+import java.time.LocalDate;
+import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,11 +10,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
-import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Mono;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
-import java.util.UUID;
+import findo.schedule.dto.AvailableScheduleDTO;
+import findo.schedule.dto.CreateScheduleDTO;
+import findo.schedule.dto.ScheduleDTO;
+import findo.schedule.dto.ScheduleDetailDTO;
+import findo.schedule.dto.ScheduleResponseDTO;
+import findo.schedule.dto.ScheduleStudioSeatDTO;
+import findo.schedule.service.impl.ScheduleServiceImpl;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/api/v1/schedules")
@@ -102,7 +113,7 @@ public class ScheduleController {
                 });
     }
 
-    @GetMapping("/{scheduleId}/all-studio-seats")
+    @GetMapping("/{scheduleId}/detail-seats")
     public Mono<ResponseEntity<ScheduleStudioSeatDTO>> getAllStudioSeats(@PathVariable("scheduleId") UUID scheduleId,
             @AuthenticationPrincipal JwtAuthenticationToken principal) {
 

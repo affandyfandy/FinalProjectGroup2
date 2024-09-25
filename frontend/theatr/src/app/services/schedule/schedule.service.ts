@@ -61,4 +61,10 @@ export class ScheduleService {
 
     return this.http.get(`${this.apiUrl}/movie/${movieId}`, { headers, params });
   }
+
+  getScheduleDetailSeats(scheduleId: string) {
+    return this.http.get(`${this.apiUrl}/${scheduleId}/detail-seats`, {
+      headers: this.getHeaders()
+    });
+  }
 }

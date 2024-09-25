@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AppConstants } from '../../config/app.constants';
 import { HttpClient } from '@angular/common/http';
+import { CreateBookingDTO } from '../../model/booking.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,12 @@ export class BookingService {
         size: size.toString(),
         sortDir: sortDir
       }
+    });
+  }
+
+  createBooking(body: CreateBookingDTO) {
+    return this.http.post(`${this.apiUrl}/customer/book`, body, {
+      headers: this.getHeaders()
     });
   }
 }

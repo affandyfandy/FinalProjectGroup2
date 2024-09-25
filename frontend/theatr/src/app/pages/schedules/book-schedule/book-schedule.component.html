@@ -19,8 +19,7 @@
 
     <!-- Seats Grid -->
     <div class="grid grid-cols-6 grid-rows-5 gap-5">
-        <button *ngFor="let seat of scheduleData.studio?.seats" (click)="onSeatClick(seat)"
-            [disabled]="seat.status == 'BOOKED'"
+        <button *ngFor="let seat of scheduleData.seats" (click)="onSeatClick(seat)" [disabled]="seat.status == 'BOOKED'"
             [ngClass]="{'bg-primary': seat.status == 'AVAILABLE', 'bg-secondary': isSeatSelected(seat)}"
             class="w-12 h-12 btn btn-square flex items-center justify-center disabled:bg-base-200 disabled:text-zinc-400">
             <p [ngClass]="{'text-primary-content': seat.status == 'AVAILABLE', 'text-white': isSeatSelected(seat)}"
@@ -34,7 +33,7 @@
     <!-- Info -->
     <div class="flex p-3 px-6 space-x-10 bg-base-300 rounded-md items-center">
         <div class="text-center">
-            <p class="text-zinc-400 font-medium">{{scheduleData.studio?.name?.toUpperCase()}}</p>
+            <p class="text-zinc-400 font-medium">{{scheduleData.studio?.[0]?.name!.toUpperCase()}}</p>
             <p>{{scheduleData.showDate ? (scheduleData.showDate | fullDateTime) : 'N/A'}}</p>
         </div>
 
@@ -73,15 +72,15 @@
 
         <div class="space-y-4 w-full">
             <div class="flex items-center w-full space-x-4">
-                <img [src]="scheduleData.movie?.posterUrl" alt="Poster"
+                <img [src]="scheduleData.movie?.[0]?.posterUrl" alt="Poster"
                     class="w-[120px] h-[186px] rounded-xl object-cover">
 
                 <div class="space-y-2">
-                    <h1 class="text-2xl font-bold">{{ scheduleData.movie?.title }} {{'(' +
-                        scheduleData.movie?.year + ')'}}</h1>
+                    <h1 class="text-2xl font-bold">{{ scheduleData.movie?.[0]?.title }} {{'(' +
+                        scheduleData.movie?.[0]?.year + ')'}}</h1>
                     <div class="text-zinc-400 flex items-center space-x-2">
                         <img src="assets/icons/location-gray.svg" alt="Edit Icon" class="w-6 h-6">
-                        <p>{{ scheduleData.studio?.name }}</p>
+                        <p>{{ scheduleData.studio?.[0]?.name }}</p>
                     </div>
 
                     <div class="flex items-center space-x-2">
@@ -130,3 +129,14 @@
         </div>
     </div>
 </dialog>
+
+<!-- ALERT -->
+<div *ngIf="isShowAlert" role="alert"
+    class="alert {{ isAlertSuccess ? 'alert-success' : 'alert-error' }} fixed transition-all top-0 left-1/2 -translate-x-1/2 mt-4 z-50 max-w-[800px]">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+        class="h-6 w-6 shrink-0 text-primary stroke-current">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    <span class="text-primary">{{alertMessage}}</span>
+</div>
