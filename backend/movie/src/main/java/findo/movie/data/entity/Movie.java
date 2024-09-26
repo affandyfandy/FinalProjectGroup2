@@ -1,6 +1,6 @@
 package findo.movie.data.entity;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -18,28 +18,28 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="movies")
+@Table(name = "movies")
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(unique=true, nullable=false)
+    @Column(unique = true, nullable = false)
     private String title;
 
-    @Column(nullable=false, columnDefinition = "TEXT")
+    @Column(nullable = false, columnDefinition = "TEXT")
     @Lob
     private String synopsis;
 
     private int duration;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String posterUrl;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private int year;
-    private LocalDate createdTime;
-    private LocalDate updatedTime;
+    private Timestamp createdTime;
+    private Timestamp updatedTime;
     private String createdBy;
     private String updatedBy;
 }

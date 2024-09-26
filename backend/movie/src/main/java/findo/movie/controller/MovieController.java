@@ -9,6 +9,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,7 +47,7 @@ public class MovieController {
             if (movieSearchPage.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
             }
-    
+
             return ResponseEntity.status(HttpStatus.OK).body(movieSearchPage);
         }
 
@@ -66,16 +68,19 @@ public class MovieController {
     }
 
     @PostMapping(value = "/admin/create-movie")
-    public ResponseEntity<Movie> createMovie(@Valid @RequestBody MovieSaveDTO movieSaveDTO) {
-        Movie movie = movieService.createMovie(movieSaveDTO);
+    public ResponseEntity<Movie> createMovie(@Valid @RequestBody MovieSaveDTO movieSaveDTO,
+            @AuthenticationPrincipal JwtAuthenticationToken principal) {
+        String email = principal.getToken().getClaimAsString("email");
+        Movie movie = movieService.createMovie(movieSaveDTO, email);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(movie);
     }
 
     @PutMapping(value = "/admin/{id}")
     public ResponseEntity<Movie> updateMovie(@PathVariable("id") UUID id,
-            @Valid @RequestBody MovieSaveDTO movieSaveDTO) {
-        Movie movie = movieService.updateMovie(id, movieSaveDTO);
+            @Valid @RequestBody MovieSaveDTO movieSaveDTO, @AuthenticationPrincipal JwtAuthenticationToken principal) {
+        String email = principal.getToken().getClaimAsString("email");
+        Movie movie = movieService.updateMovie(id, movieSaveDTO, email);
 
         return ResponseEntity.status(HttpStatus.OK).body(movie);
     }

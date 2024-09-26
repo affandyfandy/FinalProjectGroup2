@@ -295,7 +295,8 @@ public class ScheduleServiceImpl implements ScheduleService {
                 token);
         Mono<MovieDTO> movieMono = movieClient.getMovieById(schedule.get().getMovieId().get(0), token);
 
-        Mono<ScheduleStudioSeatDTO> result = Mono.zip(bookedSeatsMono, allStudioSeatsMono, scheduleStudioMono, movieMono)
+        Mono<ScheduleStudioSeatDTO> result = Mono
+                .zip(bookedSeatsMono, allStudioSeatsMono, scheduleStudioMono, movieMono)
                 .flatMap(tuple -> {
                     BookingSeatsDTO bookedSeats = tuple.getT1();
                     AllSeatStudioDTO allStudioSeats = tuple.getT2();
@@ -337,7 +338,6 @@ public class ScheduleServiceImpl implements ScheduleService {
                             .collect(Collectors.toList()); // Collect the results into a list
 
                     scheduleStudioSeat.setSeats(updatedSeats); // Set the updated seats
-
 
                     List<MovieDTO> listMovie = new ArrayList<>();
                     MovieDTO movieDTO = new MovieDTO();

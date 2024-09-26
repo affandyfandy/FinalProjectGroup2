@@ -3,7 +3,8 @@ package findo.movie.service;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.UUID;
@@ -50,7 +51,8 @@ class MovieServiceImplTest {
     void init() {
         MockitoAnnotations.openMocks(this);
 
-        mov1 = new Movie(UUID.randomUUID(), "Marvel", "This is all about Super Heroes", 30, "http://list", 2024, LocalDate.now(), LocalDate.now(), "Admin", "Admin");
+        mov1 = new Movie(UUID.randomUUID(), "Marvel", "This is all about Super Heroes", 30, "http://list", 2024,
+                Timestamp.from(Instant.now()), Timestamp.from(Instant.now()), "admi@gmail.com", "admi@gmail.com");
     }
 
     @Test
@@ -72,7 +74,7 @@ class MovieServiceImplTest {
     @Test
     void movieService_findMovieById_returnMovie() {
         UUID movId = mov1.getId();
-        
+
         when(movieRepository.findById(movId)).thenReturn(Optional.of(mov1));
 
         Movie result = movieService.findMovieById(movId);
@@ -104,19 +106,20 @@ class MovieServiceImplTest {
         when(movieMapper.toMovie(movSaveDTO)).thenReturn(mov);
         when(movieRepository.save(any(Movie.class))).thenReturn(mov1);
 
-        Movie result = movieService.createMovie(movSaveDTO);
+        Movie result = movieService.createMovie(movSaveDTO, "admi@gmail.com");
 
         Assertions.assertEquals(mov1, result);
     }
 
     @Test
     void movieService_createMovie_returnDuplicateTitle() {
-        
+
         MovieSaveDTO movSaveDTO = new MovieSaveDTO("Marvel", "This is all about Super Heroes", "http://list", 2024);
 
         when(movieRepository.existsByTitle(movSaveDTO.getTitle())).thenReturn(true);
 
-        Assertions.assertThrows(DuplicateTitleException.class, () -> movieService.createMovie(movSaveDTO));
+        Assertions.assertThrows(DuplicateTitleException.class,
+                () -> movieService.createMovie(movSaveDTO, "admi@gmail.com"));
     }
 
     @Test
@@ -129,7 +132,7 @@ class MovieServiceImplTest {
         when(movieRepository.existsByTitle(movSaveDTO.getTitle())).thenReturn(false);
         when(movieRepository.save(any(Movie.class))).thenReturn(mov1);
 
-        Movie result = movieService.updateMovie(movId, movSaveDTO);
+        Movie result = movieService.updateMovie(movId, movSaveDTO, "admi@gmail.com");
 
         Assertions.assertEquals(mov1, result);
     }
@@ -139,27 +142,31 @@ class MovieServiceImplTest {
         UUID movId = mov1.getId();
 
         MovieSaveDTO movSaveDTO = new MovieSaveDTO("Marvel", "This is all about Super Heroes", "http://list", 2024);
-        
+
         when(movieRepository.findById(movId)).thenReturn(Optional.empty());
 
-        Assertions.assertThrows(MovieNotFoundException.class, () -> movieService.updateMovie(movId, movSaveDTO));
+        Assertions.assertThrows(MovieNotFoundException.class,
+                () -> movieService.updateMovie(movId, movSaveDTO, "admi@gmail.com"));
     }
 
     @Test
     void movieService_updateMovie_returnDuplicateTitle() {
         UUID movId = mov1.getId();
 
-        MovieSaveDTO movSaveDTO = new MovieSaveDTO("Next Marvel", "This is all about Super Heroes", "http://list", 2024);
+        MovieSaveDTO movSaveDTO = new MovieSaveDTO("Next Marvel", "This is all about Super Heroes", "http://list",
+                2024);
 
         when(movieRepository.findById(movId)).thenReturn(Optional.of(mov1));
         when(movieRepository.existsByTitle(movSaveDTO.getTitle())).thenReturn(true);
 
-        Assertions.assertThrows(DuplicateTitleException.class, () -> movieService.updateMovie(movId, movSaveDTO));
+        Assertions.assertThrows(DuplicateTitleException.class,
+                () -> movieService.updateMovie(movId, movSaveDTO, "admi@gmail.com"));
     }
 
     @Test
     void movieService_uploadFile_returnLinkFile() {
-        MockMultipartFile file = new MockMultipartFile("file", "test.jpg", "image/jpeg", "some-image-content".getBytes());
+        MockMultipartFile file = new MockMultipartFile("file", "test.jpg", "image/jpeg",
+                "some-image-content".getBytes());
         String expectedUrl = "http://example.com/upload/test.jpg";
 
         when(imgUtils.uploadFile(any(MultipartFile.class))).thenReturn(expectedUrl);

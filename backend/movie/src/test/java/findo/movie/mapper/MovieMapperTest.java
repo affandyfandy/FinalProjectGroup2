@@ -1,8 +1,10 @@
 package findo.movie.mapper;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.UUID;
 
+import org.joda.time.LocalDate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +26,8 @@ class MovieMapperTest {
     void init() {
         movieMapper = Mappers.getMapper(MovieMapper.class);
 
-        movie = new Movie(UUID.randomUUID(), "Marvel", "This is all about Super Heroes", 30, "http://list", 2024, LocalDate.now(), LocalDate.now(), "Admin", "Admin");
+        movie = new Movie(UUID.randomUUID(), "Marvel", "This is all about Super Heroes", 30, "http://list", 2024,
+                Timestamp.from(Instant.now()), Timestamp.from(Instant.now()), "Admin", "Admin");
         movieDTO = new MovieDTO(UUID.randomUUID(), "Marvel", "This is all about Super Heroes", 30, "http://list", 2024);
         movieSaveDTO = new MovieSaveDTO("Marvel", "This is all about Super Heroes", "http://list", 2024);
     }
