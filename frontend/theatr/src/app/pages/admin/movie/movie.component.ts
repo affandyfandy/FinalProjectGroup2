@@ -207,10 +207,14 @@ export class MovieComponent implements OnInit {
       return true;
     } else {
       if (this.isEdit) {
-        return this.currentMovie.title === this.tempMovie.title &&
+        return (this.currentMovie.title === this.tempMovie.title &&
           this.currentMovie.synopsis === this.tempMovie.synopsis &&
           this.currentMovie.year === this.tempMovie.year &&
-          !this.isPosterChanged;
+          !this.isPosterChanged) ||
+          !this.currentMovie?.title ||
+          !this.currentMovie ||
+          !this.currentMovie?.synopsis ||
+          !this.currentMovie?.year;
       } else {
         return !this.currentMovie?.title ||
           !this.currentMovie ||

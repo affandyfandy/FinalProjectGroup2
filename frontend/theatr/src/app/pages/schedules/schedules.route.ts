@@ -11,7 +11,7 @@ export const scheduleRoutes: Routes = [
         component: MovieScheduleComponent
     },
     {
-        path: ':id/book',
+        path: ':id/customer/book',
         data: { roles: ['ROLE_CUSTOMER'] },
         canActivate: [accessGuard],
         component: BookScheduleComponent
