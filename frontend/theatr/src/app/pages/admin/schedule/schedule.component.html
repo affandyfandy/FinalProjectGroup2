@@ -2,9 +2,10 @@
     <!-- Search Bar & Add Button -->
     <div class="flex justify-between items-center max-w-full">
         <div class="flex space-x-2">
-            <select class="select select-bordered w-full max-w-44 bg-base-300 border-none">
-                <option>Latest</option>
-                <option>Earliest</option>
+            <select class="select select-bordered w-full max-w-44 bg-base-300 border-none"
+                (change)="onOrderPickerChange($event)">
+                <option value="DESC">Latest</option>
+                <option value="ASC">Earliest</option>
             </select>
             <input type="date" (change)="onDateChange($event)" [ngModel]="currentDateTime"
                 class="p-2 px-6 h-12 rounded-md text-white bg-base-300" />
