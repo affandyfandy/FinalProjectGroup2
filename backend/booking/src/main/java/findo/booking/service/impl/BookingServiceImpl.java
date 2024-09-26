@@ -179,9 +179,6 @@ public class BookingServiceImpl implements BookingService {
                         throw new TicketAlreadyPrintedException("Ticket has already been printed");
                     }
 
-                    booking.setIsPrinted(true);
-                    bookingRepository.save(booking);
-
                     // Fetch ScheduleDetailsAdmin instead of BookingDetailDTO
                     UUID custId = booking.getUserIds();
                     List<Integer> seatIds = booking.getBookingSeats().get(0).getSeatIds();
@@ -237,6 +234,9 @@ public class BookingServiceImpl implements BookingService {
                                                                                                                 // method
                                                                                                                 // if
                                                                                                                 // needed
+
+                                //     booking.setIsPrinted(true);
+                                //     bookingRepository.save(booking);
                                 } catch (IOException e) {
                                     return Mono.error(new RuntimeException("Error generating PDF", e));
                                 }
