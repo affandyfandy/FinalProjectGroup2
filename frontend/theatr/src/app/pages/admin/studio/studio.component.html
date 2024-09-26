@@ -10,40 +10,46 @@
     </div>
 
     <!-- Table -->
-    <div *ngIf="studioList.length > 0; else emptyView" class="overflow-x-auto pt-4">
-        <table class="table">
-            <!-- head -->
-            <thead>
-                <tr class="text-center">
-                    <th>Name</th>
-                    <th>Active/Inactive</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- row -->
-                <tr *ngFor="let studio of studioList" class="text-center">
-                    <td>{{ studio.name }}</td>
-
-                    <td>
-                        <input type="checkbox" class="toggle toggle-success" [checked]="!studio.deleted"
-                            (change)="changeStatus(studio.id ?? 0)" />
-                    </td>
-
-                    <td>
-                        <button (click)="showStudioModal(true, studio)" class="btn btn-square btn-secondary btn-sm">
-                            <img src="assets/icons/edit-white.svg" alt="Edit Icon" class="w-5 h-5">
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div *ngIf="isListLoading; else table" class="space-y-4 py-8">
+        <div *ngFor="let item of [].constructor(6)" class="skeleton w-full h-16"></div>
     </div>
-    <ng-template #emptyView>
-        <div class="w-full text-center">
-            <h1 class="text-xl font-semibold">There's no data here...</h1>
-            <p class="font-light">You can <b class="font-semibold">add a studio</b> anyway.</p>
+
+    <ng-template #table>
+        <div *ngIf="studioList.length > 0; else emptyView" class="overflow-x-auto pt-4">
+            <table class="table">
+                <!-- head -->
+                <thead>
+                    <tr class="text-center">
+                        <th>Name</th>
+                        <th>Active/Inactive</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- row -->
+                    <tr *ngFor="let studio of studioList" class="text-center">
+                        <td>{{ studio.name }}</td>
+
+                        <td>
+                            <input type="checkbox" class="toggle toggle-success" [checked]="!studio.deleted"
+                                (change)="changeStatus(studio.id ?? 0)" />
+                        </td>
+
+                        <td>
+                            <button (click)="showStudioModal(true, studio)" class="btn btn-square btn-secondary btn-sm">
+                                <img src="assets/icons/edit-white.svg" alt="Edit Icon" class="w-5 h-5">
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+        <ng-template #emptyView>
+            <div class="w-full text-center">
+                <h1 class="text-xl font-semibold">There's no data here...</h1>
+                <p class="font-light">You can <b class="font-semibold">add a studio</b> anyway.</p>
+            </div>
+        </ng-template>
     </ng-template>
 
     <div *ngIf="totalPages > 1" class="w-full flex justify-center mt-4 py-8">
@@ -76,7 +82,8 @@
             <button class="btn btn-secondary bg-opacity-50 max-w-[310px] w-full rounded-full"
                 (click)="closeStudioModal()">Cancel</button>
             <button (click)="onClickSave()" [disabled]="isSaveButtonDisabled()"
-                class="btn btn-primary max-w-[310px] w-full rounded-full">Save</button>
+                class="btn btn-primary max-w-[310px] w-full rounded-full"><span *ngIf="isSaveLoading"
+                    class="loading loading-spinner text-primary"></span>Save</button>
         </div>
     </div>
 </dialog>

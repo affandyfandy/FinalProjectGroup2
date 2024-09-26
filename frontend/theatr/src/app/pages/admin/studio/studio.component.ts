@@ -34,6 +34,9 @@ export class StudioComponent implements OnInit {
   alertMessage = '';
   isAlertSuccess = true;
 
+  isListLoading = false;
+  isSaveLoading = false;
+
   constructor(
     private studioService: StudioService
   ) { }
@@ -43,42 +46,60 @@ export class StudioComponent implements OnInit {
   }
 
   getStudioList(page: number = 0) {
+    this.isListLoading = true;
     this.studioService.getStudioList(page).subscribe({
       next: (res: any) => {
         this.studioList = res.content;
         this.currentPage = page;
         this.totalPages = res.totalPages;
+        this.isListLoading = false;
       },
       error: (err) => {
+        this.isListLoading = false;
         this.showAlert(MessageConstants.GET_STUDIO_LIST_FAILED(err), false);
+      },
+      complete: () => {
+        this.isListLoading = false;
       }
     });
   }
 
   addStudio() {
+    this.isSaveLoading = true;
     this.studioService.addStudio({ name: this.currentStudioName }).subscribe({
       next: () => {
         this.getStudioList(this.currentPage);
         this.closeStudioModal();
         this.showAlert(MessageConstants.ADD_STUDIO_SUCCESS, true);
+        this.isSaveLoading = false;
       },
       error: (err) => {
         this.closeStudioModal();
         this.showAlert(MessageConstants.ADD_STUDIO_FAILED(err), false);
+        this.isSaveLoading = false;
+      },
+      complete: () => {
+        this.isSaveLoading = false;
       }
     });
   }
 
   editStudio() {
+    this.isSaveLoading = true;
     this.studioService.editStudio(this.currentStudio.id!, { name: this.currentStudioName }).subscribe({
       next: () => {
         this.getStudioList(this.currentPage);
         this.closeStudioModal();
         this.showAlert(MessageConstants.EDIT_STUDIO_SUCCESS, true);
+        this.isSaveLoading = false;
       },
       error: (err) => {
         this.closeStudioModal();
         this.showAlert(MessageConstants.EDIT_STUDIO_FAILED(err), false);
+        this.isSaveLoading = false;
+      },
+      complete: () => {
+        this.isSaveLoading = false;
       }
     });
   }
@@ -87,7 +108,6 @@ export class StudioComponent implements OnInit {
     this.studioService.changeStatus(id).subscribe({
       next: () => {
         this.showAlert(MessageConstants.UPDATE_STUDIO_STATUS_SUCCESS, true);
-        this.getStudioList(this.currentPage);
       },
       error: (err) => {
         this.closeStudioModal();
@@ -132,6 +152,9 @@ export class StudioComponent implements OnInit {
   }
 
   isSaveButtonDisabled(): boolean {
-    return this.currentStudioName === this.tempStudioName || this.currentStudioName === '' || !this.currentStudioName;
+    return this.currentStudioName === this.tempStudioName ||
+      this.currentStudioName === '' ||
+      !this.currentStudioName ||
+      this.isSaveLoading;
   }
 }
