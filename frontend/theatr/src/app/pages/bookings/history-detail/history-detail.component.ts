@@ -6,6 +6,7 @@ import { FullDateTimePipe } from '../../../core/pipes/full-date-time/full-date-t
 import { BookingService } from '../../../services/booking/booking.service';
 import { ActivatedRoute } from '@angular/router';
 import { NormalFullDateTimePipe } from '../../../core/pipes/normal-full-date-time/normal-full-date-time.pipe';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-history-detail',
@@ -30,6 +31,7 @@ export class HistoryDetailComponent implements OnInit {
   isAlertSuccess = true;
 
   isLoading = false;
+  isPrintLoading = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -55,6 +57,28 @@ export class HistoryDetailComponent implements OnInit {
         },
         complete: () => {
           this.isLoading = false;
+        }
+      });
+    }
+  }
+
+  printTicket() {
+    const bookingId = this.route.snapshot.paramMap.get('id');
+    if (!!bookingId) {
+      this.isPrintLoading = true;
+      this.bookingService.printTicket(bookingId).subscribe({
+        next: (res: any) => {
+          const blob = new Blob([res], { type: 'application/pdf' });
+          saveAs(blob, `ticket-${bookingId}.pdf`);
+          this.closeModal();
+          this.showAlert('Ticket printed successfully', true);
+          this.bookingData.isPrinted = true;
+          this.isPrintLoading = false;
+        },
+        error: (err: any) => {
+          this.closeModal();
+          this.showAlert('Failed to print ticket: ' + err.error.message, false);
+          this.isPrintLoading = false;
         }
       });
     }

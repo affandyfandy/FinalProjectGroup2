@@ -235,8 +235,8 @@ public class BookingServiceImpl implements BookingService {
                                                                                                                 // if
                                                                                                                 // needed
 
-                                //     booking.setIsPrinted(true);
-                                //     bookingRepository.save(booking);
+                                    booking.setIsPrinted(true);
+                                    bookingRepository.save(booking);
                                 } catch (IOException e) {
                                     return Mono.error(new RuntimeException("Error generating PDF", e));
                                 }

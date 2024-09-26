@@ -78,7 +78,9 @@
         <div class="flex space-x-2 w-full">
             <button class="btn btn-secondary bg-opacity-50 max-w-[230px] w-full rounded-full"
                 (click)="closeModal()">Cancel</button>
-            <button (click)="closeModal()" class="btn btn-primary max-w-[230px] w-full rounded-full">Continue</button>
+            <button (click)="printTicket()" [disabled]="isPrintLoading"
+                class="btn btn-primary max-w-[230px] w-full rounded-full"><span *ngIf="isPrintLoading"
+                    class="loading loading-spinner text-primary"></span>Continue</button>
         </div>
     </div>
 </dialog>
