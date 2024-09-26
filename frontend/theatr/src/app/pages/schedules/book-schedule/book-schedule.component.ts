@@ -66,6 +66,9 @@ export class BookScheduleComponent implements OnInit {
         error: (err) => {
           this.showAlert(MessageConstants.GET_SCHEDULE_FAILED(err), false);
           this.isLoading = false;
+        },
+        complete: () => {
+          this.isLoading = false;
         }
       });
     }
@@ -140,6 +143,9 @@ export class BookScheduleComponent implements OnInit {
         this.isBookingLoading = false;
         this.closeModal();
         this.showAlert(MessageConstants.CREATE_BOOKING_FAILED(err), false);
+      },
+      complete: () => {
+        this.isBookingLoading = false;
       }
     });
   }
