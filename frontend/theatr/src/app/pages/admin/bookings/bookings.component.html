@@ -26,12 +26,14 @@
             <tbody>
                 <!-- row -->
                 <tr *ngFor="let booking of bookingList" class="text-center">
-                    <td>{{ booking.updatedTime ? (booking.updatedTime | fullTime) : 'N/A' }}</td>
-                    <td>{{ booking.schedule?.studio?.name }}</td>
-                    <td>{{ booking.schedule?.showDate ? (booking.schedule!.showDate! | fullDateTime) : 'N/A' }}</td>
-                    <td>{{ booking.schedule?.movie?.title }} {{"(" + booking.schedule?.movie?.year + ")" }}</td>
+                    <td>{{ booking.updatedTime ? (booking.updatedTime | normalTimeFormat) : 'N/A' }}</td>
+                    <td>{{ booking.scheduleIds?.[0]?.shows?.[0]?.studioName }}</td>
+                    <td>{{ booking.scheduleIds?.[0]?.shows?.[0]?.showDate ?
+                        (booking.scheduleIds?.[0]?.shows?.[0]?.showDate! | fullDateTime) : 'N/A' }}</td>
+                    <td>{{ booking.scheduleIds?.[0]?.movieTitle }} {{"(" + booking.scheduleIds?.[0]?.movieYear + ")" }}
+                    </td>
                     <td>
-                        <button (click)="showModal(booking)" class="btn btn-square btn-secondary btn-sm">
+                        <button (click)="showModal(booking.id!)" class="btn btn-square btn-secondary btn-sm">
                             <img src="assets/icons/eye-white.svg" alt="Edit Icon" class="w-5 h-5">
                         </button>
                     </td>
@@ -58,75 +60,80 @@
 
 <!-- MODAL -->
 <dialog id="booking-modal" class="modal">
-    <div class="modal-box flex flex-col max-w-[672px] space-y-6 bg-base-300">
-        <div class="flex w-full">
-            <div class="w-full"></div>
-            <button (click)="closeModal()" class="btn btn-circle btn-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-        </div>
+    <div *ngIf="isDetailLoading; else modalContent"
+        class="modal-box skeleton flex flex-col max-w-[672px] h-[500px] space-y-6 bg-base-300"></div>
+    <ng-template #modalContent>
+        <div class="modal-box flex flex-col max-w-[672px] space-y-6 bg-base-300">
+            <div class="flex w-full">
+                <div class="w-full"></div>
+                <button (click)="closeModal()" class="btn btn-circle btn-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
 
-        <div class="flex items-center w-full space-x-4">
-            <img [src]="currentBooking.schedule?.movie?.posterUrl" alt="Poster"
-                class="w-[120px] h-[186px] rounded-xl object-cover">
+            <div class="flex items-center w-full space-x-4">
+                <img [src]="bookingData.movies?.[0]?.posterUrl" alt="Poster"
+                    class=" w-[120px] h-[186px] rounded-xl object-cover">
+
+                <div class="space-y-2">
+                    <h1 class="text-2xl font-bold">{{ bookingData.movies?.[0]?.title }} {{'(' +
+                        bookingData.movies?.[0]?.year + ')'}}</h1>
+                    <div class="text-zinc-400 flex items-center space-x-2">
+                        <img src="assets/icons/location-gray.svg" alt="Edit Icon" class="w-6 h-6">
+                        <p>{{ bookingData.studios?.[0]?.name }}</p>
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        <img src="assets/icons/ticket-gray.svg" alt="Edit Icon" class="w-6 h-6">
+                        <p class="text-zinc-400">{{ bookingData.seats?.length }} Tickets</p>
+                        <p *ngFor="let seat of bookingData.seats" class="font-bold">{{seat.seatCode}}</p>
+                    </div>
+                    <p>{{ bookingData.showDate ? (bookingData.showDate! | fullDateTime) : 'N/A' }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
 
             <div class="space-y-2">
-                <h1 class="text-2xl font-bold">{{ currentBooking.schedule?.movie?.title }} {{'(' +
-                    currentBooking.schedule?.movie?.year + ')'}}</h1>
-                <div class="text-zinc-400 flex items-center space-x-2">
-                    <img src="assets/icons/location-gray.svg" alt="Edit Icon" class="w-6 h-6">
-                    <p>{{ currentBooking.schedule?.studio?.name }}</p>
+                <div class="flex justify-between">
+                    <p class="text-zinc-400">ORDER ID</p>
+                    <p class="font-semibold">{{ bookingData.bookingId }}</p>
                 </div>
-
-                <div class="flex items-center space-x-2">
-                    <img src="assets/icons/ticket-gray.svg" alt="Edit Icon" class="w-6 h-6">
-                    <p class="text-zinc-400">{{ currentBooking.seats?.length }} Tickets</p>
-                    <p *ngFor="let seat of currentBooking.seats" class="font-bold">{{seat.seatCode}}</p>
+                <div class="flex justify-between">
+                    <p class="text-zinc-400">ORDERED AT</p>
+                    <p class="font-semibold">{{ bookingData.createdAt ? (bookingData.createdAt | normalFullDateTime) :
+                        'N/A'
+                        }}</p>
                 </div>
-                <p>{{ currentBooking.schedule?.showDate ? (currentBooking.schedule!.showDate! | fullDateTime) : 'N/A' }}
-                </p>
+                <div class="flex justify-between">
+                    <p class="text-zinc-400">CUSTOMER ID</p>
+                    <p class="font-semibold">{{ bookingData.custId }}</p>
+                </div>
+                <div class="flex justify-between">
+                    <p class="text-zinc-400">CUSTOMER NAME</p>
+                    <p class="font-semibold">{{ bookingData.custName }}</p>
+                </div>
+                <div class="flex justify-between">
+                    <p class="text-zinc-400">PRICE</p>
+                    <p class="font-semibold">{{ bookingData.price ? (bookingData.price! |
+                        priceFormat) : '' }} x {{bookingData.seats?.length}}</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="flex justify-between">
+                <p class="text-zinc-400">TOTAL PRICE</p>
+                {{ bookingData.totalAmount ? (bookingData.totalAmount |
+                priceFormat) : '' }}
             </div>
         </div>
-
-        <div class="divider"></div>
-
-        <div class="space-y-2">
-            <div class="flex justify-between">
-                <p class="text-zinc-400">ORDER ID</p>
-                <p class="font-semibold">{{ currentBooking.id }}</p>
-            </div>
-            <div class="flex justify-between">
-                <p class="text-zinc-400">ORDERED AT</p>
-                <p class="font-semibold">{{ currentBooking.updatedTime ? (currentBooking.updatedTime | fullDateTime) :
-                    'N/A'
-                    }}</p>
-            </div>
-            <div class="flex justify-between">
-                <p class="text-zinc-400">CUSTOMER ID</p>
-                <p class="font-semibold">{{ currentBooking.user?.id }}</p>
-            </div>
-            <div class="flex justify-between">
-                <p class="text-zinc-400">CUSTOMER NAME</p>
-                <p class="font-semibold">{{ currentBooking.user?.name }}</p>
-            </div>
-            <div class="flex justify-between">
-                <p class="text-zinc-400">PRICE</p>
-                <p class="font-semibold">{{ currentBooking.schedule?.price ? (currentBooking.schedule!.price! |
-                    priceFormat) : '' }} x {{currentBooking.seats?.length}}</p>
-            </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="flex justify-between">
-            <p class="text-zinc-400">TOTAL PRICE</p>
-            <p class="text-xl font-semibold">{{ currentBooking.totalAmount ? (currentBooking.totalAmount |
-                priceFormat) : '' }}</p>
-        </div>
-    </div>
+    </ng-template>
 </dialog>
 
 <!-- ALERT -->

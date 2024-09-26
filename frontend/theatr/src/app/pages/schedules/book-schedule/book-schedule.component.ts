@@ -1,13 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Schedule } from '../../../model/schedule.model';
+import { BookingScheduleResponse, Schedule } from '../../../model/schedule.model';
 import { Seat } from '../../../model/seat.model';
 import { FullDateTimePipe } from '../../../core/pipes/full-date-time/full-date-time.pipe';
 import { PriceFormatPipe } from '../../../core/pipes/price-format/price-format.pipe';
 import { User } from '../../../model/user.model';
 import { UserService } from '../../../services/user/user.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RouterConfig } from '../../../config/app.constants';
+import { BookingService } from '../../../services/booking/booking.service';
+import { ScheduleService } from '../../../services/schedule/schedule.service';
+import { CreateBookingDTO } from '../../../model/booking.model';
 
 @Component({
   selector: 'app-book-schedule',
@@ -18,20 +21,32 @@ import { RouterConfig } from '../../../config/app.constants';
     PriceFormatPipe
   ],
   providers: [
-    UserService
+    UserService,
+    BookingService,
+    ScheduleService
   ],
   templateUrl: './book-schedule.component.html'
 })
 export class BookScheduleComponent implements OnInit {
 
-  scheduleData: Schedule = {};
+  scheduleData: BookingScheduleResponse = {};
   userData: User = {};
 
   selectedSeats: Seat[] = [];
 
+  isShowAlert = false;
+  alertMessage = '';
+  isAlertSuccess = true;
+
+  isLoading = false;
+  isBookingLoading = false;
+
   constructor(
     private router: Router,
-    private userService: UserService
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private bookingService: BookingService,
+    private scheduleService: ScheduleService
   ) { }
 
   ngOnInit(): void {
@@ -40,50 +55,29 @@ export class BookScheduleComponent implements OnInit {
   }
 
   getScheduleData() {
-    // Change this to get the schedule data from the backend
-    this.scheduleData = {
-      id: '1',
-      movie: {
-        id: '1',
-        title: 'Inside Out',
-        year: 2015,
-        posterUrl: 'https://image.tmdb.org/t/p/w1280/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg',
-        synopsis: "Teenager Riley's mind headquarters is undergoing a sudden demolition to make room for something entirely unexpected: new Emotions! Joy, Sadness, Anger, Fear and Disgust, who’ve long been running a successful operation by all accounts, aren’t sure how to feel when Anxiety shows up. And it looks like she’s not alone."
-      },
-      showDate: new Date(),
-      price: 50000,
-      studio: {
-        name: 'Studio 1',
-        seats: this.dummySeats()
-      }
+    this.isLoading = true;
+    const scheduleId = this.route.snapshot.paramMap.get('id');
+    if (!!scheduleId) {
+      this.scheduleService.getScheduleDetailSeats(scheduleId).subscribe({
+        next: (res: any) => {
+          this.scheduleData = res;
+          this.isLoading = false;
+        },
+        error: (err) => {
+          this.showAlert('Failed to get schedule data', false);
+          this.isLoading = false;
+        }
+      });
     }
-  }
-
-  private dummySeats(): Seat[] {
-    const seats: Seat[] = [];
-    const rows = ['A', 'B', 'C', 'D', 'E'];
-    let id = 0;
-    for (let i = 0; i < rows.length; i++) {
-      for (let j = 1; j < 7; j++) {
-        seats.push({
-          id: id,
-          seatCode: rows[i] + j,
-          status: j % 2 === 0 ? 'AVAILABLE' : 'BOOKED'
-        });
-        id++;
-      }
-    }
-    return seats;
   }
 
   private getUserData() {
     this.userService.getProfile().subscribe({
       next: (res: any) => {
         this.userData = res;
-        console.log(this.userData);
       },
       error: (err) => {
-        console.error(err);
+        this.showAlert('Failed to get user data', false);
       }
     });
   }
@@ -121,11 +115,49 @@ export class BookScheduleComponent implements OnInit {
     if (this.isBalanceNotEnough()) {
       this.navigateToProfile();
     } else {
-
+      this.createBooking();
     }
+  }
+
+  private createBooking() {
+    this.isBookingLoading = true;
+    const body: CreateBookingDTO = {
+      scheduleIds: [this.scheduleData.scheduleId ?? ''],
+      seatIds: this.selectedSeats.map(seat => seat.id),
+      totalAmount: (this.scheduleData.price ?? 0) * this.selectedSeats.length
+    };
+
+    this.bookingService.createBooking(body).subscribe({
+      next: (res: any) => {
+        this.isBookingLoading = false;
+        this.showAlert('Booking success', true);
+        this.closeModal();
+        setTimeout(() => {
+          this.navigateToHistory();
+        }, 3000);
+      },
+      error: (err) => {
+        this.isBookingLoading = false;
+        this.closeModal();
+        this.showAlert('Failed to book schedule', false);
+      }
+    });
   }
 
   private navigateToProfile() {
     this.router.navigate([RouterConfig.PROFILE.link]);
+  }
+
+  private navigateToHistory() {
+    this.router.navigate([RouterConfig.BOOKINGS.link]);
+  }
+
+  showAlert(message: string, success: boolean) {
+    this.isAlertSuccess = success;
+    this.alertMessage = message;
+    this.isShowAlert = true;
+    setTimeout(() => {
+      this.isShowAlert = false;
+    }, 3000);
   }
 }

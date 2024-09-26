@@ -36,6 +36,7 @@ export class ScheduleComponent implements OnInit {
   currentDateTime = '';
 
   scheduleList: Schedule[] = [];
+  tempScheduleList: Schedule[] = [];
   movieList: Movie[] = [];
   studioList: Studio[] = [];
   availableShowTime: Date[] = [];
@@ -84,6 +85,21 @@ export class ScheduleComponent implements OnInit {
     });
   }
 
+  getTempScheduleList() {
+    this.tempScheduleList = [];
+    this.scheduleService.getAllSchedules(this.currentDateTime, 0, 1000).subscribe({
+      next: (res: any) => {
+        this.tempScheduleList = res.content;
+        if (!!this.currentStudio.id) {
+          this.getAvailableShowTime();
+        }
+      },
+      error: (err) => {
+        this.showAlert('Failed to get schedule list: ' + err.error.message, false);
+      }
+    });
+  }
+
   createSchedule() {
     this.currentSchedule.movieId.push(this.currentMovie.id!);
     this.currentSchedule.studioId.push(this.currentStudio.id!);
@@ -117,8 +133,8 @@ export class ScheduleComponent implements OnInit {
 
   onScheduleTimeChange(event: any) {
     this.currentScheduleDateTime = event.target.value;
+    this.getTempScheduleList();
     this.getPrice(event.target.value);
-    this.getAvailableShowTime();
   }
 
   getPrice(dateTime: string) {
@@ -154,10 +170,12 @@ export class ScheduleComponent implements OnInit {
       date.setDate(day);
       date.setHours(hour, 0, 0, 0);
 
-      const isOccupied = this.scheduleList.some((schedule: Schedule) => {
+      const isOccupied = this.tempScheduleList.some((schedule: Schedule) => {
         const scheduleDate = new Date(schedule.showDate ?? '');
+        scheduleDate.setHours(scheduleDate.getHours() - 7);
+        console.log("Studio: " + schedule.studioId);
         return (
-          schedule.studioId === this.currentStudio.id &&
+          schedule.studioIds![0].id === this.currentStudio.id &&
           scheduleDate.getFullYear() === date.getFullYear() &&
           scheduleDate.getMonth() === date.getMonth() &&
           scheduleDate.getDate() === date.getDate() &&
@@ -196,16 +214,9 @@ export class ScheduleComponent implements OnInit {
   }
 
   showModal() {
-    this.currentSchedule = {
-      showDate: new Date(),
-      movieId: [],
-      studioId: [],
-      price: 0
-    };
-
-    this.currentMovie = {};
-    this.currentStudio = {};
-
+    if (!!this.currentMovie.id) {
+      this.getTempScheduleList();
+    }
     setTimeout(() => {
       const modal = document.getElementById('schedule-modal') as HTMLDialogElement;
       modal.showModal();
@@ -221,11 +232,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   closeModal() {
-    this.scheduleForm.resetForm();
-    this.currentMovie = {} as Movie;
-    this.currentStudio = {} as Studio;
     const modal = document.getElementById('schedule-modal') as HTMLDialogElement;
-    this.currentSchedule = {} as AddScheduleDTO;
     modal.close();
   }
 
@@ -236,7 +243,15 @@ export class ScheduleComponent implements OnInit {
   }
 
   isSaveButtonDisabled(): boolean {
-    return this.currentScheduleDateTime === '';
+    return !this.currentMovie.id ||
+      !this.currentStudio.id ||
+      this.currentSchedule.price === 0 ||
+      this.isPastDate();
+  }
+
+  private isPastDate(): boolean {
+    const currentDate = new Date();
+    return this.currentSchedule.showDate < currentDate;
   }
 
   showAlert(message: string, success: boolean) {

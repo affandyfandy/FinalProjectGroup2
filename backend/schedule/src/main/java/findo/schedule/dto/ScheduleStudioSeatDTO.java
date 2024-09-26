@@ -17,4 +17,5 @@ public class ScheduleStudioSeatDTO {
     private Timestamp showDate;
     private List<StudioDTO> studio;
     private List<SeatDTO> seats;
+    private List<MovieDTO> movie;
 }

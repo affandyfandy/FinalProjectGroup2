@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { Booking } from '../../../model/booking.model';
+import { Booking, BookingDetailResponse, BookingHistoryResponse } from '../../../model/booking.model';
 import { FullDateTimePipe } from '../../../core/pipes/full-date-time/full-date-time.pipe';
 import { FullTimePipe } from '../../../core/pipes/full-time/full-time.pipe';
 import { PriceFormatPipe } from '../../../core/pipes/price-format/price-format.pipe';
 import { BookingService } from '../../../services/booking/booking.service';
+import { NormalFullDateTimePipe } from '../../../core/pipes/normal-full-date-time/normal-full-date-time.pipe';
+import { NormalTimeFormatPipe } from '../../../core/pipes/normal-time-format/normal-time-format.pipe';
 
 @Component({
   selector: 'app-bookings',
@@ -15,7 +17,9 @@ import { BookingService } from '../../../services/booking/booking.service';
     FormsModule,
     FullDateTimePipe,
     FullTimePipe,
-    PriceFormatPipe
+    PriceFormatPipe,
+    NormalFullDateTimePipe,
+    NormalTimeFormatPipe
   ],
   providers: [
     BookingService
@@ -26,8 +30,9 @@ export class BookingsComponent implements OnInit {
 
   currentDateTime = '';
 
-  bookingList: Booking[] = [];
-  currentBooking: Booking = {};
+  bookingList: BookingHistoryResponse[] = [];
+  currentBooking: BookingHistoryResponse = {};
+  bookingData: BookingDetailResponse = {};
 
   currentPage = 1;
   totalPages = 1;
@@ -36,6 +41,8 @@ export class BookingsComponent implements OnInit {
   isShowAlert = false;
   alertMessage = '';
   isAlertSuccess = true;
+
+  isDetailLoading = false;
 
   constructor(
     private bookingService: BookingService
@@ -55,7 +62,7 @@ export class BookingsComponent implements OnInit {
   }
 
   getBookingList(page: number = 0) {
-    this.bookingService.getAdminHistory(page, 10, this.sortDir).subscribe({
+    this.bookingService.getAdminHistory(page, 10, this.sortDir, this.currentDateTime).subscribe({
       next: (res: any) => {
         this.bookingList = res.content;
         this.currentPage = res.pageable.pageNumber + 1;
@@ -67,8 +74,27 @@ export class BookingsComponent implements OnInit {
     });
   }
 
-  showModal(booking: Booking) {
-    this.currentBooking = booking;
+  getBookingData(bookingId: string) {
+    if (!!bookingId) {
+      this.isDetailLoading = true;
+      this.bookingService.getDetailBooking(bookingId).subscribe({
+        next: (res: any) => {
+          this.bookingData = res;
+          this.isDetailLoading = false;
+        },
+        error: (err: any) => {
+          this.isDetailLoading = false;
+          this.showAlert('Failed to get booking detail: ' + err.error.message, false);
+        },
+        complete: () => {
+          this.isDetailLoading = false;
+        }
+      });
+    }
+  }
+
+  showModal(id: string) {
+    this.getBookingData(id);
 
     const modal = document.getElementById('booking-modal') as HTMLDialogElement;
     modal.showModal();

@@ -11,6 +11,7 @@ import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import org.thymeleaf.context.Context;
 import findo.booking.dto.ScheduleDetailsAdmin;
 import findo.booking.service.PdfGeneratorService;
+import findo.booking.service.impl.QRCodeGenerator;
 
 import java.io.IOException;
 
@@ -23,9 +24,20 @@ public class PdfGeneratorServiceImpl implements PdfGeneratorService {
         this.templateEngine = templateEngine;
     }
 
+    @Override
     public ByteArrayInputStream generatePdf(ScheduleDetailsAdmin scheduleDetailsAdmin) throws IOException {
+        // Generate QR code for bookingId
+        String qrCodeBase64;
+        try {
+            qrCodeBase64 = QRCodeGenerator.generateQRCodeBase64(scheduleDetailsAdmin.getBookingId().toString());
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to generate QR code", e);
+        }
+
+        // Set variables for Thymeleaf template
         Context context = new Context();
         context.setVariable("booking", scheduleDetailsAdmin);
+        context.setVariable("qrCode", qrCodeBase64);
 
         // Process the Thymeleaf template
         String html = templateEngine.process("pdf-template", context);

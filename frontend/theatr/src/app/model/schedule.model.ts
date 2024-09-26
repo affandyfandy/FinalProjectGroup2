@@ -1,5 +1,6 @@
 import { Booking } from "./booking.model";
 import { Movie } from "./movie.model";
+import { Seat } from "./seat.model";
 import { Studio } from "./studio.model";
 
 export interface Schedule {
@@ -56,4 +57,13 @@ export interface Show {
     showDate?: Date;
     studioName?: string;
     price?: number;
+}
+
+export interface BookingScheduleResponse {
+    scheduleId?: string;
+    price?: number;
+    showDate?: Date;
+    studio?: Studio[];
+    seats?: Seat[];
+    movie?: Movie[];
 }

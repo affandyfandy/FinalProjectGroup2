@@ -20,7 +20,7 @@
     </div>
 
     <div class="p-6 space-y-6">
-        <input type="date" (change)="onDateChange($event)" [ngModel]="currentDateTime"
+        <input type="date" (change)="onDateChange($event)" [min]="getTodayDate()" [ngModel]="currentDateTime"
             class="p-2 px-6 h-12 rounded-md text-white bg-base-300" />
 
         <div *ngIf="isLoading" class="space-y-3">
@@ -30,7 +30,8 @@
         <div *ngIf="(detailSchedule.length) > 0; else emptyView">
             <div *ngFor="let schedule of detailSchedule">
                 <button *ngFor="let detail of schedule.shows" (click)="navigateToBook(detail.scheduleId!)"
-                    class="flex justify-between items-center border-b border-b-base-200 p-4 hover:bg-base-200 hover:rounded-lg w-full transition-all">
+                    [disabled]="isDisabled(detail.showDate!)"
+                    class="flex justify-between items-center border-b border-b-base-200 p-4 hover:bg-base-200 hover:rounded-lg disabled:opacity-40 w-full transition-all">
                     <div class="flex flex-col items-start space-y-1">
                         <h2 class="text-xl self-start font-semibold">{{detail.showDate ?
                             (detail.showDate! | timeFormat)
