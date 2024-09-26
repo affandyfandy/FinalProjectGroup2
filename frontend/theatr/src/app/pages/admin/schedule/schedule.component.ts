@@ -59,6 +59,9 @@ export class ScheduleComponent implements OnInit {
   alertMessage = '';
   isAlertSuccess = true;
 
+  isListLoading = false;
+  isSaveLoading = false;
+
   constructor(
     private movieService: MovieService,
     private studioService: StudioService,
@@ -73,15 +76,21 @@ export class ScheduleComponent implements OnInit {
   }
 
   getScheduleList(page: number = 0) {
+    this.isListLoading = true;
     this.scheduleList = [];
     this.scheduleService.getAllSchedules(this.currentDateTime, page).subscribe({
       next: (res: any) => {
         this.scheduleList = res.content;
         this.currentPage = page;
         this.totalPages = res.totalPages;
+        this.isListLoading = false;
       },
       error: (err) => {
         this.showAlert(MessageConstants.GET_SCHEDULE_LIST_FAILED(err), false);
+        this.isListLoading = false;
+      },
+      complete: () => {
+        this.isListLoading = false;
       }
     });
   }
@@ -102,6 +111,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   createSchedule() {
+    this.isSaveLoading = true;
     this.currentSchedule.movieId.push(this.currentMovie.id!);
     this.currentSchedule.studioId.push(this.currentStudio.id!);
 
@@ -116,9 +126,14 @@ export class ScheduleComponent implements OnInit {
         this.closeModal();
         this.getScheduleList();
         this.showAlert(MessageConstants.CREATE_SCHEDULE_SUCCESS, true);
+        this.isSaveLoading = false;
       },
       error: (err) => {
         this.showAlert(MessageConstants.CREATE_SCHEDULE_FAILED(err), false);
+        this.isSaveLoading = false;
+      },
+      complete: () => {
+        this.isSaveLoading = false;
       }
     });
   }
@@ -243,7 +258,8 @@ export class ScheduleComponent implements OnInit {
     return !this.currentMovie.id ||
       !this.currentStudio.id ||
       this.currentSchedule.price === 0 ||
-      this.isPastDate();
+      this.isPastDate() ||
+      this.isSaveLoading;
   }
 
   private isPastDate(): boolean {
