@@ -65,8 +65,9 @@
             <div class="flex items-center space-x-2 w-full">
                 <img src="assets/icons/calendar-white.svg" alt="Calendar Icon" class="w-[28px] h-[28px]">
                 <div class="w-full">
-                    <input (change)="onScheduleTimeChange($event)" type="date" [(ngModel)]="currentScheduleDateTime"
-                        #showDate="ngModel" class="p-2 px-6 h-12 rounded-md text-white bg-base-100 w-full" required />
+                    <input (change)="onScheduleTimeChange($event)" type="date" [min]="getTodayDate()"
+                        [(ngModel)]="currentScheduleDateTime" #showDate="ngModel"
+                        class="p-2 px-6 h-12 rounded-md text-white bg-base-100 w-full" required />
                     <p *ngIf="showDate.invalid && showDate.touched" class="text-error text-sm font-medium">
                         *this field is required
                     </p>
@@ -106,7 +107,8 @@
                 <img src="assets/icons/clock-white.svg" alt="Clock Icon" class="w-[28px] h-[28px]">
                 <div class="w-full">
                     <div class="w-full">
-                        <select (change)="onTimePickerChange($event)" [disabled]="availableShowTime.length == 0"
+                        <select (change)="onTimePickerChange($event)"
+                            [disabled]="availableShowTime.length == 0 || !currentStudio.id"
                             class="select select-bordered w-full bg-base-100 border-none">
                             <option disabled selected="true" [value]="null">Select a Show Time</option>
                             <option *ngFor="let time of availableShowTime" [value]="time">{{time | normalTimeFormat}}
