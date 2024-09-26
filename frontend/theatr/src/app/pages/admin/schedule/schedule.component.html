@@ -19,32 +19,38 @@
     </div>
 
     <!-- Table -->
-    <div *ngIf="scheduleList.length > 0; else emptyView" class="overflow-x-auto pt-4">
-        <table class="table">
-            <!-- head -->
-            <thead>
-                <tr class="text-center">
-                    <th>Show Time</th>
-                    <th>Studio</th>
-                    <th>Title</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- row -->
-                <tr *ngFor="let schedule of scheduleList" class="text-center">
-                    <td>{{ schedule.showDate ? (schedule.showDate | timeFormat) : 'N/A' }}</td>
-                    <td>{{ schedule.studioIds?.[0]?.name || 'N/A' }}</td>
-                    <td>{{ schedule.movieIds?.[0]?.title }} {{"(" + schedule.movieIds?.[0]?.year + ")" }}</td>
-                </tr>
-            </tbody>
-        </table>
+    <div *ngIf="isListLoading; else mainContent" class="space-y-4 py-8">
+        <div *ngFor="let item of [].constructor(6)" class="skeleton w-full h-16"></div>
     </div>
 
-    <ng-template #emptyView>
-        <div class="w-full text-center py-7">
-            <h1 class="text-xl font-semibold">There's no data here...</h1>
-            <p class="font-light">You can try to change the show date 😅</p>
+    <ng-template #mainContent>
+        <div *ngIf="scheduleList.length > 0; else emptyView" class="overflow-x-auto pt-4">
+            <table class="table">
+                <!-- head -->
+                <thead>
+                    <tr class="text-center">
+                        <th>Show Time</th>
+                        <th>Studio</th>
+                        <th>Title</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- row -->
+                    <tr *ngFor="let schedule of scheduleList" class="text-center">
+                        <td>{{ schedule.showDate ? (schedule.showDate | timeFormat) : 'N/A' }}</td>
+                        <td>{{ schedule.studioIds?.[0]?.name || 'N/A' }}</td>
+                        <td>{{ schedule.movieIds?.[0]?.title }} {{"(" + schedule.movieIds?.[0]?.year + ")" }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+
+        <ng-template #emptyView>
+            <div class="w-full text-center py-7">
+                <h1 class="text-xl font-semibold">There's no data here...</h1>
+                <p class="font-light">You can try to change the show date 😅</p>
+            </div>
+        </ng-template>
     </ng-template>
 
     <div *ngIf="totalPages > 1" class="w-full flex justify-center mt-4 py-8">
@@ -129,7 +135,8 @@
             <button class="btn btn-secondary bg-opacity-50 max-w-[310px] w-full rounded-full"
                 (click)="closeModal()">Cancel</button>
             <button (click)="createSchedule()" [disabled]="isSaveButtonDisabled()"
-                class="btn btn-primary max-w-[310px] w-full rounded-full">Save</button>
+                class="btn btn-primary max-w-[310px] w-full rounded-full"><span *ngIf="isSaveLoading"
+                    class="loading loading-spinner text-primary"></span>Save</button>
         </div>
     </div>
 </dialog>

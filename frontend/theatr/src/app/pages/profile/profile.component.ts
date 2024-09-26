@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { FormsModule, NgForm } from '@angular/forms';
 import { PriceFormatPipe } from '../../core/pipes/price-format/price-format.pipe';
+import { MessageConstants } from '../../config/app.constants';
 
 @Component({
   selector: 'app-profile',
@@ -33,6 +34,10 @@ export class ProfileComponent {
   alertMessage = '';
   isAlertSuccess = true;
 
+  isSaveProfileLoading = false;
+  isChangePasswordLoading = false;
+  isTopUpLoading = false;
+
   changePasswordDTO = {} as ChangePasswordDTO;
 
   topUpDTO: TopUpDTO = { balance: 0 };
@@ -56,7 +61,7 @@ export class ProfileComponent {
         this.tempUsername = res.name;
       },
       error: (err) => {
-        this.showAlert('Failed to get your profile: ' + err.error.message, false);
+        this.showAlert(MessageConstants.GET_PROFILE_FAILED(err), false);
       }
     });
   }
@@ -73,43 +78,58 @@ export class ProfileComponent {
   }
 
   updateProfile() {
+    this.isSaveProfileLoading = true;
     this.userService.updateProfile({ newName: this.user.name! }).subscribe({
       next: () => {
         this.tempUsername = this.user.name!;
-        this.showAlert('Profile updated successfully', true);
+        this.showAlert(MessageConstants.UPDATE_PROFILE_SUCCESS, true);
+        this.isSaveProfileLoading = false;
       },
       error: (err) => {
-        this.showAlert('Failed to update your profile: ' + err.error.message, false);
+        this.showAlert(MessageConstants.UPDATE_PROFILE_FAILED(err), false);
+        this.isSaveProfileLoading = false;
+      },
+      complete: () => {
+        this.isSaveProfileLoading = false;
       }
     });
   }
 
   topUp() {
+    this.isTopUpLoading = true;
     this.userService.topUpBalance(this.topUpDTO).subscribe({
       next: (res: any) => {
         this.closeTopUpModal();
         this.user.balance = res.balance ?? this.user.balance;
-        this.showAlert('Top Up Success!', true);
+        this.showAlert(MessageConstants.TOP_UP_SUCCESS, true);
+        this.isTopUpLoading = false;
       },
       error: (err) => {
         this.closeTopUpModal();
-        this.showAlert('Top Up Failed: ' + err.error.message, false);
+        this.showAlert(MessageConstants.TOP_UP_FAILED(err), false);
+        this.isTopUpLoading = false;
+      },
+      complete: () => {
+        this.isTopUpLoading = false;
       }
     });
   }
 
   changePassword() {
-    console.log('BODY:', this.changePasswordDTO);
-
+    this.isChangePasswordLoading = true;
     this.userService.changePassword(this.changePasswordDTO).subscribe({
       next: () => {
         this.closeChangePasswordModal();
-        this.showAlert('Password changed successfully', true);
+        this.showAlert(MessageConstants.CHANGE_PASSWORD_SUCCESS, true);
+        this.isChangePasswordLoading = false;
       },
       error: (err) => {
-        this.showAlert('Failed to change your password: ' + err.error.message, false);
+        this.showAlert(MessageConstants.CHANGE_PASSWORD_FAILED(err), false);
+        this.isChangePasswordLoading = false;
       },
-
+      complete: () => {
+        this.isChangePasswordLoading = false;
+      }
     });
   }
 
@@ -148,14 +168,22 @@ export class ProfileComponent {
   }
 
   isButtonDisabled(): boolean {
-    return this.user.name === this.tempUsername || this.user.name === '' || !this.user.name;
+    return this.user.name === this.tempUsername ||
+      this.user.name === '' ||
+      !this.user.name ||
+      this.isSaveProfileLoading;
   }
 
   isUpdatePasswordButtonDisabled(): boolean {
     return (this.changePasswordDTO.oldPassword.length < 8) ||
       (this.changePasswordDTO.newPassword.length < 8) ||
       ((this.user.confirmPassword?.length ?? 0) < 8) ||
-      (this.changePasswordDTO.newPassword !== this.user.confirmPassword);
+      (this.changePasswordDTO.newPassword !== this.user.confirmPassword) ||
+      this.isChangePasswordLoading;
+  }
+
+  isTopUpButtonDisabled(): boolean {
+    return this.topUpDTO.balance === 0 || this.isTopUpLoading;
   }
 
   showAlert(message: string, success: boolean) {

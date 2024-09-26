@@ -6,7 +6,7 @@ import { TimeFormatPipe } from '../../../core/pipes/time-format/time-format.pipe
 import { Movie } from '../../../model/movie.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PriceFormatPipe } from '../../../core/pipes/price-format/price-format.pipe';
-import { RouterConfig } from '../../../config/app.constants';
+import { MessageConstants, RouterConfig } from '../../../config/app.constants';
 import { ScheduleService } from '../../../services/schedule/schedule.service';
 
 @Component({
@@ -43,7 +43,7 @@ export class MovieScheduleComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.currentDateTime = this.getTodayDate();
+    this.currentDateTime = this.route.snapshot.paramMap.get('date')!;
     this.getScheduleList();
     this.getMovie();
   }
@@ -64,14 +64,15 @@ export class MovieScheduleComponent implements OnInit {
   getMovie() {
     this.isLoading = true;
     const movieId = this.route.snapshot.paramMap.get('id');
-    this.scheduleService.getScheduleByMovieId(movieId!, 0, 10, this.currentDateTime).subscribe({
+    const date = this.route.snapshot.paramMap.get('date');
+    this.scheduleService.getScheduleByMovieId(movieId!, 0, 10, date!).subscribe({
       next: (res: any) => {
         this.movie = res?.content[0] ?? [];
         this.isLoading = false;
       },
       error: (err: any) => {
         this.isLoading = false;
-        this.showAlert('Failed to get movie: ' + err.error.message, false);
+        this.showAlert(MessageConstants.GET_MOVIE_FAILED(err), false);
       },
       complete: () => {
         this.isLoading = false;
@@ -89,7 +90,7 @@ export class MovieScheduleComponent implements OnInit {
       },
       error: (err: any) => {
         this.isLoading = false;
-        this.showAlert('Failed to get schedule list: ' + err.error.message, false);
+        this.showAlert(MessageConstants.GET_SCHEDULE_LIST_FAILED(err), false);
       },
       complete: () => {
         this.isLoading = false;

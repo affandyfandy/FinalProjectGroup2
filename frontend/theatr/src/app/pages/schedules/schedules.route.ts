@@ -5,7 +5,7 @@ import { accessGuard } from "../../main/guards/access.guard";
 
 export const scheduleRoutes: Routes = [
     {
-        path: ':id',
+        path: ':id/:date',
         data: { roles: ['ROLE_CUSTOMER', 'ROLE_GUEST'] },
         canActivate: [accessGuard],
         component: MovieScheduleComponent

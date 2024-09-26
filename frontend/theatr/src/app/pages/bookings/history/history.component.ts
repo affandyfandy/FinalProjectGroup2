@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Schedule } from '../../../model/schedule.model';
 import { FullDateTimePipe } from '../../../core/pipes/full-date-time/full-date-time.pipe';
 import { Router } from '@angular/router';
-import { RouterConfig } from '../../../config/app.constants';
+import { MessageConstants, RouterConfig } from '../../../config/app.constants';
 import { BookingService } from '../../../services/booking/booking.service';
 import { BookingHistoryResponse } from '../../../model/booking.model';
 
@@ -61,7 +61,7 @@ export class HistoryComponent implements OnInit {
         this.totalPages = res.totalPages;
       },
       error: (err) => {
-        this.showAlert('Failed to get booking list: ' + err.error.message, false);
+        this.showAlert(MessageConstants.GET_BOOKING_LIST_FAILED(err), false);
       }
     });
   }

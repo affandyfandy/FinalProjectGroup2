@@ -3,6 +3,7 @@ import { SaveMovieDTO, Movie, ShowMovieDTO } from '../../../model/movie.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MovieService } from '../../../services/movie/movie.service';
+import { MessageConstants } from '../../../config/app.constants';
 
 @Component({
   selector: 'app-movie',
@@ -52,6 +53,8 @@ export class MovieComponent implements OnInit {
   alertMessage = '';
   isAlertSuccess = true;
 
+  isListLoading = false;
+
   constructor(private movieService: MovieService) { }
 
   ngOnInit(): void {
@@ -60,14 +63,20 @@ export class MovieComponent implements OnInit {
 
 
   getMovieList(page: number = 0) {
-    this.movieService.getAllMovies(page, this.searchText).subscribe({
+    this.isListLoading = true;
+    this.movieService.getAllMovies(page, this.searchText, 5).subscribe({
       next: (res: any) => {
-        this.movieList = res.content;
+        this.movieList = res?.content ?? [];
         this.currentPage = page;
         this.totalPages = res.totalPages;
+        this.isListLoading = false;
       },
       error: (err) => {
-        this.showAlert('Failed to get movie list: ' + err.error.message, false);
+        this.showAlert(MessageConstants.GET_MOVIE_LIST_FAILED(err), false);
+        this.isListLoading = false;
+      },
+      complete: () => {
+        this.isListLoading = false;
       }
     });
   }
@@ -95,12 +104,15 @@ export class MovieComponent implements OnInit {
         this.closeMovieModal();
         this.getMovieList(this.currentPage);
         this.isLoading = false;
-        this.showAlert('Movie updated successfully', true);
+        this.showAlert(MessageConstants.UPDATE_MOVIE_SUCCESS, true);
       },
       error: (err) => {
         this.isLoading = false;
         this.closeMovieModal();
-        this.showAlert('Failed to create a movie: ' + err.error.message, false);
+        this.showAlert(MessageConstants.UPDATE_MOVIE_FAILED(err), false);
+      },
+      complete: () => {
+        this.isLoading = false;
       }
     });
   }
@@ -118,12 +130,15 @@ export class MovieComponent implements OnInit {
         this.isLoading = false;
         this.closeMovieModal();
         this.getMovieList();
-        this.showAlert('Movie created successfully', true);
+        this.showAlert(MessageConstants.CREATE_MOVIE_SUCCESS, true);
       },
       error: (err) => {
         this.isLoading = false;
         this.closeMovieModal();
-        this.showAlert('Failed to create a movie: ' + err.error.message, false);
+        this.showAlert(MessageConstants.CREATE_MOVIE_FAILED(err), false);
+      },
+      complete: () => {
+        this.isLoading = false;
       }
     });
   }
@@ -141,7 +156,8 @@ export class MovieComponent implements OnInit {
           }
         },
         error: (err) => {
-          this.showAlert('Failed to upload poster: ' + err.error.message, false);
+          this.isLoading = false;
+          this.showAlert(MessageConstants.UPLOAD_POSTER_FAILED(err), false);
         }
       });
     }
