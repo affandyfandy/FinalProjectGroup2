@@ -3,6 +3,7 @@ package findo.booking.service.impl;
 import findo.booking.client.ScheduleClient;
 import findo.booking.client.StudioClient;
 import findo.booking.client.UserClient;
+import findo.booking.core.AppConstant;
 import findo.booking.dto.BookingDetailDTO;
 import findo.booking.dto.BookingResponseDTO;
 import findo.booking.dto.BookingSeatsDTO;
@@ -156,7 +157,7 @@ public class BookingServiceImpl implements BookingService {
         @Override
         public BookingDetailDTO getBookingDetail(UUID bookingId) {
                 Booking booking = bookingRepository.findById(bookingId)
-                                .orElseThrow(() -> new RuntimeException("Booking not found"));
+                                .orElseThrow(() -> new RuntimeException(AppConstant.BookingNotFoundMsg.getValue()));
 
                 List<BookingSeat> bookingSeats = bookingSeatRepository.findByBookingIdWithSeatIds(bookingId);
                 return bookingMapper.toBookingDetailDTO(booking, bookingSeats);
@@ -165,50 +166,69 @@ public class BookingServiceImpl implements BookingService {
         // Create Booking (Customer)
         @Override
         public Mono<Booking> createBooking(CreateBookingDTO request, UUID userId, String token, String email) {
-                return userClient.getUserBalance(userId, token)
-                                .flatMap(userBalanceDTO -> {
-                                        if (userBalanceDTO.getBalance() < request.getTotalAmount()) {
-                                                return Mono.error(new RuntimeException("Insufficient balance"));
-                                        }
+                UUID scheduleId = request.getScheduleIds().get(0);
 
-                                        // Proceed with booking creation
-                                        Booking booking = new Booking();
-                                        booking.setUserIds(userId);
-                                        booking.setTotalAmount(request.getTotalAmount());
-                                        booking.setScheduleIds(request.getScheduleIds());
-                                        booking.setIsPrinted(false);
-                                        booking.setCreatedBy(email);
-                                        booking.setUpdatedBy(email);
+                Mono<ScheduleMovieClientDTO> showDateMono = scheduleClient.getScheduleByIds(scheduleId, token);
+                Mono<Timestamp> result = showDateMono.map(showDate -> {
+                        return showDate.getShows().get(0).getShowDate();
+                });
 
-                                        Timestamp now = Timestamp.from(Instant.now());
-                                        booking.setCreatedTime(now);
-                                        booking.setUpdatedTime(now);
+                Mono<Timestamp> compareResult = Mono.just(Timestamp.from(Instant.now()));
+                System.out.println(compareResult);
+                return result.flatMap(showDateTimestamp -> compareResult.flatMap(currentTimestamp -> {
+                        if (currentTimestamp.after(showDateTimestamp)) {
+                                return userClient.getUserBalance(userId, token)
+                                                .flatMap(userBalanceDTO -> {
+                                                        if (userBalanceDTO.getBalance() < request.getTotalAmount()) {
+                                                                return Mono.error(new RuntimeException(
+                                                                                AppConstant.BookingInsufficientBalanceMsg
+                                                                                                .getValue()));
+                                                        }
 
-                                        Booking savedBooking = bookingRepository.save(booking);
+                                                        // Proceed with booking creation
+                                                        Booking booking = new Booking();
+                                                        booking.setUserIds(userId);
+                                                        booking.setTotalAmount(request.getTotalAmount());
+                                                        booking.setScheduleIds(request.getScheduleIds());
+                                                        booking.setIsPrinted(false);
+                                                        booking.setCreatedBy(email);
+                                                        booking.setUpdatedBy(email);
 
-                                        BookingSeat bookingSeat = new BookingSeat();
-                                        bookingSeat.setBooking(savedBooking);
-                                        bookingSeat.setSeatIds(request.getSeatIds());
-                                        bookingSeatRepository.save(bookingSeat);
+                                                        Timestamp now = Timestamp.from(Instant.now());
+                                                        booking.setCreatedTime(now);
+                                                        booking.setUpdatedTime(now);
 
-                                        // Update user balance
-                                        double newBalance = userBalanceDTO.getBalance() - request.getTotalAmount();
-                                        return userClient.updateUserBalance(userId, newBalance, token)
-                                                        .thenReturn(savedBooking);
-                                });
+                                                        Booking savedBooking = bookingRepository.save(booking);
+
+                                                        BookingSeat bookingSeat = new BookingSeat();
+                                                        bookingSeat.setBooking(savedBooking);
+                                                        bookingSeat.setSeatIds(request.getSeatIds());
+                                                        bookingSeatRepository.save(bookingSeat);
+
+                                                        // Update user balance
+                                                        double newBalance = userBalanceDTO.getBalance()
+                                                                        - request.getTotalAmount();
+                                                        return userClient.updateUserBalance(userId, newBalance, token)
+                                                                        .thenReturn(savedBooking);
+                                                });
+                        } else {
+                                return Mono.error(new RuntimeException(AppConstant.BookingScheduleLateMsg.getValue()));
+                        }
+                }));
         }
 
         @Override
         public Mono<PrintTicketResponseDTO> printTicket(UUID bookingId, String email, String token) {
                 return Mono.justOrEmpty(bookingRepository.findById(bookingId))
-                                .switchIfEmpty(Mono.error(new RuntimeException("Booking not found")))
+                                .switchIfEmpty(Mono
+                                                .error(new RuntimeException(AppConstant.BookingNotFoundMsg.getValue())))
                                 .flatMap(booking -> {
                                         Timestamp now = Timestamp.from(Instant.now());
                                         booking.setUpdatedTime(now);
                                         booking.setUpdatedBy(email);
                                         if (Boolean.TRUE.equals(booking.getIsPrinted())) {
                                                 throw new TicketAlreadyPrintedException(
-                                                                "Ticket has already been printed");
+                                                                AppConstant.BookingTicketPrintedMsg.getValue());
                                         }
 
                                         booking.setIsPrinted(true);
@@ -280,54 +300,20 @@ public class BookingServiceImpl implements BookingService {
                                                                                                                             // needed
                                                                 } catch (IOException e) {
                                                                         return Mono.error(new RuntimeException(
-                                                                                        "Error generating PDF", e));
+                                                                                        AppConstant.BookingPDFErrorMsg
+                                                                                                        .getValue(),
+                                                                                        e));
                                                                 }
 
                                                                 // Create PrintTicketResponseDTO with PDF
                                                                 return Mono.just(new PrintTicketResponseDTO(
                                                                                 booking.getId(), true,
-                                                                                "Ticket successfully printed",
+                                                                                AppConstant.BookingTicketSuccessMsg
+                                                                                                .getValue(),
                                                                                 pdfInputStream));
                                                         });
                                 });
         }
-
-        // @Override
-        // public Mono<PrintTicketResponseDTO> printTicket(UUID bookingId, String email)
-        // {
-        // return Mono.justOrEmpty(bookingRepository.findById(bookingId))
-        // .switchIfEmpty(Mono.error(new RuntimeException("Booking not found")))
-        // .flatMap(booking -> {
-        // Timestamp now = Timestamp.from(Instant.now());
-        // booking.setUpdatedTime(now);
-        // booking.setUpdatedBy(email);
-        // if (Boolean.TRUE.equals(booking.getIsPrinted())) {
-        // throw new TicketAlreadyPrintedException("Ticket has already been printed");
-        // }
-
-        // booking.setIsPrinted(true);
-        // bookingRepository.save(booking);
-
-        // // Construct BookingDetailDTO
-        // List<BookingSeat> bookingSeats =
-        // bookingSeatRepository.findByBookingIdWithSeatIds(bookingId);
-        // BookingDetailDTO bookingDetailDTO = bookingMapper.toBookingDetailDTO(booking,
-        // bookingSeats);
-
-        // // Generate PDF
-        // ByteArrayInputStream pdfInputStream;
-        // try {
-        // pdfInputStream = pdfGeneratorServiceImpl.generatePdf(bookingDetailDTO);
-        // } catch (IOException e) {
-        // return Mono.error(new RuntimeException("Error generating PDF", e));
-        // }
-
-        // // Create PrintTicketResponseDTO with PDF
-        // return Mono.just(new PrintTicketResponseDTO(booking.getId(), true, "Ticket
-        // successfully printed",
-        // pdfInputStream));
-        // });
-        // }
 
         @Override
         public BookingSeatsDTO getAllSeatIds(UUID scheduleId) {
@@ -345,7 +331,7 @@ public class BookingServiceImpl implements BookingService {
         @Override
         public Mono<ScheduleDetailsAdmin> getBookingDetails(UUID bookingId, String token) {
                 Booking booking = bookingRepository.findById(bookingId)
-                                .orElseThrow(() -> new RuntimeException("Booking not found"));
+                                .orElseThrow(() -> new RuntimeException(AppConstant.BookingNotFoundMsg.getValue()));
 
                 UUID custId = booking.getUserIds();
 

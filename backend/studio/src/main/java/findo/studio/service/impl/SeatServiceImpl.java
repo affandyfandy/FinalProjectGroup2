@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import findo.studio.core.AppConstant;
 import findo.studio.data.entity.Seat;
 import findo.studio.data.entity.Studio;
 import findo.studio.data.repository.SeatRepository;
@@ -50,7 +51,7 @@ public class SeatServiceImpl implements SeatService {
     @Override
     public Seat findSeatById(Integer id) {
         return seatRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Seat not found!"));
+                .orElseThrow(() -> new NotFoundException(AppConstant.StudioSeatNotFoundMsg.getValue()));
     }
 
     @Override
@@ -58,7 +59,7 @@ public class SeatServiceImpl implements SeatService {
         List<Seat> seatStudio = seatRepository.findByStudioId(studioId);
 
         if (seatStudio.isEmpty()) {
-            throw new NotFoundException("Studio seat not found!");
+            throw new NotFoundException(AppConstant.StudioSeatinStudioNotFoundMsg.getValue());
         }
 
         AllSeatStudioDTO listStudioSeats = new AllSeatStudioDTO(seatStudio);

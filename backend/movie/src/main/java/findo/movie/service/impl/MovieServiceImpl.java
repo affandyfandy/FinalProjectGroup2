@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import findo.movie.core.AppConstant;
 import findo.movie.data.entity.Movie;
 import findo.movie.data.repository.MovieRepository;
 import findo.movie.dto.MovieSaveDTO;
@@ -39,13 +40,13 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie findMovieById(UUID id) {
         return movieRepository.findById(id)
-            .orElseThrow(() -> new MovieNotFoundException("Movie not found!"));
+                .orElseThrow(() -> new MovieNotFoundException(AppConstant.MovieNotFoundMsg.getValue()));
     }
 
     @Override
     public Movie createMovie(MovieSaveDTO movieSaveDTO) {
-        if(movieRepository.existsByTitle(movieSaveDTO.getTitle())) {
-            throw new DuplicateTitleException("Movie with this title already exists!");
+        if (movieRepository.existsByTitle(movieSaveDTO.getTitle())) {
+            throw new DuplicateTitleException(AppConstant.MovieAlreadyExistMsg.getValue());
         }
 
         Movie savedMovie = movieMapper.toMovie(movieSaveDTO);
@@ -63,8 +64,9 @@ public class MovieServiceImpl implements MovieService {
     public Movie updateMovie(UUID id, MovieSaveDTO movieSaveDTO) {
         Movie checkMovie = findMovieById(id);
 
-        if(!checkMovie.getTitle().equals(movieSaveDTO.getTitle()) && movieRepository.existsByTitle(movieSaveDTO.getTitle())) {
-            throw new DuplicateTitleException("Movie with title already exists!");
+        if (!checkMovie.getTitle().equals(movieSaveDTO.getTitle())
+                && movieRepository.existsByTitle(movieSaveDTO.getTitle())) {
+            throw new DuplicateTitleException(AppConstant.MovieAlreadyExistMsg.getValue());
         }
 
         checkMovie.setTitle(movieSaveDTO.getTitle());

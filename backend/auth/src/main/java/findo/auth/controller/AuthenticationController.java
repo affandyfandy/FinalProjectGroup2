@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import findo.auth.core.AppConstant;
 import findo.auth.data.entity.User;
 import findo.auth.dto.LoginDTO;
 import findo.auth.dto.LoginResponseDTO;
@@ -28,7 +29,7 @@ public class AuthenticationController {
     public ResponseEntity<RegisterResponseDTO> register(@Valid @RequestBody RegisterDTO user) {
         User response = authenticationService.register(user);
         RegisterResponseDTO registerResponse = new RegisterResponseDTO();
-        registerResponse.setMessage("User registered successfully: "+response.getEmail());
+        registerResponse.setMessage(AppConstant.AuthRegisterSuccessMsg.getValue() + response.getEmail());
         return ResponseEntity.ok(registerResponse);
     }
 

@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 
+import findo.movie.core.AppConstant;
+
 @Component
 public class ImgUtils {
 
@@ -19,21 +21,20 @@ public class ImgUtils {
     private Cloudinary cloudinary;
 
     private static final List<String> ALLOWED_IMAGE_TYPE = Arrays.asList(
-        "image/jpeg",
-        "image/png",
-        "image/gif"
-    );
+            "image/jpeg",
+            "image/png",
+            "image/gif");
 
     public String uploadFile(MultipartFile file) {
-        if(!isImageFile(file)) {
-            throw new IllegalArgumentException("Only image files (JPEG, PNG, GIF) are allowed.");
+        if (!isImageFile(file)) {
+            throw new IllegalArgumentException(AppConstant.MovieFileCriteriaMsg.getValue());
         }
 
         try {
             Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
             return uploadResult.get("url").toString();
         } catch (IOException e) {
-            throw new RuntimeException("Error uploading file to Cloudinary", e);
+            throw new RuntimeException(AppConstant.MovieErrorUploadImageMsg.getValue(), e);
         }
     }
 
