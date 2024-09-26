@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import findo.auth.core.AppConstant;
 import findo.auth.data.entity.User;
 import findo.auth.data.repository.UserRepository;
 import findo.auth.dto.UserDetailsDTO;
@@ -19,8 +20,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        
+                .orElseThrow(() -> new UsernameNotFoundException(AppConstant.AuthUserNotFoundMsg.getValue()));
+
         return new UserDetailsDTO(user);
     }
 }

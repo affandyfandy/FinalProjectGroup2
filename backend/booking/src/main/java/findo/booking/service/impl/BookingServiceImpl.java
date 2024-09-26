@@ -3,6 +3,7 @@ package findo.booking.service.impl;
 import findo.booking.client.ScheduleClient;
 import findo.booking.client.StudioClient;
 import findo.booking.client.UserClient;
+import findo.booking.core.AppConstant;
 import findo.booking.dto.BookingDetailDTO;
 import findo.booking.dto.BookingResponseDTO;
 import findo.booking.dto.BookingSeatsDTO;
@@ -39,327 +40,357 @@ import java.util.List;
 import java.util.UUID;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 @Service
 public class BookingServiceImpl implements BookingService {
-    private final BookingRepository bookingRepository;
-    private final BookingSeatRepository bookingSeatRepository;
-    private final UserClient userClient;
-    private final ScheduleClient scheduleClient;
-    private final StudioClient studioClient;
-    private final PdfGeneratorServiceImpl pdfGeneratorServiceImpl;
+        private final BookingRepository bookingRepository;
+        private final BookingSeatRepository bookingSeatRepository;
+        private final UserClient userClient;
+        private final ScheduleClient scheduleClient;
+        private final StudioClient studioClient;
+        private final PdfGeneratorServiceImpl pdfGeneratorServiceImpl;
 
-    public BookingServiceImpl(BookingRepository bookingRepository, BookingSeatRepository bookingSeatRepository,
-            StudioClient studioClient,
-            UserClient userClient, ScheduleClient scheduleClient,
-            PdfGeneratorServiceImpl pdfGeneratorServiceImpl) {
-        this.bookingRepository = bookingRepository;
-        this.bookingSeatRepository = bookingSeatRepository;
-        this.userClient = userClient;
-        this.pdfGeneratorServiceImpl = pdfGeneratorServiceImpl;
-        this.scheduleClient = scheduleClient;
-        this.studioClient = studioClient;
-    }
+        public BookingServiceImpl(BookingRepository bookingRepository, BookingSeatRepository bookingSeatRepository,
+                        StudioClient studioClient,
+                        UserClient userClient, ScheduleClient scheduleClient,
+                        PdfGeneratorServiceImpl pdfGeneratorServiceImpl) {
+                this.bookingRepository = bookingRepository;
+                this.bookingSeatRepository = bookingSeatRepository;
+                this.userClient = userClient;
+                this.pdfGeneratorServiceImpl = pdfGeneratorServiceImpl;
+                this.scheduleClient = scheduleClient;
+                this.studioClient = studioClient;
+        }
 
-    private final BookingMapper bookingMapper = BookingMapper.INSTANCE;
+        private final BookingMapper bookingMapper = BookingMapper.INSTANCE;
 
-    // Show All Booking History (Admin)
-    @Override
-    public Mono<Page<BookingResponseDTO>> getAllBookings(Pageable pageable, LocalDate date, String token) {
-        LocalDateTime startOfDay = date.atStartOfDay();
-        LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
-        return Mono
-                .fromCallable(() -> bookingRepository.findAllBookingTimeBetween(Timestamp.valueOf(startOfDay),
-                        Timestamp.valueOf(endOfDay), pageable))
-                .flatMap(bookingsPage -> {
-                    // Process each booking reactively
-                    return Flux.fromIterable(bookingsPage.getContent())
-                            .flatMap(booking -> {
-                                // Fetch and map each ScheduleId to ScheduleMovieDTO reactively
-                                return Flux.fromIterable(booking.getScheduleIds())
-                                        .flatMap(scheduleId -> scheduleClient.getScheduleById(scheduleId, token))
-                                        .collectList()
-                                        .map(scheduleMovies -> {
-                                            BookingResponseDTO responseDTO = bookingMapper
-                                                    .toBookingResponseDTO(booking);
-                                            responseDTO.setScheduleIds(scheduleMovies);
-                                            return responseDTO;
-                                        });
-                            })
-                            .collectList() // Collect all BookingResponseDTO into a List
-                            .map(bookingResponseDTOList -> new PageImpl<>(
-                                    bookingResponseDTOList, pageable, bookingsPage.getTotalElements()));
-                });
-    }
+        // Show All Booking History (Admin)
+        @Override
+        public Mono<Page<BookingResponseDTO>> getAllBookings(Pageable pageable, LocalDate date, String token) {
+                LocalDateTime startOfDay = date.atStartOfDay();
+                LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
+                return Mono
+                                .fromCallable(() -> bookingRepository.findAllBookingTimeBetween(
+                                                Timestamp.valueOf(startOfDay),
+                                                Timestamp.valueOf(endOfDay), pageable))
+                                .flatMap(bookingsPage -> {
+                                        return Flux.fromIterable(bookingsPage.getContent())
+                                                        .flatMap(booking -> {
+                                                                return Flux.fromIterable(booking.getScheduleIds())
+                                                                                .flatMap(scheduleId -> scheduleClient
+                                                                                                .getScheduleById(
+                                                                                                                scheduleId,
+                                                                                                                token))
+                                                                                .collectList()
+                                                                                .map(scheduleMovies -> {
+                                                                                        BookingResponseDTO responseDTO = bookingMapper
+                                                                                                        .toBookingResponseDTO(
+                                                                                                                        booking);
+                                                                                        responseDTO.setScheduleIds(
+                                                                                                        scheduleMovies);
+                                                                                        return responseDTO;
+                                                                                });
+                                                        })
+                                                        .collectList()
+                                                        .map(bookingResponseDTOList -> {
+                                                                bookingResponseDTOList.sort(Comparator.comparing(
+                                                                                BookingResponseDTO::getUpdatedTime));
+                                                                if (pageable.getSort().getOrderFor("updatedTime")
+                                                                                .isDescending()) {
+                                                                        Collections.reverse(bookingResponseDTOList);
+                                                                }
 
-    @Override
-    public Mono<Page<BookingResponseDTO>> getBookingHistoryByUser(UUID userId, Pageable pageable, LocalDate date,
-            String token) {
-        LocalDateTime startOfDay = date.atStartOfDay();
-        LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
+                                                                return new PageImpl<>(
+                                                                                bookingResponseDTOList, pageable,
+                                                                                bookingsPage.getTotalElements());
+                                                        });
+                                });
+        }
 
-        return Mono.fromCallable(() -> bookingRepository.findBookingsByUserIdsAndUpdatedTimeBetween(
-                userId, Timestamp.valueOf(startOfDay), Timestamp.valueOf(endOfDay), pageable))
-                .flatMap(bookingsPage -> {
-                    // Process each booking reactively
-                    return Flux.fromIterable(bookingsPage.getContent())
-                            .flatMap(booking -> {
-                                // Fetch the related schedule data
-                                return Flux.fromIterable(booking.getScheduleIds())
-                                        .flatMap(scheduleId -> scheduleClient.getScheduleById(scheduleId, token))
-                                        .collectList()
-                                        .map(scheduleMovies -> {
-                                            BookingResponseDTO responseDTO = bookingMapper
-                                                    .toBookingResponseDTO(booking);
-                                            responseDTO.setScheduleIds(scheduleMovies);
-                                            return responseDTO;
-                                        });
-                            })
-                            .collectList() // Collect all BookingResponseDTO into a List
-                            .map(bookingResponseDTOList -> new PageImpl<>(
-                                    bookingResponseDTOList, pageable, bookingsPage.getTotalElements()));
-                });
-    }
+        @Override
+        public Mono<Page<BookingResponseDTO>> getBookingHistoryByUser(UUID userId, Pageable pageable, LocalDate date,
+                        String token) {
+                LocalDateTime startOfDay = date.atStartOfDay();
+                LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
 
-    // Show Booking Detail (Customer)
-    @Override
-    public BookingDetailDTO getBookingDetail(UUID bookingId) {
-        Booking booking = bookingRepository.findById(bookingId)
-                .orElseThrow(() -> new RuntimeException("Booking not found"));
+                return Mono.fromCallable(() -> bookingRepository.findBookingsByUserIdsAndUpdatedTimeBetween(
+                                userId, Timestamp.valueOf(startOfDay), Timestamp.valueOf(endOfDay), pageable))
+                                .flatMap(bookingsPage -> {
+                                        // Process each booking reactively
+                                        return Flux.fromIterable(bookingsPage.getContent())
+                                                        .flatMap(booking -> {
+                                                                // Fetch the related schedule data
+                                                                return Flux.fromIterable(booking.getScheduleIds())
+                                                                                .flatMap(scheduleId -> scheduleClient
+                                                                                                .getScheduleById(
+                                                                                                                scheduleId,
+                                                                                                                token))
+                                                                                .collectList()
+                                                                                .map(scheduleMovies -> {
+                                                                                        BookingResponseDTO responseDTO = bookingMapper
+                                                                                                        .toBookingResponseDTO(
+                                                                                                                        booking);
+                                                                                        responseDTO.setScheduleIds(
+                                                                                                        scheduleMovies);
+                                                                                        return responseDTO;
+                                                                                });
+                                                        })
+                                                        .collectList() // Collect all BookingResponseDTO into a List
+                                                        .map(bookingResponseDTOList -> {
+                                                                bookingResponseDTOList.sort(Comparator.comparing(
+                                                                                BookingResponseDTO::getUpdatedTime));
 
-        List<BookingSeat> bookingSeats = bookingSeatRepository.findByBookingIdWithSeatIds(bookingId);
-        return bookingMapper.toBookingDetailDTO(booking, bookingSeats);
-    }
+                                                                if (pageable.getSort().getOrderFor("updatedTime")
+                                                                                .isDescending()) {
+                                                                        Collections.reverse(bookingResponseDTOList);
+                                                                }
+                                                                return new PageImpl<>(
+                                                                                bookingResponseDTOList, pageable,
+                                                                                bookingsPage.getTotalElements());
+                                                        });
+                                });
+        }
 
-    // Create Booking (Customer)
-    @Override
-    public Mono<Booking> createBooking(CreateBookingDTO request, UUID userId, String token, String email) {
-        return userClient.getUserBalance(userId, token)
-                .flatMap(userBalanceDTO -> {
-                    if (userBalanceDTO.getBalance() < request.getTotalAmount()) {
-                        return Mono.error(new RuntimeException("Insufficient balance"));
-                    }
+        // Show Booking Detail (Customer)
+        @Override
+        public BookingDetailDTO getBookingDetail(UUID bookingId) {
+                Booking booking = bookingRepository.findById(bookingId)
+                                .orElseThrow(() -> new RuntimeException(AppConstant.BookingNotFoundMsg.getValue()));
 
-                    // Proceed with booking creation
-                    Booking booking = new Booking();
-                    booking.setUserIds(userId);
-                    booking.setTotalAmount(request.getTotalAmount());
-                    booking.setScheduleIds(request.getScheduleIds());
-                    booking.setIsPrinted(false);
-                    booking.setCreatedBy(email);
-                    booking.setUpdatedBy(email);
+                List<BookingSeat> bookingSeats = bookingSeatRepository.findByBookingIdWithSeatIds(bookingId);
+                return bookingMapper.toBookingDetailDTO(booking, bookingSeats);
+        }
 
-                    Timestamp now = Timestamp.from(Instant.now());
-                    booking.setCreatedTime(now);
-                    booking.setUpdatedTime(now);
+        // Create Booking (Customer)
+        @Override
+        public Mono<Booking> createBooking(CreateBookingDTO request, UUID userId, String token, String email) {
+                UUID scheduleId = request.getScheduleIds().get(0);
 
-                    Booking savedBooking = bookingRepository.save(booking);
-
-                    BookingSeat bookingSeat = new BookingSeat();
-                    bookingSeat.setBooking(savedBooking);
-                    bookingSeat.setSeatIds(request.getSeatIds());
-                    bookingSeatRepository.save(bookingSeat);
-
-                    // Update user balance
-                    double newBalance = userBalanceDTO.getBalance() - request.getTotalAmount();
-                    return userClient.updateUserBalance(userId, newBalance, token)
-                            .thenReturn(savedBooking);
-                });
-    }
-
-    @Override
-    public Mono<PrintTicketResponseDTO> printTicket(UUID bookingId, String email, String token) {
-        return Mono.justOrEmpty(bookingRepository.findById(bookingId))
-                .switchIfEmpty(Mono.error(new RuntimeException("Booking not found")))
-                .flatMap(booking -> {
-                    Timestamp now = Timestamp.from(Instant.now());
-                    booking.setUpdatedTime(now);
-                    booking.setUpdatedBy(email);
-                    if (Boolean.TRUE.equals(booking.getIsPrinted())) {
-                        throw new TicketAlreadyPrintedException("Ticket has already been printed");
-                    }
-
-                    // Fetch ScheduleDetailsAdmin instead of BookingDetailDTO
-                    UUID custId = booking.getUserIds();
-                    List<Integer> seatIds = booking.getBookingSeats().get(0).getSeatIds();
-                    UUID scheduleIds = booking.getScheduleIds().get(0);
-
-                    // Assume token is available in the context
-                    Mono<UserDTO> custMono = userClient.getUserById(custId, token);
-                    List<Mono<SeatDTO>> seatIdsMono = seatIds.stream()
-                            .map(seatId -> studioClient.getSeatById(seatId, token))
-                            .collect(Collectors.toList());
-                    Mono<List<SeatDTO>> seatMono = Mono.zip(seatIdsMono, array -> Arrays.stream(array)
-                            .map(seat -> (SeatDTO) seat)
-                            .collect(Collectors.toList()));
-                    Mono<ScheduleMovieClientDTO> listScheduleMono = scheduleClient.getScheduleByIds(scheduleIds, token);
-
-                    return Mono.zip(custMono, listScheduleMono, seatMono)
-                            .flatMap(tuple -> {
-                                UserDTO cust = tuple.getT1();
-                                ScheduleMovieClientDTO listSchedule = tuple.getT2();
-                                List<SeatDTO> seats = tuple.getT3();
-
-                                // Creating ScheduleDetailsAdmin
-                                ScheduleDetailsAdmin scheduleDetailsAdmin = new ScheduleDetailsAdmin();
-                                List<MovieDetailDTO> movies = new ArrayList<>();
-                                MovieDetailDTO movie = new MovieDetailDTO();
-                                movie.setTitle(listSchedule.getMovieTitle());
-                                movie.setYear(listSchedule.getMovieYear());
-                                movie.setPosterUrl(listSchedule.getPosterUrl());
-                                movies.add(movie);
-
-                                List<StudioDetailDTO> studios = new ArrayList<>();
-                                StudioDetailDTO studio = new StudioDetailDTO();
-                                studio.setId(listSchedule.getShows().get(0).getStudioId());
-                                studio.setStudioName(listSchedule.getShows().get(0).getStudioName());
-                                studios.add(studio);
-
-                                // Set properties on ScheduleDetailsAdmin
-                                scheduleDetailsAdmin.setBookingId(bookingId);
-                                scheduleDetailsAdmin.setCreatedAt(booking.getCreatedTime());
-                                scheduleDetailsAdmin.setCustId(custId);
-                                scheduleDetailsAdmin.setCustName(cust.getName());
-                                scheduleDetailsAdmin.setShowDate(listSchedule.getShows().get(0).getShowDate());
-                                scheduleDetailsAdmin.setMovies(movies);
-                                scheduleDetailsAdmin.setSeats(seats);
-                                scheduleDetailsAdmin.setStudios(studios);
-                                scheduleDetailsAdmin.setTotalAmount(booking.getTotalAmount());
-                                scheduleDetailsAdmin.setPrice(listSchedule.getShows().get(0).getPrice());
-
-                                // Generate PDF
-                                ByteArrayInputStream pdfInputStream;
-                                try {
-                                    pdfInputStream = pdfGeneratorServiceImpl.generatePdf(scheduleDetailsAdmin); // Adjust
-                                                                                                                // method
-                                                                                                                // if
-                                                                                                                // needed
-
-                                    booking.setIsPrinted(true);
-                                    bookingRepository.save(booking);
-                                } catch (IOException e) {
-                                    return Mono.error(new RuntimeException("Error generating PDF", e));
-                                }
-
-                                // Create PrintTicketResponseDTO with PDF
-                                return Mono.just(new PrintTicketResponseDTO(booking.getId(), true,
-                                        "Ticket successfully printed", pdfInputStream));
-                            });
-                });
-    }
-
-    // @Override
-    // public Mono<PrintTicketResponseDTO> printTicket(UUID bookingId, String email)
-    // {
-    // return Mono.justOrEmpty(bookingRepository.findById(bookingId))
-    // .switchIfEmpty(Mono.error(new RuntimeException("Booking not found")))
-    // .flatMap(booking -> {
-    // Timestamp now = Timestamp.from(Instant.now());
-    // booking.setUpdatedTime(now);
-    // booking.setUpdatedBy(email);
-    // if (Boolean.TRUE.equals(booking.getIsPrinted())) {
-    // throw new TicketAlreadyPrintedException("Ticket has already been printed");
-    // }
-
-    // booking.setIsPrinted(true);
-    // bookingRepository.save(booking);
-
-    // // Construct BookingDetailDTO
-    // List<BookingSeat> bookingSeats =
-    // bookingSeatRepository.findByBookingIdWithSeatIds(bookingId);
-    // BookingDetailDTO bookingDetailDTO = bookingMapper.toBookingDetailDTO(booking,
-    // bookingSeats);
-
-    // // Generate PDF
-    // ByteArrayInputStream pdfInputStream;
-    // try {
-    // pdfInputStream = pdfGeneratorServiceImpl.generatePdf(bookingDetailDTO);
-    // } catch (IOException e) {
-    // return Mono.error(new RuntimeException("Error generating PDF", e));
-    // }
-
-    // // Create PrintTicketResponseDTO with PDF
-    // return Mono.just(new PrintTicketResponseDTO(booking.getId(), true, "Ticket
-    // successfully printed",
-    // pdfInputStream));
-    // });
-    // }
-
-    @Override
-    public BookingSeatsDTO getAllSeatIds(UUID scheduleId) {
-        List<BookingSeat> seats = bookingSeatRepository.findByBooking_ScheduleIdsContaining(scheduleId);
-
-        List<Integer> seatIds = seats.stream()
-                .flatMap(seat -> seat.getSeatIds().stream()) // Flatten the stream of seat IDs
-                .collect(Collectors.toList());
-
-        BookingSeatsDTO bookSeatIds = new BookingSeatsDTO(seatIds);
-
-        return bookSeatIds;
-    }
-
-    @Override
-    public Mono<ScheduleDetailsAdmin> getBookingDetails(UUID bookingId, String token) {
-        Booking booking = bookingRepository.findById(bookingId)
-                .orElseThrow(() -> new RuntimeException("Booking not found"));
-
-        UUID custId = booking.getUserIds();
-
-        Mono<UserDTO> custMono = userClient.getUserById(custId, token);
-
-        List<Integer> seatIds = booking.getBookingSeats().get(0).getSeatIds(); // list Seat ID
-
-        List<Mono<SeatDTO>> seatIdsMono = seatIds.stream()
-                .map(seatId -> studioClient.getSeatById(seatId, token))
-                .collect(Collectors.toList());
-
-        Mono<List<SeatDTO>> seatMono = Mono.zip(seatIdsMono, array -> Arrays.stream(array)
-                .map(seat -> (SeatDTO) seat)
-                .collect(Collectors.toList()));
-
-        UUID scheduleIds = booking.getScheduleIds().get(0);
-        Mono<ScheduleMovieClientDTO> listScheduleMono = scheduleClient.getScheduleByIds(scheduleIds, token);
-
-        Mono<ScheduleDetailsAdmin> result = Mono.zip(custMono, listScheduleMono, seatMono)
-                .flatMap(tuple -> {
-                    UserDTO cust = tuple.getT1();
-                    ScheduleMovieClientDTO listSchedule = tuple.getT2();
-                    List<SeatDTO> seats = tuple.getT3();
-
-                    ScheduleDetailsAdmin shceduleDetailsAdmin = new ScheduleDetailsAdmin();
-
-                    List<MovieDetailDTO> movies = new ArrayList<>();
-
-                    MovieDetailDTO movie = new MovieDetailDTO();
-                    movie.setTitle(listSchedule.getMovieTitle());
-                    movie.setYear(listSchedule.getMovieYear());
-                    movie.setPosterUrl(listSchedule.getPosterUrl());
-
-                    movies.add(movie);
-
-                    List<StudioDetailDTO> studios = new ArrayList<>();
-
-                    StudioDetailDTO studio = new StudioDetailDTO();
-                    studio.setId(listSchedule.getShows().get(0).getStudioId());
-                    studio.setStudioName(listSchedule.getShows().get(0).getStudioName());
-
-                    studios.add(studio);
-
-                    shceduleDetailsAdmin.setBookingId(bookingId);
-                    shceduleDetailsAdmin.setCreatedAt(booking.getCreatedTime());
-                    shceduleDetailsAdmin.setCustId(custId);
-                    shceduleDetailsAdmin.setCustName(cust.getName());
-                    shceduleDetailsAdmin.setShowDate(listSchedule.getShows().get(0).getShowDate());
-                    shceduleDetailsAdmin.setMovies(movies);
-                    shceduleDetailsAdmin.setSeats(seats);
-                    shceduleDetailsAdmin.setStudios(studios);
-                    shceduleDetailsAdmin.setTotalAmount(booking.getTotalAmount());
-                    shceduleDetailsAdmin.setPrice(listSchedule.getShows().get(0).getPrice());
-                    shceduleDetailsAdmin.setIsPrinted(booking.getIsPrinted());
-
-                    return Mono.just(shceduleDetailsAdmin);
+                Mono<ScheduleMovieClientDTO> showDateMono = scheduleClient.getScheduleByIds(scheduleId, token);
+                Mono<Timestamp> result = showDateMono.map(showDate -> {
+                        return showDate.getShows().get(0).getShowDate();
                 });
 
-        return result;
-    }
+                Mono<Timestamp> compareResult = Mono.just(Timestamp.from(Instant.now()));
+                System.out.println(compareResult);
+                return result.flatMap(showDateTimestamp -> compareResult.flatMap(currentTimestamp -> {
+                        if (currentTimestamp.after(showDateTimestamp)) {
+                                return userClient.getUserBalance(userId, token)
+                                                .flatMap(userBalanceDTO -> {
+                                                        if (userBalanceDTO.getBalance() < request.getTotalAmount()) {
+                                                                return Mono.error(new RuntimeException(
+                                                                                AppConstant.BookingInsufficientBalanceMsg
+                                                                                                .getValue()));
+                                                        }
+
+                                                        // Proceed with booking creation
+                                                        Booking booking = new Booking();
+                                                        booking.setUserIds(userId);
+                                                        booking.setTotalAmount(request.getTotalAmount());
+                                                        booking.setScheduleIds(request.getScheduleIds());
+                                                        booking.setIsPrinted(false);
+                                                        booking.setCreatedBy(email);
+                                                        booking.setUpdatedBy(email);
+
+                                                        Timestamp now = Timestamp.from(Instant.now());
+                                                        booking.setCreatedTime(now);
+                                                        booking.setUpdatedTime(now);
+
+                                                        Booking savedBooking = bookingRepository.save(booking);
+
+                                                        BookingSeat bookingSeat = new BookingSeat();
+                                                        bookingSeat.setBooking(savedBooking);
+                                                        bookingSeat.setSeatIds(request.getSeatIds());
+                                                        bookingSeatRepository.save(bookingSeat);
+
+                                                        // Update user balance
+                                                        double newBalance = userBalanceDTO.getBalance()
+                                                                        - request.getTotalAmount();
+                                                        return userClient.updateUserBalance(userId, newBalance, token)
+                                                                        .thenReturn(savedBooking);
+                                                });
+                        } else {
+                                return Mono.error(new RuntimeException(AppConstant.BookingScheduleLateMsg.getValue()));
+                        }
+                }));
+        }
+
+        @Override
+        public Mono<PrintTicketResponseDTO> printTicket(UUID bookingId, String email, String token) {
+                return Mono.justOrEmpty(bookingRepository.findById(bookingId))
+                                .switchIfEmpty(Mono
+                                                .error(new RuntimeException(AppConstant.BookingNotFoundMsg.getValue())))
+                                .flatMap(booking -> {
+                                        Timestamp now = Timestamp.from(Instant.now());
+                                        booking.setUpdatedTime(now);
+                                        booking.setUpdatedBy(email);
+                                        if (Boolean.TRUE.equals(booking.getIsPrinted())) {
+                                                throw new TicketAlreadyPrintedException(
+                                                                AppConstant.BookingTicketPrintedMsg.getValue());
+                                        }
+
+                                        booking.setIsPrinted(true);
+                                        bookingRepository.save(booking);
+
+                                        // Fetch ScheduleDetailsAdmin instead of BookingDetailDTO
+                                        UUID custId = booking.getUserIds();
+                                        List<Integer> seatIds = booking.getBookingSeats().get(0).getSeatIds();
+                                        UUID scheduleIds = booking.getScheduleIds().get(0);
+
+                                        // Assume token is available in the context
+                                        Mono<UserDTO> custMono = userClient.getUserById(custId, token);
+                                        List<Mono<SeatDTO>> seatIdsMono = seatIds.stream()
+                                                        .map(seatId -> studioClient.getSeatById(seatId, token))
+                                                        .collect(Collectors.toList());
+                                        Mono<List<SeatDTO>> seatMono = Mono.zip(seatIdsMono,
+                                                        array -> Arrays.stream(array)
+                                                                        .map(seat -> (SeatDTO) seat)
+                                                                        .collect(Collectors.toList()));
+                                        Mono<ScheduleMovieClientDTO> listScheduleMono = scheduleClient
+                                                        .getScheduleByIds(scheduleIds, token);
+
+                                        return Mono.zip(custMono, listScheduleMono, seatMono)
+                                                        .flatMap(tuple -> {
+                                                                UserDTO cust = tuple.getT1();
+                                                                ScheduleMovieClientDTO listSchedule = tuple.getT2();
+                                                                List<SeatDTO> seats = tuple.getT3();
+
+                                                                // Creating ScheduleDetailsAdmin
+                                                                ScheduleDetailsAdmin scheduleDetailsAdmin = new ScheduleDetailsAdmin();
+                                                                List<MovieDetailDTO> movies = new ArrayList<>();
+                                                                MovieDetailDTO movie = new MovieDetailDTO();
+                                                                movie.setTitle(listSchedule.getMovieTitle());
+                                                                movie.setYear(listSchedule.getMovieYear());
+                                                                movie.setPosterUrl(listSchedule.getPosterUrl());
+                                                                movies.add(movie);
+
+                                                                List<StudioDetailDTO> studios = new ArrayList<>();
+                                                                StudioDetailDTO studio = new StudioDetailDTO();
+                                                                studio.setId(listSchedule.getShows().get(0)
+                                                                                .getStudioId());
+                                                                studio.setStudioName(listSchedule.getShows().get(0)
+                                                                                .getStudioName());
+                                                                studios.add(studio);
+
+                                                                // Set properties on ScheduleDetailsAdmin
+                                                                scheduleDetailsAdmin.setBookingId(bookingId);
+                                                                scheduleDetailsAdmin
+                                                                                .setCreatedAt(booking.getCreatedTime());
+                                                                scheduleDetailsAdmin.setCustId(custId);
+                                                                scheduleDetailsAdmin.setCustName(cust.getName());
+                                                                scheduleDetailsAdmin.setShowDate(listSchedule.getShows()
+                                                                                .get(0).getShowDate());
+                                                                scheduleDetailsAdmin.setMovies(movies);
+                                                                scheduleDetailsAdmin.setSeats(seats);
+                                                                scheduleDetailsAdmin.setStudios(studios);
+                                                                scheduleDetailsAdmin.setTotalAmount(
+                                                                                booking.getTotalAmount());
+                                                                scheduleDetailsAdmin.setPrice(listSchedule.getShows()
+                                                                                .get(0).getPrice());
+
+                                                                // Generate PDF
+                                                                ByteArrayInputStream pdfInputStream;
+                                                                try {
+                                                                        pdfInputStream = pdfGeneratorServiceImpl
+                                                                                        .generatePdf(scheduleDetailsAdmin); // Adjust
+                                                                                                                            // method
+                                                                                                                            // if
+                                                                                                                            // needed
+
+                                                                        booking.setIsPrinted(true);
+                                                                        bookingRepository.save(booking);
+                                                                } catch (IOException e) {
+                                                                        return Mono.error(new RuntimeException(
+                                                                                        "Error generating PDF", e));
+                                                                }
+
+                                                                // Create PrintTicketResponseDTO with PDF
+                                                                return Mono.just(new PrintTicketResponseDTO(
+                                                                                booking.getId(), true,
+                                                                                AppConstant.BookingTicketSuccessMsg
+                                                                                                .getValue(),
+                                                                                pdfInputStream));
+                                                        });
+                                });
+        }
+
+        @Override
+        public BookingSeatsDTO getAllSeatIds(UUID scheduleId) {
+                List<BookingSeat> seats = bookingSeatRepository.findByBooking_ScheduleIdsContaining(scheduleId);
+
+                List<Integer> seatIds = seats.stream()
+                                .flatMap(seat -> seat.getSeatIds().stream()) // Flatten the stream of seat IDs
+                                .collect(Collectors.toList());
+
+                BookingSeatsDTO bookSeatIds = new BookingSeatsDTO(seatIds);
+
+                return bookSeatIds;
+        }
+
+        @Override
+        public Mono<ScheduleDetailsAdmin> getBookingDetails(UUID bookingId, String token) {
+                Booking booking = bookingRepository.findById(bookingId)
+                                .orElseThrow(() -> new RuntimeException(AppConstant.BookingNotFoundMsg.getValue()));
+
+                UUID custId = booking.getUserIds();
+
+                Mono<UserDTO> custMono = userClient.getUserById(custId, token);
+
+                List<Integer> seatIds = booking.getBookingSeats().get(0).getSeatIds(); // list Seat ID
+
+                List<Mono<SeatDTO>> seatIdsMono = seatIds.stream()
+                                .map(seatId -> studioClient.getSeatById(seatId, token))
+                                .collect(Collectors.toList());
+
+                Mono<List<SeatDTO>> seatMono = Mono.zip(seatIdsMono, array -> Arrays.stream(array)
+                                .map(seat -> (SeatDTO) seat)
+                                .collect(Collectors.toList()));
+
+                UUID scheduleIds = booking.getScheduleIds().get(0);
+                Mono<ScheduleMovieClientDTO> listScheduleMono = scheduleClient.getScheduleByIds(scheduleIds, token);
+
+                Mono<ScheduleDetailsAdmin> result = Mono.zip(custMono, listScheduleMono, seatMono)
+                                .flatMap(tuple -> {
+                                        UserDTO cust = tuple.getT1();
+                                        ScheduleMovieClientDTO listSchedule = tuple.getT2();
+                                        List<SeatDTO> seats = tuple.getT3();
+
+                                        ScheduleDetailsAdmin shceduleDetailsAdmin = new ScheduleDetailsAdmin();
+
+                                        List<MovieDetailDTO> movies = new ArrayList<>();
+
+                                        MovieDetailDTO movie = new MovieDetailDTO();
+                                        movie.setTitle(listSchedule.getMovieTitle());
+                                        movie.setYear(listSchedule.getMovieYear());
+                                        movie.setPosterUrl(listSchedule.getPosterUrl());
+
+                                        movies.add(movie);
+
+                                        List<StudioDetailDTO> studios = new ArrayList<>();
+
+                                        StudioDetailDTO studio = new StudioDetailDTO();
+                                        studio.setId(listSchedule.getShows().get(0).getStudioId());
+                                        studio.setStudioName(listSchedule.getShows().get(0).getStudioName());
+
+                                        studios.add(studio);
+
+                                        shceduleDetailsAdmin.setBookingId(bookingId);
+                                        shceduleDetailsAdmin.setCreatedAt(booking.getCreatedTime());
+                                        shceduleDetailsAdmin.setCustId(custId);
+                                        shceduleDetailsAdmin.setCustName(cust.getName());
+                                        shceduleDetailsAdmin.setShowDate(listSchedule.getShows().get(0).getShowDate());
+                                        shceduleDetailsAdmin.setMovies(movies);
+                                        shceduleDetailsAdmin.setSeats(seats);
+                                        shceduleDetailsAdmin.setStudios(studios);
+                                        shceduleDetailsAdmin.setTotalAmount(booking.getTotalAmount());
+                                        shceduleDetailsAdmin.setPrice(listSchedule.getShows().get(0).getPrice());
+                                        shceduleDetailsAdmin.setIsPrinted(booking.getIsPrinted());
+
+                                        return Mono.just(shceduleDetailsAdmin);
+                                });
+
+                return result;
+        }
 }

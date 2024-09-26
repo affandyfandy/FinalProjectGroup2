@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import findo.studio.service.StudioService;
 import lombok.AllArgsConstructor;
-
+import findo.studio.core.AppConstant;
 import findo.studio.data.entity.Studio;
 import findo.studio.data.repository.StudioRepository;
 import findo.studio.dto.StudioSaveDTO;
@@ -39,13 +39,13 @@ public class StudioServiceImpl implements StudioService {
     @Override
     public Studio findStudioById(Integer id) {
         return studioRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Studio not found!"));
+                .orElseThrow(() -> new NotFoundException(AppConstant.StudioNotFound.getValue()));
     }
 
     @Override
     public Studio createStudio(StudioSaveDTO studioSaveDTO) {
         if (studioRepository.existsByName(studioSaveDTO.getName())) {
-            throw new DuplicateStudioException("Studio with this name already exists!");
+            throw new DuplicateStudioException(AppConstant.StudioAlreadyExist.getValue());
         }
 
         Studio savedStudio = studioMapper.toStudio(studioSaveDTO);
@@ -69,7 +69,7 @@ public class StudioServiceImpl implements StudioService {
 
         if (!checkStudio.getName().equals(studioSaveDTO.getName())
                 && studioRepository.existsByName(studioSaveDTO.getName())) {
-            throw new DuplicateStudioException("Studio with this name already exists!");
+            throw new DuplicateStudioException(AppConstant.StudioAlreadyExist.getValue());
         }
 
         checkStudio.setName(studioSaveDTO.getName());

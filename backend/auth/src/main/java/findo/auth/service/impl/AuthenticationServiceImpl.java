@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 
+import findo.auth.core.AppConstant;
 import findo.auth.data.entity.User;
 import findo.auth.data.repository.UserRepository;
 import findo.auth.dto.LoginDTO;
@@ -38,7 +39,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User userData = new User();
         userData.setName(user.getName());
         userData.setEmail(user.getEmail());
-        userData.setRole("ROLE_CUSTOMER");
+        userData.setRole(AppConstant.AuthRoleCustomerMsg.getValue());
         userData.setPassword(passwordEncoder.encode(user.getPassword()));
         userData.setCreatedBy(user.getEmail());
         userData.setUpdatedBy(user.getEmail());

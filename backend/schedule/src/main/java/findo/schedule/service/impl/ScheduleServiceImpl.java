@@ -3,6 +3,7 @@ package findo.schedule.service.impl;
 import findo.schedule.client.BookingClient;
 import findo.schedule.client.MovieClient;
 import findo.schedule.client.StudioClient;
+import findo.schedule.core.AppConstant;
 import findo.schedule.dto.*;
 import findo.schedule.entity.Schedule;
 import findo.schedule.mapper.ScheduleMapper;
@@ -61,7 +62,7 @@ public class ScheduleServiceImpl implements ScheduleService {
             Schedule savedSchedule = scheduleRepository.save(schedule);
             return scheduleMapper.toResponseDto(savedSchedule);
         } catch (Exception e) {
-            throw new RuntimeException("Error while creating schedule", e);
+            throw new RuntimeException(AppConstant.ScheduleErrorCreateMsg.getValue(), e);
         }
     }
 
