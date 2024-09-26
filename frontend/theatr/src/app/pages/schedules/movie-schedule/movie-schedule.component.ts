@@ -43,7 +43,7 @@ export class MovieScheduleComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.currentDateTime = this.getTodayDate();
+    this.currentDateTime = this.route.snapshot.paramMap.get('date')!;
     this.getScheduleList();
     this.getMovie();
   }
@@ -64,7 +64,8 @@ export class MovieScheduleComponent implements OnInit {
   getMovie() {
     this.isLoading = true;
     const movieId = this.route.snapshot.paramMap.get('id');
-    this.scheduleService.getScheduleByMovieId(movieId!, 0, 10, this.currentDateTime).subscribe({
+    const date = this.route.snapshot.paramMap.get('date');
+    this.scheduleService.getScheduleByMovieId(movieId!, 0, 10, date!).subscribe({
       next: (res: any) => {
         this.movie = res?.content[0] ?? [];
         this.isLoading = false;

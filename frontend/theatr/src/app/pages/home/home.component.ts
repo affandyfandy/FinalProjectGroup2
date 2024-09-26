@@ -96,7 +96,7 @@ export class HomeComponent implements OnInit {
   }
 
   navigateToSchedule(id: string) {
-    this.router.navigate([RouterConfig.SCHEDULES.path, id]);
+    this.router.navigate([RouterConfig.SCHEDULES.path, id, this.currentDateTime]);
   }
 
   showAlert(message: string, success: boolean) {
