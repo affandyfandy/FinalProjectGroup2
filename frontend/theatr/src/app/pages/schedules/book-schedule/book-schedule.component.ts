@@ -7,7 +7,7 @@ import { PriceFormatPipe } from '../../../core/pipes/price-format/price-format.p
 import { User } from '../../../model/user.model';
 import { UserService } from '../../../services/user/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RouterConfig } from '../../../config/app.constants';
+import { MessageConstants, RouterConfig } from '../../../config/app.constants';
 import { BookingService } from '../../../services/booking/booking.service';
 import { ScheduleService } from '../../../services/schedule/schedule.service';
 import { CreateBookingDTO } from '../../../model/booking.model';
@@ -64,7 +64,10 @@ export class BookScheduleComponent implements OnInit {
           this.isLoading = false;
         },
         error: (err) => {
-          this.showAlert('Failed to get schedule data', false);
+          this.showAlert(MessageConstants.GET_SCHEDULE_FAILED(err), false);
+          this.isLoading = false;
+        },
+        complete: () => {
           this.isLoading = false;
         }
       });
@@ -77,7 +80,7 @@ export class BookScheduleComponent implements OnInit {
         this.userData = res;
       },
       error: (err) => {
-        this.showAlert('Failed to get user data', false);
+        this.showAlert(MessageConstants.GET_PROFILE_FAILED(err), false);
       }
     });
   }
@@ -130,7 +133,7 @@ export class BookScheduleComponent implements OnInit {
     this.bookingService.createBooking(body).subscribe({
       next: (res: any) => {
         this.isBookingLoading = false;
-        this.showAlert('Booking success', true);
+        this.showAlert(MessageConstants.CREATE_BOOKING_SUCCESS, true);
         this.closeModal();
         setTimeout(() => {
           this.navigateToHistory();
@@ -139,7 +142,10 @@ export class BookScheduleComponent implements OnInit {
       error: (err) => {
         this.isBookingLoading = false;
         this.closeModal();
-        this.showAlert('Failed to book schedule', false);
+        this.showAlert(MessageConstants.CREATE_BOOKING_FAILED(err), false);
+      },
+      complete: () => {
+        this.isBookingLoading = false;
       }
     });
   }

@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AddStudioDTO, Studio } from '../../../model/studio.model';
 import { StudioService } from '../../../services/studio/studio.service';
+import { MessageConstants } from '../../../config/app.constants';
 
 @Component({
   selector: 'app-studio',
@@ -33,6 +34,9 @@ export class StudioComponent implements OnInit {
   alertMessage = '';
   isAlertSuccess = true;
 
+  isListLoading = false;
+  isSaveLoading = false;
+
   constructor(
     private studioService: StudioService
   ) { }
@@ -42,42 +46,60 @@ export class StudioComponent implements OnInit {
   }
 
   getStudioList(page: number = 0) {
+    this.isListLoading = true;
     this.studioService.getStudioList(page).subscribe({
       next: (res: any) => {
         this.studioList = res.content;
         this.currentPage = page;
         this.totalPages = res.totalPages;
+        this.isListLoading = false;
       },
       error: (err) => {
-        this.showAlert('Failed to get studio list: ' + err.error.message, false);
+        this.isListLoading = false;
+        this.showAlert(MessageConstants.GET_STUDIO_LIST_FAILED(err), false);
+      },
+      complete: () => {
+        this.isListLoading = false;
       }
     });
   }
 
   addStudio() {
+    this.isSaveLoading = true;
     this.studioService.addStudio({ name: this.currentStudioName }).subscribe({
       next: () => {
         this.getStudioList(this.currentPage);
         this.closeStudioModal();
-        this.showAlert('Studio added successfully', true);
+        this.showAlert(MessageConstants.ADD_STUDIO_SUCCESS, true);
+        this.isSaveLoading = false;
       },
       error: (err) => {
         this.closeStudioModal();
-        this.showAlert('Failed to add studio: ' + err.error.message, false);
+        this.showAlert(MessageConstants.ADD_STUDIO_FAILED(err), false);
+        this.isSaveLoading = false;
+      },
+      complete: () => {
+        this.isSaveLoading = false;
       }
     });
   }
 
   editStudio() {
+    this.isSaveLoading = true;
     this.studioService.editStudio(this.currentStudio.id!, { name: this.currentStudioName }).subscribe({
       next: () => {
         this.getStudioList(this.currentPage);
         this.closeStudioModal();
-        this.showAlert('Studio edited successfully', true);
+        this.showAlert(MessageConstants.EDIT_STUDIO_SUCCESS, true);
+        this.isSaveLoading = false;
       },
       error: (err) => {
         this.closeStudioModal();
-        this.showAlert('Failed to edit studio: ' + err.error.message, false);
+        this.showAlert(MessageConstants.EDIT_STUDIO_FAILED(err), false);
+        this.isSaveLoading = false;
+      },
+      complete: () => {
+        this.isSaveLoading = false;
       }
     });
   }
@@ -85,12 +107,11 @@ export class StudioComponent implements OnInit {
   changeStatus(id: number) {
     this.studioService.changeStatus(id).subscribe({
       next: () => {
-        this.showAlert('Studio status changed successfully', true);
-        this.getStudioList(this.currentPage);
+        this.showAlert(MessageConstants.UPDATE_STUDIO_STATUS_SUCCESS, true);
       },
       error: (err) => {
         this.closeStudioModal();
-        this.showAlert('Failed to change studio status: ' + err.error.message, false);
+        this.showAlert(MessageConstants.UPDATE_STUDIO_STATUS_FAILED(err), false);
       }
     });
   }
@@ -131,6 +152,9 @@ export class StudioComponent implements OnInit {
   }
 
   isSaveButtonDisabled(): boolean {
-    return this.currentStudioName === this.tempStudioName || this.currentStudioName === '' || !this.currentStudioName;
+    return this.currentStudioName === this.tempStudioName ||
+      this.currentStudioName === '' ||
+      !this.currentStudioName ||
+      this.isSaveLoading;
   }
 }

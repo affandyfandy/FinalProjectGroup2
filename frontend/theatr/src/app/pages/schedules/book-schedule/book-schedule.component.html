@@ -18,51 +18,61 @@
     </div>
 
     <!-- Seats Grid -->
-    <div class="grid grid-cols-6 grid-rows-5 gap-5">
-        <button *ngFor="let seat of scheduleData.seats" (click)="onSeatClick(seat)" [disabled]="seat.status == 'BOOKED'"
-            [ngClass]="{'bg-primary': seat.status == 'AVAILABLE', 'bg-secondary': isSeatSelected(seat)}"
-            class="w-12 h-12 btn btn-square flex items-center justify-center disabled:bg-base-200 disabled:text-zinc-400">
-            <p [ngClass]="{'text-primary-content': seat.status == 'AVAILABLE', 'text-white': isSeatSelected(seat)}"
-                class="font-semibold">{{ seat.seatCode }}</p>
-        </button>
+    <div *ngIf="isLoading; else seatGrid" class="grid grid-cols-6 grid-rows-5 gap-5">
+        <div *ngFor="let item of [].constructor(30)" class="skeleton w-12 h-12"></div>
     </div>
+    <ng-template #seatGrid>
+        <div class="grid grid-cols-6 grid-rows-5 gap-5">
+            <button *ngFor="let seat of scheduleData.seats" (click)="onSeatClick(seat)"
+                [disabled]="seat.status == 'BOOKED'"
+                [ngClass]="{'bg-primary': seat.status == 'AVAILABLE', 'bg-secondary': isSeatSelected(seat)}"
+                class="w-12 h-12 btn btn-square flex items-center justify-center disabled:bg-base-200 disabled:text-zinc-400">
+                <p [ngClass]="{'text-primary-content': seat.status == 'AVAILABLE', 'text-white': isSeatSelected(seat)}"
+                    class="font-semibold">{{ seat.seatCode }}</p>
+            </button>
+        </div>
+    </ng-template>
 
     <!-- Screen -->
     <div class="max-w-[740px] w-full bg-primary text-center font-bold text-primary-content">SCREEN</div>
 
     <!-- Info -->
-    <div class="flex p-3 px-6 space-x-10 bg-base-300 rounded-md items-center">
-        <div class="text-center">
-            <p class="text-zinc-400 font-medium">{{scheduleData.studio?.[0]?.name!.toUpperCase()}}</p>
-            <p>{{scheduleData.showDate ? (scheduleData.showDate | fullDateTime) : 'N/A'}}</p>
+    <div *ngIf="isLoading; else infoSection" class="skeleton h-20 w-[700px]"></div>
+    <ng-template #infoSection>
+        <div class="flex p-3 px-6 space-x-10 bg-base-300 rounded-md items-center">
+            <div class="text-center">
+                <p class="text-zinc-400 font-medium">{{scheduleData.studio?.[0]?.name!.toUpperCase()}}</p>
+                <p>{{scheduleData.showDate ? (scheduleData.showDate | fullDateTime) : 'N/A'}}</p>
+            </div>
+
+            <svg width="2" height="57" viewBox="0 0 2 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1V56" stroke="#454452" stroke-width="2" stroke-linecap="round" />
+            </svg>
+
+            <div class="text-center w-[120px]">
+                <p class="text-zinc-400 font-medium">TOTAL PRICE</p>
+                <p>{{(scheduleData.price ?? 0) * selectedSeats.length | priceFormat }}</p>
+            </div>
+
+            <svg width="2" height="57" viewBox="0 0 2 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1V56" stroke="#454452" stroke-width="2" stroke-linecap="round" />
+            </svg>
+
+            <div class="text-center">
+                <p class="text-zinc-400 font-medium">QUANTITY</p>
+                <p>{{selectedSeats.length }}x</p>
+            </div>
+
+            <svg width="2" height="57" viewBox="0 0 2 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1V56" stroke="#454452" stroke-width="2" stroke-linecap="round" />
+            </svg>
+
+            <button [disabled]="selectedSeats.length < 1" (click)="showModal()"
+                class="btn btn-primary px-6 rounded-full">
+                Buy Ticket
+            </button>
         </div>
-
-        <svg width="2" height="57" viewBox="0 0 2 57" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 1V56" stroke="#454452" stroke-width="2" stroke-linecap="round" />
-        </svg>
-
-        <div class="text-center w-[120px]">
-            <p class="text-zinc-400 font-medium">TOTAL PRICE</p>
-            <p>{{(scheduleData.price ?? 0) * selectedSeats.length | priceFormat }}</p>
-        </div>
-
-        <svg width="2" height="57" viewBox="0 0 2 57" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 1V56" stroke="#454452" stroke-width="2" stroke-linecap="round" />
-        </svg>
-
-        <div class="text-center">
-            <p class="text-zinc-400 font-medium">QUANTITY</p>
-            <p>{{selectedSeats.length }}x</p>
-        </div>
-
-        <svg width="2" height="57" viewBox="0 0 2 57" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 1V56" stroke="#454452" stroke-width="2" stroke-linecap="round" />
-        </svg>
-
-        <button [disabled]="selectedSeats.length < 1" (click)="showModal()" class="btn btn-primary px-6 rounded-full">
-            Buy Ticket
-        </button>
-    </div>
+    </ng-template>
 </div>
 
 <!-- MODAL -->
@@ -95,7 +105,8 @@
 
             <div class="flex justify-between">
                 <p class="text-zinc-400">PRICE</p>
-                <p class="text-xl font-semibold">{{ (scheduleData.price ?? 0) * selectedSeats.length | priceFormat }}
+                <p class="text-xl font-semibold">{{ (scheduleData.price ?? 0) * selectedSeats.length | priceFormat
+                    }}
                 </p>
             </div>
 
@@ -114,7 +125,8 @@
                 <div *ngIf="isBalanceNotEnough()"
                     class="flex space-x-4 p-6 py-4 w-full items-center bg-warning rounded-lg">
                     <img src="assets/icons/danger-black.svg" alt="Warning Icon">
-                    <p class="font-medium text-primary-content">Insufficient balance. Please top up your wallet balance
+                    <p class="font-medium text-primary-content">Insufficient balance. Please top up your wallet
+                        balance
                         first.</p>
                 </div>
             </div>
@@ -123,8 +135,9 @@
         <div class="flex space-x-2 w-full">
             <button class="btn btn-secondary bg-opacity-50 max-w-[310px] w-full rounded-full"
                 (click)="closeModal()">Cancel</button>
-            <button (click)="bookSchedule()"
-                class="btn btn-primary max-w-[310px] w-full rounded-full">{{isBalanceNotEnough() ? 'Top Up' :
+            <button (click)="bookSchedule()" [disabled]="isBookingLoading"
+                class="btn btn-primary max-w-[310px] w-full rounded-full"><span *ngIf="isBookingLoading"
+                    class="loading loading-spinner text-primary"></span>{{isBalanceNotEnough() ? 'Top Up' :
                 'Confirm'}}</button>
         </div>
     </div>

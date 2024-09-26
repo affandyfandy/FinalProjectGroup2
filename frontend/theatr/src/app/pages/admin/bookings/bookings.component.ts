@@ -8,6 +8,7 @@ import { PriceFormatPipe } from '../../../core/pipes/price-format/price-format.p
 import { BookingService } from '../../../services/booking/booking.service';
 import { NormalFullDateTimePipe } from '../../../core/pipes/normal-full-date-time/normal-full-date-time.pipe';
 import { NormalTimeFormatPipe } from '../../../core/pipes/normal-time-format/normal-time-format.pipe';
+import { MessageConstants } from '../../../config/app.constants';
 
 @Component({
   selector: 'app-bookings',
@@ -43,6 +44,7 @@ export class BookingsComponent implements OnInit {
   isAlertSuccess = true;
 
   isDetailLoading = false;
+  isListLoading = false;
 
   constructor(
     private bookingService: BookingService
@@ -62,14 +64,20 @@ export class BookingsComponent implements OnInit {
   }
 
   getBookingList(page: number = 0) {
+    this.isListLoading = true;
     this.bookingService.getAdminHistory(page, 10, this.sortDir, this.currentDateTime).subscribe({
       next: (res: any) => {
         this.bookingList = res.content;
         this.currentPage = res.pageable.pageNumber + 1;
         this.totalPages = res.totalPages;
+        this.isListLoading = false;
       },
       error: (err) => {
-        this.showAlert('Failed to get booking list: ' + err.error.message, false);
+        this.showAlert(MessageConstants.GET_BOOKING_LIST_FAILED(err), false);
+        this.isListLoading = false;
+      },
+      complete: () => {
+        this.isListLoading = false;
       }
     });
   }
@@ -84,7 +92,7 @@ export class BookingsComponent implements OnInit {
         },
         error: (err: any) => {
           this.isDetailLoading = false;
-          this.showAlert('Failed to get booking detail: ' + err.error.message, false);
+          this.showAlert(MessageConstants.GET_BOOKING_DETAIL_FAILED(err), false);
         },
         complete: () => {
           this.isDetailLoading = false;
@@ -108,7 +116,6 @@ export class BookingsComponent implements OnInit {
 
   onDateChange(event: any) {
     this.currentDateTime = event.target.value;
-    console.log("Tanggal dipilih: ", this.currentDateTime);
     this.getBookingList();
   }
 
