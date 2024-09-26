@@ -10,7 +10,8 @@
                     <input type="text" [(ngModel)]="user.name" class="input input-bordered bg-transparent w-full"
                         placeholder="Your name here...">
                     <button (click)="updateProfile()" [disabled]="isButtonDisabled()"
-                        class="btn btn-primary rounded-full px-8">Save</button>
+                        class="btn btn-primary rounded-full px-8"><span *ngIf="isSaveProfileLoading"
+                            class="loading loading-spinner text-primary"></span>Save</button>
                 </div>
             </div>
 
@@ -95,7 +96,8 @@
             <button class="btn btn-secondary bg-opacity-50 max-w-[310px] w-full rounded-full"
                 (click)="closeChangePasswordModal()">Cancel</button>
             <button (click)="changePassword()" [disabled]="isUpdatePasswordButtonDisabled()"
-                class="btn btn-primary max-w-[310px] w-full rounded-full">Save</button>
+                class="btn btn-primary max-w-[310px] w-full rounded-full"><span *ngIf="isChangePasswordLoading"
+                    class="loading loading-spinner text-primary"></span>Save</button>
         </div>
     </div>
 </dialog>
@@ -124,8 +126,9 @@
         <div class="flex space-x-2 w-full">
             <button class="btn btn-secondary bg-opacity-50 max-w-[310px] w-full rounded-full"
                 (click)="closeTopUpModal()">Cancel</button>
-            <button (click)="topUp()" [disabled]="topUpDTO.balance === 0"
-                class="btn btn-primary max-w-[310px] w-full rounded-full">Save</button>
+            <button (click)="topUp()" [disabled]="isTopUpButtonDisabled()"
+                class="btn btn-primary max-w-[310px] w-full rounded-full"><span *ngIf="isTopUpLoading"
+                    class="loading loading-spinner text-primary"></span>Save</button>
         </div>
     </div>
 </dialog>
