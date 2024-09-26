@@ -44,6 +44,7 @@ export class BookingsComponent implements OnInit {
   isAlertSuccess = true;
 
   isDetailLoading = false;
+  isListLoading = false;
 
   constructor(
     private bookingService: BookingService
@@ -63,14 +64,20 @@ export class BookingsComponent implements OnInit {
   }
 
   getBookingList(page: number = 0) {
+    this.isListLoading = true;
     this.bookingService.getAdminHistory(page, 10, this.sortDir, this.currentDateTime).subscribe({
       next: (res: any) => {
         this.bookingList = res.content;
         this.currentPage = res.pageable.pageNumber + 1;
         this.totalPages = res.totalPages;
+        this.isListLoading = false;
       },
       error: (err) => {
         this.showAlert(MessageConstants.GET_BOOKING_LIST_FAILED(err), false);
+        this.isListLoading = false;
+      },
+      complete: () => {
+        this.isListLoading = false;
       }
     });
   }

@@ -11,42 +11,49 @@
     </div>
 
     <!-- Table -->
-    <div *ngIf="bookingList.length > 0; else emptyView" class="overflow-x-auto pt-4">
-        <table class="table">
-            <!-- head -->
-            <thead>
-                <tr class="text-center">
-                    <th>Ordered Time</th>
-                    <th>Studio</th>
-                    <th>Show Time</th>
-                    <th>Title</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- row -->
-                <tr *ngFor="let booking of bookingList" class="text-center">
-                    <td>{{ booking.updatedTime ? (booking.updatedTime | normalTimeFormat) : 'N/A' }}</td>
-                    <td>{{ booking.scheduleIds?.[0]?.shows?.[0]?.studioName }}</td>
-                    <td>{{ booking.scheduleIds?.[0]?.shows?.[0]?.showDate ?
-                        (booking.scheduleIds?.[0]?.shows?.[0]?.showDate! | fullDateTime) : 'N/A' }}</td>
-                    <td>{{ booking.scheduleIds?.[0]?.movieTitle }} {{"(" + booking.scheduleIds?.[0]?.movieYear + ")" }}
-                    </td>
-                    <td>
-                        <button (click)="showModal(booking.id!)" class="btn btn-square btn-secondary btn-sm">
-                            <img src="assets/icons/eye-white.svg" alt="Edit Icon" class="w-5 h-5">
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div *ngIf="isListLoading; else mainContent" class="space-y-4 py-8">
+        <div *ngFor="let item of [].constructor(6)" class="skeleton w-full h-16"></div>
     </div>
 
-    <ng-template #emptyView>
-        <div class="w-full text-center py-8">
-            <h1 class="text-xl font-semibold">There's no data here...</h1>
-            <p class="font-light">You can try to change the show date 😅</p>
+    <ng-template #mainContent>
+        <div *ngIf="bookingList.length > 0; else emptyView" class="overflow-x-auto pt-4">
+            <table class="table">
+                <!-- head -->
+                <thead>
+                    <tr class="text-center">
+                        <th>Ordered Time</th>
+                        <th>Studio</th>
+                        <th>Show Time</th>
+                        <th>Title</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- row -->
+                    <tr *ngFor="let booking of bookingList" class="text-center">
+                        <td>{{ booking.updatedTime ? (booking.updatedTime | normalTimeFormat) : 'N/A' }}</td>
+                        <td>{{ booking.scheduleIds?.[0]?.shows?.[0]?.studioName }}</td>
+                        <td>{{ booking.scheduleIds?.[0]?.shows?.[0]?.showDate ?
+                            (booking.scheduleIds?.[0]?.shows?.[0]?.showDate! | fullDateTime) : 'N/A' }}</td>
+                        <td>{{ booking.scheduleIds?.[0]?.movieTitle }} {{"(" + booking.scheduleIds?.[0]?.movieYear + ")"
+                            }}
+                        </td>
+                        <td>
+                            <button (click)="showModal(booking.id!)" class="btn btn-square btn-secondary btn-sm">
+                                <img src="assets/icons/eye-white.svg" alt="Edit Icon" class="w-5 h-5">
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+
+        <ng-template #emptyView>
+            <div class="w-full text-center py-8">
+                <h1 class="text-xl font-semibold">There's no data here...</h1>
+                <p class="font-light">You can try to change the show date 😅</p>
+            </div>
+        </ng-template>
     </ng-template>
 
     <div *ngIf="totalPages > 1" class="w-full flex justify-center mt-4 py-8">
