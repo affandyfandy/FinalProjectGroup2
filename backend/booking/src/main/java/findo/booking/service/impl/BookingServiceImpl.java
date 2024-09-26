@@ -298,11 +298,12 @@ public class BookingServiceImpl implements BookingService {
                                                                                                                             // method
                                                                                                                             // if
                                                                                                                             // needed
+
+                                                                        booking.setIsPrinted(true);
+                                                                        bookingRepository.save(booking);
                                                                 } catch (IOException e) {
                                                                         return Mono.error(new RuntimeException(
-                                                                                        AppConstant.BookingPDFErrorMsg
-                                                                                                        .getValue(),
-                                                                                        e));
+                                                                                        "Error generating PDF", e));
                                                                 }
 
                                                                 // Create PrintTicketResponseDTO with PDF
@@ -385,6 +386,7 @@ public class BookingServiceImpl implements BookingService {
                                         shceduleDetailsAdmin.setStudios(studios);
                                         shceduleDetailsAdmin.setTotalAmount(booking.getTotalAmount());
                                         shceduleDetailsAdmin.setPrice(listSchedule.getShows().get(0).getPrice());
+                                        shceduleDetailsAdmin.setIsPrinted(booking.getIsPrinted());
 
                                         return Mono.just(shceduleDetailsAdmin);
                                 });

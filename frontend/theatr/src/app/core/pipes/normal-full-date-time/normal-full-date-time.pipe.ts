@@ -1,10 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'fullDateTime',
+  name: 'normalFullDateTime',
   standalone: true
 })
-export class FullDateTimePipe implements PipeTransform {
+export class NormalFullDateTimePipe implements PipeTransform {
 
   transform(value: Date | string | null): string {
     if (!value) {
@@ -12,7 +12,6 @@ export class FullDateTimePipe implements PipeTransform {
     }
 
     const date = new Date(value);
-    date.setHours(date.getHours() - 7);
     const options: Intl.DateTimeFormatOptions = {
       day: 'numeric',
       month: 'short',
@@ -24,4 +23,5 @@ export class FullDateTimePipe implements PipeTransform {
 
     return new Intl.DateTimeFormat('en-GB', options).format(date);
   }
+
 }

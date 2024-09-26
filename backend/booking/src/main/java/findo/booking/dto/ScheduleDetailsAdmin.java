@@ -17,6 +17,7 @@ public class ScheduleDetailsAdmin {
     private Timestamp createdAt;
     private double price;
     private double totalAmount;
+    private Boolean isPrinted;
     private UUID custId;
     private String custName;
     private Timestamp showDate;

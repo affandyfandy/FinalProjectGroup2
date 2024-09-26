@@ -1,19 +1,19 @@
 package findo.booking.mapper;
 
-import findo.booking.dto.BookingDetailDTO;
-import findo.booking.dto.BookingResponseDTO;
-import findo.booking.dto.CreateBookingDTO;
-import findo.booking.dto.CustomerBookingHistoryDTO;
-import findo.booking.dto.ScheduleMovieDTO;
-import findo.booking.entity.Booking;
-import findo.booking.entity.BookingSeat;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
+import findo.booking.dto.BookingDetailDTO;
+import findo.booking.dto.BookingResponseDTO;
+import findo.booking.dto.CustomerBookingHistoryDTO;
+import findo.booking.dto.ScheduleMovieDTO;
+import findo.booking.entity.Booking;
+import findo.booking.entity.BookingSeat;
 
 @Mapper
 public interface BookingMapper {
@@ -62,6 +62,6 @@ public interface BookingMapper {
     }
 
     // Convert CreateBookingRequestDTO to Booking entity
-    @Mapping(source = "userId", target = "userIds")
-    Booking toBookingEntity(CreateBookingDTO request);
+    // @Mapping(source = "userId", target = "userIds")
+    // Booking toBookingEntity(CreateBookingDTO request);
 }

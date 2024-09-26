@@ -72,6 +72,9 @@ export class MovieScheduleComponent implements OnInit {
       error: (err: any) => {
         this.isLoading = false;
         this.showAlert('Failed to get movie: ' + err.error.message, false);
+      },
+      complete: () => {
+        this.isLoading = false;
       }
     });
   }
@@ -87,6 +90,9 @@ export class MovieScheduleComponent implements OnInit {
       error: (err: any) => {
         this.isLoading = false;
         this.showAlert('Failed to get schedule list: ' + err.error.message, false);
+      },
+      complete: () => {
+        this.isLoading = false;
       }
     });
   }
@@ -102,5 +108,11 @@ export class MovieScheduleComponent implements OnInit {
     setTimeout(() => {
       this.isShowAlert = false;
     }, 3000);
+  }
+
+  isDisabled(date: Date): boolean {
+    var tempDate = new Date(date);
+    tempDate.setHours(tempDate.getHours() - 7);
+    return tempDate < new Date();
   }
 }

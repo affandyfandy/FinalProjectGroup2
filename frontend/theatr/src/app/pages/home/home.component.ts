@@ -69,6 +69,9 @@ export class HomeComponent implements OnInit {
       error: (err) => {
         this.showAlert('Failed to get schedule list banner: ' + err.error.message, false);
         this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
       }
     });
   }
@@ -84,6 +87,9 @@ export class HomeComponent implements OnInit {
       },
       error: (err) => {
         this.showAlert('Failed to get schedule list: ' + err.error.message, false);
+        this.isLoading = false;
+      },
+      complete: () => {
         this.isLoading = false;
       }
     });

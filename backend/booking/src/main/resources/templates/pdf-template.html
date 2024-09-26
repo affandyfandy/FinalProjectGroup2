@@ -1,138 +1,198 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Booking Ticket</title>
+    <title>Booking Receipt</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #111827; /* primary-content - dark background */
-            color: #f3f4f6; /* secondary-content - white text */
-            margin: 20px;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #333333;
+            line-height: 1.6;
+            font-size: 14px;
         }
+
+        .container {
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
         h1 {
-            font-size: 32px;
-            color: #7a49fe; /* accent - purple highlight */
             text-align: center;
+            font-size: 24px;
+            color: rgb(98, 36, 160);
             margin-bottom: 20px;
         }
-        .booking-details {
-            background-color: #1e1d27; /* neutral - dark card background */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-            padding: 20px;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        .booking-details h2 {
-            font-size: 22px;
-            color: #7a49fe; /* accent */
-            border-bottom: 2px solid #7a49fe;
+
+        .section-title {
+            font-size: 18px;
+            color: rgb(98, 36, 160);
+            border-bottom: 2px solid rgb(98, 36, 160);
             padding-bottom: 10px;
             margin-bottom: 20px;
         }
+
+        .booking-details {
+            margin-bottom: 20px;
+        }
+
         .detail {
-            font-size: 16px;
-            margin: 10px 0;
-            color: #f3f4f6; /* white text for details */
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
         }
+
         .detail strong {
-            color: #ffffff; /* pure white for strong emphasis */
+            color: #333333;
+            font-weight: 600;
         }
-        h5 {
-            font-size: 18px;
-            color: #7a49fe; /* accent */
-            margin-top: 20px;
+
+        .qr-code {
+            text-align: center;
+            margin-top: 30px;
         }
-        .movie, .studio {
+
+        .qr-code img {
+            width: 150px;
+            height: 150px;
+        }
+
+        .movies-section,
+        .studio-section,
+        .seat-section {
+            margin-top: 30px;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+
+        .movie {
             display: flex;
             align-items: center;
-            margin: 15px 0;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
             padding: 10px;
-            background-color: #292a2f; /* slightly lighter dark for contrast */
-            border-radius: 8px;
+            margin-bottom: 10px;
         }
+
         .movie img {
             border-radius: 5px;
             margin-right: 15px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
+
+        .movie-info {
+            flex: 1;
+        }
+
         .movie-title {
-            font-size: 18px;
-            color: #f3f4f6; /* white for movie title */
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
         }
+
         .movie-year {
             font-size: 14px;
-            color: #cccccc; /* grey for year */
+            color: #777777;
         }
+
+        .studio-section {
+            margin-top: 30px;
+        }
+
+        .studio {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .studio-name {
+            font-size: 16px;
+            color: #333333;
+            font-weight: 600;
+        }
+
         .seat-list {
+            margin-top: 10px;
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            margin-top: 10px;
         }
+
         .seat {
-            display: inline-block;
-            background-color: #7a49fe; /* accent */
-            color: #f3f4f6; /* white seat text */
-            padding: 10px;
+            background-color: rgb(98, 36, 160);
+            color: #ffffff;
+            padding: 8px 12px;
             border-radius: 5px;
             font-size: 14px;
-            transition: background-color 0.3s ease;
+            margin-bottom: 4px;
         }
-        .seat:hover {
-            background-color: #5c3ed7; /* Darker accent on hover */
-            cursor: pointer;
+
+        .schedule-section {
+            display: flex;
+            flex: content;
+            gap: 20px;
         }
-        .studio-name {
-            font-size: 16px;
-            color: #f3f4f6; /* white studio name */
-            margin-left: 10px;
-        }
-        @media (max-width: 768px) {
-            .movie img {
-                width: 80px;
-            }
-            .seat {
-                padding: 8px;
-                font-size: 12px;
-            }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            color: #777777;
         }
     </style>
 </head>
-<body>
-    <h1>Your Booking Confirmation</h1>
-    <div class="booking-details">
-        <h2>Booking Details</h2>
-        <div class="detail">Booking ID: <strong th:text="${booking.bookingId}"></strong></div>
-        <div class="detail">Customer Name: <strong th:text="${booking.custName}"></strong></div>
-        <div class="detail">Total Amount: <strong th:text="${booking.totalAmount}"></strong></div>
-        <div class="detail">Show Date: <strong th:text="${booking.showDate}"></strong></div>
 
-        <h5>Movies:</h5>
-        <div th:each="movie : ${booking.movies}">
-            <div class="movie">
-                <img th:src="${movie.posterUrl}" alt="Movie Poster" style="width:120px;"/>
-                <div>
-                    <div class="movie-title" th:text="${movie.title}"></div>
-                    <div class="movie-year" th:text="${movie.year}"></div>
+<body>
+    <div class="container">
+        <h1>Booking Receipt</h1>
+
+        <!-- Booking Details Section -->
+        <div class="booking-details">
+            <div class="section-title">Booking Information</div>
+            <div class="detail">Booking ID: <strong th:text="${booking.bookingId}"></strong></div>
+            <div class="detail">Customer Name: <strong th:text="${booking.custName}"></strong></div>
+            <div class="detail">Total Amount: <strong th:text="${booking.totalAmount}"></strong></div>
+            <div class="detail">Order Date: <strong th:text="${booking.createdAt}"></strong></div>
+        </div>
+
+        <!-- Movies Section -->
+        <div class="movies-section">
+            <div class="section-title">Schedule</div>
+            <div th:each="movie : ${booking.movies}">
+                <div class="movie schedule-section">
+                    <img th:src="${movie.posterUrl}" alt="Movie Poster" style="width: 100px;" />
+                    <div class="movie-info">
+                        <div class="movie-title" th:text="${movie.title} + ' (' + ${movie.year} + ')'"></div>
+                    </div>
+                    <div th:each="studio : ${booking.studios}">
+                        <div class="studio-name" th:text="${studio.studioName}"></div>
+                    </div>
+                    <div th:each="seat : ${booking.seats}" class="schedule-section">
+                        <span class="seat" th:text="${seat.seatCode}"></span>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <h5>Studio Details:</h5>
-        <div th:each="studio : ${booking.studios}" class="studio">
-            <i class="fas fa-tv" style="color: #7a49fe; font-size: 20px;"></i>
-            <div class="studio-name" th:text="${studio.studioName}"></div>
+        <!-- QR Code Section -->
+        <div class="qr-code">
+            <img th:src="'data:image/png;base64,' + ${qrCode}" alt="QR Code" />
         </div>
 
-        <h5>Seats:</h5>
-        <div class="seat-list">
-            <div th:each="seat : ${booking.seats}">
-                <span class="seat" th:text="${seat.id}"></span>
-            </div>
+        <!-- Footer -->
+        <div class="footer">
+            Thank you for choosing our service. Enjoy the show!
         </div>
     </div>
 </body>
+
 </html>
