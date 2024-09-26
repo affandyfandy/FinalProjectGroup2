@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { FormsModule, NgForm } from '@angular/forms';
 import { PriceFormatPipe } from '../../core/pipes/price-format/price-format.pipe';
+import { MessageConstants } from '../../config/app.constants';
 
 @Component({
   selector: 'app-profile',
@@ -56,7 +57,7 @@ export class ProfileComponent {
         this.tempUsername = res.name;
       },
       error: (err) => {
-        this.showAlert('Failed to get your profile: ' + err.error.message, false);
+        this.showAlert(MessageConstants.GET_PROFILE_FAILED(err), false);
       }
     });
   }
@@ -76,10 +77,10 @@ export class ProfileComponent {
     this.userService.updateProfile({ newName: this.user.name! }).subscribe({
       next: () => {
         this.tempUsername = this.user.name!;
-        this.showAlert('Profile updated successfully', true);
+        this.showAlert(MessageConstants.UPDATE_PROFILE_SUCCESS, true);
       },
       error: (err) => {
-        this.showAlert('Failed to update your profile: ' + err.error.message, false);
+        this.showAlert(MessageConstants.UPDATE_PROFILE_FAILED(err), false);
       }
     });
   }
@@ -89,25 +90,23 @@ export class ProfileComponent {
       next: (res: any) => {
         this.closeTopUpModal();
         this.user.balance = res.balance ?? this.user.balance;
-        this.showAlert('Top Up Success!', true);
+        this.showAlert(MessageConstants.TOP_UP_SUCCESS, true);
       },
       error: (err) => {
         this.closeTopUpModal();
-        this.showAlert('Top Up Failed: ' + err.error.message, false);
+        this.showAlert(MessageConstants.TOP_UP_FAILED(err), false);
       }
     });
   }
 
   changePassword() {
-    console.log('BODY:', this.changePasswordDTO);
-
     this.userService.changePassword(this.changePasswordDTO).subscribe({
       next: () => {
         this.closeChangePasswordModal();
-        this.showAlert('Password changed successfully', true);
+        this.showAlert(MessageConstants.CHANGE_PASSWORD_SUCCESS, true);
       },
       error: (err) => {
-        this.showAlert('Failed to change your password: ' + err.error.message, false);
+        this.showAlert(MessageConstants.CHANGE_PASSWORD_FAILED(err), false);
       },
 
     });

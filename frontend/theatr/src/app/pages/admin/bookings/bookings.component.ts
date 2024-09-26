@@ -8,6 +8,7 @@ import { PriceFormatPipe } from '../../../core/pipes/price-format/price-format.p
 import { BookingService } from '../../../services/booking/booking.service';
 import { NormalFullDateTimePipe } from '../../../core/pipes/normal-full-date-time/normal-full-date-time.pipe';
 import { NormalTimeFormatPipe } from '../../../core/pipes/normal-time-format/normal-time-format.pipe';
+import { MessageConstants } from '../../../config/app.constants';
 
 @Component({
   selector: 'app-bookings',
@@ -69,7 +70,7 @@ export class BookingsComponent implements OnInit {
         this.totalPages = res.totalPages;
       },
       error: (err) => {
-        this.showAlert('Failed to get booking list: ' + err.error.message, false);
+        this.showAlert(MessageConstants.GET_BOOKING_LIST_FAILED(err), false);
       }
     });
   }
@@ -84,7 +85,7 @@ export class BookingsComponent implements OnInit {
         },
         error: (err: any) => {
           this.isDetailLoading = false;
-          this.showAlert('Failed to get booking detail: ' + err.error.message, false);
+          this.showAlert(MessageConstants.GET_BOOKING_DETAIL_FAILED(err), false);
         },
         complete: () => {
           this.isDetailLoading = false;
@@ -108,7 +109,6 @@ export class BookingsComponent implements OnInit {
 
   onDateChange(event: any) {
     this.currentDateTime = event.target.value;
-    console.log("Tanggal dipilih: ", this.currentDateTime);
     this.getBookingList();
   }
 

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
-import { RouterConfig } from '../../config/app.constants';
+import { MessageConstants, RouterConfig } from '../../config/app.constants';
 import { FormsModule, NgForm } from '@angular/forms';
 import { User } from '../../model/user.model';
 
@@ -51,7 +51,7 @@ export class LoginComponent {
       },
       error: (err) => {
         this.isAlertSuccess = false;
-        this.alertMessage = 'Login failed' + err.error.message;
+        this.alertMessage = MessageConstants.LOGIN_FAILED;
         this.isShowAlert = true;
         setTimeout(() => {
           this.isShowAlert = false;
@@ -64,7 +64,7 @@ export class LoginComponent {
     this.authService.register({ name: this.user.name!, email: this.user.email!, password: this.user.password! }).subscribe({
       next: () => {
         this.isAlertSuccess = true;
-        this.alertMessage = 'Register successfully';
+        this.alertMessage = MessageConstants.REGISTER_SUCCESS;
         this.authForm.resetForm();
         this.isRegister = false;
         this.isShowAlert = true;
@@ -74,7 +74,7 @@ export class LoginComponent {
       },
       error: (err) => {
         this.isAlertSuccess = false;
-        this.alertMessage = 'Register failed: ' + err.error.message;
+        this.alertMessage = MessageConstants.REGIStER_FAILED(err);
         this.isShowAlert = true;
         setTimeout(() => {
           this.isShowAlert = false;

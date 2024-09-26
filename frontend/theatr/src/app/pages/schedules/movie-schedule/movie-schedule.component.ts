@@ -6,7 +6,7 @@ import { TimeFormatPipe } from '../../../core/pipes/time-format/time-format.pipe
 import { Movie } from '../../../model/movie.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PriceFormatPipe } from '../../../core/pipes/price-format/price-format.pipe';
-import { RouterConfig } from '../../../config/app.constants';
+import { MessageConstants, RouterConfig } from '../../../config/app.constants';
 import { ScheduleService } from '../../../services/schedule/schedule.service';
 
 @Component({
@@ -71,7 +71,7 @@ export class MovieScheduleComponent implements OnInit {
       },
       error: (err: any) => {
         this.isLoading = false;
-        this.showAlert('Failed to get movie: ' + err.error.message, false);
+        this.showAlert(MessageConstants.GET_MOVIE_FAILED(err), false);
       },
       complete: () => {
         this.isLoading = false;
@@ -89,7 +89,7 @@ export class MovieScheduleComponent implements OnInit {
       },
       error: (err: any) => {
         this.isLoading = false;
-        this.showAlert('Failed to get schedule list: ' + err.error.message, false);
+        this.showAlert(MessageConstants.GET_SCHEDULE_LIST_FAILED(err), false);
       },
       complete: () => {
         this.isLoading = false;

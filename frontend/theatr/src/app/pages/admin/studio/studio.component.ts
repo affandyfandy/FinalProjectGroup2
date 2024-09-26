@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AddStudioDTO, Studio } from '../../../model/studio.model';
 import { StudioService } from '../../../services/studio/studio.service';
+import { MessageConstants } from '../../../config/app.constants';
 
 @Component({
   selector: 'app-studio',
@@ -49,7 +50,7 @@ export class StudioComponent implements OnInit {
         this.totalPages = res.totalPages;
       },
       error: (err) => {
-        this.showAlert('Failed to get studio list: ' + err.error.message, false);
+        this.showAlert(MessageConstants.GET_STUDIO_LIST_FAILED(err), false);
       }
     });
   }
@@ -59,11 +60,11 @@ export class StudioComponent implements OnInit {
       next: () => {
         this.getStudioList(this.currentPage);
         this.closeStudioModal();
-        this.showAlert('Studio added successfully', true);
+        this.showAlert(MessageConstants.ADD_STUDIO_SUCCESS, true);
       },
       error: (err) => {
         this.closeStudioModal();
-        this.showAlert('Failed to add studio: ' + err.error.message, false);
+        this.showAlert(MessageConstants.ADD_STUDIO_FAILED(err), false);
       }
     });
   }
@@ -73,11 +74,11 @@ export class StudioComponent implements OnInit {
       next: () => {
         this.getStudioList(this.currentPage);
         this.closeStudioModal();
-        this.showAlert('Studio edited successfully', true);
+        this.showAlert(MessageConstants.EDIT_STUDIO_SUCCESS, true);
       },
       error: (err) => {
         this.closeStudioModal();
-        this.showAlert('Failed to edit studio: ' + err.error.message, false);
+        this.showAlert(MessageConstants.EDIT_STUDIO_FAILED(err), false);
       }
     });
   }
@@ -85,12 +86,12 @@ export class StudioComponent implements OnInit {
   changeStatus(id: number) {
     this.studioService.changeStatus(id).subscribe({
       next: () => {
-        this.showAlert('Studio status changed successfully', true);
+        this.showAlert(MessageConstants.UPDATE_STUDIO_STATUS_SUCCESS, true);
         this.getStudioList(this.currentPage);
       },
       error: (err) => {
         this.closeStudioModal();
-        this.showAlert('Failed to change studio status: ' + err.error.message, false);
+        this.showAlert(MessageConstants.UPDATE_STUDIO_STATUS_FAILED(err), false);
       }
     });
   }

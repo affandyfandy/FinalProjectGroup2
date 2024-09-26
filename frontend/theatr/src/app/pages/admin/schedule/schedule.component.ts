@@ -10,6 +10,7 @@ import { MovieService } from '../../../services/movie/movie.service';
 import { StudioService } from '../../../services/studio/studio.service';
 import { ScheduleService } from '../../../services/schedule/schedule.service';
 import { NormalTimeFormatPipe } from '../../../core/pipes/normal-time-format/normal-time-format.pipe';
+import { MessageConstants } from '../../../config/app.constants';
 
 @Component({
   selector: 'app-schedule',
@@ -80,7 +81,7 @@ export class ScheduleComponent implements OnInit {
         this.totalPages = res.totalPages;
       },
       error: (err) => {
-        this.showAlert('Failed to get schedule list: ' + err.error.message, false);
+        this.showAlert(MessageConstants.GET_SCHEDULE_LIST_FAILED(err), false);
       }
     });
   }
@@ -95,7 +96,7 @@ export class ScheduleComponent implements OnInit {
         }
       },
       error: (err) => {
-        this.showAlert('Failed to get schedule list: ' + err.error.message, false);
+        this.showAlert(MessageConstants.GET_SCHEDULE_LIST_FAILED(err), false);
       }
     });
   }
@@ -103,8 +104,6 @@ export class ScheduleComponent implements OnInit {
   createSchedule() {
     this.currentSchedule.movieId.push(this.currentMovie.id!);
     this.currentSchedule.studioId.push(this.currentStudio.id!);
-    console.log("Movie yang dipilih: ", this.currentMovie);
-    console.log("Schedule yang dibuat: ", this.currentSchedule);
 
     const dto: CreateScheduleDTO = {
       showDate: this.formatDateTime(this.currentSchedule.showDate),
@@ -116,10 +115,10 @@ export class ScheduleComponent implements OnInit {
       next: (res: any) => {
         this.closeModal();
         this.getScheduleList();
-        this.showAlert('Schedule created successfully', true);
+        this.showAlert(MessageConstants.CREATE_SCHEDULE_SUCCESS, true);
       },
       error: (err) => {
-        this.showAlert('Failed to get schedule list: ' + err.error.message, false);
+        this.showAlert(MessageConstants.CREATE_SCHEDULE_FAILED(err), false);
       }
     });
   }
@@ -173,7 +172,6 @@ export class ScheduleComponent implements OnInit {
       const isOccupied = this.tempScheduleList.some((schedule: Schedule) => {
         const scheduleDate = new Date(schedule.showDate ?? '');
         scheduleDate.setHours(scheduleDate.getHours() - 7);
-        console.log("Studio: " + schedule.studioId);
         return (
           schedule.studioIds![0].id === this.currentStudio.id &&
           scheduleDate.getFullYear() === date.getFullYear() &&
@@ -197,7 +195,7 @@ export class ScheduleComponent implements OnInit {
         this.totalPages = res.totalPages;
       },
       error: (err) => {
-        this.showAlert('Failed to get movie list: ' + err.error.message, false);
+        this.showAlert(MessageConstants.GET_MOVIE_LIST_FAILED(err), false);
       }
     });
   }
@@ -208,7 +206,7 @@ export class ScheduleComponent implements OnInit {
         this.studioList = res;
       },
       error: (err) => {
-        this.showAlert('Failed to get studio list: ' + err.error.message, false);
+        this.showAlert(MessageConstants.GET_STUDIO_LIST_FAILED(err), false);
       }
     });
   }
@@ -238,7 +236,6 @@ export class ScheduleComponent implements OnInit {
 
   onDateChange(event: any) {
     this.currentDateTime = event.target.value;
-    console.log("Tanggal dipilih: ", this.currentDateTime);
     this.getScheduleList();
   }
 

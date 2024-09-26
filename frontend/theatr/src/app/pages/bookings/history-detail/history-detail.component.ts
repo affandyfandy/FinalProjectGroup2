@@ -7,6 +7,7 @@ import { BookingService } from '../../../services/booking/booking.service';
 import { ActivatedRoute } from '@angular/router';
 import { NormalFullDateTimePipe } from '../../../core/pipes/normal-full-date-time/normal-full-date-time.pipe';
 import { saveAs } from 'file-saver';
+import { MessageConstants } from '../../../config/app.constants';
 
 @Component({
   selector: 'app-history-detail',
@@ -53,7 +54,7 @@ export class HistoryDetailComponent implements OnInit {
         },
         error: (err: any) => {
           this.isLoading = false;
-          this.showAlert('Failed to get booking detail: ' + err.error.message, false);
+          this.showAlert(MessageConstants.GET_BOOKING_DETAIL_FAILED(err), false);
         },
         complete: () => {
           this.isLoading = false;
@@ -71,13 +72,13 @@ export class HistoryDetailComponent implements OnInit {
           const blob = new Blob([res], { type: 'application/pdf' });
           saveAs(blob, `ticket-${bookingId}.pdf`);
           this.closeModal();
-          this.showAlert('Ticket printed successfully', true);
+          this.showAlert(MessageConstants.PRINT_TICKET_SUCCESS, true);
           this.bookingData.isPrinted = true;
           this.isPrintLoading = false;
         },
         error: (err: any) => {
           this.closeModal();
-          this.showAlert('Failed to print ticket: ' + err.error.message, false);
+          this.showAlert(MessageConstants.PRINT_TICKET_FAILED(err), false);
           this.isPrintLoading = false;
         }
       });

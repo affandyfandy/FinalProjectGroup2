@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { HomeSchedule, Schedule } from '../../model/schedule.model';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RouterConfig } from '../../config/app.constants';
+import { MessageConstants, RouterConfig } from '../../config/app.constants';
 import { ScheduleService } from '../../services/schedule/schedule.service';
 
 @Component({
@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit {
         this.isLoading = false;
       },
       error: (err) => {
-        this.showAlert('Failed to get schedule list banner: ' + err.error.message, false);
+        this.showAlert(MessageConstants.GET_SCHEDULE_LIST_FAILED(err), false);
         this.isLoading = false;
       },
       complete: () => {
@@ -86,7 +86,7 @@ export class HomeComponent implements OnInit {
         this.isLoading = false;
       },
       error: (err) => {
-        this.showAlert('Failed to get schedule list: ' + err.error.message, false);
+        this.showAlert(MessageConstants.GET_SCHEDULE_LIST_FAILED(err), false);
         this.isLoading = false;
       },
       complete: () => {
