@@ -109,4 +109,10 @@ export class MovieScheduleComponent implements OnInit {
       this.isShowAlert = false;
     }, 3000);
   }
+
+  isDisabled(date: Date): boolean {
+    var tempDate = new Date(date);
+    tempDate.setHours(tempDate.getHours() - 7);
+    return tempDate < new Date();
+  }
 }
