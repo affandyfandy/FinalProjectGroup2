@@ -53,6 +53,8 @@ export class MovieComponent implements OnInit {
   alertMessage = '';
   isAlertSuccess = true;
 
+  isListLoading = false;
+
   constructor(private movieService: MovieService) { }
 
   ngOnInit(): void {
@@ -61,14 +63,20 @@ export class MovieComponent implements OnInit {
 
 
   getMovieList(page: number = 0) {
-    this.movieService.getAllMovies(page, this.searchText).subscribe({
+    this.isListLoading = true;
+    this.movieService.getAllMovies(page, this.searchText, 5).subscribe({
       next: (res: any) => {
-        this.movieList = res.content;
+        this.movieList = res?.content ?? [];
         this.currentPage = page;
         this.totalPages = res.totalPages;
+        this.isListLoading = false;
       },
       error: (err) => {
         this.showAlert(MessageConstants.GET_MOVIE_LIST_FAILED(err), false);
+        this.isListLoading = false;
+      },
+      complete: () => {
+        this.isListLoading = false;
       }
     });
   }
@@ -102,6 +110,9 @@ export class MovieComponent implements OnInit {
         this.isLoading = false;
         this.closeMovieModal();
         this.showAlert(MessageConstants.UPDATE_MOVIE_FAILED(err), false);
+      },
+      complete: () => {
+        this.isLoading = false;
       }
     });
   }
@@ -125,6 +136,9 @@ export class MovieComponent implements OnInit {
         this.isLoading = false;
         this.closeMovieModal();
         this.showAlert(MessageConstants.CREATE_MOVIE_FAILED(err), false);
+      },
+      complete: () => {
+        this.isLoading = false;
       }
     });
   }
@@ -142,6 +156,7 @@ export class MovieComponent implements OnInit {
           }
         },
         error: (err) => {
+          this.isLoading = false;
           this.showAlert(MessageConstants.UPLOAD_POSTER_FAILED(err), false);
         }
       });

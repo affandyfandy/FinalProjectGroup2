@@ -16,43 +16,49 @@
     </div>
 
     <!-- Table -->
-    <div *ngIf="movieList.length > 0; else emptyView" class="overflow-x-auto pt-4">
-        <table class="table">
-            <!-- head -->
-            <thead>
-                <tr class="text-center">
-                    <th>Poster</th>
-                    <th>Title</th>
-                    <th>Year</th>
-                    <th>Duration</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- row -->
-                <tr *ngFor="let movie of movieList" class="text-center">
-                    <td class="text-center align-middle">
-                        <img [src]="movie.posterUrl" alt="Poster"
-                            class="w-[95px] h-[147px] rounded-xl object-cover mx-auto">
-                    </td>
-                    <td>{{ movie.title }}</td>
-                    <td>{{ movie.year }}</td>
-                    <td>{{ movie.duration }} minutes</td>
-                    <td>
-                        <button (click)="showMovieModal(true, movie)" class="btn btn-square btn-secondary btn-sm">
-                            <img src="assets/icons/edit-white.svg" alt="Edit Icon" class="w-5 h-5">
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div *ngIf="isListLoading; else mainContent" class="space-y-4 py-8">
+        <div *ngFor="let item of [].constructor(6)" class="skeleton w-full h-16"></div>
     </div>
 
-    <ng-template #emptyView>
-        <div class="w-full text-center py-7">
-            <h1 class="text-xl font-semibold">There's no data here...</h1>
-            <p class="font-light">You can <b class="font-semibold">add a movie</b> anyway.</p>
+    <ng-template #mainContent>
+        <div *ngIf="movieList.length > 0; else emptyView" class="overflow-x-auto pt-4">
+            <table class="table">
+                <!-- head -->
+                <thead>
+                    <tr class="text-center">
+                        <th>Poster</th>
+                        <th>Title</th>
+                        <th>Year</th>
+                        <th>Duration</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- row -->
+                    <tr *ngFor="let movie of movieList" class="text-center">
+                        <td class="text-center align-middle">
+                            <img [src]="movie.posterUrl" alt="Poster"
+                                class="w-[95px] h-[147px] rounded-xl object-cover mx-auto">
+                        </td>
+                        <td>{{ movie.title }}</td>
+                        <td>{{ movie.year }}</td>
+                        <td>{{ movie.duration }} minutes</td>
+                        <td>
+                            <button (click)="showMovieModal(true, movie)" class="btn btn-square btn-secondary btn-sm">
+                                <img src="assets/icons/edit-white.svg" alt="Edit Icon" class="w-5 h-5">
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+
+        <ng-template #emptyView>
+            <div class="w-full text-center py-7">
+                <h1 class="text-xl font-semibold">There's no data here...</h1>
+                <p class="font-light">You can <b class="font-semibold">add a movie</b> anyway.</p>
+            </div>
+        </ng-template>
     </ng-template>
 
     <div *ngIf="totalPages > 1" class="w-full flex justify-center mt-4 py-8">
