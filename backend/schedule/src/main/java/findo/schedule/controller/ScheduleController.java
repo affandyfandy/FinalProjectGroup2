@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -39,13 +40,16 @@ public class ScheduleController {
     @GetMapping("/admin")
     public Mono<ResponseEntity<Page<ScheduleDTO>>> getAllSchedules(
             @AuthenticationPrincipal JwtAuthenticationToken principal,
+            @RequestParam(defaultValue = "showDate") String sortBy,
+            @RequestParam(defaultValue = "DESC") String sortDir,
             @RequestParam @Valid LocalDate date,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size) {
 
         String token = principal.getToken().getTokenValue();
 
-        Pageable pageable = PageRequest.of(page, size);
+        Sort sort = Sort.by(sortDir.equalsIgnoreCase("DESC") ? Sort.Direction.DESC : Sort.Direction.ASC, sortBy);
+        Pageable pageable = PageRequest.of(page, size, sort);
 
         // Fetch paginated schedule details with movie and studio data
         return scheduleService.findAllSchedule(pageable, date, token)

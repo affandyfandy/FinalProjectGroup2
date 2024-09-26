@@ -176,7 +176,7 @@ public class BookingServiceImpl implements BookingService {
                 Mono<Timestamp> compareResult = Mono.just(Timestamp.from(Instant.now()));
                 System.out.println(compareResult);
                 return result.flatMap(showDateTimestamp -> compareResult.flatMap(currentTimestamp -> {
-                        if (currentTimestamp.after(showDateTimestamp)) {
+                        if (currentTimestamp.before(showDateTimestamp)) {
                                 return userClient.getUserBalance(userId, token)
                                                 .flatMap(userBalanceDTO -> {
                                                         if (userBalanceDTO.getBalance() < request.getTotalAmount()) {
