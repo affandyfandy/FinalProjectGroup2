@@ -280,10 +280,10 @@ public class ScheduleServiceImpl implements ScheduleService {
                     });
         }).collect(Collectors.toList());
 
-        // Combine all the Mono<ScheduleDTO> into a Flux and convert to
-        // Mono<Page<ScheduleDTO>>
+        // Combine all the Mono<ScheduleDTO> into a Flux and maintain order from the
+        // database
         return Flux.fromIterable(scheduleDTOs)
-                .flatMap(mono -> mono)
+                .concatMap(mono -> mono) // Ensure the order is maintained as received
                 .collectList()
                 .map(list -> new PageImpl<>(list, pageable, schedules.getTotalElements()));
     }

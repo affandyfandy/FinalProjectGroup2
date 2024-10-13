@@ -54,6 +54,7 @@ export class ScheduleComponent implements OnInit {
 
   currentPage = 1;
   totalPages = 1;
+  sortDir = "DESC";
 
   isShowAlert = false;
   alertMessage = '';
@@ -78,7 +79,7 @@ export class ScheduleComponent implements OnInit {
   getScheduleList(page: number = 0) {
     this.isListLoading = true;
     this.scheduleList = [];
-    this.scheduleService.getAllSchedules(this.currentDateTime, page).subscribe({
+    this.scheduleService.getAllSchedules(this.currentDateTime, page, 10, this.sortDir).subscribe({
       next: (res: any) => {
         this.scheduleList = res.content;
         this.currentPage = page;
@@ -284,5 +285,11 @@ export class ScheduleComponent implements OnInit {
   onTimePickerChange(event: Event) {
     const selectedTime = (event.target as HTMLSelectElement).value;
     this.currentSchedule.showDate = new Date(selectedTime);
+  }
+
+  onOrderPickerChange(event: Event) {
+    const selectedOrder = (event.target as HTMLSelectElement).value;
+    this.sortDir = selectedOrder;
+    this.getScheduleList();
   }
 }

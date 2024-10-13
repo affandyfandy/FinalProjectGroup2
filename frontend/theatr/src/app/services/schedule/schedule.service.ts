@@ -25,13 +25,14 @@ export class ScheduleService {
     };
   }
 
-  getAllSchedules(date: string, page: number = 0, size: number = 10) {
+  getAllSchedules(date: string, page: number = 0, size: number = 10, sortDir: string = "DESC") {
     return this.http.get(`${this.apiUrl}/admin`, {
       headers: this.getHeaders(),
       params: {
         date: date.toString(),
         page: page.toString(),
-        size: size.toString()
+        size: size.toString(),
+        sortDir: sortDir
       }
     });
   }

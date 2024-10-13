@@ -99,7 +99,7 @@ export class MovieScheduleComponent implements OnInit {
   }
 
   navigateToBook(scheduleId: string) {
-    this.router.navigate([RouterConfig.SCHEDULES.path, scheduleId, 'book']);
+    this.router.navigate([RouterConfig.SCHEDULES.path, scheduleId, 'customer', 'book']);
   }
 
   showAlert(message: string, success: boolean) {
