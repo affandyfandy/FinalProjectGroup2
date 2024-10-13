@@ -1,0 +1,64 @@
+<div class="pt-[100px] px-14 space-y-8">
+    <div class="flex space-x-2">
+        <select (change)="onOrderPickerChange($event)"
+            class="select select-bordered w-full max-w-44 bg-base-300 border-none">
+            <option value="DESC">Latest</option>
+            <option value="ASC">Earliest</option>
+        </select>
+        <input type="date" (change)="onDateChange($event)" [ngModel]="currentDateTime"
+            class="p-2 px-6 h-12 rounded-md text-white bg-base-300" />
+    </div>
+
+    <div *ngIf="scheduleList.length > 0; else emptyView">
+        <button *ngFor="let schedule of scheduleList" (click)="navigateToDetail(schedule.id!)"
+            class="flex justify-between items-center border-b border-b-base-200 p-4 hover:bg-base-200 hover:rounded-lg w-full transition-all">
+            <div class="flex space-x-3 items-center">
+                <img [src]="schedule.scheduleIds?.[0]?.posterUrl" alt="Poster"
+                    class="w-[128px] h-[193px] object-cover rounded-xl">
+
+                <div class="flex flex-col items-start space-y-1">
+                    <div class="flex space-x-2">
+                        <h1 class="text-white text-xl font-bold">{{schedule.scheduleIds?.[0]?.movieTitle}}</h1>
+                        <h1 class="text-white text-xl">{{'(' + schedule.scheduleIds?.[0]?.movieYear + ')'}}</h1>
+                    </div>
+
+                    <div class="flex space-x-2">
+                        <img src="assets/icons/location-gray.svg" alt="Location Icon" class="w-[24px] h-[24px]">
+                        <p class="font-medium text-zinc-400">{{schedule.scheduleIds?.[0]?.shows?.[0]?.studioName}}</p>
+                    </div>
+
+                    <div class="flex space-x-2">
+                        <img src="assets/icons/ticket-gray.svg" alt="Ticket Icon" class="w-[24px] h-[24px]">
+                        <p class="font-medium text-zinc-400">{{2}} Ticekts</p>
+                    </div>
+
+                    <h2 class="self-start">{{schedule.scheduleIds?.[0]?.shows?.[0]?.showDate ?
+                        (schedule.scheduleIds?.[0]?.shows?.[0]?.showDate! | fullDateTime)
+                        : 'N/A'}}
+                    </h2>
+                </div>
+            </div>
+
+            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.91 20.4201L15.43 13.9001C16.2 13.1301 16.2 11.8701 15.43 11.1001L8.91 4.58008"
+                    stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+
+    <ng-template #emptyView>
+        <div class="w-full text-center py-8">
+            <h1 class="text-xl font-semibold">There's no data here...</h1>
+            <p class="font-light">You can try to change the show date 😅</p>
+        </div>
+    </ng-template>
+
+    <div *ngIf="totalPages > 1" class="w-full flex justify-center mt-4 py-8">
+        <div class="join">
+            <input *ngFor="let item of [].constructor(totalPages); let i = index" (change)="getScheduleList(i)"
+                class="join-item btn btn-square" type="radio" name="options" [attr.aria-label]="i + 1"
+                [checked]="i === 0" />
+        </div>
+    </div>
+</div>

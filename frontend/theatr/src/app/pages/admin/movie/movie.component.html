@@ -1,0 +1,147 @@
+<div class="pt-[100px] px-14">
+    <!-- Search Bar & Add Button -->
+    <div class="flex justify-between items-center max-w-full">
+        <label class="input input-bordered flex items-center gap-2 max-w-[500px] w-full">
+            <img src="assets/icons/search-white.svg" alt="Search Icon" class="w-5 h-5">
+            <input type="text" [(ngModel)]="searchText" class="grow" placeholder="Search here..."
+                (keyup.enter)="getMovieList()" />
+        </label>
+
+        <button (click)="showMovieModal(false)" class="btn btn-primary rounded-full px-5">
+            <div class="flex items-center gap-2">
+                <img src="assets/icons/plus-black.svg" alt="Plus Icon" class="w-[22px] h-[22px]">
+                Add Movie
+            </div>
+        </button>
+    </div>
+
+    <!-- Table -->
+    <div *ngIf="isListLoading; else mainContent" class="space-y-4 py-8">
+        <div *ngFor="let item of [].constructor(6)" class="skeleton w-full h-16"></div>
+    </div>
+
+    <ng-template #mainContent>
+        <div *ngIf="movieList.length > 0; else emptyView" class="overflow-x-auto pt-4">
+            <table class="table">
+                <!-- head -->
+                <thead>
+                    <tr class="text-center">
+                        <th>Poster</th>
+                        <th>Title</th>
+                        <th>Year</th>
+                        <th>Duration</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- row -->
+                    <tr *ngFor="let movie of movieList" class="text-center">
+                        <td class="text-center align-middle">
+                            <img [src]="movie.posterUrl" alt="Poster"
+                                class="w-[95px] h-[147px] rounded-xl object-cover mx-auto">
+                        </td>
+                        <td>{{ movie.title }}</td>
+                        <td>{{ movie.year }}</td>
+                        <td>{{ movie.duration }} minutes</td>
+                        <td>
+                            <button (click)="showMovieModal(true, movie)" class="btn btn-square btn-secondary btn-sm">
+                                <img src="assets/icons/edit-white.svg" alt="Edit Icon" class="w-5 h-5">
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <ng-template #emptyView>
+            <div class="w-full text-center py-7">
+                <h1 class="text-xl font-semibold">There's no data here...</h1>
+                <p class="font-light">You can <b class="font-semibold">add a movie</b> anyway.</p>
+            </div>
+        </ng-template>
+    </ng-template>
+
+    <div *ngIf="totalPages > 1" class="w-full flex justify-center mt-4 py-8">
+        <div class="join">
+            <input *ngFor="let item of [].constructor(totalPages); let i = index" (change)="getMovieList(i)"
+                class="join-item btn btn-square" type="radio" name="options" [attr.aria-label]="i + 1"
+                [checked]="i === 0" />
+        </div>
+    </div>
+</div>
+
+<!-- MOVIE MODAL -->
+<dialog id="movie-modal" class="modal">
+    <div class="modal-box flex flex-col max-w-[672px] items-center space-y-6 justify-center bg-base-300">
+        <h1 class="text-2xl font-semibold">{{ isEdit ? 'Edit Movie' : 'Add Movie' }}</h1>
+
+        <div class="flex w-full space-x-2">
+            <!-- MOVIE POSTER -->
+            <input type="file" id="posterInput" accept="image/*" class="hidden" (change)="onFileSelected($event)">
+            <button *ngIf="currentMovie.posterUrl === '' && previewImage ===''; else posterFrame"
+                (click)="triggerFileInput()" class="btn btn-secondary bg-opacity-10 w-[128px] h-[186px]">
+                <div class="flex flex-col items-center space-y-1 ">
+                    <img src="assets/icons/gallery-add-gray.svg" alt="Gallery Add Icon" class="w-9 h-9">
+                    <p class="text-sm font-medium">*Add Poster</p>
+                </div>
+            </button>
+            <ng-template #posterFrame>
+                <div>
+                    <img [src]="isPosterChanged ? previewImage : currentMovie.posterUrl" alt="Poster"
+                        class="w-[165px] h-[186px] rounded-xl object-cover">
+                    <button (click)="triggerFileInput()" class="btn btn-ghost btn-sm">Change Poster</button>
+                </div>
+            </ng-template>
+
+            <!-- Movie Data Form -->
+            <form #movieForm="ngForm" class="w-full space-y-3">
+                <div>
+                    <input type="text" [(ngModel)]="currentMovie.title" placeholder="The Title..." name="movieTitle"
+                        required #movieTitle="ngModel" class="input input-bordered w-full bg-transparent">
+
+                    <p *ngIf="movieTitle.invalid && movieTitle.touched" class="text-error text-sm font-medium">*This
+                        field is required</p>
+                </div>
+
+                <input type="text" disabled="true" placeholder="The Duration..." value="15 minutes"
+                    class="input input-bordered w-full">
+
+                <div>
+                    <input type="text" [(ngModel)]="currentMovie.year" placeholder="Year..." name="movieYear" required
+                        #movieYear="ngModel" class="input input-bordered w-full bg-transparent">
+
+                    <p *ngIf="movieYear.invalid && movieYear.touched" class="text-error text-sm font-medium">*This
+                        field is required</p>
+                </div>
+
+                <label class="form-control">
+                    <textarea class="textarea textarea-bordered h-32 bg-transparent"
+                        [value]="this.currentMovie.synopsis" (input)="limitCharacters($event)"
+                        (paste)="handlePaste($event)" placeholder="Write movie overview here..."></textarea>
+                    <div class="label">
+                        <span class="label-text-alt">{{charCount}}/1000</span>
+                    </div>
+                </label>
+            </form>
+        </div>
+
+        <div class="flex space-x-2 w-full">
+            <button class="btn btn-secondary bg-opacity-50 max-w-[310px] w-full rounded-full"
+                (click)="closeMovieModal()">Cancel</button>
+            <button (click)="onSaveClick()" [disabled]="isSaveButtonDisabled()"
+                class="btn btn-primary max-w-[310px] w-full rounded-full">
+                <span *ngIf="isLoading" class="loading loading-spinner text-primary"></span>Save</button>
+        </div>
+    </div>
+</dialog>
+
+<!-- ALERT -->
+<div *ngIf="isShowAlert" role="alert"
+    class="alert {{ isAlertSuccess ? 'alert-success' : 'alert-error' }} fixed transition-all top-0 left-1/2 -translate-x-1/2 mt-4 z-50 max-w-[800px]">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+        class="h-6 w-6 shrink-0 text-primary stroke-current">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    <span class="text-primary">{{alertMessage}}</span>
+</div>

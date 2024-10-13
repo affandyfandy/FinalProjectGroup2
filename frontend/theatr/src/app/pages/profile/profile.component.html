@@ -1,0 +1,145 @@
+<div class="pt-[100px] flex justify-center">
+
+    <div class="max-w-[800px] w-full justify-center items-center space-y-10 p-8 bg-base-300 rounded-2xl">
+        <div class="flex flex-col justify-center items-center space-y-4">
+            <img src="assets/icons/profile-circle-white.svg" alt="Profile" class="w-20 h-20 rounded-full">
+
+            <div class="items-start justify-start w-full space-y-2">
+                <p class="text-sm text-zinc-400 font-medium">FULL NAME</p>
+                <div class="flex w-full space-x-2">
+                    <input type="text" [(ngModel)]="user.name" class="input input-bordered bg-transparent w-full"
+                        placeholder="Your name here...">
+                    <button (click)="updateProfile()" [disabled]="isButtonDisabled()"
+                        class="btn btn-primary rounded-full px-8"><span *ngIf="isSaveProfileLoading"
+                            class="loading loading-spinner text-primary"></span>Save</button>
+                </div>
+            </div>
+
+            <div class="items-start justify-start w-full space-y-2">
+                <p class="text-sm text-zinc-400 font-medium">EMAIL</p>
+                <div class="flex w-full space-x-2">
+                    <input type="text" [(ngModel)]="user.email" disabled="true" class="input w-full"
+                        placeholder="Your email here...">
+                    <button disabled="true" class="btn px-8 opacity-0">Save</button>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="!isAdmin">
+            <div class="flex bg-base-100 bg-opacity-30 rounded-xl p-6 items-center justify-between">
+                <div class="flex space-x-4 ">
+                    <img src="assets/icons/wallet-white.svg" alt="Wallet Icon"
+                        class="p-2 w-9 h-9 text-center rounded-lg bg-secondary">
+                    <div>
+                        <p class="font-medium text-zinc-400">Your Wallet Balance</p>
+                        <p class="font-semibold text-2xl">{{(user.balance ?? 0) | priceFormat}}</p>
+                    </div>
+                </div>
+
+                <button (click)="showTopUpModal()" class="btn btn-secondary btn-sm rounded-full px-4">Top Up</button>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <button (click)="showChangePasswordModal()" class="btn btn-secondary bg-opacity-50 w-full rounded-full">Change
+            Password</button>
+
+        <button (click)="showLogoutModal()" class="btn btn-outline btn-error w-full rounded-full">Log Out</button>
+    </div>
+</div>
+
+<!-- LOGOUT MODAL -->
+<dialog id="logout-modal" class="modal">
+    <div class="modal-box flex flex-col items-center space-y-6 justify-center bg-base-300">
+        <h1 class="text-lg font-semibold">Are you sure you want to log out?</h1>
+        <div class="flex space-x-2 w-full">
+            <button class="btn btn-primary max-w-[230px] w-full rounded-full" (click)="closeLogoutModal()">No</button>
+            <button (click)="logout()" class="btn btn-outline max-w-[230px] w-full btn-error rounded-full">Yes</button>
+        </div>
+    </div>
+</dialog>
+
+<!-- CHANGE PASSWORD MODAL -->
+<dialog id="change-password-modal" class="modal">
+    <div class="modal-box flex flex-col max-w-[672px] items-center space-y-6 justify-center bg-base-300">
+        <h1 class="text-2xl font-semibold">Change Password</h1>
+
+        <form #passwordForm="ngForm" class="w-full space-y-3">
+            <div>
+                <input type="password" [(ngModel)]="changePasswordDTO.oldPassword" placeholder="Old password here..."
+                    name="password" required #password="ngModel" minlength="8" class="input input-bordered w-full">
+
+                <p *ngIf="password.invalid && password.touched" class="text-error text-sm font-medium">*minimal 8
+                    characters</p>
+            </div>
+
+            <div>
+                <input type="password" [(ngModel)]="changePasswordDTO.newPassword" placeholder="New password here..."
+                    name="newPassword" required #newPassword="ngModel" minlength="8"
+                    class="input input-bordered w-full">
+
+                <p *ngIf="newPassword.invalid && newPassword.touched" class="text-error text-sm font-medium">*minimal 8
+                    characters</p>
+            </div>
+
+            <div>
+                <input type="password" [(ngModel)]="user.confirmPassword" name="confirmPassword" required
+                    #confirmPassword="ngModel" minlength="8" placeholder="Confirm your password here..."
+                    class="input input-bordered w-full">
+                <p *ngIf="confirmPassword.invalid && confirmPassword.touched" class="text-error text-sm font-medium">
+                    *should match to password field</p>
+            </div>
+        </form>
+
+        <div class="flex space-x-2 w-full">
+            <button class="btn btn-secondary bg-opacity-50 max-w-[310px] w-full rounded-full"
+                (click)="closeChangePasswordModal()">Cancel</button>
+            <button (click)="changePassword()" [disabled]="isUpdatePasswordButtonDisabled()"
+                class="btn btn-primary max-w-[310px] w-full rounded-full"><span *ngIf="isChangePasswordLoading"
+                    class="loading loading-spinner text-primary"></span>Save</button>
+        </div>
+    </div>
+</dialog>
+
+<!-- TOP UP MODAL -->
+<dialog id="top-up-modal" class="modal">
+    <div class="modal-box flex flex-col max-w-[672px] items-center space-y-6 justify-center bg-base-300">
+        <h1 class="text-2xl font-semibold">Top Up</h1>
+
+        <div class="flex w-full p-6 space-x-4 bg-base-200 rounded-xl">
+            <img src="assets/icons/wallet-white.svg" alt="Wallet Icon"
+                class="p-2 w-9 h-9 text-center rounded-lg bg-secondary">
+            <div>
+                <p class="font-medium text-zinc-400">Your Wallet Balance</p>
+                <p class="font-semibold text-2xl">{{(user.balance ?? 0) | priceFormat}}</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-3 grid-rows-2 gap-2 w-full">
+            <button *ngFor="let amount of amountList" (click)="topUpDTO.balance = amount"
+                class="btn btn-ghost font-semibold px-8 py-4 w-full {{topUpDTO.balance === amount ? 'bg-secondary' : 'bg-gray-900'}} ">
+                {{amount | priceFormat}}
+            </button>
+        </div>
+
+        <div class="flex space-x-2 w-full">
+            <button class="btn btn-secondary bg-opacity-50 max-w-[310px] w-full rounded-full"
+                (click)="closeTopUpModal()">Cancel</button>
+            <button (click)="topUp()" [disabled]="isTopUpButtonDisabled()"
+                class="btn btn-primary max-w-[310px] w-full rounded-full"><span *ngIf="isTopUpLoading"
+                    class="loading loading-spinner text-primary"></span>Save</button>
+        </div>
+    </div>
+</dialog>
+
+<!-- ALERT -->
+<div *ngIf="isShowAlert" role="alert"
+    class="alert {{ isAlertSuccess ? 'alert-success' : 'alert-error' }} fixed transition-all top-0 left-1/2 -translate-x-1/2 mt-4 z-50 max-w-[800px]">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+        class="h-6 w-6 shrink-0 text-primary stroke-current">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    <span class="text-primary">{{alertMessage}}</span>
+</div>

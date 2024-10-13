@@ -1,0 +1,155 @@
+<div class="pt-[100px] px-14">
+    <!-- Search Bar & Add Button -->
+    <div class="flex space-x-2">
+        <select (change)="onOrderPickerChange($event)"
+            class="select select-bordered w-full max-w-44 bg-base-300 border-none">
+            <option value="DESC">Latest</option>
+            <option value="ASC">Earliest</option>
+        </select>
+        <input type="date" (change)="onDateChange($event)" [ngModel]="currentDateTime"
+            class="p-2 px-6 h-12 rounded-md text-white bg-base-300" />
+    </div>
+
+    <!-- Table -->
+    <div *ngIf="isListLoading; else mainContent" class="space-y-4 py-8">
+        <div *ngFor="let item of [].constructor(6)" class="skeleton w-full h-16"></div>
+    </div>
+
+    <ng-template #mainContent>
+        <div *ngIf="bookingList.length > 0; else emptyView" class="overflow-x-auto pt-4">
+            <table class="table">
+                <!-- head -->
+                <thead>
+                    <tr class="text-center">
+                        <th>Ordered Time</th>
+                        <th>Studio</th>
+                        <th>Show Time</th>
+                        <th>Title</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- row -->
+                    <tr *ngFor="let booking of bookingList" class="text-center">
+                        <td>{{ booking.updatedTime ? (booking.updatedTime | normalTimeFormat) : 'N/A' }}</td>
+                        <td>{{ booking.scheduleIds?.[0]?.shows?.[0]?.studioName }}</td>
+                        <td>{{ booking.scheduleIds?.[0]?.shows?.[0]?.showDate ?
+                            (booking.scheduleIds?.[0]?.shows?.[0]?.showDate! | fullDateTime) : 'N/A' }}</td>
+                        <td>{{ booking.scheduleIds?.[0]?.movieTitle }} {{"(" + booking.scheduleIds?.[0]?.movieYear + ")"
+                            }}
+                        </td>
+                        <td>
+                            <button (click)="showModal(booking.id!)" class="btn btn-square btn-secondary btn-sm">
+                                <img src="assets/icons/eye-white.svg" alt="Edit Icon" class="w-5 h-5">
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <ng-template #emptyView>
+            <div class="w-full text-center py-8">
+                <h1 class="text-xl font-semibold">There's no data here...</h1>
+                <p class="font-light">You can try to change the show date 😅</p>
+            </div>
+        </ng-template>
+    </ng-template>
+
+    <div *ngIf="totalPages > 1" class="w-full flex justify-center mt-4 py-8">
+        <div class="join">
+            <input *ngFor="let item of [].constructor(totalPages); let i = index" (change)="getBookingList(i)"
+                class="join-item btn btn-square" type="radio" name="options" [attr.aria-label]="i + 1"
+                [checked]="i === 0" />
+        </div>
+    </div>
+</div>
+
+<!-- MODAL -->
+<dialog id="booking-modal" class="modal">
+    <div *ngIf="isDetailLoading; else modalContent"
+        class="modal-box skeleton flex flex-col max-w-[672px] h-[500px] space-y-6 bg-base-300"></div>
+    <ng-template #modalContent>
+        <div class="modal-box flex flex-col max-w-[672px] space-y-6 bg-base-300">
+            <div class="flex w-full">
+                <div class="w-full"></div>
+                <button (click)="closeModal()" class="btn btn-circle btn-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="flex items-center w-full space-x-4">
+                <img [src]="bookingData.movies?.[0]?.posterUrl" alt="Poster"
+                    class=" w-[120px] h-[186px] rounded-xl object-cover">
+
+                <div class="space-y-2">
+                    <h1 class="text-2xl font-bold">{{ bookingData.movies?.[0]?.title }} {{'(' +
+                        bookingData.movies?.[0]?.year + ')'}}</h1>
+                    <div class="text-zinc-400 flex items-center space-x-2">
+                        <img src="assets/icons/location-gray.svg" alt="Edit Icon" class="w-6 h-6">
+                        <p>{{ bookingData.studios?.[0]?.name }}</p>
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        <img src="assets/icons/ticket-gray.svg" alt="Edit Icon" class="w-6 h-6">
+                        <p class="text-zinc-400">{{ bookingData.seats?.length }} Tickets</p>
+                        <p *ngFor="let seat of bookingData.seats" class="font-bold">{{seat.seatCode}}</p>
+                    </div>
+                    <p>{{ bookingData.showDate ? (bookingData.showDate! | fullDateTime) : 'N/A' }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="space-y-2">
+                <div class="flex justify-between">
+                    <p class="text-zinc-400">ORDER ID</p>
+                    <p class="font-semibold">{{ bookingData.bookingId }}</p>
+                </div>
+                <div class="flex justify-between">
+                    <p class="text-zinc-400">ORDERED AT</p>
+                    <p class="font-semibold">{{ bookingData.createdAt ? (bookingData.createdAt | normalFullDateTime) :
+                        'N/A'
+                        }}</p>
+                </div>
+                <div class="flex justify-between">
+                    <p class="text-zinc-400">CUSTOMER ID</p>
+                    <p class="font-semibold">{{ bookingData.custId }}</p>
+                </div>
+                <div class="flex justify-between">
+                    <p class="text-zinc-400">CUSTOMER NAME</p>
+                    <p class="font-semibold">{{ bookingData.custName }}</p>
+                </div>
+                <div class="flex justify-between">
+                    <p class="text-zinc-400">PRICE</p>
+                    <p class="font-semibold">{{ bookingData.price ? (bookingData.price! |
+                        priceFormat) : '' }} x {{bookingData.seats?.length}}</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="flex justify-between">
+                <p class="text-zinc-400">TOTAL PRICE</p>
+                {{ bookingData.totalAmount ? (bookingData.totalAmount |
+                priceFormat) : '' }}
+            </div>
+        </div>
+    </ng-template>
+</dialog>
+
+<!-- ALERT -->
+<div *ngIf="isShowAlert" role="alert"
+    class="alert {{ isAlertSuccess ? 'alert-success' : 'alert-error' }} fixed transition-all top-0 left-1/2 -translate-x-1/2 mt-4 z-50 max-w-[800px]">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+        class="h-6 w-6 shrink-0 text-primary stroke-current">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    <span class="text-primary">{{alertMessage}}</span>
+</div>
